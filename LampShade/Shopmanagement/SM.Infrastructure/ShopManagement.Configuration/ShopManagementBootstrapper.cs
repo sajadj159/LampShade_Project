@@ -16,7 +16,7 @@ namespace ShopManagement.Configuration
             service.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
 
 
-            service.AddDbContext<ShopContext>(builder => builder.UseSqlServer(connectionString));
+            service.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
         }
     }
 }

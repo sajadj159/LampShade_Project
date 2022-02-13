@@ -1,4 +1,6 @@
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\ShopManagement.Configuration.deps.json
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\ShopManagement.Configuration.runtimeconfig.json
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\ShopManagement.Configuration.runtimeconfig.dev.json
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\ShopManagement.Configuration.dll
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\ref\ShopManagement.Configuration.dll
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\ShopManagement.Configuration.pdb
@@ -21,3 +23,4 @@ D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\obj\Debug\net5.0\ShopManagement.Configuration.dll
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\obj\Debug\net5.0\ref\ShopManagement.Configuration.dll
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\obj\Debug\net5.0\ShopManagement.Configuration.pdb
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\obj\Debug\net5.0\ShopManagement.Configuration.genruntimeconfig.cache
