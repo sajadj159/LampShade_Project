@@ -21,11 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Infrastructure", "SM.Infrastructure", "{F1712BD9-869B-4EFE-8525-9B0D0A5EFFD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Infrastructure.EFCore", "Shopmanagement\SM.Infrastructure\ShopManagement.Infrastructure.EFCore\ShopManagement.Infrastructure.EFCore.csproj", "{89AC97D8-FF8F-4E46-9906-8DBA7EEF3FF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Infrastructure.EFCore", "Shopmanagement\SM.Infrastructure\ShopManagement.Infrastructure.EFCore\ShopManagement.Infrastructure.EFCore.csproj", "{89AC97D8-FF8F-4E46-9906-8DBA7EEF3FF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Configuration", "Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\ShopManagement.Configuration.csproj", "{9AF648A4-E0DF-457E-BC06-944EA71DCA7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Configuration", "Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\ShopManagement.Configuration.csproj", "{9AF648A4-E0DF-457E-BC06-944EA71DCA7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHost", "ServiceHost\ServiceHost.csproj", "{6EAD06E9-1098-4054-AA61-24942FAA8027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHost", "ServiceHost\ServiceHost.csproj", "{6EAD06E9-1098-4054-AA61-24942FAA8027}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
