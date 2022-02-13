@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using _0_Framework.Domain;
 using ShopManagement.Application.Contract.ProductCategory;
 
 namespace ShopManagement.Domain.ProductCategoryAgg
 {
-    public interface IProductCategoryRepository
+    public interface IProductCategoryRepository : IRepository<long,ProductCategory>
     {
-        void Create(ProductCategory entity);
-        List<ProductCategory> GetAll();
-        ProductCategory Get(long id);
-        bool Exist(Expression<Func<ProductCategory, bool>> expression);
-        void Save();
         EditProductCategory GetDetails(long id);
         List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel);
     }
