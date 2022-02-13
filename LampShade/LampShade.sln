@@ -7,17 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shopmanagement", "Shopmanag
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Domain", "SM.Domain", "{655FD201-E512-44FA-8E25-42FA89152717}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Domain", "SM.Domain\ShopManagement.Domain\ShopManagement.Domain.csproj", "{AD8C8955-817B-43E2-9BAE-2B6A6DD7B070}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Domain", "Shopmanagement\SM.Domain\ShopManagement.Domain\ShopManagement.Domain.csproj", "{AD8C8955-817B-43E2-9BAE-2B6A6DD7B070}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0_Framework", "0_Framework", "{5F884196-F534-4730-A07B-6615CFAC8483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0_Framework", "0_Framework\0_Framework\0_Framework.csproj", "{1C60344A-C260-42A2-B371-7A89B09AA80E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "0_Framework", "0_Framework\0_Framework\0_Framework.csproj", "{1C60344A-C260-42A2-B371-7A89B09AA80E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Application", "SM.Application", "{3469BD5D-E205-41BA-92FE-28647ADA750B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Application.Contract", "SM.Application\ShopManagement.Application.Contract\ShopManagement.Application.Contract.csproj", "{FAE2477D-9FD1-4DB2-B453-D26A629AC4CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Application.Contract", "Shopmanagement\SM.Application\ShopManagement.Application.Contract\ShopManagement.Application.Contract.csproj", "{FAE2477D-9FD1-4DB2-B453-D26A629AC4CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Application", "SM.Application\ShopManagement.Application\ShopManagement.Application.csproj", "{83EABC1F-BE69-4D51-901B-7F0497FBCDEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Application", "Shopmanagement\SM.Application\ShopManagement.Application\ShopManagement.Application.csproj", "{83EABC1F-BE69-4D51-901B-7F0497FBCDEE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{F1712BD9-869B-4EFE-8525-9B0D0A5EFFD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,7 @@ Global
 		{3469BD5D-E205-41BA-92FE-28647ADA750B} = {8FAE266A-DD17-4594-99E1-DAD7F8FF646B}
 		{FAE2477D-9FD1-4DB2-B453-D26A629AC4CF} = {3469BD5D-E205-41BA-92FE-28647ADA750B}
 		{83EABC1F-BE69-4D51-901B-7F0497FBCDEE} = {3469BD5D-E205-41BA-92FE-28647ADA750B}
+		{F1712BD9-869B-4EFE-8525-9B0D0A5EFFD7} = {8FAE266A-DD17-4594-99E1-DAD7F8FF646B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35D3B86F-BEE3-4936-A7CA-3F786EAE8CDE}
