@@ -30,7 +30,11 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
 
         public PartialViewResult OnGetCreate()
         {
-            return Partial("./Create", new CreateProduct());
+            var command = new CreateProduct
+            {
+                Categories = _productCategoryApplication.GetProductCategories()
+            };
+            return Partial("./Create", command);
         }
 
         public JsonResult OnPostCreate(CreateProduct command)
@@ -42,6 +46,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
         public PartialViewResult OnGetEdit(long id)
         {
             var editProduct = _productApplication.GetDetails(id);
+            editProduct.Categories = _productCategoryApplication.GetProductCategories();
             return Partial("Edit", editProduct);
         }
 
