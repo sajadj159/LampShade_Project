@@ -67,8 +67,8 @@
                                     <td>@productCategory.Name</td> 
                                     <td>@productCategory.CreationDate</td>
                                     <td>
-                                        <a class="btn btn-warning pull-right m-rl-5" >
-                                            <i class="fa fa-edit">ویرایش</i>
+                                        <a class="btn btn-warning pull-right m-rl-5" href="#showmodal=@Url.Page("./Index", "Edit" ,new {id=productCategory.Id})">
+                                            <i class="fa fa-edit"></i> ویرایش
                                         </a>
                                     </td>
                                 </tr>

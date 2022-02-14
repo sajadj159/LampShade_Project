@@ -162,3 +162,4 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ref\ServiceHost.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.genruntimeconfig.cache
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Shop\ProductCategories\Create.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Shop\ProductCategories\Edit.cshtml.g.cs
