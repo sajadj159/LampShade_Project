@@ -38,7 +38,7 @@ namespace _0_Framework.Repository
 
         public void Save()
         {
-
+            _context.SaveChanges();
         }
     }
 }
