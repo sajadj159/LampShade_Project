@@ -65,27 +65,51 @@
                                     <th>کد</th>
                                     <th>گروه</th>
                                     <th>قیمت</th>
+                                    <th>موجودی</th>
                                     <th>تاریخ تولید</th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
                             <tbody>
-                           @foreach (var productCategory in Model.Products)
+                           @foreach (var product in Model.Products)
                             {
                                 <tr>
-                                    <td>@productCategory.Id</td>
+                                    <td>@product.Id</td>
                                     <td>
-                                        <img src="@productCategory.PictureUrl" style="width: 70px; height: 70px" />
+                                        <img src="@product.PictureUrl" style="width: 70px; height: 70px" />
                                     </td>
-                                    <td>@productCategory.Name</td> 
-                                    <td>@productCategory.Code</td> 
-                                    <td>@productCategory.Category</td> 
-                                    <td>@productCategory.UnitPrice</td> 
-                                    <td>@productCategory.CreationDate</td>
+                                    <td>@product.Name</td> 
+                                    <td>@product.Code</td> 
+                                    <td>@product.Category</td> 
+                                    <td>@product.UnitPrice</td> 
+                                    <td class="text-center">
+                                        @if (product.IsInStock)
+                                        {
+                                            <i class="fa fa-check fa-2x text-success"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-remove fa-2x text-danger"></i>
+
+                                        }                                     
+                                        
+                                    </td>
+                                    <td>@product.CreationDate</td>
                                     <td>
-                                        <a class="btn btn-warning pull-right m-rl-5" href="#showmodal=@Url.Page("./Index", "Edit" ,new {id=productCategory.Id})">
+                                        <a class="btn btn-warning btn-custom waves-effect waves-light m-b-5" href="#showmodal=@Url.Page("./Index", "Edit" ,new {id=product.Id})">
                                             <i class="fa fa-edit"></i> ویرایش
-                                        </a>
+                                        </a> 
+                                        @if (product.IsInStock)
+                                        {
+                                            <a class="btn btn-danger btn-custom waves-effect waves-light m-b-5" asp-page="./Index" asp-page-handler="NotInStock" 
+                                               asp-route-id="@product.Id">اتمام موجودی!</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success btn-custom waves-effect waves-light m-b-5" asp-page="./Index" asp-page-handler="IsInStock" 
+                                               asp-route-id="@product.Id">موجود شد!</a>
+                                        }
+
                                     </td>
                                 </tr>
                             }

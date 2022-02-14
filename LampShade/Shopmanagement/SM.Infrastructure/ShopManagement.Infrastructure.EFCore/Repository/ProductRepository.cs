@@ -25,6 +25,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                     Id = x.Id,
                     Code = x.Code,
                     Name = x.Name,
+                    IsInStock = x.IsInStock,
                     UnitPrice = x.UnitPrice,
                     Category = x.Category.Name,
                     PictureUrl = x.PictureUrl ,

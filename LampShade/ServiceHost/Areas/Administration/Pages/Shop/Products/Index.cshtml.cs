@@ -9,6 +9,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
 {
     public class IndexModel : PageModel
     {
+        [TempData] public string Message { get; set; }
         public List<ProductViewModel> Products;
         public ProductSearchModel SearchModel;
         public SelectList ProductCategories;
@@ -54,6 +55,26 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
         {
             var result = _productApplication.Edit(command);
             return new JsonResult(result);
+        }
+
+        public RedirectToPageResult OnGetIsInStock(long id)
+        {
+            var result= _productApplication.InStock(id);
+            if (result.IsSucceeded)
+                return RedirectToPage("./Index");
+
+            Message = result.Message;
+            return RedirectToPage("./Index");
+        }
+
+        public RedirectToPageResult OnGetNotInStock(long id)
+        {
+           var result= _productApplication.NotInStock(id);
+           if (result.IsSucceeded)
+               return RedirectToPage("./Index");
+
+           Message = result.Message;
+           return RedirectToPage("./Index");
         }
     }
 }
