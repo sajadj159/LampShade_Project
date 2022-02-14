@@ -53,5 +53,10 @@ namespace ShopManagement.Application.ProductCategory
         {
             return _productCategoryRepository.GetDetails(id);
         }
+
+        public List<ProductCategoryViewModel> GetProductCategories()
+        {
+            return _productCategoryRepository.GetProductCategories();
+        }
     }
 }

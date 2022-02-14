@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using _0_Framework.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                     Name = x.Name,
                     UnitPrice = x.UnitPrice,
                     Category = x.Category.Name,
-                    PictureUrl = x.PictureUrl
+                    PictureUrl = x.PictureUrl ,
+                    CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture)
                 });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
                 queryable = queryable.Where(x => x.Name.Contains(searchModel.Name));
