@@ -7,5 +7,6 @@
         public string PictureUrl { get; set; }
         public string CreationDate { get; set; }
         public bool IsRemoved { get; set; }
+        public long ProductId { get; set; }
     }
 }
