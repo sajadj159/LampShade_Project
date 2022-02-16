@@ -17,7 +17,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label asp-for="PictureUrl" class="control-label">عکس</label>
-                    <input type="url" class="form-control" asp-for="PictureUrl" accept="image/*">
+                    <input type="text" class="form-control" asp-for="PictureUrl" accept="image/*">
                     <span asp-validation-for="PictureUrl" class="error"></span>
                 </div>
             </div>
@@ -67,6 +67,15 @@
                     <label asp-for="BtnText" class="control-label">متن دکمه</label>
                     <input type="text" class="form-control" asp-for="BtnText">
                     <span asp-validation-for="BtnText" class="error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Link" class="control-label">لینک</label>
+                    <input type="text" class="form-control" asp-for="Link">
+                    <span asp-validation-for="Link" class="error"></span>
                 </div>
             </div>
         </div>

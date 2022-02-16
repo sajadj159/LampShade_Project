@@ -20,7 +20,7 @@ namespace ShopManagement.Application.Slide
             if (_slideRepository.Exist(x => x.PictureTitle == command.PictureTitle))
                 operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             var slide = new Domain.SlideAgg.Slide(command.PictureUrl, command.PictureAlt, command.PictureTitle, command.Heading,
-                command.Title, command.Text, command.BtnText);
+                command.Title, command.Text, command.BtnText,command.Link);
             _slideRepository.Create(slide);
             _slideRepository.Save();
             return operationResult.Succeeded();
@@ -39,7 +39,7 @@ namespace ShopManagement.Application.Slide
                 operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             editSlide.Edit(command.PictureUrl, command.PictureAlt, command.PictureTitle, command.Heading, command.Title,
-                command.Text, command.BtnText);
+                command.Text, command.BtnText,command.Link);
             _slideRepository.Save();
             return operationResult.Succeeded();
         }
@@ -62,6 +62,7 @@ namespace ShopManagement.Application.Slide
             if (slide == null)
                 operationResult.Failed(ApplicationMessages.RecordNotFound);
             slide.Restore();
+            _slideRepository.Save();
             return operationResult.Succeeded();
 
         }

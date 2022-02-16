@@ -7,7 +7,7 @@ using ShopManagement.Domain.SlideAgg;
 
 namespace ShopManagement.Infrastructure.EFCore.Repository
 {
-    public class SlideRepository : RepositoryBase<long,Slide>,ISlideRepository
+    public class SlideRepository : RepositoryBase<long, Slide>, ISlideRepository
     {
         private readonly ShopContext _context;
         public SlideRepository(ShopContext context) : base(context)
@@ -17,7 +17,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
 
         public EditSlide GetDetails(long id)
         {
-            return _context.Slides.Select(x=>new EditSlide
+            return _context.Slides.Select(x => new EditSlide
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -26,8 +26,9 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 PictureAlt = x.PictureAlt,
                 PictureUrl = x.PictureUrl,
                 Text = x.Text,
-                BtnText = x.BtnText
-            }).FirstOrDefault(x=>x.Id==id); 
+                BtnText = x.BtnText,
+                Link = x.Link
+            }).FirstOrDefault(x => x.Id == id);
         }
 
         public List<SlideViewModel> GetList()
@@ -40,7 +41,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
                 Title = x.Title,
                 IsRemoved = x.IsRemoved
-            }).OrderByDescending(x=>x.Id).ToList();
+            }).OrderByDescending(x => x.Id).ToList();
         }
     }
 }
