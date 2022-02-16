@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using _0_Framework.Application;
 using ShopManagement.Application.Contract.A.ProductPicture;
 using ShopManagement.Domain.ProductPictureAgg;
