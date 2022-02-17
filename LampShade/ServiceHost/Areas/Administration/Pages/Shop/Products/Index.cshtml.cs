@@ -33,7 +33,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
         {
             var command = new CreateProduct
             {
-                Categories = _productCategoryApplication.GetProductCategories()
+                Products = _productCategoryApplication.GetProductCategories()
             };
             return Partial("./Create", command);
         }
@@ -47,7 +47,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
         public PartialViewResult OnGetEdit(long id)
         {
             var editProduct = _productApplication.GetDetails(id);
-            editProduct.Categories = _productCategoryApplication.GetProductCategories();
+            editProduct.Products = _productCategoryApplication.GetProductCategories();
             return Partial("Edit", editProduct);
         }
 

@@ -38,7 +38,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="CategoryId" class="control-label"> گروه محصول </label>
-                        <select class="form-control" asp-for="CategoryId" asp-items='new SelectList(Model.Categories,"Id","Name")'>
+                        <select class="form-control" asp-for="CategoryId" asp-items='new SelectList(Model.Products,"Id","Name")'>
                             <option value="0">گروه محصولی...</option>
                         </select>
                         <span asp-validation-for="CategoryId" class="error"></span>

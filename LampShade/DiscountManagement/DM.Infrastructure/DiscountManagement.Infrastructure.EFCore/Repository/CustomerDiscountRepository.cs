@@ -48,7 +48,8 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
                     StartDate = x.StartDate.ToFarsi(),
                     EndDate = x.EndDate.ToFarsi(),
                     StartDateGr = x.StartDate,
-                    EndDateGr = x.EndDate
+                    EndDateGr = x.EndDate,
+                    CreationDate = x.CreationDate.ToFarsi()
                 });
             if (searchModel.ProductId > 0)
             {
@@ -57,12 +58,12 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
 
             if (!string.IsNullOrWhiteSpace(searchModel.StartDate))
             {
-                queryable = queryable.Where(x => x.StartDateGr > searchModel.StartDate.ToGeorgianDateTime());
+                queryable = queryable.Where(x => x.StartDateGr >= searchModel.StartDate.ToGeorgianDateTime());
             }
 
             if (!string.IsNullOrWhiteSpace(searchModel.EndDate))
             {
-                queryable = queryable.Where(x => x.EndDateGr < searchModel.EndDate.ToGeorgianDateTime());
+                queryable = queryable.Where(x => x.EndDateGr <= searchModel.EndDate.ToGeorgianDateTime());
             }
 
             var discounts = queryable.OrderByDescending(x => x.Id).ToList();
