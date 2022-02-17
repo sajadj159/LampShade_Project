@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="A.CustomerDiscount\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DM.Domain\DiscountManagement.Domain\DiscountManagement.Domain.csproj" />
+    <ProjectReference Include="..\DIscountManagement.Application.Contract\DiscountManagement.Application.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

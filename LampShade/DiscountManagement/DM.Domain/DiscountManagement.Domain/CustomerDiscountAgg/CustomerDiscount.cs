@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using _0_Framework.Domain;
+using ShopManagement.Domain.ProductAgg;
 
 namespace DiscountManagement.Domain.CustomerDiscountAgg
 {
     public class CustomerDiscount : EntityBase
     {
-        public long ProductId { get; private set; }
         public int DiscountRate { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public string Reason { get; private set; }
 
+        public long ProductId { get; private set; }
         public CustomerDiscount()
         {
         }
