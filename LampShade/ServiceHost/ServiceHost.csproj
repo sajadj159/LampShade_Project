@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DiscountManagement\DM.Infrastructure\DiscountManagement.Configuration\DiscountManagement.Configuration.csproj" />
     <ProjectReference Include="..\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\ShopManagement.Configuration.csproj" />
   </ItemGroup>
 

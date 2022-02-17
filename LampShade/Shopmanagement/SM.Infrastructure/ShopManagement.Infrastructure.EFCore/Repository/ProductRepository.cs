@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using _0_Framework.Application;
 using _0_Framework.Repository;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contract.A.Product;
@@ -29,7 +30,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                     UnitPrice = x.UnitPrice,
                     Category = x.Category.Name,
                     PictureUrl = x.PictureUrl ,
-                    CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture)
+                    CreationDate = x.CreationDate.ToFarsi()
                 });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
                 queryable = queryable.Where(x => x.Name.Contains(searchModel.Name));

@@ -177,3 +177,13 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\01_LampShadeQuery.d
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\01_LampShadeQuery.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Shared\Components\Slide\Default.cshtml.g.cs
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Shared\Components\ProductCategory\Default.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Application.Contract.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Application.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Configuration.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Domain.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Infrastructure.EFCore.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Configuration.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Application.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Application.Contract.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Domain.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\DiscountManagement.Infrastructure.EFCore.pdb

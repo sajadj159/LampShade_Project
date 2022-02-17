@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using _0_Framework.Application;
 using _0_Framework.Repository;
 using ShopManagement.Application.Contract.ProductCategory;
 using ShopManagement.Domain.ProductCategoryAgg;
@@ -49,7 +50,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 Id = x.Id,
                 Name = x.Name,
                 PictureUrl = x.PictureUrl,
-                CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture)
+                CreationDate = x.CreationDate.ToFarsi()
             });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
                 query = query.Where(x => x.Name.Contains(searchModel.Name));

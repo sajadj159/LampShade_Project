@@ -2025,6 +2025,80 @@
           "bin/placeholder/0_Framework.dll": {}
         }
       },
+      "DiscountManagement.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "DiscountManagement.Application.Contract": "1.0.0",
+          "DiscountManagement.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DiscountManagement.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DiscountManagement.Application.dll": {}
+        }
+      },
+      "DiscountManagement.Application.Contract/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "0_Framework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DiscountManagement.Application.Contract.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DiscountManagement.Application.Contract.dll": {}
+        }
+      },
+      "DiscountManagement.Configuration/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "DiscountManagement.Application": "1.0.0",
+          "DiscountManagement.Infrastructure.EFCore": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DiscountManagement.Configuration.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DiscountManagement.Configuration.dll": {}
+        }
+      },
+      "DiscountManagement.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "0_Framework": "1.0.0",
+          "DiscountManagement.Application.Contract": "1.0.0",
+          "ShopManagement.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DiscountManagement.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DiscountManagement.Domain.dll": {}
+        }
+      },
+      "DiscountManagement.Infrastructure.EFCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "0_Framework": "1.0.0",
+          "DiscountManagement.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "5.0.14",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.14",
+          "ShopManagement.Infrastructure.EFCore": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DiscountManagement.Infrastructure.EFCore.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DiscountManagement.Infrastructure.EFCore.dll": {}
+        }
+      },
       "ShopManagement.Application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -7214,6 +7288,31 @@
       "path": "../0_Framework/0_Framework/0_Framework.csproj",
       "msbuildProject": "../0_Framework/0_Framework/0_Framework.csproj"
     },
+    "DiscountManagement.Application/1.0.0": {
+      "type": "project",
+      "path": "../DiscountManagement/DM.Application/DiscountManagement.Application/DiscountManagement.Application.csproj",
+      "msbuildProject": "../DiscountManagement/DM.Application/DiscountManagement.Application/DiscountManagement.Application.csproj"
+    },
+    "DiscountManagement.Application.Contract/1.0.0": {
+      "type": "project",
+      "path": "../DiscountManagement/DM.Application/DIscountManagement.Application.Contract/DiscountManagement.Application.Contract.csproj",
+      "msbuildProject": "../DiscountManagement/DM.Application/DIscountManagement.Application.Contract/DiscountManagement.Application.Contract.csproj"
+    },
+    "DiscountManagement.Configuration/1.0.0": {
+      "type": "project",
+      "path": "../DiscountManagement/DM.Infrastructure/DiscountManagement.Configuration/DiscountManagement.Configuration.csproj",
+      "msbuildProject": "../DiscountManagement/DM.Infrastructure/DiscountManagement.Configuration/DiscountManagement.Configuration.csproj"
+    },
+    "DiscountManagement.Domain/1.0.0": {
+      "type": "project",
+      "path": "../DiscountManagement/DM.Domain/DiscountManagement.Domain/DiscountManagement.Domain.csproj",
+      "msbuildProject": "../DiscountManagement/DM.Domain/DiscountManagement.Domain/DiscountManagement.Domain.csproj"
+    },
+    "DiscountManagement.Infrastructure.EFCore/1.0.0": {
+      "type": "project",
+      "path": "../DiscountManagement/DM.Infrastructure/DiscountManagement.Infrastructure.EFCore/DiscountManagement.Infrastructure.EFCore.csproj",
+      "msbuildProject": "../DiscountManagement/DM.Infrastructure/DiscountManagement.Infrastructure.EFCore/DiscountManagement.Infrastructure.EFCore.csproj"
+    },
     "ShopManagement.Application/1.0.0": {
       "type": "project",
       "path": "../Shopmanagement/SM.Application/ShopManagement.Application/ShopManagement.Application.csproj",
@@ -7242,6 +7341,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "DiscountManagement.Configuration >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.14",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
       "ShopManagement.Configuration >= 1.0.0"
@@ -7274,6 +7374,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "D:\\repos\\C#\\LampShade\\LampShade\\DiscountManagement\\DM.Infrastructure\\DiscountManagement.Configuration\\DiscountManagement.Configuration.csproj": {
+              "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\DiscountManagement\\DM.Infrastructure\\DiscountManagement.Configuration\\DiscountManagement.Configuration.csproj"
+            },
             "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Infrastructure\\ShopManagement.Configuration\\ShopManagement.Configuration.csproj": {
               "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Infrastructure\\ShopManagement.Configuration\\ShopManagement.Configuration.csproj"
             }

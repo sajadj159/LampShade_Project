@@ -17,27 +17,48 @@ namespace DiscountManagement.Application.A.CustomerDiscount
         public OperationResult Define(DefineCustomerDiscount command)
         {
             var operationResult = new OperationResult();
-            if (_customerDiscountRepository.Exist(x=>x.Reason==command.Reason))
+            if (_customerDiscountRepository.Exist(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate))
                 operationResult.Failed(ApplicationMessages.DuplicatedRecord);
-            var customerDiscount = new Domain.CustomerDiscountAgg.CustomerDiscount(command.ProductId,command.DiscountRate,command.StartDate,command.EndDate,command.Reason);
+
+            var startDate = command.StartDate.ToGeorgianDateTime();
+            var endDate = command.EndDate.ToGeorgianDateTime();
+            var customerDiscount = new Domain.CustomerDiscountAgg.CustomerDiscount(command.ProductId, command.DiscountRate, startDate, endDate, command.Reason);
             _customerDiscountRepository.Create(customerDiscount);
             _customerDiscountRepository.Save();
-           return operationResult.Succeeded();
+            return operationResult.Succeeded();
         }
 
         public OperationResult Edit(EditCustomerDiscount command)
         {
-            throw new System.NotImplementedException();
+            var operationResult = new OperationResult();
+            var customerDiscount = _customerDiscountRepository.Get(command.Id);
+            if (customerDiscount == null)
+            {
+                operationResult.Failed(ApplicationMessages.RecordNotFound);
+            }
+
+            if (_customerDiscountRepository.Exist(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate && x.Id != command.Id))
+            {
+                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+            }
+
+            var startDate = command.StartDate.ToGeorgianDateTime();
+            var endDate = command.EndDate.ToGeorgianDateTime();
+            customerDiscount.Edit(command.ProductId, command.DiscountRate, startDate, endDate, command.Reason);
+            _customerDiscountRepository.Save();
+            return operationResult.Succeeded();
+
+
         }
 
         public List<CustomerDiscountViewmodel> Search(CustomerDiscountSearchModel searchModel)
         {
-            throw new System.NotImplementedException();
+            return _customerDiscountRepository.Search(searchModel);
         }
 
         public EditCustomerDiscount GetDetails(long id)
         {
-            throw new System.NotImplementedException();
+            return _customerDiscountRepository.GetDetails(id);
         }
     }
 }
