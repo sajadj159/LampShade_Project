@@ -34,6 +34,7 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
             var query = _context.ColleagueDiscounts
                 .Select(x => new ColleagueDiscountViewModel
                 {
+                    Id = x.Id,
                     ProductId = x.ProductId,
                     CreationDate = x.CreationDate.ToFarsi(),
                     DiscountRate = x.DiscountRate,

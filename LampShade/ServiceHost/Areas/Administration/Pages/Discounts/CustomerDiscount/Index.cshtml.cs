@@ -11,7 +11,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscount
     {
         [TempData] public string Message { get; set; }
         public List<CustomerDiscountViewmodel> CustomerDiscounts;
-        public CustomerDiscountSearchModel SearchModel;
+        public CostumerDiscountSearchModel SearchModel;
         public SelectList Products;
         private readonly IProductApplication _productApplication;
         private readonly ICustomerDiscountApplication _customerDiscountApplication;
@@ -23,7 +23,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscount
         }
 
 
-        public void OnGet(CustomerDiscountSearchModel searchModel)
+        public void OnGet(CostumerDiscountSearchModel searchModel)
         {
             Products = new SelectList(_productApplication.GetProducts(), "Id", "Name");
             CustomerDiscounts = _customerDiscountApplication.Search(searchModel);

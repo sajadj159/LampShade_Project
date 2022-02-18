@@ -1,6 +1,6 @@
 ﻿namespace DiscountManagement.Application.Contract.AC.CustomerDiscount
 {
-    public class CustomerDiscountSearchModel
+    public class CostumerDiscountSearchModel
     {
         public long ProductId { get; set; }
         public string StartDate { get; set; }

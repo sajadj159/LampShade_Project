@@ -51,7 +51,7 @@ namespace DiscountManagement.Application.A.CustomerDiscount
 
         }
 
-        public List<CustomerDiscountViewmodel> Search(CustomerDiscountSearchModel searchModel)
+        public List<CustomerDiscountViewmodel> Search(CostumerDiscountSearchModel searchModel)
         {
             return _customerDiscountRepository.Search(searchModel);
         }

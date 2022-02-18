@@ -7,6 +7,6 @@ namespace DiscountManagement.Domain.CustomerDiscountAgg
     public interface ICustomerDiscountRepository : IRepository<long,CustomerDiscount>
     {
         EditCustomerDiscount GetDetails(long id);
-        List<CustomerDiscountViewmodel> Search(CustomerDiscountSearchModel searchModel);
+        List<CustomerDiscountViewmodel> Search(CostumerDiscountSearchModel searchModel);
     }
 }

@@ -7,7 +7,7 @@ namespace DiscountManagement.Application.Contract.AC.CustomerDiscount
     {
         OperationResult Define(DefineCustomerDiscount command);
         OperationResult Edit(EditCustomerDiscount command);
-        List<CustomerDiscountViewmodel> Search(CustomerDiscountSearchModel searchModel);
+        List<CustomerDiscountViewmodel> Search(CostumerDiscountSearchModel searchModel);
         EditCustomerDiscount GetDetails(long id);
     }
 }

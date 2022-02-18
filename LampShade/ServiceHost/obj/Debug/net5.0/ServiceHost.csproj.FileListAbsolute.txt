@@ -190,3 +190,6 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ref\ServiceHost.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.genruntimeconfig.cache
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Discounts\ColleagueDiscount\Create.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Discounts\ColleagueDiscount\Edit.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Discounts\ColleagueDiscount\Index.cshtml.g.cs

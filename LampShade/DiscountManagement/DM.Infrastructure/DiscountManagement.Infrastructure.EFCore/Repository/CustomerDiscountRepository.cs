@@ -35,7 +35,7 @@ namespace DiscountManagement.Infrastructure.EFCore.Repository
                 .FirstOrDefault(x => x.Id == id);
         }
 
-        public List<CustomerDiscountViewmodel> Search(CustomerDiscountSearchModel searchModel)
+        public List<CustomerDiscountViewmodel> Search(CostumerDiscountSearchModel searchModel)
         {
             var products = _shopContext.Products.Select(x => new { x.Id, x.Name }).ToList();
             var queryable = _context.CustomerDiscounts
