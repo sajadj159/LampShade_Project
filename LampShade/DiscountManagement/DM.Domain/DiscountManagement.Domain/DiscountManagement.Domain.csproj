@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -8,6 +8,10 @@
     <ProjectReference Include="..\..\..\0_Framework\0_Framework\0_Framework.csproj" />
     <ProjectReference Include="..\..\..\Shopmanagement\SM.Domain\ShopManagement.Domain\ShopManagement.Domain.csproj" />
     <ProjectReference Include="..\..\DM.Application\DIscountManagement.Application.Contract\DiscountManagement.Application.Contract.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ColleagueDiscountAgg\" />
   </ItemGroup>
 
 </Project>
