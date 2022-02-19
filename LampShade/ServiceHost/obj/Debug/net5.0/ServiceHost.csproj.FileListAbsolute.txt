@@ -203,3 +203,6 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Infrastructure.EFCore.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Application.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Application.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Inventory\Create.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Inventory\Edit.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Inventory\Index.cshtml.g.cs
