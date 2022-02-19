@@ -12,6 +12,10 @@ namespace InventoryManagement.Domain.InventoryAgg
         public bool InStock { get; private set; }
         public List<InventoryOperation> InventoryOperations { get; private set; }
 
+        protected Inventory()
+        {
+        }
+
         public Inventory(long productId, double unitPrice)
         {
             ProductId = productId;
@@ -19,6 +23,11 @@ namespace InventoryManagement.Domain.InventoryAgg
             InStock = false;
         }
 
+        public void Edit(long productId, double unitPrice)
+        {
+            ProductId = productId;
+            UnitPrice = unitPrice;
+        }
         public long CalculateCurrentCount()
         {
             var plus = InventoryOperations.Where(x => x.Operation).Sum(x => x.Count);

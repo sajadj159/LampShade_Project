@@ -201,3 +201,5 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Infrastructure.EFCore.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Configuration.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Infrastructure.EFCore.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Application.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Application.pdb
