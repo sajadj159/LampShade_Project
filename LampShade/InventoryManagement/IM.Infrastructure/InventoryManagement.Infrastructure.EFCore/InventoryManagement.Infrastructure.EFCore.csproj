@@ -11,14 +11,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\01_LampShadeQuery\01_LampShadeQuery.csproj" />
-    <ProjectReference Include="..\..\..\InventoryManagement\IM.Application\InventoryManagement.Application.Contract\InventoryManagement.Application.Contract.csproj" />
-    <ProjectReference Include="..\..\..\InventoryManagement\IM.Domain\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />
-    <ProjectReference Include="..\..\SM.Application\ShopManagement.Application\ShopManagement.Application.csproj" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shopmanagement\SM.Infrastructure\ShopManagement.Infrastructure.EFCore\ShopManagement.Infrastructure.EFCore.csproj" />
+    <ProjectReference Include="..\..\IM.Domain\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>
