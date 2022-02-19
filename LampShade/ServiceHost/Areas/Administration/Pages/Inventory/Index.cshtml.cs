@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
 using InventoryManagement.Application.Contract.AC.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -57,6 +56,33 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
         {
             var result = _inventoryApplication.Edit(command);
             return new JsonResult(result);
+        }
+
+        public PartialViewResult OnGetIncrease(long id)
+        {
+            var command = new IncreaseInventory()
+            {
+                InventoryId = id
+            };
+            return Partial("Increase",command);
+        }
+        public JsonResult OnPostIncrease(IncreaseInventory command)
+        {
+            var operationResult = _inventoryApplication.Increase(command);
+            return new JsonResult(operationResult);
+        }
+        public PartialViewResult OnGetReduce(long id)
+        {
+            var command = new ReduceInventory()
+            {
+                InventoryId = id
+            };
+            return Partial("Reduce", command);
+        }
+        public JsonResult OnPostReduce(ReduceInventory command)
+        {
+            var operationResult = _inventoryApplication.Reduce(command);
+            return new JsonResult(operationResult);
         }
     }
 }

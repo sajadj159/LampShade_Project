@@ -28,7 +28,7 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
                 UnitPrice = x.UnitPrice,
                 CurrentCount = x.CalculateCurrentCount()
             });
-            if (!searchModel.InStock)
+            if (searchModel.InStock)
             {
                 queryable = queryable.Where(x => !x.InStock);
             }

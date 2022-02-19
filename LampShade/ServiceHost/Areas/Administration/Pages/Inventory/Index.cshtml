@@ -63,6 +63,7 @@
                                     <th>نام محصول</th>
                                     <th>قیمت واحد </th>
                                     <th>موجود در انبار</th>
+                                    <th>تعداد فعلی</th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
@@ -74,7 +75,7 @@
                                         <td>@item.Product</td>
                                         <td>@item.UnitPrice</td>
                                         <td>
-                                            @if (item.InStock)
+                                            @if (!item.InStock)
                                             {
                                                 <i class="fa fa-remove fa-2x text-danger"></i>
                                             }
@@ -83,24 +84,19 @@
                                                 <i class="fa fa-check fa-2x text-success"></i>
                                             }
                                         </td>
+                                        <td>@item.CurrentCount</td>
                                         <td>
                                             <a class="btn btn-warning btn-custom waves-effect waves-light m-b-5" href="#showmodal=@Url.Page("./Index", "Edit", new {id = item.Id})">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
-                                            @if (item.InStock)
-                                            {
-                                                <a class="btn btn-danger btn-custom waves-effect waves-light m-b-5" asp-page="./Index"
-                                                   asp-page-handler="Remove" asp-route-id="@item.Id">
-                                                    غیر فعال سازی
-                                                    </a>
-                                            }
-                                            else
-                                            {
-                                                <a class="btn btn-success btn-custom waves-effect waves-light m-b-5" asp-page="./Index"
-                                           asp-page-handler="Restore" asp-route-id="@item.Id">
-                                                    فعال سازی
-                                                </a>
-                                            }
+                                            <a class="btn btn-success btn-custom waves-effect waves-light m-b-5"
+                                               href="#showmodal=@Url.Page("./Index", "Increase", new {id = item.Id})">
+                                                <i class="fa fa-plus"></i> افزایش موجودی
+                                            </a>
+                                            <a class="btn btn-danger btn-custom waves-effect waves-light m-b-5"
+                                               href="#showmodal=@Url.Page("./Index", "Reduce", new {id = item.Id})">
+                                                <i class="fa fa-minus"></i> کاهش موجودی
+                                            </a>
                                         </td>
                                     </tr>
                                 }
