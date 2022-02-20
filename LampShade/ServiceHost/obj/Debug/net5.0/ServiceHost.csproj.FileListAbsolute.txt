@@ -209,3 +209,4 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\ServiceHost.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\ServiceHost.Views.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.csproj.CopyComplete
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.genruntimeconfig.cache
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Shared\Components\ProductCategoryWithProduct\Default.cshtml.g.cs
