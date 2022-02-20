@@ -28,6 +28,9 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "D:\\repos\\C#\\LampShade\\LampShade\\InventoryManagement\\IM.Infrastructure\\InventoryManagement.Infrastructure.EFCore\\InventoryManagement.Infrastructure.EFCore.csproj": {
+                "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\InventoryManagement\\IM.Infrastructure\\InventoryManagement.Infrastructure.EFCore\\InventoryManagement.Infrastructure.EFCore.csproj"
+              },
               "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Infrastructure\\ShopManagement.Infrastructure.EFCore\\ShopManagement.Infrastructure.EFCore.csproj": {
                 "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Infrastructure\\ShopManagement.Infrastructure.EFCore\\ShopManagement.Infrastructure.EFCore.csproj"
               }

@@ -92,9 +92,19 @@
                                                                 <a href="single-product.html">
                                                                     @products.Name
                                                                 </a>
+                                                                <span>
+                                                                    @if (products.InStock=="True")
+                                                                    {
+                                                                        <p style="text-align: left;" class="text text-success">موجود</p>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <p style="text-align: left;"class="text text-danger">ناموجود</p>
+                                                                    }
+                                                                </span>
                                                             </h3>
                                                             <p class="single-grid-product__price">
-                                                                <span class="main-price">$120.00</span>
+                                                                <span class="main-price">@products.Price تومان</span>
                                                             </p>
                                                         </div>
                                                     </div>

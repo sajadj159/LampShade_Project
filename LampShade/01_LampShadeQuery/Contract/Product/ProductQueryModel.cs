@@ -12,6 +12,6 @@
         public int DiscountRate { get; set; }
         public string Category { get; set; }
         public string Slug { get; set; }
-
+        public string InStock { get; set; }
     }
 }
