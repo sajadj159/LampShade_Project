@@ -10,8 +10,5 @@ namespace ShopManagement.Application.Contract.A.Product
         List<ProductViewModel> Search(ProductSearchModel searchModel);
         List<ProductViewModel> GetProducts();
         EditProduct GetDetails(long id);
-
-        OperationResult InStock(long id);
-        OperationResult NotInStock(long id);
     }
 }

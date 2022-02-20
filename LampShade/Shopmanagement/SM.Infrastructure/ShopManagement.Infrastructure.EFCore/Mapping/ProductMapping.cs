@@ -13,8 +13,6 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
 
             builder.Property(p => p.Name).HasMaxLength(255).IsRequired();
             builder.Property(p => p.Code).HasMaxLength(15).IsRequired();
-            builder.Property(p => p.UnitPrice).HasMaxLength(255).IsRequired();
-            builder.Property(p => p.IsInStock);
             builder.Property(p => p.ShortDescription).HasMaxLength(500).IsRequired();
             builder.Property(p => p.Description).HasMaxLength(1000);
             builder.Property(p => p.PictureUrl).HasMaxLength(1000);

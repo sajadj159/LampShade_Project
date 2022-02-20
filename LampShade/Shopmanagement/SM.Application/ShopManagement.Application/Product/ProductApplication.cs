@@ -22,7 +22,7 @@ namespace ShopManagement.Application.Product
                 operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slugify = command.Slug.Slugify();
-            var product = new Domain.ProductAgg.Product(command.Name, command.Code, command.UnitPrice, command.ShortDescription,
+            var product = new Domain.ProductAgg.Product(command.Name, command.Code, command.ShortDescription,
                 command.Description, command.PictureUrl, command.PictureTitle, command.PictureAlt, slugify,
                 command.Keywords, command.MetaDescription, command.CategoryId);
             _productRepository.Create(product);
@@ -41,7 +41,7 @@ namespace ShopManagement.Application.Product
                 operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slugify = command.Slug.Slugify();
-            product.Edit(command.Name, command.Code, command.UnitPrice, command.ShortDescription,
+            product.Edit(command.Name, command.Code, command.ShortDescription,
                 command.Description, command.PictureUrl, command.PictureTitle, command.PictureAlt,
                 slugify, command.Keywords, command.MetaDescription, command.CategoryId);
             _productRepository.Save();
@@ -62,28 +62,6 @@ namespace ShopManagement.Application.Product
         public EditProduct GetDetails(long id)
         {
             return _productRepository.GetDetails(id);
-        }
-
-        public OperationResult InStock(long id)
-        {
-            var operationResult = new OperationResult();
-            var product = _productRepository.Get(id);
-            if (product == null)
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
-            product.InStock();
-            _productRepository.Save();
-            return operationResult.Succeeded();
-        }
-
-        public OperationResult NotInStock(long id)
-        {
-            var operationResult = new OperationResult();
-            var product = _productRepository.Get(id);
-            if (product == null)
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
-            product.NotInStock();
-            _productRepository.Save();
-          return  operationResult.Succeeded();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -26,8 +25,6 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                     Id = x.Id,
                     Code = x.Code,
                     Name = x.Name,
-                    IsInStock = x.IsInStock,
-                    UnitPrice = x.UnitPrice,
                     Category = x.Category.Name,
                     PictureUrl = x.PictureUrl ,
                     CreationDate = x.CreationDate.ToFarsi()
@@ -53,7 +50,6 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                     Keywords = x.Keywords,
                     PictureAlt = x.PictureAlt,
                     CategoryId = x.CategoryId,  
-                    UnitPrice = x.UnitPrice,
                     ShortDescription = x.ShortDescription,
                     Slug = x.Slug,
                     PictureUrl = x.PictureUrl,
