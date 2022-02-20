@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _0_Framework.Application;
 using _0_Framework.Repository;
 using InventoryManagement.Application.Contract.AC.Inventory;
 using InventoryManagement.Domain.InventoryAgg;
@@ -26,7 +27,8 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
                 ProductId = x.ProductId,
                 InStock = x.InStock,
                 UnitPrice = x.UnitPrice,
-                CurrentCount = x.CalculateCurrentCount()
+                CurrentCount = x.CalculateCurrentCount(),
+                CreationDate = x.CreationDate.ToFarsi()
             });
             if (searchModel.InStock)
             {
@@ -56,6 +58,23 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
         public Inventory GetBy(long productId)
         {
             return _context.Inventory.FirstOrDefault(x => x.ProductId == productId);
+        }
+
+        public List<InventoryOperationViewModel> GetOperationLog(long inventoryId)
+        {
+            var inventory = _context.Inventory.FirstOrDefault(x=>x.Id==inventoryId);
+            return inventory.InventoryOperations.Select(x => new InventoryOperationViewModel
+            {
+                Id = x.Id,
+                Count = x.Count,
+                CurrentCount = x.CurrentCount,
+                Description = x.Description,
+                Operation = x.Operation,
+                OperationDate = x.OperationDate.ToFarsi(),
+                Operator = "مدیر سیستم",
+                OperatorId = x.OperatorId,
+                OrderId = x.OrderId
+            }).OrderByDescending(x=>x.Id).ToList();
         }
     }
 }
