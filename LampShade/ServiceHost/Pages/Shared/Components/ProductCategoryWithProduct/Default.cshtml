@@ -67,13 +67,18 @@
                                                 <div class="col">
                                                     <!--=======  single grid product  =======-->
                                             <div class="single-grid-product">
-                                                        <div class="single-grid-product__image">
-
-                                                            <a href="single-product.html">
-                                                                <img src="@products.PictureUrl" title="@products.PictureTitle" class="img-fluid"
-                                                             alt="@products.PictureAlt">
-                                                            </a>
+                                                <div class="single-grid-product__image">
+                                                    @if (products.HasDiscount)
+                                                    {
+                                                        <div class="single-grid-product__label">
+                                                            <span class="sale">-@products.DiscountRate%</span>
                                                         </div>
+                                                    }
+                                                    <a href="single-product.html">
+                                                        <img src="@products.PictureUrl" title="@products.PictureTitle" class="img-fluid"
+                                                             alt="@products.PictureAlt">
+                                                    </a>
+                                                </div>
                                                         <div class="single-grid-product__content">
                                                             <div class="single-grid-product__category-rating">
                                                                 <span class="category">
@@ -104,7 +109,17 @@
                                                                 </span>
                                                             </h3>
                                                             <p class="single-grid-product__price">
+                                                                @if (products.HasDiscount)
+                                                                {
+                                                                    <span class="discounted-price">@products.PriceWithDiscount تومان</span>
+                                                                    <span class="main-price discounted">@products.Price تومان</span>
+
+                                                                }
+                                                                else
+                                                                {
                                                                 <span class="main-price">@products.Price تومان</span>
+
+                                                                }
                                                             </p>
                                                         </div>
                                                     </div>

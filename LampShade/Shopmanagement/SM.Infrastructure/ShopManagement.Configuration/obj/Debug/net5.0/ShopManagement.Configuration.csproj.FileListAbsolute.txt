@@ -32,3 +32,9 @@ D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\obj\Debug\net5.0\ShopManagement.Configuration.genruntimeconfig.cache
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\InventoryManagement.Infrastructure.EFCore.dll
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\InventoryManagement.Infrastructure.EFCore.pdb
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\DiscountManagement.Application.Contract.dll
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\DiscountManagement.Domain.dll
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\DiscountManagement.Infrastructure.EFCore.dll
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\DiscountManagement.Application.Contract.pdb
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\DiscountManagement.Domain.pdb
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\DiscountManagement.Infrastructure.EFCore.pdb
