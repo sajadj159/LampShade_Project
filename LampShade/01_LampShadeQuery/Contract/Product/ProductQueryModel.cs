@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
-namespace _01_LampShadeQuery.Contract.Product
+﻿namespace _01_LampShadeQuery.Contract.Product
 {
     public class ProductQueryModel
     {
@@ -17,5 +15,7 @@ namespace _01_LampShadeQuery.Contract.Product
         public string InStock { get; set; }
         public bool HasDiscount { get; set; }
         public string DiscountExpireDate { get; set; }
+        public string ShortDescription { get; set; }
+        public string CategorySlug { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace _01_LampShadeQuery.Query
                     Keywords = x.Keywords,
                     Products = MapProducts(x.Products),
                     Slug = x.Slug
-                }).FirstOrDefault(x => x.Slug == slug);
+                }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
             foreach (var product in productCategory.Products)
             {
@@ -75,7 +75,7 @@ namespace _01_LampShadeQuery.Query
                 PictureUrl = x.PictureUrl,
                 Slug = x.Slug,
 
-            }).ToList();
+            }).AsNoTracking().ToList();
         }
 
         public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()
