@@ -38,6 +38,10 @@ namespace ShopManagement.Domain.ProductCategoryAgg
         {
             Name = name;
             Description = description;
+            if (!string.IsNullOrWhiteSpace(pictureUrl))
+            {
+                PictureUrl = pictureUrl;
+            }
             PictureUrl = pictureUrl;
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
