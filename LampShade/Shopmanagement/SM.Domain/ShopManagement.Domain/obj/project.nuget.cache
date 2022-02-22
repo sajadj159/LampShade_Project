@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2KtIdD3vLs0ZHXiaNLFdZ5oMV/+cO4QJzdvRUeTD743zdRSZb8owG2iVazPI00JXJdR3AeYSOJcblWP6ikRJwg==",
+  "dgSpecHash": "CidjQpAKuwkhAT3ArNiSuPKiWwT692fQlUksKaWn4vPCE+EFr0LbtNNYYZeoYFP0OohlvoW9FddQkOZnK0orKA==",
   "success": true,
   "projectFilePath": "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Domain\\ShopManagement.Domain\\ShopManagement.Domain.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sajad\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.14\\microsoft.aspnetcore.http.features.5.0.14.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.14\\microsoft.entityframeworkcore.5.0.14.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.14\\microsoft.entityframeworkcore.abstractions.5.0.14.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.14\\microsoft.entityframeworkcore.analyzers.5.0.14.nupkg.sha512",
@@ -14,10 +15,11 @@
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
-    "C:\\Users\\sajad\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\sajad\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
-    "C:\\Users\\sajad\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.1\\system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512"
+    "C:\\Users\\sajad\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.1\\system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
+    "C:\\Users\\sajad\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512"
   ],
   "logs": []
 }
