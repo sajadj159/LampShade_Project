@@ -52,7 +52,6 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                     CategoryId = x.CategoryId,  
                     ShortDescription = x.ShortDescription,
                     Slug = x.Slug,
-                    //PictureUrl = x.PictureUrl,
                     Description = x.Description,
                     PictureTitle = x.PictureTitle,
                     MetaDescription = x.MetaDescription,

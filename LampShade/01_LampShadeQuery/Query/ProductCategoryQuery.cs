@@ -50,7 +50,7 @@ namespace _01_LampShadeQuery.Query
                 {
                     var unitPrice = productInventory.UnitPrice;
                     product.Price = unitPrice.ToMoney();
-                    product.InStock = inventory.FirstOrDefault(x => x.ProductId == product.Id)?.InStock.ToString();
+                    product.InStock = productInventory.InStock; 
 
                     var discountRate = discount.FirstOrDefault(x => x.ProductId == product.Id);
                     if (discountRate == null) continue;
@@ -100,7 +100,7 @@ namespace _01_LampShadeQuery.Query
                 {
                     var price = productInventory.UnitPrice;
                     product.Price = price.ToMoney();
-                    product.InStock = inventory.FirstOrDefault(x => x.ProductId == product.Id)?.InStock.ToString();
+                    product.InStock = productInventory.InStock;
 
                     var discount = discountRate.FirstOrDefault(x => x.ProductId == product.Id);
                     if (discount == null) continue;

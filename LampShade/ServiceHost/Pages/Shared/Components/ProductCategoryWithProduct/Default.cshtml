@@ -74,7 +74,7 @@
                                                             <span class="sale">-@products.DiscountRate%</span>
                                                         </div>
                                                     }
-                                                    <a href="single-product.html">
+                                                    <a asp-page="/Product" asp-route-id="@products.Slug">
                                                         <img src="~/ProductPictures/@products.PictureUrl" title="@products.PictureTitle" class="img-fluid"
                                                              alt="@products.PictureAlt">
                                                     </a>
@@ -82,7 +82,7 @@
                                                         <div class="single-grid-product__content">
                                                             <div class="single-grid-product__category-rating">
                                                                 <span class="category">
-                                                                    <a href="shop-left-sidebar.html">@products.Category</a>
+                                                                    <a asp-page="/Product" asp-route-id="@products.CategorySlug">@products.Category</a>
                                                                 </span>
                                                                 <span class="rating">
                                                                     <i class="ion-android-star active"></i>
@@ -94,17 +94,17 @@
                                                             </div>
 
                                                             <h3 class="single-grid-product__title">
-                                                                <a href="single-product.html">
+                                                                <a asp-page="/Product" asp-route-id="@products.Slug">
                                                                     @products.Name
                                                                 </a>
                                                                 <span>
-                                                                    @if (products.InStock=="True")
+                                                                    @if (products.InStock)
                                                                     {
-                                                                        <p style="text-align: left;" class="text text-success">موجود</p>
+                                                                        <span style="text-align: left;" class="text text-success">موجود</span>
                                                                     }
                                                                     else
                                                                     {
-                                                                        <p style="text-align: left;"class="text text-danger">ناموجود</p>
+                                                                        <span style="text-align: left;"class="text text-danger">ناموجود</span>
                                                                     }
                                                                 </span>
                                                             </h3>
