@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -25,7 +24,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 Heading = x.Heading,
                 PictureTitle = x.PictureTitle,
                 PictureAlt = x.PictureAlt,
-                PictureUrl = x.PictureUrl,
+                //PictureUrl = x.PictureUrl,
                 Text = x.Text,
                 BtnText = x.BtnText,
                 Link = x.Link

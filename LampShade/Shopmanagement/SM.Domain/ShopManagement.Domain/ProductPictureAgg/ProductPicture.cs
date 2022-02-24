@@ -27,7 +27,10 @@ namespace ShopManagement.Domain.ProductPictureAgg
         public void Edit(long productId, string pictureUrl, string pictureTitle, string pictureAlt)
         {
             ProductId = productId;
-            PictureUrl = pictureUrl;
+            if (!string.IsNullOrWhiteSpace(pictureUrl))
+            {
+                PictureUrl = pictureUrl;
+            }
             PictureTitle = pictureTitle;
             PictureAlt = pictureAlt;
         }

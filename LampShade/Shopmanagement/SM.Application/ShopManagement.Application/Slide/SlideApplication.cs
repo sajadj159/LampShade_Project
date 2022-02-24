@@ -7,11 +7,13 @@ namespace ShopManagement.Application.Slide
 {
     public class SlideApplication : ISlideApplication
     {
+        private readonly IFIleUploader _uploader;
         private readonly ISlideRepository _slideRepository;
 
-        public SlideApplication(ISlideRepository slideRepository)
+        public SlideApplication(ISlideRepository slideRepository, IFIleUploader uploader)
         {
             _slideRepository = slideRepository;
+            _uploader = uploader;
         }
 
         public OperationResult Create(CreateSlide command)
@@ -19,7 +21,9 @@ namespace ShopManagement.Application.Slide
             var operationResult = new OperationResult();
             if (_slideRepository.Exist(x => x.PictureTitle == command.PictureTitle))
                 operationResult.Failed(ApplicationMessages.DuplicatedRecord);
-            var slide = new Domain.SlideAgg.Slide(command.PictureUrl, command.PictureAlt, command.PictureTitle, command.Heading,
+
+            var picturePath = _uploader.Upload(command.PictureUrl,"Slides");
+            var slide = new Domain.SlideAgg.Slide(picturePath, command.PictureAlt, command.PictureTitle, command.Heading,
                 command.Title, command.Text, command.BtnText,command.Link);
             _slideRepository.Create(slide);
             _slideRepository.Save();
@@ -38,7 +42,8 @@ namespace ShopManagement.Application.Slide
             if (_slideRepository.Exist(x => x.PictureTitle == command.PictureTitle && x.Id != command.Id))
                 operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
-            editSlide.Edit(command.PictureUrl, command.PictureAlt, command.PictureTitle, command.Heading, command.Title,
+            var pictureUrl = _uploader.Upload(command.PictureUrl,"Slides");
+            editSlide.Edit(pictureUrl, command.PictureAlt, command.PictureTitle, command.Heading, command.Title,
                 command.Text, command.BtnText,command.Link);
             _slideRepository.Save();
             return operationResult.Succeeded();

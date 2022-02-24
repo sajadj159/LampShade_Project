@@ -1,14 +1,31 @@
-﻿namespace ShopManagement.Application.Contract.A.Slide
+﻿using System.ComponentModel.DataAnnotations;
+using _0_Framework.Application;
+using Microsoft.AspNetCore.Http;
+
+namespace ShopManagement.Application.Contract.A.Slide
 {
     public class CreateSlide
     {
-        public string PictureUrl { get; set; }
+        public IFormFile PictureUrl { get; set; }
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string PictureTitle { get; set; }
+
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string PictureAlt { get; set; }
+
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Heading { get;  set; }
+
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Title { get;  set; }
+
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Text { get;  set; }
+
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Link { get; set; }
+
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string BtnText { get;  set; }
     }
 }

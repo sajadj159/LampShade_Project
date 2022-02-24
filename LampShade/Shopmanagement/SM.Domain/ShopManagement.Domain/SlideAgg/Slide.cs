@@ -1,4 +1,5 @@
-﻿using _0_Framework.Domain;
+﻿using System.Diagnostics.SymbolStore;
+using _0_Framework.Domain;
 
 namespace ShopManagement.Domain.SlideAgg
 {
@@ -19,7 +20,7 @@ namespace ShopManagement.Domain.SlideAgg
         }
 
         public Slide(string pictureUrl, string pictureAlt, string pictureTitle,
-            string heading, string title, string text, string btnText,string link)
+            string heading, string title, string text, string btnText, string link)
         {
             PictureUrl = pictureUrl;
             PictureAlt = pictureAlt;
@@ -33,16 +34,19 @@ namespace ShopManagement.Domain.SlideAgg
         }
 
         public void Edit(string pictureUrl, string pictureAlt, string pictureTitle, string heading,
-            string title, string text, string btnText,string link)
+            string title, string text, string btnText, string link)
         {
-            PictureUrl = pictureUrl;
+            if (!string.IsNullOrWhiteSpace(pictureUrl))
+            {
+                PictureUrl = pictureUrl;
+            }
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
             Heading = heading;
             Title = title;
             Text = text;
             BtnText = btnText;
-            Link=link;
+            Link = link;
         }
 
         public void Remove()
