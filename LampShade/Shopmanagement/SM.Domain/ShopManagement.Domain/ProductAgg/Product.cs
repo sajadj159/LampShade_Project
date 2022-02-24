@@ -50,7 +50,10 @@ namespace ShopManagement.Domain.ProductAgg
             Code = code;
             ShortDescription = shortDescription;
             Description = description;
-            PictureUrl = pictureUrl;
+            if (!string.IsNullOrWhiteSpace(pictureUrl))
+            {
+                PictureUrl = pictureUrl;
+            }
             PictureTitle = pictureTitle;
             PictureAlt = pictureAlt;
             Slug = slug;

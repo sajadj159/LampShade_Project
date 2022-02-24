@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using _0_Framework.Application;
+using Microsoft.AspNetCore.Http;
 using ShopManagement.Application.Contract.ProductCategory;
 
 namespace ShopManagement.Application.Contract.A.Product
@@ -17,7 +18,9 @@ namespace ShopManagement.Application.Contract.A.Product
         public string ShortDescription { get; set; }
 
         public string Description { get; set; }
-        public string PictureUrl { get; set; }
+
+
+        public IFormFile PictureUrl { get; set; }
         public string PictureTitle { get; set; }
         public string PictureAlt { get; set; }
 

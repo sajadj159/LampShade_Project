@@ -52,11 +52,16 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                     CategoryId = x.CategoryId,  
                     ShortDescription = x.ShortDescription,
                     Slug = x.Slug,
-                    PictureUrl = x.PictureUrl,
+                    //PictureUrl = x.PictureUrl,
                     Description = x.Description,
                     PictureTitle = x.PictureTitle,
                     MetaDescription = x.MetaDescription,
                 }).FirstOrDefault(x => x.Id == id);
+        }
+
+        public Product GetProductWithCategories(long id)
+        {
+            return _context.Products.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
         }
 
         public List<ProductViewModel> GetProducts()
