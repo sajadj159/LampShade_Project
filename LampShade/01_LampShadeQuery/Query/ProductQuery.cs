@@ -6,6 +6,7 @@ using _01_LampShadeQuery.Contract.Product;
 using DiscountManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
+using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EFCore;
 
 namespace _01_LampShadeQuery.Query
@@ -30,7 +31,9 @@ namespace _01_LampShadeQuery.Query
                 .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
                 .Select(x => new { x.ProductId, x.DiscountRate, x.EndDate }).ToList();
 
-            var product = _shopContext.Products.Include(x => x.Category)
+            var product = _shopContext.Products
+                .Include(x => x.Category)
+                .Include(x=>x.ProductPictures)
                 .Select(x => new ProductQueryModel
                 {
                     Id = x.Id,
@@ -45,8 +48,8 @@ namespace _01_LampShadeQuery.Query
                     PictureTitle = x.PictureTitle,
                     CategorySlug = x.Category.Slug,
                     MetaDescription = x.MetaDescription,
-                    ShortDescription = x.ShortDescription
-
+                    ShortDescription = x.ShortDescription,
+                    Pictures = MapProductPictures(x.ProductPictures)
                 }).FirstOrDefault(x => x.Slug == slug);
             if (product == null)
                 return new ProductQueryModel();
@@ -68,6 +71,18 @@ namespace _01_LampShadeQuery.Query
                 product.PriceWithDiscount = (price - discountAmount).ToMoney();
             }
             return product;
+        }
+
+        private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)
+        {
+            return pictures.Select(x => new ProductPictureQueryModel
+            {
+                PictureAlt = x.PictureAlt,
+                IsRemoved = x.IsRemoved,
+                PictureTitle = x.PictureTitle,
+                PictureUrl = x.PictureUrl,
+                ProductId = x.ProductId
+            }).Where(x=>!x.IsRemoved).ToList();
         }
 
 
