@@ -45,7 +45,9 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
                 CanonicalAddress = x.CanonicalAddress,
                 MetaDescription = x.MetaDescription,
                 Name = x.Name,
-                ShowOrder = x.ShowOrder
+                ShowOrder = x.ShowOrder,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle
             }).FirstOrDefault(x => x.Id == id);
         }
     }

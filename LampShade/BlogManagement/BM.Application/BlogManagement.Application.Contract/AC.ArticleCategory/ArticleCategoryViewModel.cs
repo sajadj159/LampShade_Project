@@ -8,5 +8,6 @@
         public string PictureUrl { get; set; }
         public int ShowOrder { get; set; }
         public string CreationDate { get; set; }
+        public long ArticlesCount { get; set; }
     }
 }

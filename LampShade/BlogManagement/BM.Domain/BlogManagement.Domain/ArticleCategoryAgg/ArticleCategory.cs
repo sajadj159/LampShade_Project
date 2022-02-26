@@ -6,6 +6,8 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
     {
         public string Name { get; private set; }
         public string PictureUrl { get; private set; }
+        public string PictureAlt { get; private set; }
+        public string PictureTitle { get; private set; }
         public string Description { get; private set; }
         public int ShowOrder { get; private set; }
         public string Slug { get; private set; }
@@ -17,9 +19,11 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
         {
         }
 
-        public ArticleCategory(string name, string pictureUrl, string description, int showOrder, string slug, string keywords, string metaDescription, string canonicalAddress)
+        public ArticleCategory(string name, string pictureUrl, string pictureAlt, string pictureTitle, string description, int showOrder, string slug, string keywords, string metaDescription, string canonicalAddress)
         {
             Name = name;
+            PictureUrl = pictureUrl;
+            PictureAlt = pictureAlt;
             PictureUrl = pictureUrl;
             Description = description;
             ShowOrder = showOrder;
@@ -29,13 +33,15 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
             CanonicalAddress = canonicalAddress;
         }
 
-        public void Edit(string name, string pictureUrl, string description, int showOrder, string slug, string keywords, string metaDescription, string canonicalAddress)
+        public void Edit(string name, string pictureUrl, string pictureAlt, string pictureTitle, string description, int showOrder, string slug, string keywords, string metaDescription, string canonicalAddress)
         {
             Name = name;
             if (!string.IsNullOrWhiteSpace(pictureUrl))
             {
                 PictureUrl = pictureUrl;
             }
+            PictureAlt = pictureAlt;
+            PictureTitle = pictureTitle;
             Description = description;
             ShowOrder = showOrder;
             Slug = slug;

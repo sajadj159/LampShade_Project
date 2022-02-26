@@ -27,7 +27,7 @@ namespace BlogManagement.Application.A.ArticleCategory
             var slugify = command.Slug.Slugify();
             var picturePath = _uploader.Upload(command.PictureUrl, slugify);
 
-            var articleCategory = new Domain.ArticleCategoryAgg.ArticleCategory(command.Name, picturePath,
+            var articleCategory = new Domain.ArticleCategoryAgg.ArticleCategory(command.Name, picturePath,command.PictureAlt,command.PictureTitle,
                 command.Description, command.ShowOrder, slugify, command.Keywords, command.MetaDescription,
                 command.CanonicalAddress);
 
@@ -53,7 +53,10 @@ namespace BlogManagement.Application.A.ArticleCategory
             var slugify = command.Slug.Slugify();
             var picturePath = _uploader.Upload(command.PictureUrl,slugify);
 
-            articleCategory.Edit(command.Name,picturePath,command.Description,command.ShowOrder,slugify,command.Keywords,command.MetaDescription,command.CanonicalAddress);
+            articleCategory.Edit(command.Name,picturePath,command.PictureAlt,command.PictureTitle,
+                command.Description,command.ShowOrder,slugify,command.Keywords,command.MetaDescription,
+                command.CanonicalAddress);
+
             _articleCategoryRepository.Save();
            return operationResult.Succeeded();
         }
