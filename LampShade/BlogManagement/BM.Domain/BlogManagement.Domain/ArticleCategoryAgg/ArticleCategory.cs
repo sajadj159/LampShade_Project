@@ -1,4 +1,6 @@
-﻿using _0_Framework.Domain;
+﻿using System.Collections.Generic;
+using _0_Framework.Domain;
+using BlogManagement.Domain.ArticleAgg;
 
 namespace BlogManagement.Domain.ArticleCategoryAgg
 {
@@ -14,6 +16,8 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
         public string Keywords { get; private set; }
         public string MetaDescription { get; private set; }
         public string CanonicalAddress { get; private set; }
+
+        public List<Article> Articles { get; private set; }
 
         protected ArticleCategory()
         {

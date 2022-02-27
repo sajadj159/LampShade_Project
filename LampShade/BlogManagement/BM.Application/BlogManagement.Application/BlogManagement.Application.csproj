@@ -9,4 +9,8 @@
     <ProjectReference Include="..\BlogManagement.Application.Contract\BlogManagement.Application.Contract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="A.Article\" />
+  </ItemGroup>
+
 </Project>

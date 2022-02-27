@@ -20,6 +20,8 @@ namespace BlogManagement.Infrastructure.EFCore.Mapping
             builder.Property(x => x.PictureAlt).HasMaxLength(500);
             builder.Property(x => x.PictureTitle).HasMaxLength(500);
             builder.Property(x => x.Slug).HasMaxLength(600);
+
+            builder.HasMany(x => x.Articles).WithOne(x => x.Category).HasForeignKey(x => x.CategoryId);
         }
     }
 }
