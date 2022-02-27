@@ -1,12 +1,12 @@
-﻿@model BlogManagement.Application.Contract.AC.ArticleCategory.CreateArticleCategory
+﻿@model BlogManagement.Application.Contract.AC.ArticleCategory.EditArticleCategory
 @{
 }
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h4 class="modal-title">ایجاد گروه مقاله جدید</h4>
+    <h4 class="modal-title">تغییر گروه مقاله:@Model.Name </h4>
 </div>
 
-<form asp-page="./Index" asp-page-handler="Create"
+<form asp-page="./Index" asp-page-handler="Edit"
       method="post"
       data-ajax="true"
       data-callback=""
@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Name" class="control-label">نام</label>
-                    <input type="text" class="form-control" asp-for="Name" onchange="makeSlug('Name', 'Slug')">
+                    <input type="text" class="form-control" asp-for="Name">
                     <span asp-validation-for="Name" class="error"></span>
                 </div>
             </div><div class="col-md-6">
@@ -41,22 +41,6 @@
                     <label asp-for="ShowOrder" class="control-label">ترتیب نمایش</label>
                     <input class="form-control" asp-for="ShowOrder">
                     <span asp-validation-for="ShowOrder" class="error"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="PictureAlt" class="control-label">Alt</label>
-                    <input type="text" class="form-control" asp-for="PictureAlt">
-                    <span asp-validation-for="PictureAlt" class="error"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="PictureTitle" class="control-label">عنوان</label>
-                    <input type="text" class="form-control" asp-for="PictureTitle">
-                    <span asp-validation-for="PictureTitle" class="error"></span>
                 </div>
             </div>
         </div>
@@ -88,20 +72,11 @@
                     <span asp-validation-for="MetaDescription" class="error"></span>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group no-margin">
-                    <label asp-for="CanonicalAddress" class="control-label">CanonicalAddress</label>
-                    <textarea class="form-control autogrow" asp-for="CanonicalAddress"
-                              style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;"></textarea>
-                    <span asp-validation-for="CanonicalAddress" class="error"></span>
-                </div>
-            </div>
-        </div>
+        </div> 
+        <input type="hidden" asp-for="Id" value="@Model.Id"/>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
-        <button type="submit" class="btn btn-info waves-effect waves-light">ایجاد</button>
+        <button type="submit" class="btn btn-info waves-effect waves-light">ویرایش</button>
     </div>
 </form>

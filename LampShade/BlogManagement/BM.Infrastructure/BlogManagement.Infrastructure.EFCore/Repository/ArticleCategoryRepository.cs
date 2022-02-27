@@ -4,6 +4,7 @@ using _0_Framework.Application;
 using _0_Framework.Repository;
 using BlogManagement.Application.Contract.AC.ArticleCategory;
 using BlogManagement.Domain.ArticleCategoryAgg;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogManagement.Infrastructure.EFCore.Repository
 {
@@ -37,6 +38,15 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
             }
 
             return queryable.OrderByDescending(x => x.ShowOrder).ToList();
+        }
+
+        public List<ArticleCategoryViewModel> GetArticleCategories()
+        {
+            return _context.ArticleCategories.Include(x=>x.Articles).Select(x => new ArticleCategoryViewModel
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToList();
         }
 
         public EditArticleCategory GetDetails(long id)
