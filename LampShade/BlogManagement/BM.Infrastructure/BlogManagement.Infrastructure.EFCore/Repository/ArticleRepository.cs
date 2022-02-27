@@ -4,6 +4,7 @@ using _0_Framework.Application;
 using _0_Framework.Repository;
 using BlogManagement.Application.Contract.AC.Article;
 using BlogManagement.Domain.ArticleAgg;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogManagement.Infrastructure.EFCore.Repository
 {
@@ -13,6 +14,11 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
         public ArticleRepository(BlogContext context) : base(context)
         {
             _context = context;
+        }
+
+        public Article GetWithCategory(long id)
+        {
+            return _context.Articles.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
         }
 
         public List<ArticleViewModel> Search(ArticleSearchModel searchModel)
