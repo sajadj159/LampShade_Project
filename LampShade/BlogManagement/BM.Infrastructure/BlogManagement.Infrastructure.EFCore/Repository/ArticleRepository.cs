@@ -30,7 +30,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
                 PictureUrl = x.PictureUrl,
                 Title = x.Title,
                 ShortDescription = x.ShortDescription,
-                PublishDate = x.PictureUrl,
+                PublishDate = x.PublishDate.ToFarsi(),
                 Category = x.Category.Name
             });
             if (searchModel.CategoryId>0)
