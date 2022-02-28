@@ -1,4 +1,7 @@
-﻿namespace _01_LampShadeQuery.Contract.ArticleCategory
+﻿using System.Collections.Generic;
+using _01_LampShadeQuery.Contract.Article;
+
+namespace _01_LampShadeQuery.Contract.ArticleCategory
 {
     public class ArticleCategoryQueryModel
     {
@@ -13,5 +16,6 @@
         public string MetaDescription { get; set; }
         public string CanonicalAddress { get; set; }
         public long ArticlesCount { get; set; }
+        public List<ArticleQueryModel> Articles { get; set; }
     }
 }

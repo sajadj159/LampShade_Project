@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogManagement.Infrastructure.EFCore.Repository
 {
-    public class ArticleRepository:RepositoryBase<long,Article>,IArticleRepository
+    public class ArticleRepository : RepositoryBase<long, Article>, IArticleRepository
     {
         private readonly BlogContext _context;
         public ArticleRepository(BlogContext context) : base(context)
@@ -25,15 +26,16 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
         {
             var queryable = _context.Articles.Select(x => new ArticleViewModel
             {
-                Id= x.Id,
+                Id = x.Id,
                 CreatedDate = x.CreationDate.ToFarsi(),
                 PictureUrl = x.PictureUrl,
                 Title = x.Title,
-                ShortDescription = x.ShortDescription,
+                ShortDescription = x.ShortDescription.Substring(0, Math.Min(x.ShortDescription.Length, 50)) + "...",
                 PublishDate = x.PublishDate.ToFarsi(),
-                Category = x.Category.Name
+                Category = x.Category.Name,
+                CategoryId = x.CategoryId
             });
-            if (searchModel.CategoryId>0)
+            if (searchModel.CategoryId > 0)
             {
                 queryable = queryable.Where(x => x.CategoryId == searchModel.CategoryId);
             }
@@ -58,8 +60,8 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
                 PublishDate = x.PublishDate.ToFarsi(),
                 Slug = x.Slug,
                 Keywords = x.Keywords,
-                MetaDescription = x.MetaDescription,            
-                CanonicalAddress = x.CanonicalAddress,            
+                MetaDescription = x.MetaDescription,
+                CanonicalAddress = x.CanonicalAddress,
                 CategoryId = x.CategoryId,
                 Id = x.Id
             }).FirstOrDefault(x => x.Id == id);

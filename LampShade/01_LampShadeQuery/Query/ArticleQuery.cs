@@ -19,7 +19,7 @@ namespace _01_LampShadeQuery.Query
 
         public ArticleQueryModel GetArticleDetails(string value)
         {
-            return _context.Articles
+            var result= _context.Articles
                 .Where(x => x.PublishDate <= DateTime.Now)
                 .Include(x => x.Category)
                 .Select(x => new ArticleQueryModel
@@ -39,6 +39,8 @@ namespace _01_LampShadeQuery.Query
                     CategoryName = x.Category.Name,
                     CategorySlug = x.Category.Slug
                 }).FirstOrDefault(x=>x.Slug==value);
+            result.KeywordsList = result.Keywords.Split(",").ToList();
+            return result;
         }
 
         public List<ArticleQueryModel> LatestArticles()
