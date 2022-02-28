@@ -17,7 +17,7 @@ namespace _01_LampShadeQuery.Query
             _context = context;
         }
 
-        public List<ArticleQueryModel> LatestArticles()
+        public ArticleQueryModel GetArticleDetails(string value)
         {
             return _context.Articles
                 .Where(x => x.PublishDate <= DateTime.Now)
@@ -36,9 +36,26 @@ namespace _01_LampShadeQuery.Query
                     Keywords = x.Keywords,
                     MetaDescription = x.MetaDescription,
                     CanonicalAddress = x.CanonicalAddress,
-                    CategoryId = x.CategoryId,
                     CategoryName = x.Category.Name,
                     CategorySlug = x.Category.Slug
+                }).FirstOrDefault(x=>x.Slug==value);
+        }
+
+        public List<ArticleQueryModel> LatestArticles()
+        {
+            return _context.Articles
+                .Where(x => x.PublishDate <= DateTime.Now)
+                .Include(x => x.Category)
+                .Select(x => new ArticleQueryModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    ShortDescription = x.ShortDescription,
+                    PictureUrl = x.PictureUrl,
+                    PictureTitle = x.PictureTitle,
+                    PictureAlt = x.PictureAlt,
+                    PublishDate = x.PublishDate.ToFarsi(),
+                    Slug = x.Slug,
                 }).ToList();
         }
     }
