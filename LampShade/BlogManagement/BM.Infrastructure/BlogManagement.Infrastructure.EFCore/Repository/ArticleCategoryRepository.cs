@@ -30,7 +30,8 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
                 CreationDate = x.CreationDate.ToFarsi(),
                 Description = x.Description,
                 PictureUrl = x.PictureUrl,
-                ShowOrder = x.ShowOrder
+                ShowOrder = x.ShowOrder,
+                ArticlesCount = x.Articles.Count
             });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
             {
