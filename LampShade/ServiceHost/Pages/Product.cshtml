@@ -1,7 +1,9 @@
 ﻿@page "{id}"
 @model ServiceHost.Pages.ProductModel
 @{
-    ViewData["Title"] = "صفحه اصلی";
+    ViewData["Title"] = @Model.Product.Name;
+    ViewData["keywords"] = @Model.Product.Keywords;
+    ViewData["metaDescription"] = @Model.Product.Description;
 }
 
 <!--====================  breadcrumb area ====================-->
@@ -126,7 +128,7 @@
                                         <p class="single-info">
                                             <a asp-page="/ProductCategory" asp-route-id="@Model.Product.CategorySlug">@Model.Product.Category</a>
                                         </p>
-                                        <h4 class="product-title">@Model.Product.Name</h4>
+                                        <h2 class="product-title">@Model.Product.Name</h2>
                                         <div class="product-rating">
                                             <span class="rating">
                                                 <i class="ion-android-star active"></i>
@@ -190,7 +192,7 @@
                                         </div>
 
                                         <div class="social-share-buttons mt-20">
-                                            <h5>این محصول را به اشتراک بگذارید</h5>
+                                            <h2>این محصول را به اشتراک بگذارید</h2>
                                             <ul>
                                                 <li>
                                                     <a class="twitter" href="#">
@@ -306,7 +308,7 @@
                                                         <div class="ratings-wrapper">
                                                             <div class="sin-ratings">
                                                                 <div class="rating-author">
-                                                                    <h3>@item.Name</h3>
+                                                                    <h2>@item.Name</h2>
                                                                     @*<div class="rating-star">
                                                                         <i class="fa fa-star"></i>
                                                                         <i class="fa fa-star"></i>
@@ -321,7 +323,7 @@
                                                         </div>
                                                     }
                                                     <div class="rating-form-wrapper fix">
-                                                        <h3>نظر خود را به ما بگویید</h3>
+                                                        <h2>نظر خود را به ما بگویید</h2>
                                                         <form method="post">
                                                             <div class="rating-form row">
                                                                 <div class="col-md-6 col-12 form-group">

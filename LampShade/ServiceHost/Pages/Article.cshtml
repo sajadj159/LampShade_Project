@@ -1,7 +1,9 @@
 ﻿@page "{id}"
 @model ServiceHost.Pages.ArticleModel
 @{
-    ViewData["Title"] = "صفحه مقاله";
+    ViewData["Title"] = @Model.Article.Title;
+    ViewData["keywords"] = @Model.Article.Keywords;
+    ViewData["metaDescription"] = @Model.Article.Description;
 }
 
 <div class="breadcrumb-area section-space--half">
@@ -46,7 +48,7 @@
                                         <!--=======  post title  =======-->
 
 
-                                        <h3 class="post-title">@Model.Article.Title</h3>
+                                        <h2 class="post-title">@Model.Article.Title</h2>
 
                                         <!--=======  End of post title  =======-->
                                         <!--=======  Post meta  =======-->
@@ -92,7 +94,7 @@
                                         <!--=======  Share post area  =======-->
 
                                         <div class="social-share-buttons">
-                                            <h3>share this post</h3>
+                                            <h2>share this post</h2>
                                             <ul>
                                                 <li>
                                                     <a class="twitter" href="#">
@@ -124,7 +126,7 @@
                                     =============================================-->
 
                                     <div class="comment-section">
-                                        <h3 class="comment-counter">4 COMMENTS</h3>
+                                        <h2 class="comment-counter">4 COMMENTS</h2>
 
                                         <!--=======  comment container  =======-->
 
@@ -140,12 +142,12 @@
                                                     <img src="assets/img/blog/comment-icon.png" alt="">
                                                 </div>
                                                 <div class="content">
-                                                    <h3 class="user">
+                                                    <h2 class="user">
                                                         admin <span class="comment-time">
                                                             April 28, 2019
                                                             at 3:09 am
                                                         </span>
-                                                    </h3>
+                                                    </h2>
                                                     <p class="comment-text">
                                                         Lorem ipsum dolor sit amet consectetur
                                                         adipisicing elit. Sint quia rem dolorem et rerum est
@@ -167,12 +169,12 @@
                                                     <img src="assets/img/blog/comment-icon.png" alt="">
                                                 </div>
                                                 <div class="content">
-                                                    <h3 class="user">
+                                                    <h2 class="user">
                                                         admin <span class="comment-time">
                                                             April 28, 2019
                                                             at 3:09 am
                                                         </span>
-                                                    </h3>
+                                                    </h2>
                                                     <p class="comment-text">
                                                         Lorem ipsum dolor sit amet consectetur
                                                         adipisicing elit. Sint quia rem dolorem et rerum est
@@ -194,12 +196,12 @@
                                                     <img src="assets/img/blog/comment-icon.png" alt="">
                                                 </div>
                                                 <div class="content">
-                                                    <h3 class="user">
+                                                    <h2 class="user">
                                                         admin <span class="comment-time">
                                                             April 28, 2019
                                                             at 3:09 am
                                                         </span>
-                                                    </h3>
+                                                    </h2>
                                                     <p class="comment-text">
                                                         Lorem ipsum dolor sit amet consectetur
                                                         adipisicing elit. Sint quia rem dolorem et rerum est
@@ -218,7 +220,7 @@
                                         <!--=======  comment form container  =======-->
 
                                         <div class="comment-form-container">
-                                            <h3 class="comment-form-title">LEAVE A REPLY</h3>
+                                            <h2 class="comment-form-title">LEAVE A REPLY</h2>
                                             <p>
                                                 Your email address will not be published. Required fields are marked
                                                 *
@@ -282,7 +284,7 @@
                                     <!--=======  single sidebar widget  =======-->
                                     <div class="single-sidebar-widget">
 
-                                        <h4 class="single-sidebar-widget__title">گروه مقالات</h4>
+                                        <h2 class="single-sidebar-widget__title">گروه مقالات</h2>
                                         <ul class="single-sidebar-widget__category-list">
                                            @foreach (var articleCategory in Model.ArticleCategories)
                                            {
@@ -298,7 +300,7 @@
 
                                     <div class="single-sidebar-widget">
 
-                                        <h4 class="single-sidebar-widget__title">آخرین مقالات</h4>
+                                        <h2 class="single-sidebar-widget__title">آخرین مقالات</h2>
                                         <div class="block-container">
                                             @foreach (var item in @Model.LatestArticles)
                                             {
@@ -329,7 +331,7 @@
                                     <!--=======  End of single sidebar widget  =======-->
                                     <!--=======  single sidebar widget  =======-->
                                     <div class="single-sidebar-widget">
-                                        <h4 class="single-sidebar-widget__title">تگ ها</h4>
+                                        <h2 class="single-sidebar-widget__title">تگ ها</h2>
                                         <ul class="single-sidebar-widget__tag-list">
                                             @foreach (var tag in Model.Article.KeywordsList)
                                             {
