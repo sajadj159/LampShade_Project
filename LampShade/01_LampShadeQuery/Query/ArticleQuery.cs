@@ -19,7 +19,7 @@ namespace _01_LampShadeQuery.Query
 
         public ArticleQueryModel GetArticleDetails(string value)
         {
-            var result= _context.Articles
+            var result = _context.Articles
                 .Where(x => x.PublishDate <= DateTime.Now)
                 .Include(x => x.Category)
                 .Select(x => new ArticleQueryModel
@@ -38,8 +38,9 @@ namespace _01_LampShadeQuery.Query
                     CanonicalAddress = x.CanonicalAddress,
                     CategoryName = x.Category.Name,
                     CategorySlug = x.Category.Slug
-                }).FirstOrDefault(x=>x.Slug==value);
-            result.KeywordsList = result.Keywords.Split(",").ToList();
+                }).FirstOrDefault(x => x.Slug == value);
+            if (!string.IsNullOrWhiteSpace(result.Keywords))
+                result.KeywordsList = result.Keywords.Split(",").ToList();
             return result;
         }
 
