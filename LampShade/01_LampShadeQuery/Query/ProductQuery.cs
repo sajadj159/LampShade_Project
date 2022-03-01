@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
+using _01_LampShadeQuery.Contract.Comment;
 using _01_LampShadeQuery.Contract.Product;
 using CommentManagement.Infrastructure.EFCore;
 using DiscountManagement.Infrastructure.EFCore;
@@ -17,8 +18,7 @@ namespace _01_LampShadeQuery.Query
         private readonly ShopContext _shopContext;
         private readonly InventoryContext _inventoryContext;
         private readonly DiscountContext _discountContext;
-        private readonly CommentContext _commentContext
-            ;
+        private readonly CommentContext _commentContext;
         public ProductQuery(ShopContext shopContext, InventoryContext inventoryContext, DiscountContext discountContext, CommentContext commentContext)
         {
             _shopContext = shopContext;
@@ -83,7 +83,8 @@ namespace _01_LampShadeQuery.Query
                 {
                     Id = x.Id,
                     Description = x.Description,
-                    Name = x.Name
+                    Name = x.Name,
+                    CreationDate = x.CreationDate.ToFarsi()
                 }).OrderByDescending(x => x.Id).ToList();
 
             return product;

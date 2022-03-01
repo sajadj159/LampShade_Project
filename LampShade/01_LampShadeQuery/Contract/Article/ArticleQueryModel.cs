@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _01_LampShadeQuery.Contract.Comment;
 
 namespace _01_LampShadeQuery.Contract.Article
 {
@@ -20,6 +21,7 @@ namespace _01_LampShadeQuery.Contract.Article
         public long CategoryId { get;  set; }
         public string CategoryName { get; set; }
         public string CategorySlug { get; set; }
+        public List<CommentQueryModel> Comments { get; set; }
 
     }
 }
