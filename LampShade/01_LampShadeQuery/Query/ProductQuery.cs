@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _01_LampShadeQuery.Contract.Product;
+using CommentManagement.Infrastructure.EFCore;
 using DiscountManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,15 +17,17 @@ namespace _01_LampShadeQuery.Query
         private readonly ShopContext _shopContext;
         private readonly InventoryContext _inventoryContext;
         private readonly DiscountContext _discountContext;
-
-        public ProductQuery(ShopContext shopContext, InventoryContext inventoryContext, DiscountContext discountContext)
+        private readonly CommentContext _commentContext
+            ;
+        public ProductQuery(ShopContext shopContext, InventoryContext inventoryContext, DiscountContext discountContext, CommentContext commentContext)
         {
             _shopContext = shopContext;
             _inventoryContext = inventoryContext;
             _discountContext = discountContext;
+            _commentContext = commentContext;
         }
 
-        public ProductQueryModel GetDetails(string slug)
+        public ProductQueryModel GetProductDetails(string slug)
         {
             var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId, x.InStock, x.UnitPrice }).ToList();
             var discounts = _discountContext.CustomerDiscounts
@@ -33,7 +36,7 @@ namespace _01_LampShadeQuery.Query
 
             var product = _shopContext.Products
                 .Include(x => x.Category)
-                .Include(x=>x.ProductPictures)
+                .Include(x => x.ProductPictures)
                 .Select(x => new ProductQueryModel
                 {
                     Id = x.Id,
@@ -49,7 +52,7 @@ namespace _01_LampShadeQuery.Query
                     CategorySlug = x.Category.Slug,
                     MetaDescription = x.MetaDescription,
                     ShortDescription = x.ShortDescription,
-                    Pictures = MapProductPictures(x.ProductPictures) ,
+                    Pictures = MapProductPictures(x.ProductPictures),
                 }).FirstOrDefault(x => x.Slug == slug);
             if (product == null)
                 return new ProductQueryModel();
@@ -70,21 +73,23 @@ namespace _01_LampShadeQuery.Query
                 var discountAmount = Math.Round((price * discountRate) / 100);
                 product.PriceWithDiscount = (price - discountAmount).ToMoney();
             }
+
+            product.Comments = _commentContext.Comments
+                .Where(x => x.Type == CommentType.Product)
+                .Where(x => !x.IsCanceled)
+                .Where(x => x.IsConfirmed)
+                .Where(x => x.OwnerRecordId == product.Id)
+                .Select(x => new CommentQueryModel
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    Name = x.Name
+                }).OrderByDescending(x => x.Id).ToList();
+
             return product;
         }
 
-        //private static List<CommentQueryModel> MapComment(List<Comment> comments)
-        //{
-        //    return comments
-        //        .Where(x=>!x.IsCanceled)
-        //        .Where(x=>x.IsConfirmed)
-        //        .Select(x => new CommentQueryModel
-        //    {
-        //        Id = x.Id,
-        //        Description = x.Description,
-        //        Name = x.Name
-        //    }).OrderByDescending(x=>x.Id).ToList();
-        //}
+
 
         private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)
         {
@@ -95,7 +100,7 @@ namespace _01_LampShadeQuery.Query
                 PictureTitle = x.PictureTitle,
                 PictureUrl = x.PictureUrl,
                 ProductId = x.ProductId
-            }).Where(x=>!x.IsRemoved).ToList();
+            }).Where(x => !x.IsRemoved).ToList();
         }
 
 
