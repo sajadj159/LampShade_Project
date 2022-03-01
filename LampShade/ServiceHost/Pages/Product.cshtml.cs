@@ -1,8 +1,7 @@
 using _01_LampShadeQuery.Contract.Product;
+using CommentManagement.Application.Contract.A.Comment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ShopManagement.Application.Contract.A.Comment;
-using ShopManagement.Infrastructure.EFCore.Migrations;
 
 namespace ServiceHost.Pages
 {
@@ -10,11 +9,11 @@ namespace ServiceHost.Pages
     {
         public ProductQueryModel Product;
         private readonly IProductQuery _product;
-        protected readonly ICommentApplication _comment;
+        protected readonly ICommentApplication Comment;
         public ProductModel(IProductQuery product, ICommentApplication comment)
         {
             _product = product;
-            _comment = comment;
+            Comment = comment;
         }
 
         public void OnGet(string id)
@@ -24,7 +23,7 @@ namespace ServiceHost.Pages
 
         public RedirectToPageResult OnPost(AddComment command,string productSlug)
         {
-            var result = _comment.Add(command);
+            Comment.Add(command);
             return RedirectToPage("./Product", new { Id = productSlug });
         }
     }

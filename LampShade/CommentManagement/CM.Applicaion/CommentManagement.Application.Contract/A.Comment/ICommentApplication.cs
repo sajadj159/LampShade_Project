@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using _0_Framework.Application;
 
-namespace ShopManagement.Application.Contract.A.Comment
+namespace CommentManagement.Application.Contract.A.Comment
 {
     public interface ICommentApplication
     {

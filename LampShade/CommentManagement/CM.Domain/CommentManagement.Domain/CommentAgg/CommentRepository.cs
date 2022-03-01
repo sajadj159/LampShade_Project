@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using _0_Framework.Domain;
-using ShopManagement.Application.Contract.A.Comment;
+using CommentManagement.Application.Contract.A.Comment;
 
-namespace ShopManagement.Domain.CommentAgg
+namespace CommentManagement.Domain.CommentAgg
 {
     public interface ICommentRepository:IRepository<long,Comment>
     {

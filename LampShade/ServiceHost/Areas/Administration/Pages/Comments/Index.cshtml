@@ -1,5 +1,5 @@
 ﻿@page
-@model ServiceHost.Areas.Administration.Pages.Shop.Comments.IndexModel
+@model ServiceHost.Areas.Administration.Pages.Comments.IndexModel
 @{
 }
 
@@ -82,7 +82,7 @@
                                             }
                                         </td>
                                         <td>@item.Description</td>
-                                        <td>@item.ProductName</td>
+                                        <td>@item.OwnerName</td>
                                         <td>@item.CommentDate</td>
                                         <td>
                                             <a class="btn btn-danger btn-custom waves-effect waves-light m-b-5" asp-page="./Index" asp-page-handler="Cancel"

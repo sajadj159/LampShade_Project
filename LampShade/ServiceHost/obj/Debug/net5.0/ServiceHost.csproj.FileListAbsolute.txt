@@ -218,7 +218,6 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\Microsoft.AspNetCor
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\System.IO.Pipelines.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Product.cshtml.g.cs
-D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Shop\Comments\Index.cshtml.g.cs
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\BlogManagement.Application.Contract.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\BlogManagement.Application.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\BlogManagement.Domain.dll
@@ -239,3 +238,14 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.MvcAppl
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Shared\Components\LatestArticles\Default.cshtml.g.cs
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Article.cshtml.g.cs
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\ArticleCategory.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Comments\Index.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Application.Contract.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Application.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Configuration.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Domain.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Infrastructure.EFCore.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Application.Contract.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Configuration.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Application.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Domain.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\CommentManagement.Infrastructure.EFCore.pdb

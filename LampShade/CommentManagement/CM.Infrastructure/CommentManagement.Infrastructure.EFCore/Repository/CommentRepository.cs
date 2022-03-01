@@ -2,35 +2,34 @@
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
-using Microsoft.EntityFrameworkCore;
-using ShopManagement.Application.Contract.A.Comment;
-using ShopManagement.Domain.CommentAgg;
+using CommentManagement.Application.Contract.A.Comment;
+using CommentManagement.Domain.CommentAgg;
 
-namespace ShopManagement.Infrastructure.EFCore.Repository
+namespace CommentManagement.Infrastructure.EFCore.Repository
 {
     public class CommentRepository : RepositoryBase<long, Comment>, ICommentRepository
     {
-        private readonly ShopContext _Context;
-        public CommentRepository(ShopContext context) : base(context)
+        private readonly CommentContext _context;
+        public CommentRepository(CommentContext context) : base(context)
         {
-            _Context = context;
+            _context = context;
         }
 
         public List<CommentViewModel> Search(CommentSearchModel searchModel)
         {
-            var queryable = _Context.Comments
-                .Include(x => x.Product)
+            var queryable = _context.Comments
                 .Select(x => new CommentViewModel
                 {
                     Id = x.Id,
                     Name = x.Name,
                     Email = x.Email,
+                    Website = x.Website,
                     Description = x.Description,
                     IsCanceled = x.IsCanceled,
                     IsConfirmed = x.IsConfirmed,
-                    ProductId = x.ProductId,
-                    ProductName = x.Product.Name,
-                    CommentDate = x.CreationDate.ToFarsi()
+                    CommentDate = x.CreationDate.ToFarsi(),
+                    OwnerRecordId = x.OwnerRecordId,
+                    Type = x.Type
                 });
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
             {
