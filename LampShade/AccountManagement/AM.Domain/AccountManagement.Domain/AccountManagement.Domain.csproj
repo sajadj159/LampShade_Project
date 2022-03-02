@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,6 +7,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\0_Framework\0_Framework\0_Framework.csproj" />
     <ProjectReference Include="..\..\AM.Application\AccountManagement.Application.Contracts\AccountManagement.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RoleAgg\" />
   </ItemGroup>
 
 </Project>
