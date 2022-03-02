@@ -259,3 +259,6 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\AccountManagement.A
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\AccountManagement.Application.Contracts.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\AccountManagement.Domain.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\AccountManagement.Infrastructure.EFCore.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Accounts\Account\Create.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Accounts\Account\Edit.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Accounts\Account\Index.cshtml.g.cs

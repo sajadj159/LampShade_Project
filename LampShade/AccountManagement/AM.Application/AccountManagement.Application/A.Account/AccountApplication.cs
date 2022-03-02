@@ -45,7 +45,7 @@ namespace AccountManagement.Application.A.Account
                 return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
-            if (_accountRepository.Exist(x => x.UserName == command.UserName || x.Mobile == command.Mobile && x.Id != command.Id))
+            if (_accountRepository.Exist(x => (x.UserName == command.UserName || x.Mobile == command.Mobile) && x.Id != command.Id))
             {
                 return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
