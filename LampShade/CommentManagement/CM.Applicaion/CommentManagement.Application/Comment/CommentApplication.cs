@@ -34,7 +34,7 @@ namespace CommentManagement.Application.Comment
             var comment = _commentRepository.Get(id);
             if (comment==null)
             {
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
             comment.Confirm();
             _commentRepository.Save();
@@ -47,7 +47,7 @@ namespace CommentManagement.Application.Comment
             var comment = _commentRepository.Get(id);
             if (comment==null)
             {
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+              return  operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
             comment.Cancel();
             _commentRepository.Save();

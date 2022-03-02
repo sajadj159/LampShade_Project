@@ -21,7 +21,7 @@ namespace BlogManagement.Application.A.ArticleCategory
             var operationResult = new OperationResult();
             if (_articleCategoryRepository.Exist(x => x.Name == command.Name))
             {
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return  operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
 
             var slugify = command.Slug.Slugify();
@@ -42,12 +42,12 @@ namespace BlogManagement.Application.A.ArticleCategory
             var articleCategory = _articleCategoryRepository.Get(command.Id);
             if (articleCategory == null)
             {
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
             if (_articleCategoryRepository.Exist(x => x.Name == command.Name && x.Id != command.Id))
             {
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+              return  operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
 
             var slugify = command.Slug.Slugify();

@@ -20,7 +20,7 @@ namespace InventoryManagement.Application
             var operationResult = new OperationResult();
             if (_inventoryRepository.Exist(x => x.ProductId == command.ProductId))
             {
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
 
             var inventory = new Inventory(command.ProductId, command.UnitPrice);
@@ -35,12 +35,12 @@ namespace InventoryManagement.Application
             var inventory = _inventoryRepository.Get(command.Id);
             if (inventory == null)
             {
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+              return  operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
             if (_inventoryRepository.Exist(x => x.ProductId == command.ProductId && x.Id != command.Id))
             {
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
             inventory.Edit(command.ProductId, command.UnitPrice);
             _inventoryRepository.Save();
@@ -53,7 +53,7 @@ namespace InventoryManagement.Application
             var inventory = _inventoryRepository.Get(command.InventoryId);
             if (inventory == null)
             {
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
             const long operatorId = 1;
@@ -69,7 +69,7 @@ namespace InventoryManagement.Application
             var inventory = _inventoryRepository.Get(command.InventoryId);
             if (inventory==null)
             {
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
             const long operatorId = 1;
             inventory.Reduce(command.Count,operatorId,command.Description,0);

@@ -18,7 +18,7 @@ namespace DiscountManagement.Application.A.CustomerDiscount
         {
             var operationResult = new OperationResult();
             if (_customerDiscountRepository.Exist(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate))
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var startDate = command.StartDate.ToGeorgianDateTime();
             var endDate = command.EndDate.ToGeorgianDateTime();
@@ -34,12 +34,12 @@ namespace DiscountManagement.Application.A.CustomerDiscount
             var customerDiscount = _customerDiscountRepository.Get(command.Id);
             if (customerDiscount == null)
             {
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
             if (_customerDiscountRepository.Exist(x => x.ProductId == command.ProductId && x.DiscountRate == command.DiscountRate && x.Id != command.Id))
             {
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+              return  operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
 
             var startDate = command.StartDate.ToGeorgianDateTime();

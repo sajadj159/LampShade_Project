@@ -24,7 +24,7 @@ namespace ShopManagement.Application.ProductPicture
             var operationResult = new OperationResult();
 
             if (_productPictureRepository.Exist(x => x.PictureTitle == command.PictureTitle && x.ProductId == command.ProductId))
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var product = _productRepository.GetProductWithCategories(command.ProductId);
             var path = $"{product.Category.Slug}/{product.Slug}";
@@ -43,10 +43,10 @@ namespace ShopManagement.Application.ProductPicture
 
             var productPicture = _productPictureRepository.GetWithProductsAndCategories(command.Id);
             if (productPicture == null)
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
 
             if (_productPictureRepository.Exist(x => x.PictureTitle == command.PictureTitle && x.ProductId == command.ProductId && x.Id != command.Id))
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var path = $"{productPicture.Product.Category.Slug}/{productPicture.Product.Slug}";
             var picturePath = _uploader.Upload(command.PictureUrl, path);
@@ -61,7 +61,7 @@ namespace ShopManagement.Application.ProductPicture
             var operationResult = new OperationResult();
             var productPicture = _productPictureRepository.Get(id);
             if (productPicture == null)
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
 
             productPicture.Remove();
             _productPictureRepository.Save();
@@ -74,7 +74,7 @@ namespace ShopManagement.Application.ProductPicture
             var operationResult = new OperationResult();
             var productPicture = _productPictureRepository.Get(id);
             if (productPicture == null)
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
 
             productPicture.Restore();
             _productPictureRepository.Save();

@@ -20,7 +20,7 @@ namespace ShopManagement.Application.Slide
         {
             var operationResult = new OperationResult();
             if (_slideRepository.Exist(x => x.PictureTitle == command.PictureTitle))
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var picturePath = _uploader.Upload(command.PictureUrl,"Slides");
             var slide = new Domain.SlideAgg.Slide(picturePath, command.PictureAlt, command.PictureTitle, command.Heading,
@@ -36,11 +36,11 @@ namespace ShopManagement.Application.Slide
             var editSlide = _slideRepository.Get(command.Id);
             if (editSlide == null)
             {
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
             if (_slideRepository.Exist(x => x.PictureTitle == command.PictureTitle && x.Id != command.Id))
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var pictureUrl = _uploader.Upload(command.PictureUrl,"Slides");
             editSlide.Edit(pictureUrl, command.PictureAlt, command.PictureTitle, command.Heading, command.Title,
@@ -54,7 +54,7 @@ namespace ShopManagement.Application.Slide
             var operationResult = new OperationResult();
             var slide = _slideRepository.Get(id);
             if (slide == null)
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
             slide.Remove();
             _slideRepository.Save();
             return operationResult.Succeeded();
@@ -65,7 +65,7 @@ namespace ShopManagement.Application.Slide
             var operationResult = new OperationResult();
             var slide = _slideRepository.Get(id);
             if (slide == null)
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
             slide.Restore();
             _slideRepository.Save();
             return operationResult.Succeeded();

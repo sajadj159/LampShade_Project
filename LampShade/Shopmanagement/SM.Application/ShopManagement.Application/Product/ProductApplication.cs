@@ -23,7 +23,7 @@ namespace ShopManagement.Application.Product
         {
             var operationResult = new OperationResult();
             if (_productRepository.Exist(x => x.Name == command.Name))
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return  operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slugify = command.Slug.Slugify();
             var slugBy = _productCategoryRepository.GetSlugBy(command.CategoryId);
@@ -44,9 +44,9 @@ namespace ShopManagement.Application.Product
 
             var product = _productRepository.GetProductWithCategories(command.Id);
             if (product == null)
-                operationResult.Failed(ApplicationMessages.RecordNotFound);
+               return operationResult.Failed(ApplicationMessages.RecordNotFound);
             if (_productRepository.Exist(x => x.Name == command.Name && x.Id != command.Id))
-                operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slugify = command.Slug.Slugify();
             var picturePath = $"{product.Category.Slug}/{slugify}";
