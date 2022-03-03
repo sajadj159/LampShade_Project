@@ -22,7 +22,7 @@ namespace AccountManagement.Application.A.Role
                 return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
 
-            var role = new Domain.RoleAgg.Role(command.Name);
+            var role = new Domain.RoleAgg.Role(command.Name,new List<Permission>());
             _roleRepository.Create(role);
             _roleRepository.Save();
             return operationResult.Succeeded();
@@ -41,7 +41,7 @@ namespace AccountManagement.Application.A.Role
             {
                 return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
-            role.Edit(command.Name);
+            role.Edit(command.Name,new List<Permission>());
             _roleRepository.Save();
             return operationResult.Succeeded();
         }
