@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using _0_Framework.Application;
+using _0_Framework.Repository;
 using AccountManagement.Application.Contracts.AC.Role;
 using AccountManagement.Domain.RoleAgg;
 
@@ -41,7 +42,11 @@ namespace AccountManagement.Application.A.Role
             {
                 return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
-            role.Edit(command.Name,new List<Permission>());
+
+            var permissions = new List<Permission>();
+            command.Permissions.ForEach(code=>permissions.Add(new Permission(code)));
+
+            role.Edit(command.Name,permissions);
             _roleRepository.Save();
             return operationResult.Succeeded();
         }

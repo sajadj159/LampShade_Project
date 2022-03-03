@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -19,6 +19,10 @@
     <ProjectReference Include="..\..\..\InventoryManagement\IM.Application\InventoryManagement.Application.Contract\InventoryManagement.Application.Contract.csproj" />
     <ProjectReference Include="..\..\..\InventoryManagement\IM.Domain\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />
     <ProjectReference Include="..\..\SM.Application\ShopManagement.Application\ShopManagement.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Permissions\" />
   </ItemGroup>
 
 </Project>
