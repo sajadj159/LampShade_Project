@@ -25,7 +25,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Slides
         public PartialViewResult OnGetCreate()
         {
             var command = new CreateSlide();
-            return Partial("./Create",command);
+            return Partial("./Create", command);
         }
 
         public JsonResult OnPostCreate(CreateSlide command)

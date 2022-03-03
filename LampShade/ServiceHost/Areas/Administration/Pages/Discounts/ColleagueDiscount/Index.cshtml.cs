@@ -35,7 +35,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscount
                 Products = _productApplication.GetProducts()
             };
             
-            return Partial("./Create",command);
+            return Partial("./Create", command);
         }
 
         public JsonResult OnPostCreate(DefineColleagueDiscount command)

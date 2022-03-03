@@ -20,7 +20,7 @@ namespace AccountManagement.Application.A.Account
             _authHelper = authHelper;
         }
 
-        public OperationResult Create(CreateAccount command)
+        public OperationResult Register(RegisterAccount command)
         {
             var operationResult = new OperationResult();
             if (_accountRepository.Exist(x => x.UserName == command.UserName || x.Mobile == command.Mobile))

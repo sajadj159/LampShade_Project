@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\AM.Application\AccountManagement.Application\AccountManagement.Application.csproj" />
+    <ProjectReference Include="..\..\AM.Domain\AccountManagement.Domain\AccountManagement.Domain.csproj" />
     <ProjectReference Include="..\AccountManagement.Infrastructure.EFCore\AccountManagement.Infrastructure.EFCore.csproj" />
   </ItemGroup>
 

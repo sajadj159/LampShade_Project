@@ -5,7 +5,7 @@ namespace AccountManagement.Application.Contracts.AC.Account
 {
     public interface IAccountApplication
     {
-        OperationResult Create(CreateAccount command);
+        OperationResult Register(RegisterAccount command);
         OperationResult Edit(EditAccount command);
         OperationResult ChangePassword(ChangePassword command);
         OperationResult Login(Login command);

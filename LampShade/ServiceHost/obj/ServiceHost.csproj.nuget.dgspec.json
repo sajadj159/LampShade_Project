@@ -336,14 +336,14 @@
         }
       }
     },
-    "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.Configure\\AccountManagement.Infrastructure.Configuration.csproj": {
+    "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Configuration\\AccountManagement.Configuration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.Configure\\AccountManagement.Infrastructure.Configuration.csproj",
-        "projectName": "AccountManagement.Infrastructure.Configuration",
-        "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.Configure\\AccountManagement.Infrastructure.Configuration.csproj",
+        "projectUniqueName": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Configuration\\AccountManagement.Configuration.csproj",
+        "projectName": "AccountManagement.Configuration",
+        "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Configuration\\AccountManagement.Configuration.csproj",
         "packagesPath": "C:\\Users\\sajad\\.nuget\\packages\\",
-        "outputPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.Configure\\obj\\",
+        "outputPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Configuration\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sajad\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -362,6 +362,9 @@
             "projectReferences": {
               "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Application\\AccountManagement.Application\\AccountManagement.Application.csproj": {
                 "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Application\\AccountManagement.Application\\AccountManagement.Application.csproj"
+              },
+              "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Domain\\AccountManagement.Domain\\AccountManagement.Domain.csproj": {
+                "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Domain\\AccountManagement.Domain\\AccountManagement.Domain.csproj"
               },
               "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj": {
                 "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj"
@@ -1806,8 +1809,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.Configure\\AccountManagement.Infrastructure.Configuration.csproj": {
-                "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.Configure\\AccountManagement.Infrastructure.Configuration.csproj"
+              "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Configuration\\AccountManagement.Configuration.csproj": {
+                "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Configuration\\AccountManagement.Configuration.csproj"
               },
               "D:\\repos\\C#\\LampShade\\LampShade\\BlogManagement\\BM.Infrastructure\\BlogManagement.Infrastructure.Configuration\\BlogManagement.Infrastructure.Configuration.csproj": {
                 "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\BlogManagement\\BM.Infrastructure\\BlogManagement.Infrastructure.Configuration\\BlogManagement.Infrastructure.Configuration.csproj"
@@ -1845,6 +1848,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.14, )"
+            },
+            "Microsoft.QualityTools.Testing.Fakes": {
+              "target": "Package",
+              "version": "[16.11.230815, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using _0_Framework.Repository;
 using InventoryManagement.Application.Contract.AC.Inventory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +9,7 @@ using ShopManagement.Application.Contract.A.Product;
 
 namespace ServiceHost.Areas.Administration.Pages.Inventory
 {
+    [Authorize(Roles = Roles.Administrator)]
     public class IndexModel : PageModel
     {
         [TempData] public string Message { get; set; }
@@ -36,7 +39,7 @@ namespace ServiceHost.Areas.Administration.Pages.Inventory
                 Products = _productApplication.GetProducts()
             };
             
-            return Partial("./Create",command);
+            return Partial("./Create", command);
         }
 
         public JsonResult OnPostCreate(CreateInventory command)

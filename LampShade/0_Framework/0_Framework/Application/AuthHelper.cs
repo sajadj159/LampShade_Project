@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using _0_Framework.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using AuthenticationProperties = Microsoft.AspNetCore.Authentication.AuthenticationProperties;
 
 namespace _0_Framework.Application
 {
@@ -47,9 +47,26 @@ namespace _0_Framework.Application
 
         public string CurrentAccountRole()
         {
-            if (IsAuthenticated())
-                return _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
-            return null;
+            return IsAuthenticated() ? _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value : null;
+        }
+
+        public AuthViewModel CurrentAccountInfo()
+        {
+            var result = new AuthViewModel();
+
+            if (!IsAuthenticated())
+            {
+                return result;
+            }
+
+            var claims = _contextAccessor.HttpContext.User.Claims.ToList();
+            result.Id = long.Parse(claims.FirstOrDefault(x => x.Type == "AccountId")?.Value);
+            result.Username = claims.FirstOrDefault(x => x.Type == "username")?.Value;
+            result.RoleId= long.Parse(claims.FirstOrDefault(y => y.Type ==ClaimTypes.Role)?.Value);
+            result.Fullname = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
+            result.Role = Roles.GetRoleBy(result.RoleId);
+            return result;
+
         }
 
         public bool IsAuthenticated()

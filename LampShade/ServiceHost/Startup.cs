@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using _0_Framework.Application;
-using AccountManagement.Infrastructure.Configuration;
+using _0_Framework.Repository;
+using AccountManagement.Configuration;
 using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Configuration;
 using DiscountManagement.Configuration;
@@ -30,6 +32,7 @@ namespace ServiceHost
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
+
             var connectionString = Configuration.GetConnectionString("LampShadeDb");
 
             ShopManagementBootstrapper.Configure(services, connectionString);
@@ -47,8 +50,9 @@ namespace ServiceHost
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.Strict;
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
             });
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
                 {
@@ -57,7 +61,28 @@ namespace ServiceHost
                     o.AccessDeniedPath = new PathString("/AccessDenied");
                 });
 
-            services.AddRazorPages();
+            services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("AdminArea", builder => builder
+                        .RequireRole(new List<string> {Roles.Administrator, Roles.ContentUploader}));
+
+                    options.AddPolicy("Shop", builder => builder
+                        .RequireRole(new List<string> { Roles.Administrator}));
+
+                    options.AddPolicy("Discount", builder => builder
+                        .RequireRole(new List<string> { Roles.Administrator }));
+
+                    options.AddPolicy("Account", builder => builder
+                        .RequireRole(new List<string> { Roles.Administrator }));
+                });
+            services.AddRazorPages()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizeAreaFolder("Administration", "/", "AdminArea");
+                    options.Conventions.AuthorizeAreaFolder("Administration", "/Shop", "shop");
+                    options.Conventions.AuthorizeAreaFolder("Administration", "/Discounts", "Discount");
+                    options.Conventions.AuthorizeAreaFolder("Administration", "/Accounts", "Account");
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,6 +114,7 @@ namespace ServiceHost
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

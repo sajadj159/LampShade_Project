@@ -1,44 +1,85 @@
-﻿<div id="sidebar-menu">
+﻿@using _0_Framework.Application
+@using _0_Framework.Repository
+@inject IAuthHelper _authHelper;
+@{
+    var currentAccount = _authHelper.CurrentAccountInfo();
+}
+<div class="user-details">
+    <div class="pull-right">
+        <img src="~/ProductPictures/profilePhotos/2022-03-03-14-15-47-f234efd2-898a-4900-a429-0e26b6fa078a.jpg" alt="" class="thumb-md img-circle">
+    </div>
+    <div class="user-info">
+        <div class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">@currentAccount.Fullname <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div class="ripple-wrapper"></div></a></li>
+                <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
+                <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
+                <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> Logout</a></li>
+            </ul>
+        </div>
+
+        <p class="text-muted m-0">@currentAccount.Role</p>
+    </div>
+</div>
+<div id="sidebar-menu">
     <ul>
         <li>
             <a asp-page="/Index" class="waves-effect active"><i class="md md-home"></i><span> داشبورد </span></a>
         </li>
-        <li>
-            <a asp-page="/Inventory/Index" class="waves-effect"><i class="md md-home"></i><span> انبارداری </span></a>
-        </li>
-        <li class="has_sub">
-            <a class="waves-effect"><i class="md md-mail"></i><span> فروشگاه </span><span class="pull-right"><i class="md md-add"></i></span></a>
-            <ul class="list-unstyled">
-                <li><a asp-page="/shop/slides/Index"> اسلایدر </a></li>
-                <li><a asp-page="/shop/LatestArticles/Index">گروه محصولات </a></li>
-                <li><a asp-page="/shop/products/Index">محصولات </a></li>
-                <li><a asp-page="/shop/productpictures/Index">عکس محصولات </a></li>
-                <li><a asp-page="/shop/Comments/Index">کامنت ها </a></li>
-            </ul>
-        </li>
+        @if (_authHelper.CurrentAccountRole() == Roles.Administrator)
+        {
+            <li>
+                <a asp-page="/Inventory/Index" class="waves-effect"><i class="md md-home"></i><span> انبارداری </span></a>
+            </li>
+        }
+        
+        @if (_authHelper.CurrentAccountRole()==Roles.Administrator)
+        {
+            <li class="has_sub">
+                <a class="waves-effect"><i class="md md-mail"></i><span> فروشگاه </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                <ul class="list-unstyled">
+                    <li><a asp-page="/shop/slides/Index"> اسلایدر </a></li>
+                    <li><a asp-page="/shop/ProductCategories/Index">گروه محصولات </a></li>
+                    <li><a asp-page="/shop/products/Index">محصولات </a></li>
+                    <li><a asp-page="/shop/productpictures/Index">عکس محصولات </a></li>
+                </ul>
+            </li>
+        }
+        
         <li>
             <a asp-page="/Comments/Index" class="waves-effect"><i class="md md-home"></i><span> کامنت </span></a>
         </li>
-        <li class="has_sub">
-            <a class="waves-effect"><i class="md md-mail"></i><span> سیستم تخفیفات </span><span class="pull-right"><i class="md md-add"></i></span></a>
-            <ul class="list-unstyled">
-                <li><a asp-page="/Discounts/CustomerDiscount/Index"> تخفیف مشتری </a></li>
-                <li><a asp-page="/Discounts/ColleagueDiscount/Index"> تخفیف همکاری </a></li>
-            </ul>
-        </li>
+        @if (_authHelper.CurrentAccountRole() == Roles.Administrator)
+        {
+            <li class="has_sub">
+                <a class="waves-effect"><i class="md md-mail"></i><span> سیستم تخفیفات </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                <ul class="list-unstyled">
+                    <li><a asp-page="/Discounts/CustomerDiscount/Index"> تخفیف مشتری </a></li>
+                    <li><a asp-page="/Discounts/ColleagueDiscount/Index"> تخفیف همکاری </a></li>
+                </ul>
+            </li>
+        }
+        
         <li class="has_sub">
             <a class="waves-effect"><i class="md md-mail"></i><span> سیستم بلاگینگ </span><span class="pull-right"><i class="md md-add"></i></span></a>
             <ul class="list-unstyled">
                 <li><a asp-page="/Blog/ArticleCategories/Index"> گروه مقالات </a></li>
-                <li><a asp-page="/Blog/LatestArticles/Index"> مقالات </a></li>
+                <li><a asp-page="/Blog/Articles/Index"> مقالات </a></li>
             </ul>
         </li>
-        <li class="has_sub">
-            <a class="waves-effect"><i class="md md-mail"></i><span> سیستم کاربران </span><span class="pull-right"><i class="md md-add"></i></span></a>
-            <ul class="list-unstyled">
-                <li><a asp-page="/Accounts/Account/Index">کاربران</a></li>
-                <li><a asp-page="/Accounts/Role/Index"> نقش ها </a></li>
-            </ul>
+        @if (_authHelper.CurrentAccountRole() == Roles.Administrator)
+        {
+            <li class="has_sub">
+                <a class="waves-effect"><i class="md md-mail"></i><span> سیستم کاربران </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                <ul class="list-unstyled">
+                    <li><a asp-page="/Accounts/Account/Index">کاربران</a></li>
+                    <li><a asp-page="/Accounts/Role/Index"> نقش ها </a></li>
+                </ul>
+            </li>
+        }
+        <li>
+            <a asp-page="/Account" asp-page-handler="Logout" class="waves-effect active"><i class="fa fa-sign-out"></i><span> خروج </span></a>
         </li>
         
     </ul>

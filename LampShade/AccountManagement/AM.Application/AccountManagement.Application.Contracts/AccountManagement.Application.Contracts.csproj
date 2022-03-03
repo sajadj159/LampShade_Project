@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AC.Account\" />
     <Folder Include="AC.Role\" />
   </ItemGroup>
 
