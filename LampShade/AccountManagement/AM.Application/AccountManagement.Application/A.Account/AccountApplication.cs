@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using _0_Framework.Application;
 using AccountManagement.Application.Contracts.AC.Account;
 using AccountManagement.Domain.AccountAgg;
+using AccountManagement.Domain.RoleAgg;
 
 namespace AccountManagement.Application.A.Account
 {
@@ -11,13 +14,14 @@ namespace AccountManagement.Application.A.Account
         private readonly IAccountRepository _accountRepository;
         private readonly IFIleUploader _uploader;
         private readonly IAuthHelper _authHelper;
-
-        public AccountApplication(IAccountRepository accountRepository, IFIleUploader uploader, IPasswordHasher passwordHasher, IAuthHelper authHelper)
+        private readonly IRoleRepository _roleRepository;
+        public AccountApplication(IAccountRepository accountRepository, IFIleUploader uploader, IPasswordHasher passwordHasher, IAuthHelper authHelper, IRoleRepository roleRepository)
         {
             _accountRepository = accountRepository;
             _uploader = uploader;
             _passwordHasher = passwordHasher;
             _authHelper = authHelper;
+            _roleRepository = roleRepository;
         }
 
         public OperationResult Register(RegisterAccount command)
@@ -90,7 +94,13 @@ namespace AccountManagement.Application.A.Account
             (bool Verified, bool NeedsUpgrade) result = _passwordHasher.Check(account.Password,command.Password);
             if (!result.Verified)
                 return operationResult.Failed(ApplicationMessages.WrongUserPass);
-            var authViewModel = new AuthViewModel(account.Id,account.UserName,account.FullName,account.RoleId);
+
+            var permissions = _roleRepository.Get(account.RoleId)
+                .Permissions
+                .Select(x => x.Code)
+                .ToList();
+
+            var authViewModel = new AuthViewModel(account.Id,account.UserName,account.FullName,account.RoleId,permissions);
             _authHelper.Signin(authViewModel);
             return operationResult.Succeeded();
         }
