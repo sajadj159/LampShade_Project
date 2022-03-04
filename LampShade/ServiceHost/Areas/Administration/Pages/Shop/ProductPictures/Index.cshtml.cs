@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using _0_Framework.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Application.Contract.A.Product;
 using ShopManagement.Application.Contract.A.ProductPicture;
+using ShopManagement.Configuration.Permissions;
 
 namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures
 {
@@ -22,7 +24,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures
             _productPictureApplication = productPictureApplication;
         }
 
-
+        [NeedsPermission(ShopPermissions.ListProductCategories)]
         public void OnGet(ProductPictureSearchModel searchModel)
         {
             Products = new SelectList(_productApplication.GetProducts(),"Id","Name");
@@ -38,6 +40,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures
             return Partial("./Create", command);
         }
 
+        [NeedsPermission(ShopPermissions.CreateProductCategory)]
         public JsonResult OnPostCreate(CreateProductPicture command)
         {
             var result = _productPictureApplication.Create(command);
@@ -51,6 +54,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures
             return Partial("Edit", editProductPicture);
         }
 
+        [NeedsPermission(ShopPermissions.EditProductCategory)]
         public JsonResult OnPostEdit(EditProductPicture command)
         {
             var result = _productPictureApplication.Edit(command);

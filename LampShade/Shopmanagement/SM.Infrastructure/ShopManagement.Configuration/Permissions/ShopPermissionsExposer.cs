@@ -29,6 +29,6 @@ namespace ShopManagement.Configuration.Permissions
                  }
                 }
             };
+        }
     }
-}
 }

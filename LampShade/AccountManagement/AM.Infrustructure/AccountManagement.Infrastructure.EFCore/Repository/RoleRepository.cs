@@ -28,7 +28,7 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 
         public EditRole GetDetails(long id)
         {
-            var role= _context.Roles.Select(x => new EditRole
+            var role = _context.Roles.Select(x => new EditRole
             {
                 Id = x.Id,
                 Name = x.Name,

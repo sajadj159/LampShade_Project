@@ -43,6 +43,7 @@ namespace AccountManagement.Application.A.Role
             }
 
             var permissions = new List<Permission>();
+            
             command.Permissions.ForEach(code=>permissions.Add(new Permission(code)));
 
             role.Edit(command.Name,permissions);

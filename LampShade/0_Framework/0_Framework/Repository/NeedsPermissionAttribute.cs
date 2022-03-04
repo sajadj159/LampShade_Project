@@ -2,7 +2,7 @@
 
 namespace _0_Framework.Repository
 {
-    public class NeedsPermissionAttribute:Attribute
+    public class NeedsPermissionAttribute : Attribute
     {
         public int Permission { get; set; }
 

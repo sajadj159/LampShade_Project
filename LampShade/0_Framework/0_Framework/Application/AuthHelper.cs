@@ -31,19 +31,7 @@ namespace _0_Framework.Application
             return JsonConvert.DeserializeObject<List<int>>(permissions);
         }
 
-        public long CurrentAccountId()
-        {
-            return IsAuthenticated()
-                ? long.Parse(_contextAccessor.HttpContext.User.Claims.First(x => x.Type == "AccountId")?.Value)
-                : 0;
-        }
-
-        public string CurrentAccountMobile()
-        {
-            return IsAuthenticated()
-                ? _contextAccessor.HttpContext.User.Claims.First(x => x.Type == "Mobile")?.Value
-                : "";
-        }
+  
 
         public string CurrentAccountRole()
         {
@@ -71,7 +59,7 @@ namespace _0_Framework.Application
 
         public bool IsAuthenticated()
         {
-            return _contextAccessor.HttpContext.User.Identity!.IsAuthenticated;
+            return _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
         }
 
         public void Signin(AuthViewModel account)
@@ -83,7 +71,7 @@ namespace _0_Framework.Application
                 new Claim(ClaimTypes.Name, account.Fullname),
                 new Claim(ClaimTypes.Role, account.RoleId.ToString()),
                 new Claim("Username", account.Username), // Or Use ClaimTypes.NameIdentifier
-                new Claim("Permissions",permissions)
+                new Claim("permissions",permissions)
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

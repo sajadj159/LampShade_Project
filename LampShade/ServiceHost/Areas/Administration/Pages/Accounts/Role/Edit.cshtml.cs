@@ -24,24 +24,24 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Role
         public void OnGet(long id)
         {
             Command = _roleApplication.GetDetails(id);
-            var permission = new List<PermissionDto>();
+            var permissions = new List<PermissionDto>();
             foreach (var exposer in _permissionsExposers)
             {
                 var exposedPermissions = exposer.Expose();
                 foreach (var (key, value) in exposedPermissions)
                 {
-                    permission.AddRange(value);
+                    permissions.AddRange(value);
                     var group = new SelectListGroup
                     {
                         Name = key
                     };
-                    foreach (var permissionDto in value)
+                    foreach (var permission in value)
                     {
-                        var item = new SelectListItem(permissionDto.Name, permissionDto.Code.ToString())
+                        var item = new SelectListItem(permission.Name, permission.Code.ToString())
                         {
                             Group = group
                         };
-                        if (Command.MappedPermissions.Any(x => x.Code == permissionDto.Code))
+                        if (Command.MappedPermissions.Any(x => x.Code == permission.Code))
                             item.Selected = true;
 
                         Permissions.Add(item);

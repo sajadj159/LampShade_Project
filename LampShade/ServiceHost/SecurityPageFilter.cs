@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using _0_Framework.Application;
 using _0_Framework.Repository;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ServiceHost
@@ -22,16 +22,20 @@ namespace ServiceHost
 
         public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
         {
-            var handlerPermission = (NeedsPermissionAttribute)context.HandlerMethod.MethodInfo.GetCustomAttributes(typeof(NeedsPermissionAttribute));
+            var handlerPermission =
+               (NeedsPermissionAttribute) context.HandlerMethod.MethodInfo.GetCustomAttribute(typeof(NeedsPermissionAttribute));
 
             if (handlerPermission == null)
+            {
                 return;
+            }
 
             var accountPermissions = _authHelper.GetPermissions();
             if (accountPermissions.All(x => x != handlerPermission.Permission))
-                context.HttpContext.Response.Redirect("/AccessDenied");
+                context.HttpContext.Response.Redirect("/Account");
 
         }
+
 
         public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
         {

@@ -91,7 +91,7 @@ namespace AccountManagement.Application.A.Account
                 return operationResult.Failed(ApplicationMessages.WrongUserPass);
             }
 
-            (bool Verified, bool NeedsUpgrade) result = _passwordHasher.Check(account.Password,command.Password);
+            var result = _passwordHasher.Check(account.Password,command.Password);
             if (!result.Verified)
                 return operationResult.Failed(ApplicationMessages.WrongUserPass);
 
@@ -101,6 +101,7 @@ namespace AccountManagement.Application.A.Account
                 .ToList();
 
             var authViewModel = new AuthViewModel(account.Id,account.UserName,account.FullName,account.RoleId,permissions);
+
             _authHelper.Signin(authViewModel);
             return operationResult.Succeeded();
         }
