@@ -176,20 +176,34 @@
                                         {
                                             <div class="product-countdown" data-countdown="@Model.Product.DiscountExpireDate"></div>
                                         }
+                                        @if (Model.Product.InStock)
+                                        {
+                                            <div class="product-actions">
+                                                <div class="quantity-selection">
+                                                    <label>تعداد</label>
+                                                    <input type="number" value="1" min="1" id="productCount">
+                                                </div>
 
-                                        <div class="product-actions">
-                                            <div class="quantity-selection">
-                                                <label>تعداد</label>
-                                                <input type="number" value="1" min="1" id="productCount">
+                                                <div class="product-buttons">
+                                                    <a class="cart-btn" onclick="addToCart('@Model.Product.Id','@Model.Product.Name','@Model.Product.Price','@Model.Product.PictureUrl')">
+                                                        <i class="ion-bag"></i> افزودن به سبد خرید
+                                                    </a>
+                                                </div>
+
                                             </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="product-actions" style="display: block">  
+                                               
+                                                    <a class="cart-btn">
+                                                        <i class="ion-alert text-dark"></i> ناموجود
+                                                    </a>
+                                                
 
-                                            <div class="product-buttons">
-                                                <a class="cart-btn" onclick="addToCart('@Model.Product.Id','@Model.Product.Name','@Model.Product.Price','@Model.Product.PictureUrl')">
-                                                    <i class="ion-bag"></i> افزودن به سبد خرید
-                                                </a>
                                             </div>
-
-                                        </div>
+                                        }
+                                        
 
                                         <div class="social-share-buttons mt-20">
                                             <h2>این محصول را به اشتراک بگذارید</h2>
