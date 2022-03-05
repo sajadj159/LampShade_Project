@@ -180,11 +180,11 @@
                                         <div class="product-actions">
                                             <div class="quantity-selection">
                                                 <label>تعداد</label>
-                                                <input type="number" value="1" min="1">
+                                                <input type="number" value="1" min="1" id="productCount">
                                             </div>
 
                                             <div class="product-buttons">
-                                                <a class="cart-btn" href="#">
+                                                <a class="cart-btn" onclick="addToCart('@Model.Product.Id','@Model.Product.Name','@Model.Product.Price','@Model.Product.PictureUrl')">
                                                     <i class="ion-bag"></i> افزودن به سبد خرید
                                                 </a>
                                             </div>
@@ -239,7 +239,7 @@
                                                 <a class="nav-item nav-link active" id="description-tab"
                                                    data-toggle="tab" href="#product-description" role="tab"
                                                    aria-selected="true">توضیحات</a>
-                                                <a class="nav-item nav-link" id="review-tab" data-toggle="tab"
+                                                <a class="nav-item nav-link comment-counter" id="review-tab" data-toggle="tab"
                                                    href="#review" role="tab" aria-selected="false">نظرات (@Model.Product.Comments.Count)</a>
                                             </div>
                                         </nav>
