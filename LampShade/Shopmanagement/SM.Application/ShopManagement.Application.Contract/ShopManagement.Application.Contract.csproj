@@ -11,6 +11,7 @@
   <ItemGroup>
     <Folder Include="A.ProductPicture\" />
     <Folder Include="A.Slide\" />
+    <Folder Include="Order\" />
   </ItemGroup>
 
   <ItemGroup>

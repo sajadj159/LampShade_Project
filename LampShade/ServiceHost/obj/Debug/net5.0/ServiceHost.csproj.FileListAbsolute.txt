@@ -758,3 +758,14 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\o\net5.0
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\o\net5.0\ref\BlogManagement.Infrastructure.Configuration.Fakes.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\fakes.args
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\AccessDenied.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Cart.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\Microsoft.Extensions.PlatformAbstractions.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\Nancy.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\Microsoft.DotNet.PlatformAbstractions.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\Microsoft.Extensions.DependencyModel.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\Microsoft.Extensions.PlatformAbstractions.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\Microsoft.Extensions.PlatformAbstractions.xml
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\Nancy.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\Nancy.xml

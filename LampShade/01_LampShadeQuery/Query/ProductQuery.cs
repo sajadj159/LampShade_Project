@@ -73,6 +73,7 @@ namespace _01_LampShadeQuery.Query
             {
                 var price = productInventory.UnitPrice;
                 product.Price = price.ToMoney();
+                product.DoublePrice = price;
                 product.InStock = productInventory.InStock;
                 var productDiscount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
                 if (productDiscount == null) return product;

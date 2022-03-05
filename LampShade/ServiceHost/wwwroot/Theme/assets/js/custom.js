@@ -15,7 +15,7 @@ function addToCart(id, name, price, pictureUrl) {
         const product = {
             id,
             name,
-            price,
+            unitPrice: price,
             pictureUrl,
             count
         }
@@ -33,24 +33,24 @@ function updateCart() {
     let cartItemsWrapper = $("#cart_items_wrapper");
     cartItemsWrapper.html('');
     products.forEach(x => {
-        const product = `<div class="single-cart-item">
-                                                <a href="javascript:vovalue(0)" class="remove-icon" onClick="removeFromCart('${x.id}')">
-                                                    <i class="ion-android-close"></i>
-                                                </a>
-                                                <div class="image">
-                                                    <a href="single-product.html">
-                                                        <img src="/ProductPictures/${x.pictureUrl}"
-                                                             class="img-fluid" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <p class="product-title">
-                                                        <a href="single-product.html">محصول: ${x.name}</a>
-                                                    </p>
-                                                    <p class="count"><span>تعداد: ${x.count} </span></p>
-                                                    <p class="count"><span>قمیت واحد: ${x.price} </span> تومان</p>
-                                                </div>
-                                            </div>`;
+        const product = `<div class="single-cart-item ps-scroll">
+                                 <a href="javascript:vovalue(0)" class="remove-icon" onClick="removeFromCart('${x.id}')">
+                                     <i class="ion-android-close"></i>
+                                 </a>
+                                 <div class="image">
+                                      <a href="single-product.html">
+                                              <img src="/ProductPictures/${x.pictureUrl}"
+                                                    class="img-fluid" alt="">
+                                      </a>
+                                 </div>
+                                 <div class="content">
+                                      <p class="product-title">
+                                           <a href="single-product.html">محصول: ${x.name}</a>
+                                      </p>
+                                      <p class="count"><span>تعداد: ${x.count} </span></p>
+                                      <p class="count"><span>قمیت واحد: ${x.unitPrice} </span> تومان</p>
+                                 </div>
+                               </div>`;
         cartItemsWrapper.append(product);
     });
 }
