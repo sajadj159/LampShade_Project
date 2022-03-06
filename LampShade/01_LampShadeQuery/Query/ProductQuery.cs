@@ -8,6 +8,7 @@ using CommentManagement.Infrastructure.EFCore;
 using DiscountManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
+using ShopManagement.Application.Contract.Order;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EFCore;
 
@@ -148,6 +149,22 @@ namespace _01_LampShadeQuery.Query
                 }
             }
             return products;
+        }
+
+        public List<CartItem> CheckInventoryStatus(List<CartItem> cartItems)
+        {
+            var inventory = _inventoryContext.Inventory.ToList();
+            foreach (var item in cartItems)
+            {
+                if (inventory.Any(x => x.ProductId == item.Id && x.InStock))
+                {
+                    var inventoryInStock = inventory.FirstOrDefault(x => x.ProductId == item.Id);
+                    if (inventoryInStock != null)
+                        item.IsInStock = inventoryInStock.CalculateCurrentCount() >= item.Count;
+                }
+            }
+            return cartItems;
+
         }
     }
 }
