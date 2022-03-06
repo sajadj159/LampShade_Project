@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Contract\Cart\" />
     <Folder Include="Contract\Product\" />
     <Folder Include="Contract\ProductCategory\" />
     <Folder Include="Contract\Slide\" />

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.PortableExecutable;
-using _0_Framework.Repository;
 using _01_LampShadeQuery.Contract.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +32,7 @@ namespace ServiceHost.Pages
 
             foreach (var item in cartItems)
             {
-                item.TotalItemPrice = item.UnitPrice * item.Count;
+               item.CalculateTotalItemPrice();
             }
 
             CartItems = _productQuery.CheckInventoryStatus(cartItems);
@@ -66,7 +64,7 @@ namespace ServiceHost.Pages
             var cartItems = serializer.Deserialize<List<CartItem>>(value);
             foreach (var item in cartItems)
             {
-                item.TotalItemPrice = item.UnitPrice * item.Count;
+                item.CalculateTotalItemPrice();
             }
 
             CartItems = _productQuery.CheckInventoryStatus(cartItems);
