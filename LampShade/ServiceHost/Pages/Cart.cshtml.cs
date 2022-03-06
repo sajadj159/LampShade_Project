@@ -73,7 +73,7 @@ namespace ServiceHost.Pages
                 return RedirectToPage("/Cart");
             }
 
-            return RedirectToPage("CheckOut");
+            return RedirectToPage("/CheckOut");
         }
     }
 }

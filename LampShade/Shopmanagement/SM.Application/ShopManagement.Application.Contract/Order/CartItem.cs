@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace ShopManagement.Application.Contract.Order
+﻿namespace ShopManagement.Application.Contract.Order
 {
     public class CartItem
     {

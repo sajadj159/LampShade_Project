@@ -36,14 +36,14 @@ namespace _01_LampShadeQuery.Query
                 if (currentAccountRole == Roles.ColleagueUser)
                 {
                     var colleagueDiscount = colleagueDiscounts.FirstOrDefault(x => x.ProductId == cartItem.Id);
-                    if (colleagueDiscount == null) continue;
-                    cartItem.DiscountRate=colleagueDiscount.DiscountRate;
+                    if (colleagueDiscount != null)
+                        cartItem.DiscountRate = colleagueDiscount.DiscountRate;
                 }
                 else
                 {
                     var customerDiscount = customerDiscounts.FirstOrDefault(x => x.ProductId == cartItem.Id);
-                    if (customerDiscount == null) continue;
-                    cartItem.DiscountRate=customerDiscount.DiscountRate;
+                    if (customerDiscount != null)
+                        cartItem.DiscountRate = customerDiscount.DiscountRate;
                 }
                 cartItem.DiscountAmount = ((cartItem.TotalItemPrice * cartItem.DiscountRate) / 100);
                 cartItem.ItemPayAmount = cartItem.TotalItemPrice - cartItem.DiscountAmount;
