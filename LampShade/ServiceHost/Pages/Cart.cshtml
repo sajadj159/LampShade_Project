@@ -32,7 +32,7 @@
                 <div class="page-wrapper">
                     @foreach (var item in Model.CartItems.Where(item => !item.IsInStock))
                     {
-                        <div class="alert alert-danger"><i class="fa fa-warning"></i>کالای <strong>@item.Name</strong> در انبار کمتر از تعداد درخواستی موجود است</div>
+                        <div class="alert alert-danger"><i class="fa fa-warning"></i>کالای <strong>@item.Name</strong> در انبار تعداد وجود دارد  و کمتر از تعداد درخواستی موجود است</div>
                     }
 
                     <div class="page-content-wrapper">
@@ -65,11 +65,11 @@
                                         </td>
                                         <td class="pro-quantity">
                                             <div class="quantity-selection">
-                                                <input type="number" value="@cart.Count" min="1">
+                                                <input type="number" value="@cart.Count" min="1" onchange="changeCartItemCount('@cart.Id','totalItemPrice-@cart.Id',this.value)">
                                             </div>
                                         </td>
                                         <td class="pro-subtotal">
-                                            <span>@cart.TotalItemPrice.ToMoney() تومان</span>
+                                            <span id="totalItemPrice-@cart.Id">@cart.TotalItemPrice.ToMoney() تومان</span>
                                         </td>
                                         <td class="pro-remove">
                                             <a asp-page-handler="RemoveFromCart" asp-route-id="@cart.Id">
@@ -87,7 +87,7 @@
                             <div class="col-lg-6 col-12 d-flex">
                                 <div class="cart-summary">
                                     <div class="cart-summary-button">
-                                        <button class="checkout-btn">تکمیل فرایند خرید</button>
+                                        <a asp-page-handler="GoToCheckOut" class="checkout-btn">تکمیل فرایند خرید</a>
                                     </div>
                                 </div>
                             </div>
