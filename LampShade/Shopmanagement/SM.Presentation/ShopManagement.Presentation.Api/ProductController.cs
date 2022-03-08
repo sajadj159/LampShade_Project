@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using _01_LampShadeQuery.Contract.Product;
-using Microsoft.AspNetCore.Mvc;
 
-namespace ServiceHost.Controllers
+namespace ShopManagement.Presentation.Api
 {
     [Route("api/[controller]")]
     [ApiController]

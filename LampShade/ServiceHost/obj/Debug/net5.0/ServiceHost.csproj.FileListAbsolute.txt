@@ -771,3 +771,11 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\ServiceHost.genruntimeconfig.cache
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Checkout.cshtml.g.cs
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Shared\Components\LatestArrivals\Default.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Presentation.Api.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\ShopManagement.Presentation.Api.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\InventoryManagement.Presentation.Api.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\ShopManagement.Presentation.Api.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\InventoryManagement.Presentation.Api.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\InventoryManagement.Presentation.Api.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopManagement.Presentation.Api.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopManagement.Presentation.Api.pdb

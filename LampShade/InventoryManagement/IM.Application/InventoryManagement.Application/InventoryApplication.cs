@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using _0_Framework.Application;
 using InventoryManagement.Application.Contract.AC.Inventory;
 using InventoryManagement.Domain.InventoryAgg;
@@ -8,11 +7,13 @@ namespace InventoryManagement.Application
 {
     public class InventoryApplication : IInventoryApplication
     {
+        private readonly IAuthHelper _authHelper;
         private readonly IInventoryRepository _inventoryRepository;
 
-        public InventoryApplication(IInventoryRepository inventoryRepository)
+        public InventoryApplication(IInventoryRepository inventoryRepository, IAuthHelper authHelper)
         {
             _inventoryRepository = inventoryRepository;
+            _authHelper = authHelper;
         }
 
         public OperationResult Create(CreateInventory command)
@@ -20,7 +21,7 @@ namespace InventoryManagement.Application
             var operationResult = new OperationResult();
             if (_inventoryRepository.Exist(x => x.ProductId == command.ProductId))
             {
-               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
 
             var inventory = new Inventory(command.ProductId, command.UnitPrice);
@@ -35,12 +36,12 @@ namespace InventoryManagement.Application
             var inventory = _inventoryRepository.Get(command.Id);
             if (inventory == null)
             {
-              return  operationResult.Failed(ApplicationMessages.RecordNotFound);
+                return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
             if (_inventoryRepository.Exist(x => x.ProductId == command.ProductId && x.Id != command.Id))
             {
-               return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
             inventory.Edit(command.ProductId, command.UnitPrice);
             _inventoryRepository.Save();
@@ -53,11 +54,11 @@ namespace InventoryManagement.Application
             var inventory = _inventoryRepository.Get(command.InventoryId);
             if (inventory == null)
             {
-               return operationResult.Failed(ApplicationMessages.RecordNotFound);
+                return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
-            const long operatorId = 1;
-            inventory.Increase(command.Count,operatorId, command.Description);
+            var currentAccountId = _authHelper.CurrentAccountId();
+            inventory.Increase(command.Count, currentAccountId, command.Description);
             _inventoryRepository.Save();
             return operationResult.Succeeded();
 
@@ -67,12 +68,12 @@ namespace InventoryManagement.Application
         {
             var operationResult = new OperationResult();
             var inventory = _inventoryRepository.Get(command.InventoryId);
-            if (inventory==null)
+            if (inventory == null)
             {
-               return operationResult.Failed(ApplicationMessages.RecordNotFound);
+                return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
-            const long operatorId = 1;
-            inventory.Reduce(command.Count,operatorId,command.Description,0);
+            var currentAccountId = _authHelper.CurrentAccountId();
+            inventory.Reduce(command.Count, currentAccountId, command.Description, 0);
             _inventoryRepository.Save();
             return operationResult.Succeeded();
         }
@@ -80,11 +81,11 @@ namespace InventoryManagement.Application
         public OperationResult Reduce(List<ReduceInventory> command)
         {
             var operationResult = new OperationResult();
-            const long operatorId = 1;
+            var currentAccountId = _authHelper.CurrentAccountId();
             foreach (var item in command)
             {
                 var inventory = _inventoryRepository.GetBy(item.ProductId);
-                inventory.Reduce(item.Count,operatorId,item.Description,item.OrderId);
+                inventory.Reduce(item.Count, currentAccountId, item.Description, item.OrderId);
             }
             _inventoryRepository.Save();
             return operationResult.Succeeded();
