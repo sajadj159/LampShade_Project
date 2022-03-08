@@ -88,6 +88,56 @@ namespace _01_LampShadeQuery.Query
             return product;
         }
 
+        public List<ProductQueryModel> GetLatestArrivals()
+        {
+            var inventory = _inventoryContext.Inventory.Where(x => x.InStock).Select(x => new { x.ProductId, x.UnitPrice,x.InStock }).ToList();
+            var discounts = _discountContext.CustomerDiscounts
+                .Where(x => x.StartDate <= DateTime.Now && x.EndDate > DateTime.Now)
+                .Select(x => new { x.ProductId, x.DiscountRate }).ToList();
+
+            var latestArrivals = _shopContext.Products
+                .Include(x => x.Category)
+                .Include(x=>x.ProductPictures)
+                .Select(x => new ProductQueryModel
+                {
+                    Id = x.Id,
+                    PictureUrl = x.PictureUrl,
+                    PictureAlt = x.PictureAlt,
+                    PictureTitle = x.PictureTitle,
+                    Pictures = MapProductPictures(x.ProductPictures),
+                    Name = x.Name,
+                    Category = x.Category.Name,
+                    CategorySlug = x.Category.Slug,
+                    Slug = x.Slug,
+                    ShortDescription = x.ShortDescription
+                }).AsNoTracking().ToList();
+
+            foreach (var product in latestArrivals)
+            {
+                if (product == null)
+                {
+                    return new List<ProductQueryModel>();
+                }
+
+                var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
+                if (productInventory == null)
+                    continue;
+                var unitPrice = productInventory.UnitPrice;
+                product.Price = unitPrice.ToMoney();
+                var productInStock = productInventory.InStock;
+                product.InStock = productInStock;
+                var productDiscount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
+                if (productDiscount == null)
+                    continue;
+
+                var rate = productDiscount.DiscountRate;
+                product.DiscountRate = productDiscount.DiscountRate;
+                product.HasDiscount = rate > 0;
+                var discountAmount = Math.Round((unitPrice * rate) / 100);
+                product.PriceWithDiscount = (unitPrice - discountAmount).ToMoney();
+            }
+            return latestArrivals.Where(x=>x.InStock).ToList();
+        }
 
 
         private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)
