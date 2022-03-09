@@ -77,6 +77,13 @@ namespace ServiceHost
                     options.AddPolicy("Account", builder => builder
                         .RequireRole(new List<string> { Roles.Administrator }));
                 });
+
+            services.AddCors(options => options.AddPolicy("MyPolicy", builder =>
+                builder
+                    .WithOrigins("https://localhost:5002")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()));
+
             services.AddRazorPages()
                 .AddMvcOptions(options=>options.Filters.Add<SecurityPageFilter>())
                 .AddRazorPagesOptions(options =>
@@ -117,6 +124,8 @@ namespace ServiceHost
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("MyPolicy");
 
             app.UseEndpoints(endpoints =>
             {
