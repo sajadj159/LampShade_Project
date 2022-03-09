@@ -9,12 +9,15 @@ using Microsoft.Extensions.DependencyInjection;
 using ShopManagement.Application.Contract.A.Product;
 using ShopManagement.Application.Contract.A.ProductPicture;
 using ShopManagement.Application.Contract.A.Slide;
+using ShopManagement.Application.Contract.Order;
 using ShopManagement.Application.Contract.ProductCategory;
+using ShopManagement.Application.Order;
 using ShopManagement.Application.Product;
 using ShopManagement.Application.ProductCategory;
 using ShopManagement.Application.ProductPicture;
 using ShopManagement.Application.Slide;
 using ShopManagement.Configuration.Permissions;
+using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
@@ -43,6 +46,9 @@ namespace ShopManagement.Configuration
             service.AddTransient<ISlideQuery, SlideQuery>();
             service.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
             service.AddTransient<IProductQuery, ProductQuery>();
+
+            service.AddTransient<IOrderRepository, OrderRepository>();
+            service.AddTransient<IOrderApplication, OrderApplication>();
 
             service.AddTransient<IPermissionExposer, ShopPermissionsExposer>();
 
