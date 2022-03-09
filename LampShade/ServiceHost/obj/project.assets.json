@@ -3528,6 +3528,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "01_LampShadeQuery": "1.0.0",
           "InventoryManagement.Application": "1.0.0",
           "InventoryManagement.Infrastructure.EFCore": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
@@ -3574,6 +3575,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "01_LampShadeQuery": "1.0.0",
           "InventoryManagement.Application.Contract": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5"
         },

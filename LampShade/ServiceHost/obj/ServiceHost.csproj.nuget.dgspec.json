@@ -1665,6 +1665,9 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "D:\\repos\\C#\\LampShade\\LampShade\\01_LampShadeQuery\\01_LampShadeQuery.csproj": {
+                "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\01_LampShadeQuery\\01_LampShadeQuery.csproj"
+              },
               "D:\\repos\\C#\\LampShade\\LampShade\\InventoryManagement\\IM.Application\\InventoryManagement.Application\\InventoryManagement.Application.csproj": {
                 "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\InventoryManagement\\IM.Application\\InventoryManagement.Application\\InventoryManagement.Application.csproj"
               },
@@ -1812,6 +1815,9 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "D:\\repos\\C#\\LampShade\\LampShade\\01_LampShadeQuery\\01_LampShadeQuery.csproj": {
+                "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\01_LampShadeQuery\\01_LampShadeQuery.csproj"
+              },
               "D:\\repos\\C#\\LampShade\\LampShade\\InventoryManagement\\IM.Application\\InventoryManagement.Application.Contract\\InventoryManagement.Application.Contract.csproj": {
                 "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\InventoryManagement\\IM.Application\\InventoryManagement.Application.Contract\\InventoryManagement.Application.Contract.csproj"
               }
