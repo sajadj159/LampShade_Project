@@ -779,3 +779,14 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\Invent
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\InventoryManagement.Presentation.Api.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopManagement.Presentation.Api.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopManagement.Presentation.Api.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\RestSharp.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\RestSharp.xml
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\crypto.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\crypto.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\crypto.xml
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\MimeKit.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\MimeKit.xml
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\MimeKit.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\crypto.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\RestSharp.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\PaymentResult.cshtml.g.cs

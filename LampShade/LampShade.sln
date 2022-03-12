@@ -123,11 +123,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManagement.Configura
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Presentation", "SM.Presentation", "{E8C8EB92-50A6-4737-B966-0FAE7C4374AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Presentation.Api", "Shopmanagement\SM.Presentation\ShopManagement.Presentation.Api\ShopManagement.Presentation.Api.csproj", "{82DBD278-44A1-498B-A728-686479717149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Presentation.Api", "Shopmanagement\SM.Presentation\ShopManagement.Presentation.Api\ShopManagement.Presentation.Api.csproj", "{82DBD278-44A1-498B-A728-686479717149}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IM.Presentation", "IM.Presentation", "{5DFA685F-72B4-4EC4-B0D6-CF31DA4C96C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManagement.Presentation.Api", "InventoryManagement\IM.Presentation\InventoryManagement.Presentation.Api\InventoryManagement.Presentation.Api.csproj", "{9D6DCD87-B20E-44EB-B1E3-38D1B698FC70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryManagement.Presentation.Api", "InventoryManagement\IM.Presentation\InventoryManagement.Presentation.Api\InventoryManagement.Presentation.Api.csproj", "{9D6DCD87-B20E-44EB-B1E3-38D1B698FC70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

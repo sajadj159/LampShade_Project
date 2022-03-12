@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using _0_Framework.Application;
+using _0_Framework.Application.ZarinPal;
 using _0_Framework.Repository;
 using AccountManagement.Configuration;
 using BlogManagement.Infrastructure.Configuration;
@@ -48,6 +49,7 @@ namespace ServiceHost
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddTransient<IFIleUploader, FileUploader>();
             services.AddTransient<IAuthHelper, AuthHelper>();
+            services.AddTransient<IZarinPalFactory, ZarinPalFactory>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

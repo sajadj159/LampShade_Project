@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using _0_Framework.Domain;
+﻿using _0_Framework.Domain;
 
 namespace CommentManagement.Domain.CommentAgg
 {
