@@ -7,6 +7,7 @@ namespace ShopManagement.Domain.OrderAgg
     {
         public long AccountId { get; private set; }
         public double TotalAmount { get; private set; }
+        public int PaymentMethod { get; private set; }
         public double DiscountAmount { get; private set; }
         public double PayAmount { get; private set; }
         public bool IsPaid { get; private set; }
@@ -15,10 +16,11 @@ namespace ShopManagement.Domain.OrderAgg
         public long RefId { get; private set; }
         public List<OrderItem> Items { get; private set; }
 
-        public Order(long accountId, double totalAmount, double discountAmount, double payAmount)
+        public Order(long accountId, double totalAmount,int paymentMethod, double discountAmount, double payAmount)
         {
             AccountId = accountId;
             TotalAmount = totalAmount;
+            PaymentMethod = paymentMethod;
             DiscountAmount = discountAmount;
             PayAmount = payAmount;
             IsPaid = false;

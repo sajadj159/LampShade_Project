@@ -33,7 +33,13 @@
                <div class="alert alert-success">
 
                    <p>@Model.Result.Message </p>
-                   شماره پیگیری: <strong>@Model.Result.IssueTrackingNo </strong>
+                   @if (!string.IsNullOrWhiteSpace(Model.Result.IssueTrackingNo))
+                   {
+                       <p>
+                           شماره پیگیری: <strong>@Model.Result.IssueTrackingNo </strong>
+
+                       </p>
+                   }
                </div>
            }
            else

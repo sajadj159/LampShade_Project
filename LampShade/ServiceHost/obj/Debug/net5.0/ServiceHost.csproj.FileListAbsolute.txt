@@ -790,3 +790,7 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\MimeKit.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\crypto.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\RestSharp.dll
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\PaymentResult.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\ShopManagement.Infrastructure.InventoryAcl.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\ShopManagement.Infrastructure.InventoryAcl.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopManagement.Infrastructure.InventoryAcl.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopManagement.Infrastructure.InventoryAcl.pdb

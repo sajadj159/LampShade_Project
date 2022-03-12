@@ -15,7 +15,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.14",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.14",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
-          "ShopManagement.Application": "1.0.0"
+          "ShopManagement.Application": "1.0.0",
+          "ShopManagement.Infrastructure.InventoryAcl": "1.0.0"
         },
         "runtime": {
           "ShopManagement.Configuration.dll": {}
@@ -1799,6 +1800,15 @@
         "runtime": {
           "ShopManagement.Infrastructure.EFCore.dll": {}
         }
+      },
+      "ShopManagement.Infrastructure.InventoryAcl/1.0.0": {
+        "dependencies": {
+          "InventoryManagement.Application.Contract": "1.0.0",
+          "ShopManagement.Domain": "1.0.0"
+        },
+        "runtime": {
+          "ShopManagement.Infrastructure.InventoryAcl.dll": {}
+        }
       }
     }
   },
@@ -2868,6 +2878,11 @@
       "sha512": ""
     },
     "ShopManagement.Infrastructure.EFCore/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ShopManagement.Infrastructure.InventoryAcl/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

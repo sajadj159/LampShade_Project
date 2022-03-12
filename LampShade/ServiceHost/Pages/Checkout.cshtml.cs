@@ -39,12 +39,6 @@ namespace ServiceHost.Pages
 
         public RedirectToPageResult OnGet()
         {
-            //if (!_authHelper.IsAuthenticated())
-            //{
-            //   return RedirectToPage("/Account");
-
-            //}
-
             var serializer = new JavaScriptSerializer();
             var value = Request.Cookies[CookieName];
             var cartItems = serializer.Deserialize<List<CartItem>>(value);
@@ -59,9 +53,10 @@ namespace ServiceHost.Pages
 
         }
 
-        public IActionResult OnGetPay()
+        public IActionResult OnPostPay(int paymentMethod)
         {
             var cart = _cartService.Get();
+            cart.SetPaymentMethod(paymentMethod);
             var result = _productQuery.CheckInventoryStatus(cart.Items);
             if (result.Any(x => x.IsInStock == false))
             {
@@ -69,10 +64,17 @@ namespace ServiceHost.Pages
             }
 
             var orderId = _orderApplication.PlaceOrder(cart);
-            var paymentResponse = _zarinPalFactory.CreatePaymentRequest(cart.PayAmount.ToString(CultureInfo.InvariantCulture), "", ""
-                , "خرید از درگاه لوازم خانگی و دکوری", orderId);
+            if (paymentMethod==1)
+            {
+                var paymentResponse = _zarinPalFactory.CreatePaymentRequest(cart.PayAmount.ToString(CultureInfo.InvariantCulture), "", ""
+                    , "خرید از درگاه لوازم خانگی و دکوری", orderId);
 
-            return Redirect($"https://{_zarinPalFactory.Prefix}.zarinpal.com/pg/StartPay/{paymentResponse.Authority}");
+                return Redirect($"https://{_zarinPalFactory.Prefix}.zarinpal.com/pg/StartPay/{paymentResponse.Authority}");
+            }
+
+            var paymentResult = new PaymentResult();
+            return RedirectToPage("/PaymentResult", paymentResult.Succeeded("سفارش شما با موفقیت ثبت شد، پس از تماس کارشناسان ما و پرداخت وجه، سفارش شما ارسال خواهد شد",null));
+
         }
 
         public IActionResult OnGetCallBack([FromQuery] string authority, [FromQuery] string status, [FromQuery] long oId)

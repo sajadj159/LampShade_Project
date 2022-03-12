@@ -2494,6 +2494,20 @@
         "runtime": {
           "bin/placeholder/ShopManagement.Infrastructure.EFCore.dll": {}
         }
+      },
+      "ShopManagement.Infrastructure.InventoryAcl/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "InventoryManagement.Application.Contract": "1.0.0",
+          "ShopManagement.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ShopManagement.Infrastructure.InventoryAcl.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ShopManagement.Infrastructure.InventoryAcl.dll": {}
+        }
       }
     }
   },
@@ -7808,6 +7822,11 @@
       "type": "project",
       "path": "../ShopManagement.Infrastructure.EFCore/ShopManagement.Infrastructure.EFCore.csproj",
       "msbuildProject": "../ShopManagement.Infrastructure.EFCore/ShopManagement.Infrastructure.EFCore.csproj"
+    },
+    "ShopManagement.Infrastructure.InventoryAcl/1.0.0": {
+      "type": "project",
+      "path": "../ShopManagement.Infrastructure.InventoryAcl/ShopManagement.Infrastructure.InventoryAcl.csproj",
+      "msbuildProject": "../ShopManagement.Infrastructure.InventoryAcl/ShopManagement.Infrastructure.InventoryAcl.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7819,7 +7838,8 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.14",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.14",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 5.0.0",
-      "ShopManagement.Application >= 1.0.0"
+      "ShopManagement.Application >= 1.0.0",
+      "ShopManagement.Infrastructure.InventoryAcl >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7860,6 +7880,9 @@
             },
             "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Application\\ShopManagement.Application\\ShopManagement.Application.csproj": {
               "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Application\\ShopManagement.Application\\ShopManagement.Application.csproj"
+            },
+            "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Infrastructure\\ShopManagement.Infrastructure.InventoryAcl\\ShopManagement.Infrastructure.InventoryAcl.csproj": {
+              "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Infrastructure\\ShopManagement.Infrastructure.InventoryAcl\\ShopManagement.Infrastructure.InventoryAcl.csproj"
             }
           }
         }

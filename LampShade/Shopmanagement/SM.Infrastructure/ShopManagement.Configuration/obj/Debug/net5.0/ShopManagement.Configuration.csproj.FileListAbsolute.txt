@@ -56,3 +56,5 @@ D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\AccountManagement.Application.Contracts.pdb
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\AccountManagement.Domain.pdb
 D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\AccountManagement.Infrastructure.EFCore.pdb
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\ShopManagement.Infrastructure.InventoryAcl.dll
+D:\repos\C#\LampShade\LampShade\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\bin\Debug\net5.0\ShopManagement.Infrastructure.InventoryAcl.pdb

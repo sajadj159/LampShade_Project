@@ -22,9 +22,11 @@ using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
+using ShopManagement.Domain.Services;
 using ShopManagement.Domain.SlideAgg;
 using ShopManagement.Infrastructure.EFCore;
 using ShopManagement.Infrastructure.EFCore.Repository;
+using ShopManagement.Infrastructure.InventoryAcl;
 
 namespace ShopManagement.Configuration
 {
@@ -54,6 +56,9 @@ namespace ShopManagement.Configuration
             service.AddTransient<IPermissionExposer, ShopPermissionsExposer>();
 
             service.AddTransient<ICartCalculatorService, CartCalculatorService>();
+
+            service.AddTransient<IShopInventoryAcl, ShopInventoryAcl>();
+
 
             service.AddSingleton<ICartService, CartService>();
 
