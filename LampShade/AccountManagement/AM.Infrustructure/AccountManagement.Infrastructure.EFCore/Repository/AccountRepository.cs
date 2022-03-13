@@ -60,6 +60,15 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
             return queryable.OrderByDescending(x => x.Id).ToList();
         }
 
+        public List<AccountViewModel> GetAccounts()
+        {
+            return _context.Accounts.Select(x => new AccountViewModel
+            {
+                Id = x.Id,
+                FullName = x.FullName
+            }).ToList();  
+        }
+
         public EditAccount GetDetails(long id)
         {
             return _context.Accounts

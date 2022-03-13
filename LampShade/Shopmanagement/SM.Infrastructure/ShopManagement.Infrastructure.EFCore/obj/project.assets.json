@@ -2203,6 +2203,49 @@
           "bin/placeholder/0_Framework.dll": {}
         }
       },
+      "AccountManagement.Application.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "0_Framework": "1.0.0",
+          "Microsoft.AspNetCore.Http.Features": "5.0.14"
+        },
+        "compile": {
+          "bin/placeholder/AccountManagement.Application.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AccountManagement.Application.Contracts.dll": {}
+        }
+      },
+      "AccountManagement.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "0_Framework": "1.0.0",
+          "AccountManagement.Application.Contracts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/AccountManagement.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AccountManagement.Domain.dll": {}
+        }
+      },
+      "AccountManagement.Infrastructure.EFCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "AccountManagement.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "5.0.14",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.14"
+        },
+        "compile": {
+          "bin/placeholder/AccountManagement.Infrastructure.EFCore.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AccountManagement.Infrastructure.EFCore.dll": {}
+        }
+      },
       "ShopManagement.Application.Contract/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -7445,6 +7488,21 @@
       "path": "../../../0_Framework/0_Framework/0_Framework.csproj",
       "msbuildProject": "../../../0_Framework/0_Framework/0_Framework.csproj"
     },
+    "AccountManagement.Application.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../../../AccountManagement/AM.Application/AccountManagement.Application.Contracts/AccountManagement.Application.Contracts.csproj",
+      "msbuildProject": "../../../AccountManagement/AM.Application/AccountManagement.Application.Contracts/AccountManagement.Application.Contracts.csproj"
+    },
+    "AccountManagement.Domain/1.0.0": {
+      "type": "project",
+      "path": "../../../AccountManagement/AM.Domain/AccountManagement.Domain/AccountManagement.Domain.csproj",
+      "msbuildProject": "../../../AccountManagement/AM.Domain/AccountManagement.Domain/AccountManagement.Domain.csproj"
+    },
+    "AccountManagement.Infrastructure.EFCore/1.0.0": {
+      "type": "project",
+      "path": "../../../AccountManagement/AM.Infrustructure/AccountManagement.Infrastructure.EFCore/AccountManagement.Infrastructure.EFCore.csproj",
+      "msbuildProject": "../../../AccountManagement/AM.Infrustructure/AccountManagement.Infrastructure.EFCore/AccountManagement.Infrastructure.EFCore.csproj"
+    },
     "ShopManagement.Application.Contract/1.0.0": {
       "type": "project",
       "path": "../../SM.Application/ShopManagement.Application.Contract/ShopManagement.Application.Contract.csproj",
@@ -7458,6 +7516,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "AccountManagement.Infrastructure.EFCore >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 5.0.14",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.14",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.14",
@@ -7491,6 +7550,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj": {
+              "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj"
+            },
             "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Domain\\ShopManagement.Domain\\ShopManagement.Domain.csproj": {
               "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Domain\\ShopManagement.Domain\\ShopManagement.Domain.csproj"
             }

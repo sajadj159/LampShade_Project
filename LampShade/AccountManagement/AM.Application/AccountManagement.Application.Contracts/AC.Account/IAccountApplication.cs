@@ -10,6 +10,7 @@ namespace AccountManagement.Application.Contracts.AC.Account
         OperationResult ChangePassword(ChangePassword command);
         OperationResult Login(Login command);
         List<AccountViewModel> Search(AccountSearchModel searchModel);
+        List<AccountViewModel> GetAccounts();
         EditAccount GetDetails(long id);
 
         void Logout();

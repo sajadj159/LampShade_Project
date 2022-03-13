@@ -2281,6 +2281,9 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj": {
+                "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Infrustructure\\AccountManagement.Infrastructure.EFCore\\AccountManagement.Infrastructure.EFCore.csproj"
+              },
               "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Domain\\ShopManagement.Domain\\ShopManagement.Domain.csproj": {
                 "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\Shopmanagement\\SM.Domain\\ShopManagement.Domain\\ShopManagement.Domain.csproj"
               }
