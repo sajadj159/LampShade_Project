@@ -3,7 +3,6 @@ using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
 using AccountManagement.Infrastructure.EFCore;
-using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contract;
 using ShopManagement.Application.Contract.Order;
 using ShopManagement.Domain.OrderAgg;
@@ -64,6 +63,32 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
             }
 
             return orders;
+        }
+
+        public List<OrderItemViewModel> GetItemsBy(long orderId)
+        {
+            var products = _context.Products.Select(x=>new {x.Id,x.Name}).ToList();
+            var order = _context.Orders.FirstOrDefault(x=>x.Id==orderId);
+            if (order==null)
+            {
+                return new List<OrderItemViewModel>();
+            }
+
+            var items = order.Items.Select(x=>new OrderItemViewModel
+            {
+                Id = x.Id,
+                ProductId = x.ProductId,
+                Count = x.Count,
+                UnitPrice = x.UnitPrice,
+                DiscountRate = x.DiscountRate,
+                OrderId = x.OrderId
+            }).ToList();
+            foreach (var item in items)
+            {
+                item.ProductName = products.FirstOrDefault(x => x.Id == item.ProductId)?.Name;
+            }
+            
+            return items;
         }
     }
 }

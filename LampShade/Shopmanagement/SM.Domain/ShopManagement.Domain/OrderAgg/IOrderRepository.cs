@@ -8,5 +8,6 @@ namespace ShopManagement.Domain.OrderAgg
     {
        double GetAmountBy(long id);
        List<OrderViewModel> Search(OrderSearchModel searchModel);
+       List<OrderItemViewModel> GetItemsBy(long orderId);
     }
 }

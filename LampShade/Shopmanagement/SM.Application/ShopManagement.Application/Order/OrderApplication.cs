@@ -51,9 +51,21 @@ namespace ShopManagement.Application.Order
             return issueCodeTracking;
         }
 
+        public void Cancel(long id)
+        {
+            var order = _orderRepository.Get(id);
+            order?.Cancel();
+            _orderRepository.Save();
+        }
+
         public List<OrderViewModel> Search(OrderSearchModel searchModel)
         {
             return _orderRepository.Search(searchModel);
+        }
+
+        public List<OrderItemViewModel> GetItemsBy(long orderId)
+        {
+            return _orderRepository.GetItemsBy(orderId);
         }
     }
 }

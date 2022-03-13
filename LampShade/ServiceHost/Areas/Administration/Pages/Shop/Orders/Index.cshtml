@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="sr-only" asp-for="SearchModel.IsCanceled"></label>
+                        <label asp-for="SearchModel.IsCanceled">جستجو در لغو شده ها</label>
                         <input class="form-control" asp-for="SearchModel.IsCanceled">
                     </div>
                     <button type="submit" class="btn btn-success waves-effect waves-light m-l-10">جستجو</button>
@@ -67,40 +67,44 @@
                                 </tr>
                             </thead>
                             <tbody>
-                           @foreach (var productCategory in Model.Orders)
+                           @foreach (var item in Model.Orders)
                             {
                                 <tr>
-                                    <td>@productCategory.Id</td>
-                                    <td>@productCategory.AccountFullName</td> 
-                                    <td>@productCategory.TotalAmount.ToMoney()</td>
-                                    <td>@productCategory.DiscountAmount.ToMoney()</td>
-                                    <td>@productCategory.PayAmount.ToMoney()</td>
-                                    <td>@productCategory.PaymentMethodName</td>
-                                    <td>@productCategory.IssueTrackingNumber</td>
-                                    <td>@productCategory.RefId</td>
-                                    <td>@productCategory.CreationDate</td>
+                                    <td>@item.Id</td>
+                                    <td>@item.AccountFullName</td> 
+                                    <td>@item.TotalAmount.ToMoney()</td>
+                                    <td>@item.DiscountAmount.ToMoney()</td>
+                                    <td>@item.PayAmount.ToMoney()</td>
+                                    <td>@item.PaymentMethodName</td>
+                                    <td>@item.IssueTrackingNumber</td>
+                                    <td>@item.RefId</td>
+                                    <td>@item.CreationDate</td>
                                     <td>
-                                        @if (productCategory.IsCanceled)
+                                        @if (item.IsCanceled)
                                         {
                                             <span class="text-danger">کنسل شده</span>
                                         }
-                                        @if (productCategory.IsPaid)
+                                        @if (item.IsPaid)
                                         {
                                             <span class="text-success">پرداخت شده</span>
                                         }
+                                        @if(!item.IsCanceled && !item.IsPaid)
+                                        {
+                                            <span class="text-warning">در انتظار پرداخت</span>
+                                        }
                                     </td>
                                     <td>
-                                        @if (productCategory.IsPaid==false)
+                                        @if (item.IsPaid==false)
                                         {
-                                            <a class="btn btn-success pull-right m-rl-5" asp-page-handler="Confirm">
+                                            <a class="btn btn-success pull-right m-rl-5" asp-page-handler="Confirm" asp-route-Id="@item.Id">
                                                 <i class="fa fa-check"></i> تایید
                                             </a>
-                                            <a class="btn btn-danger pull-right m-rl-5" asp-page-handler="Cancel">
+                                            <a class="btn btn-danger pull-right m-rl-5" asp-page-handler="Cancel" asp-route-Id="@item.Id">
                                                 <i class="fa fa-close"></i> لغو
                                             </a>
 
                                         }
-                                        <a class="btn btn-primary pull-right m-rl-5" href="#showmodal=@Url.Page("./Index", "]Items", new {id = productCategory.Id})">
+                                        <a class="btn btn-primary pull-right m-rl-5" href="#showmodal=@Url.Page("./Index", "Items", new {id = item.Id})">
                                             <i class="fa fa-id-card"></i> آیتم ها
                                         </a>
                                     </td>
