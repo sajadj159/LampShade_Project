@@ -19,6 +19,7 @@
     <ProjectReference Include="..\..\..\InventoryManagement\IM.Application\InventoryManagement.Application.Contract\InventoryManagement.Application.Contract.csproj" />
     <ProjectReference Include="..\..\..\InventoryManagement\IM.Domain\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />
     <ProjectReference Include="..\..\SM.Application\ShopManagement.Application\ShopManagement.Application.csproj" />
+    <ProjectReference Include="..\ShopManagement.Infrastructure.AccountAcl\ShopManagement.Infrastructure.AccountAcl.csproj" />
     <ProjectReference Include="..\ShopManagement.Infrastructure.InventoryAcl\ShopManagement.Infrastructure.InventoryAcl.csproj" />
   </ItemGroup>
 

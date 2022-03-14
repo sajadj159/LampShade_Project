@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using _0_Framework.Application;
+using _0_Framework.Application.SMS;
 using Microsoft.Extensions.Configuration;
+using Org.BouncyCastle.Asn1.Cms;
 using ShopManagement.Application.Contract.Order;
 using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.Services;
@@ -12,12 +14,15 @@ namespace ShopManagement.Application.Order
         private readonly IOrderRepository _orderRepository;
         private readonly IAuthHelper _authHelper;
         private readonly IShopInventoryAcl _inventoryAcl;
-
-        public OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IShopInventoryAcl inventoryAcl)
+        private readonly ISmsService _smsService;
+        private readonly IShopAccountAcl _accountAcl;
+        public OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IShopInventoryAcl inventoryAcl, ISmsService smsService, IShopAccountAcl accountAcl)
         {
             _orderRepository = orderRepository;
             _authHelper = authHelper;
             _inventoryAcl = inventoryAcl;
+            _smsService = smsService;
+            _accountAcl = accountAcl;
         }
 
         public long PlaceOrder(Contract.Order.Cart cart)
@@ -48,6 +53,8 @@ namespace ShopManagement.Application.Order
             if (!_inventoryAcl.ReduceFromInventory(order.Items)) return "";
 
             _orderRepository.Save();
+            var (name, mobile) = _accountAcl.GetAccountBy(order.AccountId);
+            _smsService.Send(mobile,$"{name} گرامی سفارش شما با شماره پیگیری {issueCodeTracking} موفقیت پرداخت شد و ارسال خواهد شد.");
             return issueCodeTracking;
         }
 

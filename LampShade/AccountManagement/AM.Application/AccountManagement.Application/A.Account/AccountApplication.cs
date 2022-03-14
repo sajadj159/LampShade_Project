@@ -99,7 +99,7 @@ namespace AccountManagement.Application.A.Account
                 .Select(x => x.Code)
                 .ToList();
 
-            var authViewModel = new AuthViewModel(account.Id,account.UserName,account.FullName,account.RoleId,permissions);
+            var authViewModel = new AuthViewModel(account.Id,account.UserName,account.FullName,account.Mobile,account.RoleId,permissions);
 
             _authHelper.Signin(authViewModel);
             return operationResult.Succeeded();
@@ -118,6 +118,16 @@ namespace AccountManagement.Application.A.Account
         public EditAccount GetDetails(long id)
         {
             return _accountRepository.GetDetails(id);
+        }
+
+        public AccountViewModel GetAccountBy(long id)
+        {
+            var account = _accountRepository.Get(id);
+            return new AccountViewModel
+            {
+                FullName = account.FullName,
+                Mobile = account.Mobile,
+            };
         }
 
         public void Logout()

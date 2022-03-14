@@ -12,6 +12,7 @@ namespace AccountManagement.Application.Contracts.AC.Account
         List<AccountViewModel> Search(AccountSearchModel searchModel);
         List<AccountViewModel> GetAccounts();
         EditAccount GetDetails(long id);
+        AccountViewModel GetAccountBy(long id);
 
         void Logout();
     }

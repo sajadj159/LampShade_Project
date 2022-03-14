@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "MPNGkeiy2Jb50QlW59wry2M7fLy9jgcTgjCnwLbbAD+QB3ETADRbFLOpoHk2JQ03UUnax/Qnc3SOJpfJnKxXkg==",
+  "dgSpecHash": "ZGolCKFQUa8ewEzDDlR1pOr+SIdoNHEOLjypFOECB/DY4bB8GcAoDHYHuqvJbgvdcuME5YIq7jtAba5ysamQuQ==",
   "success": true,
   "projectFilePath": "D:\\repos\\C#\\LampShade\\LampShade\\ServiceHost\\ServiceHost.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sajad\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\sajad\\.nuget\\packages\\mailkit\\1.10.0\\mailkit.1.10.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
@@ -95,6 +96,8 @@
     "C:\\Users\\sajad\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\runtime.native.system.io.compression\\4.3.0\\runtime.native.system.io.compression.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\runtime.native.system.net.http\\4.3.0\\runtime.native.system.net.http.4.3.0.nupkg.sha512",
+    "C:\\Users\\sajad\\.nuget\\packages\\runtime.native.system.net.security\\4.0.1\\runtime.native.system.net.security.4.0.1.nupkg.sha512",
+    "C:\\Users\\sajad\\.nuget\\packages\\runtime.native.system.security.cryptography\\4.0.0\\runtime.native.system.security.cryptography.4.0.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\runtime.native.system.security.cryptography.apple\\4.3.0\\runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\runtime.opensuse.13.2-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.opensuse.13.2-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
@@ -105,6 +108,7 @@
     "C:\\Users\\sajad\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\sajad\\.nuget\\packages\\smsirrestful\\1.1.3\\smsirrestful.1.1.3.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
@@ -148,6 +152,7 @@
     "C:\\Users\\sajad\\.nuget\\packages\\system.net.nameresolution\\4.3.0\\system.net.nameresolution.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.net.networkinformation\\4.1.0\\system.net.networkinformation.4.1.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.net.primitives\\4.3.0\\system.net.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\sajad\\.nuget\\packages\\system.net.security\\4.0.0\\system.net.security.4.0.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.net.sockets\\4.3.0\\system.net.sockets.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\system.private.datacontractserialization\\4.3.0\\system.private.datacontractserialization.4.3.0.nupkg.sha512",
@@ -207,5 +212,16 @@
     "C:\\Users\\sajad\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Users\\sajad\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'SmsIrRestful 1.1.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "SmsIrRestful",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
 }

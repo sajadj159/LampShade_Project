@@ -796,3 +796,12 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopMa
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopManagement.Infrastructure.InventoryAcl.pdb
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Shop\Orders\Index.cshtml.g.cs
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Shop\Orders\Items.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\SmsIrRestful.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\SmsIrRestful.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\ShopManagement.Infrastructure.AccountAcl.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\ShopManagement.Infrastructure.AccountAcl.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopManagement.Infrastructure.AccountAcl.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\ShopManagement.Infrastructure.AccountAcl.pdb
+D:\repos\C#\LampShade\LampShade\ServiceHost\bin\Debug\net5.0\MailKit.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\MailKit.dll
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\MailKit.xml

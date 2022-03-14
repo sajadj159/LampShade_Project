@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="1.10.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
@@ -14,6 +15,11 @@
     <PackageReference Include="MimeKit" Version="1.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
     <PackageReference Include="RestSharp" Version="106.11.4" />
+    <PackageReference Include="SmsIrRestful" Version="1.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Email\" />
   </ItemGroup>
 
 </Project>
