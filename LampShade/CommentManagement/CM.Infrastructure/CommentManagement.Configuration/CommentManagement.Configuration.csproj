@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\01_LampShadeQuery\01_LampShadeQuery.csproj" />
     <ProjectReference Include="..\..\CM.Applicaion\CommentManagement.Application\CommentManagement.Application.csproj" />
     <ProjectReference Include="..\CommentManagement.Infrastructure.EFCore\CommentManagement.Infrastructure.EFCore.csproj" />
   </ItemGroup>

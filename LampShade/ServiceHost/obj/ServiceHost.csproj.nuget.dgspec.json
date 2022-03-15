@@ -380,6 +380,9 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "D:\\repos\\C#\\LampShade\\LampShade\\01_LampShadeQuery\\01_LampShadeQuery.csproj": {
+                "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\01_LampShadeQuery\\01_LampShadeQuery.csproj"
+              },
               "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Application\\AccountManagement.Application\\AccountManagement.Application.csproj": {
                 "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\AccountManagement\\AM.Application\\AccountManagement.Application\\AccountManagement.Application.csproj"
               },
@@ -1028,6 +1031,9 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "D:\\repos\\C#\\LampShade\\LampShade\\01_LampShadeQuery\\01_LampShadeQuery.csproj": {
+                "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\01_LampShadeQuery\\01_LampShadeQuery.csproj"
+              },
               "D:\\repos\\C#\\LampShade\\LampShade\\CommentManagement\\CM.Applicaion\\CommentManagement.Application\\CommentManagement.Application.csproj": {
                 "projectPath": "D:\\repos\\C#\\LampShade\\LampShade\\CommentManagement\\CM.Applicaion\\CommentManagement.Application\\CommentManagement.Application.csproj"
               },

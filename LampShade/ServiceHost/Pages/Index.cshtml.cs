@@ -14,7 +14,7 @@ namespace ServiceHost.Pages
 
         public void OnGet()
         {
-           _emailService.SendEmail("salam","salam salam","cotact@lampshade.com");
+           //_emailService.SendEmail("salam","salam salam","cotact@lampshade.com");
         }
     }
 }

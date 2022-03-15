@@ -1,5 +1,6 @@
 ﻿using _0_Framework.Repository;
 using _01_LampShadeQuery.Contract.Cart;
+using _01_LampShadeQuery.Contract.Order;
 using _01_LampShadeQuery.Contract.Product;
 using _01_LampShadeQuery.Contract.ProductCategory;
 using _01_LampShadeQuery.Contract.Slide;
@@ -61,9 +62,9 @@ namespace ShopManagement.Configuration
             service.AddTransient<IShopInventoryAcl, ShopInventoryAcl>();
             service.AddTransient<IShopAccountAcl, ShopAccountAcl>();
 
-
             service.AddSingleton<ICartService, CartService>();
 
+            service.AddTransient<IOrderQuery, OrderQuery>();
             service.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
         }
     }

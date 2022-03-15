@@ -68,7 +68,8 @@ namespace _01_LampShadeQuery.Query
                     PictureAlt = x.PictureAlt,
                     PictureTitle = x.PictureTitle,
                     Slug = x.Slug,
-                    ArticlesCount = x.Articles.Count
+                    ArticlesCount = x.Articles.Count,
+                    Articles = MapArticles(x.Articles)
                 }).ToList();
         }
     }

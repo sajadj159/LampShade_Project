@@ -1,4 +1,6 @@
-﻿using CommentManagement.Application.Comment;
+﻿using _01_LampShadeQuery.Contract.Comment;
+using _01_LampShadeQuery.Query;
+using CommentManagement.Application.Comment;
 using CommentManagement.Application.Contract.A.Comment;
 using CommentManagement.Domain.CommentAgg;
 using CommentManagement.Infrastructure.EFCore;
@@ -14,6 +16,8 @@ namespace CommentManagement.Configuration
         {
             service.AddTransient<ICommentApplication, CommentApplication>();
             service.AddTransient<ICommentRepository, CommentRepository>();
+
+            service.AddTransient<ICommentQuery, CommentQuery>();
 
             service.AddDbContext<CommentContext>(x => x.UseSqlServer(connectionString));
         }

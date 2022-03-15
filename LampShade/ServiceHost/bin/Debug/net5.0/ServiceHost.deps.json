@@ -2771,6 +2771,7 @@
       },
       "AccountManagement.Configuration/1.0.0": {
         "dependencies": {
+          "01_LampShadeQuery": "1.0.0",
           "AccountManagement.Application": "1.0.0",
           "AccountManagement.Domain": "1.0.0",
           "AccountManagement.Infrastructure.EFCore": "1.0.0",
@@ -2895,6 +2896,7 @@
       },
       "CommentManagement.Configuration/1.0.0": {
         "dependencies": {
+          "01_LampShadeQuery": "1.0.0",
           "CommentManagement.Application": "1.0.0",
           "CommentManagement.Infrastructure.EFCore": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"

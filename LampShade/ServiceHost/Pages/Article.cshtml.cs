@@ -5,7 +5,6 @@ using CommentManagement.Application.Contract.A.Comment;
 using CommentManagement.Infrastructure.EFCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.ProjectModel;
 
 namespace ServiceHost.Pages
 {
