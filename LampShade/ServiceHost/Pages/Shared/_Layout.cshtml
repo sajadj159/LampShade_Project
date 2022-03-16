@@ -18,6 +18,7 @@
     <link href="~/Theme/assets/css/vendors.css" rel="stylesheet">
     <link href="~/Theme/assets/css/style.css" rel="stylesheet">
     <link href="~/Theme/assets/css/Custom.css" rel="stylesheet">
+    @await RenderSectionAsync("Css", false)
 </head>
 
 <body>
@@ -52,10 +53,11 @@
     <script src="~/Theme/assets/js/active.js"></script>
     <script src="~/Theme/assets/js/plugins.js"></script>
     <script src="~/Theme/assets/js/custom.js"></script>
-<script>
-    $(document).ready(function() {
-        updateCart();
-    });
-</script>
+    @await RenderSectionAsync("Scripts", false)
+    <script>
+        $(document).ready(function() {
+            updateCart();
+        });
+    </script>
 </body>
 </html>

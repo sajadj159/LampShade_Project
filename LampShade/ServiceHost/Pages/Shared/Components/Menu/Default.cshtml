@@ -1,4 +1,5 @@
 ﻿@using _0_Framework.Application
+@using _0_Framework.Repository
 @model _01_LampShadeQuery.MenuModel
 @inject IAuthHelper _authHelper;
  <!--====================  header area ====================-->
@@ -109,21 +110,61 @@
                                     <div class="settings-menu-wrapper" id="settings-menu-wrapper">
                                         <div class="single-settings-block">
                                             <h4 class="title">پروفایل من </h4>
-                                            <ul>
-                                                <li>
-                                                    <a asp-page="/Account">ثبت نام</a>
-                                                </li>
-                                                <li>
-                                                    <a asp-page="/Account">ورود</a>
-                                                </li>
-                                            </ul>
+                                            @if (_authHelper.IsAuthenticated())
+                                            {
+                                                <ul>
+                                                    <li>
+                                                        <a asp-page="/AccountProfile">مشخصات</a>
+                                                    </li>
+                                                    <li>
+                                                        <a asp-page="/AccountOrders">سفارشات</a>
+                                                    </li>
+                                                    <li>
+                                                        <a asp-page="/Account" asp-page-handler="Logout">خروج</a>
+                                                    </li>
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <ul>
+                                                    <li>
+                                                        <a asp-page="/Account">ثبت نام</a>
+                                                    </li>
+                                                    <li>
+                                                        <a asp-page="/Account">ورود</a>
+                                                    </li>
+                                                </ul>
+                                            }
+                                            
                                         </div>
 
                                     </div>
+                                    
                                 </div>
+                                
                             </li>
+                           @if (_authHelper.IsAuthenticated() && (_authHelper.CurrentAccountRole()==Roles.Administrator||_authHelper.CurrentAccountRole()==Roles.ContentUploader))
+                           {
+                               <li>
+                                   <div >
+                                       <a href="https://localhost:5001/Administration" class="alert-primary btn">سیستم</a>
+                                   </div>
+                               </li> 
+                           }
+                             
                         </ul>
                     </div>
+                    
+                      
+                          
+                                    
+                                        
+                                 
+
+
+                          
+                        
+                    
                 </div>
                 <!--=======  End of header wrapper  =======-->
                 <!--=======  mobile navigation area  =======-->
@@ -236,7 +277,7 @@
                     </ul>
                 </nav>
             </div>
-
+            
             <div class="offcanvas-widget-area">
                 <div class="off-canvas-contact-widget">
                     <div class="header-contact-info">

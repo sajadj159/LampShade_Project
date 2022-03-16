@@ -1,0 +1,68 @@
+﻿@page
+@using _0_Framework.Application
+@model ServiceHost.Pages.AccountOrdersModel
+@{
+    ViewData["Title"] = "مشخصات سفارشات";
+}
+<div class="breadcrumb-area section-space--half">
+    <div class="container wide">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-wrapper breadcrumb-bg">
+                    <div class="breadcrumb-content">
+                        <h2 class="breadcrumb-content__title">مشخصات سفارشات کاربر: <strong>@Model.AuthViewModel.Fullname</strong> </h2>
+                        <ul class="breadcrumb-content__page-map">
+                            <li>
+                                <a asp-page="./Index">صفحه اصلی</a>
+                            </li>
+                            <li class="active"> مشخصات سفارشات</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <h2>(@Model.OrderQueryModels.Count)سفارشات</h2>
+    @if (@Model.OrderQueryModels.Count <= 0)
+    {
+        <div class="alert alert-secondary">
+            <h5>شما تا کنون سفارشی ثبت نکرده اید!</h5>
+        </div>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>نوع پرداخت</th>
+                <th>مبلغ پرداختی</th>
+                <th>کل</th>
+                <th>کل تخفیف</th>
+                <th>شماره پیگیری</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var order in @Model.OrderQueryModels)
+        {
+            
+            <tr class="text-white @(order.IsPaid ? "bg-success" : "bg-danger")">
+                @if (@order.PaymentMethodId == 1)
+                {
+                    <td><p>اینترنتی</p></td>
+                }
+                @if (@order.PaymentMethodId == 2)
+                {
+                    <td><p>نقدی</p></td>
+                }
+                <td>@order.PayAmount.ToMoney()</td>
+                <td>@order.TotalAmount.ToMoney()</td>
+                <td>@order.DiscountAmount.ToMoney()</td>
+                <td>@order.IssueTrackingNo<td>
+            </tr>
+            
+        }
+        
+
+        </tbody>
+    </table>
+</div>

@@ -81,6 +81,8 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
                     Mobile = x.Mobile,
                     RoleId = x.RoleId,
                     Id = x.Id,
+                    Address = x.Address,
+                    PostalCode = x.PostalCode
                 }).FirstOrDefault(x => x.Id == id);
         }
 

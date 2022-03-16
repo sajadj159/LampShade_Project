@@ -807,3 +807,5 @@ D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\MailKi
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Fakes\bmic\b\MailKit.xml
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\Address.cshtml.g.cs
 D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Areas\Administration\Pages\Accounts\Account\MakeAddress.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\AccountProfile.cshtml.g.cs
+D:\repos\C#\LampShade\LampShade\ServiceHost\obj\Debug\net5.0\Razor\Pages\AccountOrders.cshtml.g.cs
