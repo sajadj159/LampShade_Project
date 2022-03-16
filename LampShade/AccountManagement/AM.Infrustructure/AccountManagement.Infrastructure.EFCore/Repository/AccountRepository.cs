@@ -34,6 +34,8 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
                 ProfilePhoto = x.ProfilePhoto,
                 RoleId = x.RoleId,
                 Role = x.Role.Name,
+                Address = x.Address,
+                PostalCode = x.PostalCode,
                 CreationDate = x.CreationDate.ToFarsi()
 
             });
@@ -78,8 +80,18 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
                     FullName = x.FullName,
                     Mobile = x.Mobile,
                     RoleId = x.RoleId,
-                    Id = x.Id
+                    Id = x.Id,
                 }).FirstOrDefault(x => x.Id == id);
+        }
+
+        public MakeAddress GetAddressBy(long id)
+        {
+            return _context.Accounts.Select(x => new MakeAddress
+            {
+                AccountId = x.Id,
+                Address = x.Address,
+                PostalCode = x.PostalCode
+            }).FirstOrDefault(x => x.AccountId == id);
         }
     }
 }

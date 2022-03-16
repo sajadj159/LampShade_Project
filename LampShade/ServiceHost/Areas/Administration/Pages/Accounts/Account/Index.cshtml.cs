@@ -68,5 +68,16 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
             var result = _accountApplication.ChangePassword(command);
             return new JsonResult(result);
         }
+        public PartialViewResult OnGetMakeAddress(long id)
+        {
+            var result = _accountApplication.GetAddressBy(id);
+            return Partial("MakeAddress", result);
+        }
+
+        public JsonResult OnPostMakeAddress(MakeAddress command)
+        {
+            var result = _accountApplication.MakeAddress(command);
+            return new JsonResult(result);
+        }
     }
 }

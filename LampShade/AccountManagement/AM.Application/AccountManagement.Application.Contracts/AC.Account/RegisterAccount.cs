@@ -10,7 +10,7 @@ namespace AccountManagement.Application.Contracts.AC.Account
     public class RegisterAccount
     {
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
-        public string UserName { get; set; } 
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string FullName { get; set; }
@@ -20,6 +20,12 @@ namespace AccountManagement.Application.Contracts.AC.Account
 
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string Mobile { get; set; }
+
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
+        public string Address { get; set; }
+
+        [Required(ErrorMessage = ValidationMessages.IsRequired)]
+        public string PostalCode { get; set; }
 
         public long RoleId { get; set; }
 

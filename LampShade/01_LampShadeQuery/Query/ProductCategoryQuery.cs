@@ -55,6 +55,7 @@ namespace _01_LampShadeQuery.Query
                     var discountRate = discount.FirstOrDefault(x => x.ProductId == product.Id);
                     if (discountRate == null) continue;
                     var rate = discountRate.DiscountRate;
+                    product.DiscountRate=rate;
                     product.DiscountExpireDate = discountRate.EndDate.ToDiscountFormat();
                     product.HasDiscount = rate > 0;
                     var discountAmount = Math.Round((unitPrice * rate) / 100);

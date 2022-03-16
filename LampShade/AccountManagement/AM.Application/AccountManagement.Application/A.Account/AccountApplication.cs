@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using AccountManagement.Application.Contracts.AC.Account;
@@ -98,10 +99,28 @@ namespace AccountManagement.Application.A.Account
                 .Permissions
                 .Select(x => x.Code)
                 .ToList();
-
+           
             var authViewModel = new AuthViewModel(account.Id,account.UserName,account.FullName,account.Mobile,account.RoleId,permissions);
 
             _authHelper.Signin(authViewModel);
+            return operationResult.Succeeded();
+        }
+
+        public OperationResult MakeAddress(MakeAddress command)
+        {
+            var operationResult = new OperationResult();
+            var account = _accountRepository.Get(command.AccountId);
+            if (account==null)
+            {
+                return operationResult.Failed(ApplicationMessages.RecordNotFound);
+            }
+
+            if (_accountRepository.Exist(x=>x.Address==command.Address&&x.PostalCode==command.PostalCode))
+            {
+                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
+            }
+            account.MakeAddress(command.Address,command.PostalCode);
+            _accountRepository.Save();
             return operationResult.Succeeded();
         }
 
@@ -118,6 +137,11 @@ namespace AccountManagement.Application.A.Account
         public EditAccount GetDetails(long id)
         {
             return _accountRepository.GetDetails(id);
+        }
+
+        public MakeAddress GetAddressBy(long id)
+        {
+            return _accountRepository.GetAddressBy(id);
         }
 
         public AccountViewModel GetAccountBy(long id)

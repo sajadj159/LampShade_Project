@@ -10,5 +10,6 @@ namespace AccountManagement.Domain.AccountAgg
         List<AccountViewModel> Search(AccountSearchModel searchModel);
         List<AccountViewModel> GetAccounts();
         EditAccount GetDetails(long id);
+        MakeAddress GetAddressBy(long id);
     }
 }

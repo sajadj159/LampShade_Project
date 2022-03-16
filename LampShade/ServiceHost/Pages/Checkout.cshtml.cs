@@ -95,5 +95,6 @@ namespace ServiceHost.Pages
             return RedirectToPage("/PaymentResult", result);
 
         }
+
     }
 }

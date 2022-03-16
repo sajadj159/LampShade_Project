@@ -1,0 +1,35 @@
+﻿@model AccountManagement.Application.Contracts.AC.Account.MakeAddress
+@{
+}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">تغییر آدرس کاربر</h4>
+</div>
+
+<form asp-page="./Index" asp-page-handler="MakeAddress"
+      method="post"
+      data-ajax="true"
+      data-callback=""
+      data-action="Refresh">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label">آدرس</label>
+                    <input type="text" class="form-control" asp-for="Address">
+                    <span asp-validation-for="Address" class="error"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PostalCode" class="control-label">کد پستی</label>
+                    <input type="number" class="form-control" asp-for="PostalCode">
+                    <span asp-validation-for="PostalCode" class="error"></span>
+                </div>
+            </div>
+            <input type="hidden" asp-for="AccountId" value="@Model.AccountId"/>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
+        <button type="submit" class="btn btn-info waves-effect waves-light">اعمال تفییر</button>
+    </div>
+</form>

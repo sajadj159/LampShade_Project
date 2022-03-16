@@ -1,0 +1,53 @@
+﻿@page
+@model ServiceHost.Pages.AddressModel
+@{
+    ViewData["Title"] = "تایید آدرس";
+}
+<div class="breadcrumb-area section-space--half">
+    <div class="container wide">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-wrapper breadcrumb-bg">
+                    <div class="breadcrumb-content">
+                        <h2 class="breadcrumb-content__title">تایید آدرس شما</h2>
+                        <ul class="breadcrumb-content__page-map">
+                            <li>
+                                <a asp-page="./Index">صفحه اصلی</a>
+                            </li>
+                            <li class="active"> تایید آدرس</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content-area">
+    <div class="container">
+        <div class="login-form">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel-body">
+                        <form method="post" asp-page-handler="MakeAddress">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>آدرس*</label>
+                                    <input type="text" asp-for="Address" name="address" placeholder="آدرس دقیق">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>کدپستی*</label>
+                                        <input type="text" asp-for="PostalCode" name="postalcode" placeholder="کد پستی">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-success waves-effect waves-light m-b-5"> ایجاد</button>
+                            <a asp-page="./Checkout" class="btn btn-secondary waves-effect waves-light m-b-5">بازگشت</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

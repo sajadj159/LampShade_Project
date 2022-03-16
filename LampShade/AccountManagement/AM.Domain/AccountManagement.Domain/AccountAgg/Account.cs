@@ -11,6 +11,8 @@ namespace AccountManagement.Domain.AccountAgg
         public string Mobile { get; private set; }
         public long RoleId { get; private set; }
         public string ProfilePhoto { get; private set; }
+        public string Address { get; private set; }
+        public string PostalCode { get; private set; }
         public Role Role { get; private set; }
 
         protected Account()
@@ -45,6 +47,12 @@ namespace AccountManagement.Domain.AccountAgg
         public void ChangePassword(string password)
         {
             Password = password;
+        }
+
+        public void MakeAddress(string address, string postalCode)
+        {
+            Address = address;
+            PostalCode = postalCode;
         }
     }
 }

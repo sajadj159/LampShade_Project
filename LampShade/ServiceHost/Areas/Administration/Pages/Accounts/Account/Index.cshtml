@@ -68,6 +68,7 @@
                                     <th>نام کاربری</th>
                                     <th>نام شخص</th>
                                     <th>موبایل</th>
+                                    <th>آدرس</th>
                                     <th>نقش</th>
                                     <th>تاریخ تولید</th>
                                     <th>عملیات</th>
@@ -84,6 +85,7 @@
                                     <td>@account.UserName</td> 
                                     <td>@account.FullName</td> 
                                     <td>@account.Mobile</td> 
+                                    <td>@account.Address</td> 
                                     <td>@account.Role</td> 
                                     <td>@account.CreationDate</td>
                                     <td>
@@ -93,6 +95,9 @@
                                         <a class="btn btn-primary btn-custom waves-effect waves-light m-b-5" href="#showmodal=@Url.Page("./Index", "ChangePassword" ,new {id=account.Id})">
                                             <i class="fa fa-key"></i> تغییر کلمه عبور
                                         </a> 
+                                        <a class="btn btn-default btn-custom waves-effect waves-light m-b-5" href="#showmodal=@Url.Page("./Index", "MakeAddress" ,new {id=account.Id})">
+                                            <i class="fa fa-road"></i> ویرایش آدرس
+                                        </a>
                                     </td>
                                 </tr>
                             }
