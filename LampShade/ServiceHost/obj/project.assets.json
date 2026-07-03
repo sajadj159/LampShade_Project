@@ -2741,21 +2741,6 @@
           "bin/placeholder/InventoryManagement.Infrastructure.EFCore.dll": {}
         }
       },
-      "InventoryManagement.Presentation.Api/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "dependencies": {
-          "01_LampShadeQuery": "1.0.0",
-          "InventoryManagement.Application.Contract": "1.0.0",
-          "MailKit": "4.17.0"
-        },
-        "compile": {
-          "bin/placeholder/InventoryManagement.Presentation.Api.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/InventoryManagement.Presentation.Api.dll": {}
-        }
-      },
       "ShopManagement.Application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -2869,20 +2854,6 @@
         },
         "runtime": {
           "bin/placeholder/ShopManagement.Infrastructure.InventoryAcl.dll": {}
-        }
-      },
-      "ShopManagement.Presentation.Api/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "dependencies": {
-          "01_LampShadeQuery": "1.0.0",
-          "MailKit": "4.17.0"
-        },
-        "compile": {
-          "bin/placeholder/ShopManagement.Presentation.Api.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ShopManagement.Presentation.Api.dll": {}
         }
       }
     }
@@ -6836,11 +6807,6 @@
       "path": "../InventoryManagement/IM.Infrastructure/InventoryManagement.Infrastructure.EFCore/InventoryManagement.Infrastructure.EFCore.csproj",
       "msbuildProject": "../InventoryManagement/IM.Infrastructure/InventoryManagement.Infrastructure.EFCore/InventoryManagement.Infrastructure.EFCore.csproj"
     },
-    "InventoryManagement.Presentation.Api/1.0.0": {
-      "type": "project",
-      "path": "../InventoryManagement/IM.Presentation/InventoryManagement.Presentation.Api/InventoryManagement.Presentation.Api.csproj",
-      "msbuildProject": "../InventoryManagement/IM.Presentation/InventoryManagement.Presentation.Api/InventoryManagement.Presentation.Api.csproj"
-    },
     "ShopManagement.Application/1.0.0": {
       "type": "project",
       "path": "../Shopmanagement/SM.Application/ShopManagement.Application/ShopManagement.Application.csproj",
@@ -6875,11 +6841,6 @@
       "type": "project",
       "path": "../Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.InventoryAcl/ShopManagement.Infrastructure.InventoryAcl.csproj",
       "msbuildProject": "../Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.InventoryAcl/ShopManagement.Infrastructure.InventoryAcl.csproj"
-    },
-    "ShopManagement.Presentation.Api/1.0.0": {
-      "type": "project",
-      "path": "../Shopmanagement/SM.Presentation/ShopManagement.Presentation.Api/ShopManagement.Presentation.Api.csproj",
-      "msbuildProject": "../Shopmanagement/SM.Presentation/ShopManagement.Presentation.Api/ShopManagement.Presentation.Api.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6890,7 +6851,6 @@
       "CommentManagement.Configuration >= 1.0.0",
       "DiscountManagement.Configuration >= 1.0.0",
       "InventoryManagement.Configuration >= 1.0.0",
-      "InventoryManagement.Presentation.Api >= 1.0.0",
       "MailKit >= 4.17.0",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.9",
       "Microsoft.QualityTools.Testing.Fakes >= 18.1.1",
@@ -6898,8 +6858,7 @@
       "Nancy >= 2.0.0",
       "NuGet.Packaging >= 7.6.0",
       "NuGet.Protocol >= 7.6.0",
-      "ShopManagement.Configuration >= 1.0.0",
-      "ShopManagement.Presentation.Api >= 1.0.0"
+      "ShopManagement.Configuration >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -6953,14 +6912,8 @@
             "D:\\LampShade_Project\\LampShade\\InventoryManagement\\IM.Infrastructure\\InventoryManagement.Configuration\\InventoryManagement.Configuration.csproj": {
               "projectPath": "D:\\LampShade_Project\\LampShade\\InventoryManagement\\IM.Infrastructure\\InventoryManagement.Configuration\\InventoryManagement.Configuration.csproj"
             },
-            "D:\\LampShade_Project\\LampShade\\InventoryManagement\\IM.Presentation\\InventoryManagement.Presentation.Api\\InventoryManagement.Presentation.Api.csproj": {
-              "projectPath": "D:\\LampShade_Project\\LampShade\\InventoryManagement\\IM.Presentation\\InventoryManagement.Presentation.Api\\InventoryManagement.Presentation.Api.csproj"
-            },
             "D:\\LampShade_Project\\LampShade\\Shopmanagement\\SM.Infrastructure\\ShopManagement.Configuration\\ShopManagement.Configuration.csproj": {
               "projectPath": "D:\\LampShade_Project\\LampShade\\Shopmanagement\\SM.Infrastructure\\ShopManagement.Configuration\\ShopManagement.Configuration.csproj"
-            },
-            "D:\\LampShade_Project\\LampShade\\Shopmanagement\\SM.Presentation\\ShopManagement.Presentation.Api\\ShopManagement.Presentation.Api.csproj": {
-              "projectPath": "D:\\LampShade_Project\\LampShade\\Shopmanagement\\SM.Presentation\\ShopManagement.Presentation.Api\\ShopManagement.Presentation.Api.csproj"
             }
           }
         }

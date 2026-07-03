@@ -1,4 +1,4 @@
-﻿const cookieName = "cart-items";
+const cookieName = "cart-items";
 function addToCart(id, name, price, pictureUrl) {
     debugger;
     let products = $.cookie(cookieName);
@@ -75,7 +75,7 @@ function changeCartItemCount(id, totalId, count) {
     updateCart();
 
     const settings = {
-        "url": "https://localhost:5001/api/Inventory",
+        "url": "https://localhost:5002/api/read/inventory/checkstock",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -83,7 +83,7 @@ function changeCartItemCount(id, totalId, count) {
         },
         "data": JSON.stringify({
             "productId": id,
-            "Count": count
+            "count": count
         }),
     };
 

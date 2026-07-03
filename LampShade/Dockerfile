@@ -32,7 +32,6 @@ COPY InventoryManagement/IM.Application/InventoryManagement.Application/Inventor
 COPY InventoryManagement/IM.Application/InventoryManagement.Application.Contract/InventoryManagement.Application.Contract.csproj InventoryManagement/IM.Application/InventoryManagement.Application.Contract/
 COPY InventoryManagement/IM.Infrastructure/InventoryManagement.Infrastructure.EFCore/InventoryManagement.Infrastructure.EFCore.csproj InventoryManagement/IM.Infrastructure/InventoryManagement.Infrastructure.EFCore/
 COPY InventoryManagement/IM.Infrastructure/InventoryManagement.Configuration/InventoryManagement.Configuration.csproj InventoryManagement/IM.Infrastructure/InventoryManagement.Configuration/
-COPY InventoryManagement/IM.Presentation/InventoryManagement.Presentation.Api/InventoryManagement.Presentation.Api.csproj InventoryManagement/IM.Presentation/InventoryManagement.Presentation.Api/
 COPY Shopmanagement/SM.Domain/ShopManagement.Domain/ShopManagement.Domain.csproj Shopmanagement/SM.Domain/ShopManagement.Domain/
 COPY Shopmanagement/SM.Application/ShopManagement.Application/ShopManagement.Application.csproj Shopmanagement/SM.Application/ShopManagement.Application/
 COPY Shopmanagement/SM.Application/ShopManagement.Application.Contract/ShopManagement.Application.Contract.csproj Shopmanagement/SM.Application/ShopManagement.Application.Contract/
@@ -40,7 +39,6 @@ COPY Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.EFCore/ShopM
 COPY Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.AccountAcl/ShopManagement.Infrastructure.AccountAcl.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.AccountAcl/
 COPY Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.InventoryAcl/ShopManagement.Infrastructure.InventoryAcl.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.InventoryAcl/
 COPY Shopmanagement/SM.Infrastructure/ShopManagement.Configuration/ShopManagement.Configuration.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Configuration/
-COPY Shopmanagement/SM.Presentation/ShopManagement.Presentation.Api/ShopManagement.Presentation.Api.csproj Shopmanagement/SM.Presentation/ShopManagement.Presentation.Api/
 COPY Endpoint/OnlineShop/OnlineShop.csproj Endpoint/OnlineShop/
 COPY docker-compose.dcproj ./
 

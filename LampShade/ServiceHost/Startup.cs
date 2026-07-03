@@ -11,7 +11,6 @@ using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Configuration;
 using DiscountManagement.Configuration;
 using InventoryManagement.Configuration;
-using InventoryManagement.Presentation.Api;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,7 +22,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ShopManagement.Configuration;
 using ShopManagement.Infrastructure.EFCore;
-using ShopManagement.Presentation.Api;
 using CommentManagement.Infrastructure.EFCore;
 using BlogManagement.Infrastructure.EFCore;
 using DiscountManagement.Infrastructure.EFCore;
@@ -108,9 +106,7 @@ namespace ServiceHost
                     options.Conventions.AuthorizeAreaFolder("Administration", "/Shop", "shop");
                     options.Conventions.AuthorizeAreaFolder("Administration", "/Discounts", "Discount");
                     options.Conventions.AuthorizeAreaFolder("Administration", "/Accounts", "Account");
-                })
-                .AddApplicationPart(typeof(ProductController).Assembly)
-                .AddApplicationPart(typeof(InventoryController).Assembly);
+                });
            
         }
 
