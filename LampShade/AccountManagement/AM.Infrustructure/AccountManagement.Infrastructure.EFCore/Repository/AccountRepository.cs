@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -18,7 +18,7 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 
         public Account GetBy(string userName)
         {
-            return _context.Accounts.FirstOrDefault(x => x.UserName == userName);
+            return _context.Accounts.FirstOrDefault(x => x.UserName == userName || x.Mobile == userName);
         }
 
         public List<AccountViewModel> Search(AccountSearchModel searchModel)

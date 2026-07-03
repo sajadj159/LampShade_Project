@@ -5,10 +5,12 @@ using LampShade.Api.Features.ProductPictures.Commands.RestoreProductPicture;
 using LampShade.Api.Features.ProductPictures.Queries.GetProductPictureById;
 using LampShade.Api.Features.ProductPictures.Queries.SearchProductPictures;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
 
+[Authorize]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ProductPictureController : ControllerBase

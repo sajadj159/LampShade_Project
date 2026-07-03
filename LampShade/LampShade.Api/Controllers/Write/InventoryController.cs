@@ -7,10 +7,12 @@ using LampShade.Api.Features.Inventories.Queries.GetInventoryById;
 using LampShade.Api.Features.Inventories.Queries.GetInventoryOperations;
 using LampShade.Api.Features.Inventories.Queries.SearchInventories;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
 
+[Authorize]
 [ApiController]
 [Route("api/write/[controller]")]
 public class InventoryController : ControllerBase

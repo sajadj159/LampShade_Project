@@ -5,10 +5,12 @@ using LampShade.Api.Features.Slides.Commands.RestoreSlide;
 using LampShade.Api.Features.Slides.Queries.GetSlideById;
 using LampShade.Api.Features.Slides.Queries.GetSlides;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
 
+[Authorize]
 [ApiController]
 [Route("api/write/[controller]")]
 public class SlideController : ControllerBase

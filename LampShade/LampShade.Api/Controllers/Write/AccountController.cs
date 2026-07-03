@@ -8,6 +8,7 @@ using LampShade.Api.Features.Accounts.Queries.GetAccountById;
 using LampShade.Api.Features.Accounts.Queries.GetAccounts;
 using LampShade.Api.Features.Accounts.Queries.SearchAccounts;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
@@ -24,6 +25,7 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> Register([FromForm] RegisterCommand command)
         => Ok(await _mediator.Send(command));
 
+    [Authorize]
     [HttpPut("edit")]
     public async Task<IActionResult> Edit([FromForm] EditAccountCommand command)
         => Ok(await _mediator.Send(command));
@@ -40,22 +42,27 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> Logout()
         => Ok(await _mediator.Send(new LogoutCommand()));
 
+    [Authorize]
     [HttpPost("address")]
     public async Task<IActionResult> MakeAddress(MakeAddressCommand command)
         => Ok(await _mediator.Send(command));
 
+    [Authorize]
     [HttpGet("search")]
     public async Task<IActionResult> Search([FromQuery] SearchAccountsQuery query)
         => Ok(await _mediator.Send(query));
 
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAccounts()
         => Ok(await _mediator.Send(new GetAccountsQuery()));
 
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id)
         => Ok(await _mediator.Send(new GetAccountByIdQuery { Id = id }));
 
+    [Authorize]
     [HttpGet("{id}/address")]
     public async Task<IActionResult> GetAddressBy(long id)
     {
@@ -63,6 +70,7 @@ public class AccountController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize]
     [HttpGet("{id}/account")]
     public async Task<IActionResult> GetAccountBy(long id)
         => Ok(await _mediator.Send(new GetAccountByIdQuery { Id = id }));

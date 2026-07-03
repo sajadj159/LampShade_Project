@@ -13,6 +13,7 @@ using DiscountManagement.Infrastructure.EFCore;
 using InventoryManagement.Configuration;
 using InventoryManagement.Infrastructure.EFCore;
 using LampShade.Api;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Configuration;
 using ShopManagement.Infrastructure.EFCore;
@@ -41,11 +42,27 @@ builder.Services.AddTransient<IHttpContextGetter, HttpContextGetter>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
+// Configure Cookie Authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/api/write/Account/login";
+        options.LogoutPath = "/api/write/Account/logout";
+        options.AccessDeniedPath = "/api/write/Account/login";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SameSite = SameSiteMode.Lax;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        options.ExpireTimeSpan = TimeSpan.FromDays(1);
+    });
+
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
-        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+        policy.WithOrigins("http://localhost:3000", "http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials());
 });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -91,8 +108,16 @@ app.UseSwaggerUI(options =>
         options.RoutePrefix = "swagger";
 });
 
+// Development-mode debugging features
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

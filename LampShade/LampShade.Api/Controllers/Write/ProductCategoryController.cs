@@ -4,10 +4,12 @@ using LampShade.Api.Features.ProductCategories.Queries.GetProductCategories;
 using LampShade.Api.Features.ProductCategories.Queries.GetProductCategoryById;
 using LampShade.Api.Features.ProductCategories.Queries.SearchProductCategories;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
 
+[Authorize]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ProductCategoryController : ControllerBase

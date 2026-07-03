@@ -4,10 +4,12 @@ using LampShade.Api.Features.ArticleCategories.Queries.GetArticleCategories;
 using LampShade.Api.Features.ArticleCategories.Queries.GetArticleCategoryById;
 using LampShade.Api.Features.ArticleCategories.Queries.SearchArticleCategories;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
 
+[Authorize]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ArticleCategoryController : ControllerBase

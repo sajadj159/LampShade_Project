@@ -5,10 +5,12 @@ using LampShade.Api.Features.Orders.Queries.GetOrderAmount;
 using LampShade.Api.Features.Orders.Queries.GetOrderItems;
 using LampShade.Api.Features.Orders.Queries.SearchOrders;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
 
+[Authorize]
 [ApiController]
 [Route("api/write/[controller]")]
 public class OrderController : ControllerBase

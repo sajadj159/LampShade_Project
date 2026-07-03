@@ -5,7 +5,6 @@ WORKDIR /src
 COPY LampShade.sln ./
 COPY 0_Framework/0_Framework/0_Framework.csproj 0_Framework/0_Framework/
 COPY 01_LampShadeQuery/01_LampShadeQuery.csproj 01_LampShadeQuery/
-COPY ServiceHost/ServiceHost.csproj ServiceHost/
 COPY LampShade.Api/LampShade.Api.csproj LampShade.Api/
 COPY AccountManagement/AM.Domain/AccountManagement.Domain/AccountManagement.Domain.csproj AccountManagement/AM.Domain/AccountManagement.Domain/
 COPY AccountManagement/AM.Application/AccountManagement.Application/AccountManagement.Application.csproj AccountManagement/AM.Application/AccountManagement.Application/
@@ -39,16 +38,15 @@ COPY Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.EFCore/ShopM
 COPY Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.AccountAcl/ShopManagement.Infrastructure.AccountAcl.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.AccountAcl/
 COPY Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.InventoryAcl/ShopManagement.Infrastructure.InventoryAcl.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.InventoryAcl/
 COPY Shopmanagement/SM.Infrastructure/ShopManagement.Configuration/ShopManagement.Configuration.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Configuration/
-COPY Endpoint/OnlineShop/OnlineShop.csproj Endpoint/OnlineShop/
-COPY docker-compose.dcproj ./
 
-RUN dotnet restore LampShade.sln
+RUN dotnet restore LampShade.Api/LampShade.Api.csproj
 
 # Stage 2: Build and publish
 FROM restore AS build
+ARG BUILD_CONFIG=Release
 COPY . .
-RUN dotnet build LampShade.sln -c Release --no-restore
-RUN dotnet publish ServiceHost/ServiceHost.csproj -c Release -o /app/publish --no-restore
+RUN dotnet build LampShade.Api/LampShade.Api.csproj -c ${BUILD_CONFIG} --no-restore
+RUN dotnet publish LampShade.Api/LampShade.Api.csproj -c ${BUILD_CONFIG} -o /app/publish --no-restore
 
 # Stage 3: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
@@ -67,4 +65,4 @@ EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 ENV DOTNET_RUNNING_IN_CONTAINER=true
 
-ENTRYPOINT ["dotnet", "ServiceHost.dll"]
+ENTRYPOINT ["dotnet", "LampShade.Api.dll"]
