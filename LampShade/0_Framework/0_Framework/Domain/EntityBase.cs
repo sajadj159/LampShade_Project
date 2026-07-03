@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace _0_Framework.Domain
 {
@@ -9,7 +9,7 @@ namespace _0_Framework.Domain
 
         public EntityBase()
         {
-            CreationDate = DateTime.Now;
+            CreationDate = DateTime.UtcNow;
         }
     }
 }

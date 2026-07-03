@@ -1,4 +1,4 @@
-﻿using _01_LampShadeQuery.Contract.Comment;
+using _01_LampShadeQuery.Contract.Comment;
 using _01_LampShadeQuery.Query;
 using CommentManagement.Application.Comment;
 using CommentManagement.Application.Contract.A.Comment;
@@ -19,7 +19,7 @@ namespace CommentManagement.Configuration
 
             service.AddTransient<ICommentQuery, CommentQuery>();
 
-            service.AddDbContext<CommentContext>(x => x.UseSqlServer(connectionString));
+            service.AddDbContext<CommentContext>(x => x.UseNpgsql(connectionString));
         }
     }
 }

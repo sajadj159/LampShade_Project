@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
@@ -82,7 +82,7 @@ namespace _01_LampShadeQuery.Query
         public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()
         {
             var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId, x.UnitPrice, x.InStock }).ToList();
-            var discountRate = _discountContext.CustomerDiscounts.Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now).Select(x => new { x.ProductId, x.DiscountRate }).ToList();
+            var discountRate = _discountContext.CustomerDiscounts.Where(x => x.StartDate < DateTime.UtcNow && x.EndDate > DateTime.UtcNow).Select(x => new { x.ProductId, x.DiscountRate }).ToList();
 
             var productCategories = _context.ProductCategories
                 .Include(x => x.Products)

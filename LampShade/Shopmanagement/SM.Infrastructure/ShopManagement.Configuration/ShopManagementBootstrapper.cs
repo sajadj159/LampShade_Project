@@ -1,4 +1,4 @@
-﻿using _0_Framework.Repository;
+using _0_Framework.Repository;
 using _01_LampShadeQuery.Contract.Cart;
 using _01_LampShadeQuery.Contract.Order;
 using _01_LampShadeQuery.Contract.Product;
@@ -65,7 +65,7 @@ namespace ShopManagement.Configuration
             service.AddSingleton<ICartService, CartService>();
 
             service.AddTransient<IOrderQuery, OrderQuery>();
-            service.AddDbContext<ShopContext>(x => x.UseSqlServer(connectionString));
+            service.AddDbContext<ShopContext>(x => x.UseNpgsql(connectionString));
         }
     }
 }

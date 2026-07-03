@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
@@ -24,7 +24,7 @@ namespace _01_LampShadeQuery.Query
         public ArticleQueryModel GetArticleDetails(string value)
         {
             var result = _context.Articles
-                .Where(x => x.PublishDate <= DateTime.Now)
+                .Where(x => x.PublishDate <= DateTime.UtcNow)
                 .Include(x => x.Category)
                 .Select(x => new ArticleQueryModel
                 {
@@ -71,7 +71,7 @@ namespace _01_LampShadeQuery.Query
         public List<ArticleQueryModel> LatestArticles()
         {
             return _context.Articles
-                .Where(x => x.PublishDate <= DateTime.Now)
+                .Where(x => x.PublishDate <= DateTime.UtcNow)
                 .Include(x => x.Category)
                 .Select(x => new ArticleQueryModel
                 {

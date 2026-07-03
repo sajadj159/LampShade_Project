@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>_01_LampShadeQuery</RootNamespace>
   </PropertyGroup>
 
@@ -11,6 +11,10 @@
     <Folder Include="Contract\Product\" />
     <Folder Include="Contract\ProductCategory\" />
     <Folder Include="Contract\Slide\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.17.0" />
   </ItemGroup>
 
   <ItemGroup>

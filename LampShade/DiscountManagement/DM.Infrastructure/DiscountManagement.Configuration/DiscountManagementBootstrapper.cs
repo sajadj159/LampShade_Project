@@ -1,4 +1,4 @@
-﻿using DiscountManagement.Application.A.ColleagueDiscount;
+using DiscountManagement.Application.A.ColleagueDiscount;
 using DiscountManagement.Application.A.CustomerDiscount;
 using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
 using DiscountManagement.Application.Contract.AC.CustomerDiscount;
@@ -21,7 +21,7 @@ namespace DiscountManagement.Configuration
             service.AddTransient<IColleagueDiscountApplication, ColleagueDiscountApplication>();
             service.AddTransient<IColleagueDiscountRepository, ColleagueDiscountRepository>();
 
-            service.AddDbContext<DiscountContext>(x => x.UseSqlServer(connectionString));
+            service.AddDbContext<DiscountContext>(x => x.UseNpgsql(connectionString));
         }
     }
 }

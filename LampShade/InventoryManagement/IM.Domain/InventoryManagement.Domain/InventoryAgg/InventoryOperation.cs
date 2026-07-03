@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace InventoryManagement.Domain.InventoryAgg
 {
@@ -23,7 +23,7 @@ namespace InventoryManagement.Domain.InventoryAgg
             Description = description;
             OrderId = orderId;
             InventoryId = inventoryId;
-            OperationDate=DateTime.Now;
+            OperationDate=DateTime.UtcNow;
         }
     }
 }

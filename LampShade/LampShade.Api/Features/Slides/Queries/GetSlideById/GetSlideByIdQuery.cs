@@ -1,0 +1,16 @@
+using MediatR;
+using ShopManagement.Application.Contract.A.Slide;
+
+namespace LampShade.Api.Features.Slides.Queries.GetSlideById;
+
+public class GetSlideByIdQuery : IRequest<EditSlide>
+{
+    public long Id { get; set; }
+}
+
+public class GetSlideByIdQueryHandler : IRequestHandler<GetSlideByIdQuery, EditSlide>
+{
+    private readonly ISlideApplication _application;
+    public GetSlideByIdQueryHandler(ISlideApplication application) => _application = application;
+    public async Task<EditSlide> Handle(GetSlideByIdQuery r, CancellationToken c) => await Task.FromResult(_application.GetDetails(r.Id));
+}

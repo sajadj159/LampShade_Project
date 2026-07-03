@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using RestSharp;
-using RestSharp.Serialization.Json;
 
 namespace _0_Framework.Application.ZarinPal
 {
@@ -25,9 +24,8 @@ namespace _0_Framework.Application.ZarinPal
             var finalAmount = int.Parse(amount);
             var siteUrl = _configuration.GetSection("payment")["siteUrl"];
 
-            var client = new RestClient($"https://{Prefix}.zarinpal.com/pg/rest/WebGate/PaymentRequest.json");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/json");
+            var client = new RestClient($"https://{Prefix}.zarinpal.com/pg/rest/WebGate/");
+            var request = new RestRequest("PaymentRequest.json", Method.Post);
             var body = new PaymentRequest
             {
                 Mobile = mobile,
@@ -38,16 +36,14 @@ namespace _0_Framework.Application.ZarinPal
                 MerchantID = MerchantId
             };
             request.AddJsonBody(body);
-            var response = client.Execute(request);
-            var jsonSerializer = new JsonSerializer();
-            return jsonSerializer.Deserialize<PaymentResponse>(response);
+            var response = client.Execute<PaymentResponse>(request);
+            return response.Data;
         }
 
         public VerificationResponse CreateVerificationRequest(string authority, string amount)
         {
-            var client = new RestClient($"https://{Prefix}.zarinpal.com/pg/rest/WebGate/PaymentVerification.json");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/json");
+            var client = new RestClient($"https://{Prefix}.zarinpal.com/pg/rest/WebGate/");
+            var request = new RestRequest("PaymentVerification.json", Method.Post);
 
             amount = amount.Replace(",", "");
             var finalAmount = int.Parse(amount);
@@ -58,9 +54,8 @@ namespace _0_Framework.Application.ZarinPal
                 MerchantID = MerchantId,
                 Authority = authority
             });
-            var response = client.Execute(request);
-            var jsonSerializer = new JsonSerializer();
-            return jsonSerializer.Deserialize<VerificationResponse>(response);
+            var response = client.Execute<VerificationResponse>(request);
+            return response.Data;
         }
     }
 }

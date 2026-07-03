@@ -1,4 +1,4 @@
-﻿using _01_LampShadeQuery.Contract.Account;
+using _01_LampShadeQuery.Contract.Account;
 using _01_LampShadeQuery.Query;
 using AccountManagement.Application.A.Account;
 using AccountManagement.Application.A.Role;
@@ -24,7 +24,7 @@ namespace AccountManagement.Configuration
             service.AddTransient<IRoleApplication, RoleApplication>();
 
             service.AddTransient<IAccountQuery, AccountQuery>();
-            service.AddDbContext<AccountContext>(x => x.UseSqlServer(connectionString));
+            service.AddDbContext<AccountContext>(x => x.UseNpgsql(connectionString));
         }
     }
 }
