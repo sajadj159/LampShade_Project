@@ -1,4 +1,4 @@
-﻿using _0_Framework.Repository;
+using _0_Framework.Repository;
 using _01_LampShadeQuery.Contract.Inventory;
 using _01_LampShadeQuery.Query;
 using InventoryManagement.Application;
@@ -22,7 +22,7 @@ namespace InventoryManagement.Configuration
             service.AddTransient<IPermissionExposer, InventoryPermissionExposer>();
             service.AddTransient<IInventoryQuery, InventoryQuery>();
 
-            service.AddDbContext<InventoryContext>(x => x.UseSqlServer(connectionString));
+            service.AddDbContext<InventoryContext>(x => x.UseNpgsql(connectionString));
         }
     }
 }

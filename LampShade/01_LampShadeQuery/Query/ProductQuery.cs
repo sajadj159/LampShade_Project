@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
@@ -32,7 +32,7 @@ namespace _01_LampShadeQuery.Query
         {
             var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId, x.InStock, x.UnitPrice }).ToList();
             var discounts = _discountContext.CustomerDiscounts
-                .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
+                .Where(x => x.StartDate < DateTime.UtcNow && x.EndDate > DateTime.UtcNow)
                 .Select(x => new { x.ProductId, x.DiscountRate, x.EndDate }).ToList();
 
             var product = _shopContext.Products
@@ -92,7 +92,7 @@ namespace _01_LampShadeQuery.Query
         {
             var inventory = _inventoryContext.Inventory.Where(x => x.InStock).Select(x => new { x.ProductId, x.UnitPrice,x.InStock }).ToList();
             var discounts = _discountContext.CustomerDiscounts
-                .Where(x => x.StartDate <= DateTime.Now && x.EndDate > DateTime.Now)
+                .Where(x => x.StartDate <= DateTime.UtcNow && x.EndDate > DateTime.UtcNow)
                 .Select(x => new { x.ProductId, x.DiscountRate }).ToList();
 
             var latestArrivals = _shopContext.Products
@@ -157,7 +157,7 @@ namespace _01_LampShadeQuery.Query
         {
             var inventory = _inventoryContext.Inventory.Select(x => new { x.ProductId, x.InStock, x.UnitPrice }).ToList();
             var discounts = _discountContext.CustomerDiscounts
-                .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
+                .Where(x => x.StartDate < DateTime.UtcNow && x.EndDate > DateTime.UtcNow)
                 .Select(x => new { x.ProductId, x.DiscountRate, x.EndDate }).ToList();
             var queryable = _shopContext.Products.Include(x => x.Category).Select(x => new ProductQueryModel
             {

@@ -1,4 +1,4 @@
-﻿using _01_LampShadeQuery.Contract.Article;
+using _01_LampShadeQuery.Contract.Article;
 using _01_LampShadeQuery.Contract.ArticleCategory;
 using _01_LampShadeQuery.Query;
 using BlogManagement.Application.A.Article;
@@ -27,7 +27,7 @@ namespace BlogManagement.Infrastructure.Configuration
             service.AddTransient<IArticleQuery, ArticleQuery>();
             service.AddTransient<IArticleCategoryQuery, ArticleCategoryQuery>();
             
-            service.AddDbContext<BlogContext>(x => x.UseSqlServer(connectionString));
+            service.AddDbContext<BlogContext>(x => x.UseNpgsql(connectionString));
         }
     }
 }

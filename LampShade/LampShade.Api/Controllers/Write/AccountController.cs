@@ -1,0 +1,69 @@
+using LampShade.Api.Features.Accounts.Commands.ChangePassword;
+using LampShade.Api.Features.Accounts.Commands.Edit;
+using LampShade.Api.Features.Accounts.Commands.Login;
+using LampShade.Api.Features.Accounts.Commands.Logout;
+using LampShade.Api.Features.Accounts.Commands.MakeAddress;
+using LampShade.Api.Features.Accounts.Commands.Register;
+using LampShade.Api.Features.Accounts.Queries.GetAccountById;
+using LampShade.Api.Features.Accounts.Queries.GetAccounts;
+using LampShade.Api.Features.Accounts.Queries.SearchAccounts;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace LampShade.Api.Controllers.Write;
+
+[ApiController]
+[Route("api/write/[controller]")]
+public class AccountController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public AccountController(IMediator mediator) => _mediator = mediator;
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromForm] RegisterCommand command)
+        => Ok(await _mediator.Send(command));
+
+    [HttpPut("edit")]
+    public async Task<IActionResult> Edit([FromForm] EditAccountCommand command)
+        => Ok(await _mediator.Send(command));
+
+    [HttpPost("change-password")]
+    public async Task<IActionResult> ChangePassword(ChangePasswordCommand command)
+        => Ok(await _mediator.Send(command));
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginCommand command)
+        => Ok(await _mediator.Send(command));
+
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
+        => Ok(await _mediator.Send(new LogoutCommand()));
+
+    [HttpPost("address")]
+    public async Task<IActionResult> MakeAddress(MakeAddressCommand command)
+        => Ok(await _mediator.Send(command));
+
+    [HttpGet("search")]
+    public async Task<IActionResult> Search([FromQuery] SearchAccountsQuery query)
+        => Ok(await _mediator.Send(query));
+
+    [HttpGet]
+    public async Task<IActionResult> GetAccounts()
+        => Ok(await _mediator.Send(new GetAccountsQuery()));
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetDetails(long id)
+        => Ok(await _mediator.Send(new GetAccountByIdQuery { Id = id }));
+
+    [HttpGet("{id}/address")]
+    public async Task<IActionResult> GetAddressBy(long id)
+    {
+        var result = await _mediator.Send(new GetAccountByIdQuery { Id = id });
+        return Ok(result);
+    }
+
+    [HttpGet("{id}/account")]
+    public async Task<IActionResult> GetAccountBy(long id)
+        => Ok(await _mediator.Send(new GetAccountByIdQuery { Id = id }));
+}

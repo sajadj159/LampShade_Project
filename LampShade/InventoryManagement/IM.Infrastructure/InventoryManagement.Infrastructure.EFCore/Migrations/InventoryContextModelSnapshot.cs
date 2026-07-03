@@ -3,8 +3,10 @@ using System;
 using InventoryManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+
+#nullable disable
 
 namespace InventoryManagement.Infrastructure.EFCore.Migrations
 {
@@ -15,32 +17,34 @@ namespace InventoryManagement.Infrastructure.EFCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.14")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "10.0.9")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("InventoryManagement.Domain.InventoryAgg.Inventory", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("InStock")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");
 
                     b.Property<double>("UnitPrice")
-                        .HasColumnType("float");
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Inventory");
+                    b.ToTable("Inventory", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Domain.InventoryAgg.Inventory", b =>
@@ -49,8 +53,9 @@ namespace InventoryManagement.Infrastructure.EFCore.Migrations
                         {
                             b1.Property<long>("Id")
                                 .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("bigint");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<long>("Id"));
 
                             b1.Property<long>("Count")
                                 .HasColumnType("bigint");
@@ -60,16 +65,16 @@ namespace InventoryManagement.Infrastructure.EFCore.Migrations
 
                             b1.Property<string>("Description")
                                 .HasMaxLength(1000)
-                                .HasColumnType("nvarchar(1000)");
+                                .HasColumnType("character varying(1000)");
 
                             b1.Property<long>("InventoryId")
                                 .HasColumnType("bigint");
 
                             b1.Property<bool>("Operation")
-                                .HasColumnType("bit");
+                                .HasColumnType("boolean");
 
                             b1.Property<DateTime>("OperationDate")
-                                .HasColumnType("datetime2");
+                                .HasColumnType("timestamp without time zone");
 
                             b1.Property<long>("OperatorId")
                                 .HasColumnType("bigint");
@@ -81,7 +86,7 @@ namespace InventoryManagement.Infrastructure.EFCore.Migrations
 
                             b1.HasIndex("InventoryId");
 
-                            b1.ToTable("InventoryOperations");
+                            b1.ToTable("InventoryOperations", (string)null);
 
                             b1.WithOwner("Inventory")
                                 .HasForeignKey("InventoryId");

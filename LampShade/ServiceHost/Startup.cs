@@ -18,9 +18,18 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using ShopManagement.Configuration;
+using ShopManagement.Infrastructure.EFCore;
 using ShopManagement.Presentation.Api;
+using CommentManagement.Infrastructure.EFCore;
+using BlogManagement.Infrastructure.EFCore;
+using DiscountManagement.Infrastructure.EFCore;
+using InventoryManagement.Infrastructure.EFCore;
+using AccountManagement.Infrastructure.EFCore;
+using System;
 
 namespace ServiceHost
 {
@@ -28,6 +37,7 @@ namespace ServiceHost
     {
         public Startup(IConfiguration configuration)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             Configuration = configuration;
         }
 
@@ -107,7 +117,8 @@ namespace ServiceHost
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+            ApplyMigrations(app);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -138,6 +149,26 @@ namespace ServiceHost
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
+        }
+
+        private void ApplyMigrations(IApplicationBuilder app)
+        {
+            using var scope = app.ApplicationServices.CreateScope();
+            var services = scope.ServiceProvider;
+
+            try
+            {
+                services.GetRequiredService<ShopContext>().Database.Migrate();
+                services.GetRequiredService<InventoryContext>().Database.Migrate();
+                services.GetRequiredService<CommentContext>().Database.Migrate();
+                services.GetRequiredService<BlogContext>().Database.Migrate();
+                services.GetRequiredService<DiscountContext>().Database.Migrate();
+                services.GetRequiredService<AccountContext>().Database.Migrate();
+            }
+            catch (Exception ex)
+            {
+                services.GetRequiredService<ILogger<Startup>>().LogError(ex, "Failed to create databases");
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
@@ -27,7 +27,7 @@ namespace _01_LampShadeQuery.Query
                 .Where(x => !x.IsRemoved)
                 .Select(x => new { x.DiscountRate, x.ProductId }).ToList();
             var customerDiscounts = _discountContext.CustomerDiscounts
-                .Where(x => x.StartDate <= DateTime.Now && x.EndDate > DateTime.Now)
+                .Where(x => x.StartDate <= DateTime.UtcNow && x.EndDate > DateTime.UtcNow)
                 .Select(x => new { x.ProductId, x.DiscountRate }).ToList();
 
             var currentAccountRole = _authHelper.CurrentAccountRole();
