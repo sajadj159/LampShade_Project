@@ -8,92 +8,92 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infrastructure.EFCore.Repository
 {
-    public class AccountRepository : RepositoryBase<long, Account>, IAccountRepository
-    {
-        private readonly AccountContext _context;
-        public AccountRepository(AccountContext context) : base(context)
-        {
-            _context = context;
-        }
+	public class AccountRepository : RepositoryBase<long, Account>, IAccountRepository
+	{
+		private readonly AccountContext _context;
+		public AccountRepository(AccountContext context) : base(context)
+		{
+			_context = context;
+		}
 
-        public Account GetBy(string userName)
-        {
-            return _context.Accounts.FirstOrDefault(x => x.UserName == userName || x.Mobile == userName);
-        }
+		public Account GetBy(string userName)
+		{
+			return _context.Accounts.FirstOrDefault(x => x.UserName == userName || x.Mobile == userName);
+		}
 
-        public List<AccountViewModel> Search(AccountSearchModel searchModel)
-        {
-            var queryable = _context.Accounts
-                .Include(x=>x.Role)
-                .Select(x => new AccountViewModel
-            {
-                Id = x.Id,
-                UserName = x.UserName,
-                FullName = x.FullName,
-                Mobile = x.Mobile,
-                ProfilePhoto = x.ProfilePhoto,
-                RoleId = x.RoleId,
-                Role = x.Role.Name,
-                Address = x.Address,
-                PostalCode = x.PostalCode,
-                CreationDate = x.CreationDate.ToFarsi()
+		public List<AccountViewModel> Search(AccountSearchModel searchModel)
+		{
+			var queryable = _context.Accounts
+				.Include(x => x.Role)
+				.Select(x => new AccountViewModel
+				{
+					Id = x.Id,
+					UserName = x.UserName,
+					FullName = x.FullName,
+					Mobile = x.Mobile,
+					ProfilePhoto = x.ProfilePhoto,
+					RoleId = x.RoleId,
+					Role = x.Role.Name,
+					Address = x.Address,
+					PostalCode = x.PostalCode,
+					CreationDate = x.CreationDate.ToFarsi()
 
-            });
-            if (!string.IsNullOrWhiteSpace(searchModel.UserName))
-            {
-                queryable = queryable.Where(x => x.UserName.Contains(searchModel.UserName));
-            }
+				});
+			if (!string.IsNullOrWhiteSpace(searchModel.UserName))
+			{
+				queryable = queryable.Where(x => x.UserName.Contains(searchModel.UserName));
+			}
 
-            if (!string.IsNullOrWhiteSpace(searchModel.FullName))
-            {
-                queryable = queryable.Where(x => x.FullName.Contains(searchModel.FullName));
-            }
+			if (!string.IsNullOrWhiteSpace(searchModel.FullName))
+			{
+				queryable = queryable.Where(x => x.FullName.Contains(searchModel.FullName));
+			}
 
-            if (!string.IsNullOrWhiteSpace(searchModel.Mobile))
-            {
-                queryable = queryable.Where(x => x.Mobile.Contains(searchModel.Mobile));
-            }
+			if (!string.IsNullOrWhiteSpace(searchModel.Mobile))
+			{
+				queryable = queryable.Where(x => x.Mobile.Contains(searchModel.Mobile));
+			}
 
-            if (searchModel.RoleId > 0)
-            {
-                queryable = queryable.Where(x => x.RoleId == searchModel.RoleId);
-            }
+			if (searchModel.RoleId > 0)
+			{
+				queryable = queryable.Where(x => x.RoleId == searchModel.RoleId);
+			}
 
-            return queryable.OrderByDescending(x => x.Id).ToList();
-        }
+			return queryable.OrderByDescending(x => x.Id).ToList();
+		}
 
-        public List<AccountViewModel> GetAccounts()
-        {
-            return _context.Accounts.Select(x => new AccountViewModel
-            {
-                Id = x.Id,
-                FullName = x.FullName
-            }).ToList();  
-        }
+		public List<AccountViewModel> GetAccounts()
+		{
+			return _context.Accounts.Select(x => new AccountViewModel
+			{
+				Id = x.Id,
+				FullName = x.FullName
+			}).ToList();
+		}
 
-        public EditAccount GetDetails(long id)
-        {
-            return _context.Accounts
-                .Select(x => new EditAccount
-                {
-                    UserName = x.UserName,
-                    FullName = x.FullName,
-                    Mobile = x.Mobile,
-                    RoleId = x.RoleId,
-                    Id = x.Id,
-                    Address = x.Address,
-                    PostalCode = x.PostalCode
-                }).FirstOrDefault(x => x.Id == id);
-        }
+		public AccountViewModel GetDetails(long id)
+		{
+			return _context.Accounts
+				.Select(x => new AccountViewModel()
+				{
+					UserName = x.UserName,
+					FullName = x.FullName,
+					Mobile = x.Mobile,
+					RoleId = x.RoleId,
+					Id = x.Id,
+					Address = x.Address,
+					PostalCode = x.PostalCode
+				}).FirstOrDefault(x => x.Id == id);
+		}
 
-        public MakeAddress GetAddressBy(long id)
-        {
-            return _context.Accounts.Select(x => new MakeAddress
-            {
-                AccountId = x.Id,
-                Address = x.Address,
-                PostalCode = x.PostalCode
-            }).FirstOrDefault(x => x.AccountId == id);
-        }
-    }
+		public AccountViewModel GetAddressBy(long id)
+		{
+			return _context.Accounts.Select(x => new AccountViewModel
+			{
+				Id = x.Id,
+				Address = x.Address,
+				PostalCode = x.PostalCode
+			}).FirstOrDefault(x => x.Id == id);
+		}
+	}
 }

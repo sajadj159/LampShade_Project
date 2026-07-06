@@ -9,7 +9,7 @@ namespace AccountManagement.Domain.AccountAgg
         Account GetBy(string userName);
         List<AccountViewModel> Search(AccountSearchModel searchModel);
         List<AccountViewModel> GetAccounts();
-        EditAccount GetDetails(long id);
-        MakeAddress GetAddressBy(long id);
+        AccountViewModel GetDetails(long id);
+        AccountViewModel GetAddressBy(long id);
     }
 }

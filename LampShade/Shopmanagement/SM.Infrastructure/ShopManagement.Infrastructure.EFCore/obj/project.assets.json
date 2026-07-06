@@ -1070,27 +1070,11 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "AccountManagement.Application.Contracts/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "dependencies": {
-          "0_Framework": "1.0.0",
-          "MailKit": "4.17.0",
-          "Microsoft.AspNetCore.Http.Features": "5.0.17"
-        },
-        "compile": {
-          "bin/placeholder/AccountManagement.Application.Contracts.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/AccountManagement.Application.Contracts.dll": {}
-        }
-      },
       "AccountManagement.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
           "0_Framework": "1.0.0",
-          "AccountManagement.Application.Contracts": "1.0.0",
           "MailKit": "4.17.0"
         },
         "compile": {
@@ -3377,11 +3361,6 @@
       "type": "project",
       "path": "../../../0_Framework/0_Framework/0_Framework.csproj",
       "msbuildProject": "../../../0_Framework/0_Framework/0_Framework.csproj"
-    },
-    "AccountManagement.Application.Contracts/1.0.0": {
-      "type": "project",
-      "path": "../../../AccountManagement/AM.Application/AccountManagement.Application.Contracts/AccountManagement.Application.Contracts.csproj",
-      "msbuildProject": "../../../AccountManagement/AM.Application/AccountManagement.Application.Contracts/AccountManagement.Application.Contracts.csproj"
     },
     "AccountManagement.Domain/1.0.0": {
       "type": "project",

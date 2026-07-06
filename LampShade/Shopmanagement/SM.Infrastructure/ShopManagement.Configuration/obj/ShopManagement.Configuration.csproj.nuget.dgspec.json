@@ -898,8 +898,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\LampShade_Project\\LampShade\\0_Framework\\0_Framework\\0_Framework.csproj": {
-                "projectPath": "D:\\LampShade_Project\\LampShade\\0_Framework\\0_Framework\\0_Framework.csproj"
+              "D:\\LampShade_Project\\LampShade\\AccountManagement\\AM.Domain\\AccountManagement.Domain\\AccountManagement.Domain.csproj": {
+                "projectPath": "D:\\LampShade_Project\\LampShade\\AccountManagement\\AM.Domain\\AccountManagement.Domain\\AccountManagement.Domain.csproj"
               }
             }
           }
@@ -1255,9 +1255,6 @@
             "projectReferences": {
               "D:\\LampShade_Project\\LampShade\\0_Framework\\0_Framework\\0_Framework.csproj": {
                 "projectPath": "D:\\LampShade_Project\\LampShade\\0_Framework\\0_Framework\\0_Framework.csproj"
-              },
-              "D:\\LampShade_Project\\LampShade\\AccountManagement\\AM.Application\\AccountManagement.Application.Contracts\\AccountManagement.Application.Contracts.csproj": {
-                "projectPath": "D:\\LampShade_Project\\LampShade\\AccountManagement\\AM.Application\\AccountManagement.Application.Contracts\\AccountManagement.Application.Contracts.csproj"
               }
             }
           }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using AccountManagement.Application.Contracts.AC.Account;
@@ -134,12 +133,12 @@ namespace AccountManagement.Application.A.Account
             return _accountRepository.GetAccounts();
         }
 
-        public EditAccount GetDetails(long id)
+        public AccountViewModel GetDetails(long id)
         {
             return _accountRepository.GetDetails(id);
         }
 
-        public MakeAddress GetAddressBy(long id)
+        public AccountViewModel GetAddressBy(long id)
         {
             return _accountRepository.GetAddressBy(id);
         }

@@ -1,6 +1,6 @@
-﻿namespace AccountManagement.Application.Contracts.AC.Role
+﻿namespace AccountManagement.Domain.RoleAgg.Contracts
 {
-    public class RoleViewModel
+    public class RoleDto
     {
         public long Id { get; set; }
         public string Name { get; set; }
