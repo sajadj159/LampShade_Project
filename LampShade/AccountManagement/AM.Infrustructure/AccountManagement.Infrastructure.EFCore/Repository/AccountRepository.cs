@@ -24,6 +24,7 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 		public List<AccountViewModel> Search(AccountSearchModel searchModel)
 		{
 			var queryable = _context.Accounts
+				.AsNoTracking()
 				.Include(x => x.Role)
 				.Select(x => new AccountViewModel
 				{
@@ -64,7 +65,7 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 
 		public List<AccountViewModel> GetAccounts()
 		{
-			return _context.Accounts.Select(x => new AccountViewModel
+			return _context.Accounts.AsNoTracking().Select(x => new AccountViewModel
 			{
 				Id = x.Id,
 				FullName = x.FullName
@@ -74,6 +75,7 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 		public AccountViewModel GetDetails(long id)
 		{
 			return _context.Accounts
+				.AsNoTracking()
 				.Select(x => new AccountViewModel()
 				{
 					UserName = x.UserName,
@@ -88,7 +90,7 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 
 		public AccountViewModel GetAddressBy(long id)
 		{
-			return _context.Accounts.Select(x => new AccountViewModel
+			return _context.Accounts.AsNoTracking().Select(x => new AccountViewModel
 			{
 				Id = x.Id,
 				Address = x.Address,

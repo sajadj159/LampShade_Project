@@ -409,3 +409,13 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,ncrunch
+### AI assistant local files ###
+.agents/
+.codex/
+.mimocode/
+.claude/
+.cursor/
+.continue/
+.windsurf/
+.aider*
+*.aider.chat.history.md

@@ -2,6 +2,7 @@
 using System.Linq;
 using _0_Framework.Repository;
 using AccountManagement.Domain.RoleAgg;
+using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infrastructure.EFCore.Repository
 {
@@ -15,12 +16,12 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 
 		public List<Role> GetRolls()
 		{
-			return _context.Roles.ToList();
+			return _context.Roles.AsNoTracking().ToList();
 		}
 
 		public Role GetDetails(long id)
 		{
-			return _context.Roles.Single(a => a.Id == id);
+			return _context.Roles.AsNoTracking().Single(a => a.Id == id);
 		}
 
 	}

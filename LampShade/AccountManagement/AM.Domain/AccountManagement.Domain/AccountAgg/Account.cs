@@ -24,10 +24,7 @@ namespace AccountManagement.Domain.AccountAgg
             FullName = fullName;
             Password = password;
             Mobile = mobile;
-            if (RoleId == 0)
-            {
-                RoleId = 2;
-            }
+            RoleId = roleId == 0 ? 2 : roleId;
             ProfilePhoto = profilePhoto;
         }
 

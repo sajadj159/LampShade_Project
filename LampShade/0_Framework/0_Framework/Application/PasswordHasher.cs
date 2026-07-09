@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Options;
 
@@ -19,15 +18,19 @@ namespace _0_Framework.Application
 
         public string Hash(string password)
         {
-            using var algorithm = new Rfc2898DeriveBytes(password, SaltSize, Options.Iterations, HashAlgorithmName.SHA256);
-            var key = Convert.ToBase64String(algorithm.GetBytes(KeySize));
-            var salt = Convert.ToBase64String(algorithm.Salt);
+            var salt = RandomNumberGenerator.GetBytes(SaltSize);
+            var key = Rfc2898DeriveBytes.Pbkdf2(password, salt, Options.Iterations, HashAlgorithmName.SHA256, KeySize);
 
-            return $"{Options.Iterations}.{salt}.{key}";
+            return $"{Options.Iterations}.{Convert.ToBase64String(salt)}.{Convert.ToBase64String(key)}";
         }
 
         public (bool Verified, bool NeedsUpgrade) Check(string hash, string password)
         {
+            if (string.IsNullOrWhiteSpace(hash))
+            {
+                return (false, false);
+            }
+
             var parts = hash.Split('.', 3);
 
             if (parts.Length != 3)
@@ -35,16 +38,34 @@ namespace _0_Framework.Application
                 return (false, false);
             }
 
-            var iterations = Convert.ToInt32(parts[0]);
-            var salt = Convert.FromBase64String(parts[1]);
-            var key = Convert.FromBase64String(parts[2]);
+            if (!int.TryParse(parts[0], out var iterations) || iterations <= 0)
+            {
+                return (false, false);
+            }
+
+            byte[] salt;
+            byte[] key;
+
+            try
+            {
+                salt = Convert.FromBase64String(parts[1]);
+                key = Convert.FromBase64String(parts[2]);
+            }
+            catch (FormatException)
+            {
+                return (false, false);
+            }
 
             var needsUpgrade = iterations != Options.Iterations;
 
-            using var algorithm = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
-            var keyToCheck = algorithm.GetBytes(KeySize);
+            var keyToCheck = Rfc2898DeriveBytes.Pbkdf2(
+                password,
+                salt,
+                iterations,
+                HashAlgorithmName.SHA256,
+                KeySize);
 
-            var verified = keyToCheck.SequenceEqual(key);
+            var verified = CryptographicOperations.FixedTimeEquals(keyToCheck, key);
 
             return (verified, needsUpgrade);
         }
