@@ -14,6 +14,7 @@ namespace InventoryManagement.Domain.InventoryAgg
 
         protected Inventory()
         {
+            InventoryOperations = new List<InventoryOperation>();
         }
 
         public Inventory(long productId, double unitPrice)
@@ -21,6 +22,7 @@ namespace InventoryManagement.Domain.InventoryAgg
             ProductId = productId;
             UnitPrice = unitPrice;
             InStock = false;
+            InventoryOperations = new List<InventoryOperation>();
         }
 
         public void Edit(long productId, double unitPrice)

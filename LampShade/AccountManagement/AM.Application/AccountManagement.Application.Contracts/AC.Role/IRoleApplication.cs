@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using _0_Framework.Application;
+using AccountManagement.Domain.RoleAgg.Contracts;
 
 namespace AccountManagement.Application.Contracts.AC.Role
 {
@@ -7,7 +8,7 @@ namespace AccountManagement.Application.Contracts.AC.Role
     {
         OperationResult Create(CreateRole command);
         OperationResult Edit(EditRole command);
-        List<RoleViewModel> GetRolls();
-        EditRole GetDetails(long id);
+        List<RoleDto> GetRolls();
+        RoleDto GetDetails(long id);
     }
 }

@@ -3,10 +3,12 @@ using LampShade.Api.Features.Comments.Commands.CancelComment;
 using LampShade.Api.Features.Comments.Commands.ConfirmComment;
 using LampShade.Api.Features.Comments.Queries.SearchComments;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
 
+[Authorize]
 [ApiController]
 [Route("api/write/[controller]")]
 public class CommentController : ControllerBase

@@ -24,7 +24,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
 
         public List<ArticleViewModel> Search(ArticleSearchModel searchModel)
         {
-            var queryable = _context.Articles.Select(x => new ArticleViewModel
+            var queryable = _context.Articles.AsNoTracking().Select(x => new ArticleViewModel
             {
                 Id = x.Id,
                 CreatedDate = x.CreationDate.ToFarsi(),
@@ -50,7 +50,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
 
         public EditArticle GetDetails(long id)
         {
-            return _context.Articles.Select(x => new EditArticle
+            return _context.Articles.AsNoTracking().Select(x => new EditArticle
             {
                 Title = x.Title,
                 ShortDescription = x.ShortDescription,

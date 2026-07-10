@@ -42,7 +42,6 @@ namespace ShopManagement.Domain.ProductCategoryAgg
             {
                 PictureUrl = pictureUrl;
             }
-            PictureUrl = pictureUrl;
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
             Keywords = keywords;

@@ -18,12 +18,12 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
 
         public string GetSlugBy(long id)
         {
-            return _context.ArticleCategories.Select(x => new {x.Id, x.Slug}).FirstOrDefault(x => x.Id == id)?.Slug;
+            return _context.ArticleCategories.AsNoTracking().Select(x => new {x.Id, x.Slug}).FirstOrDefault(x => x.Id == id)?.Slug;
         }
 
         public List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel searchModel)
         {
-            var queryable = _context.ArticleCategories.Select(x => new ArticleCategoryViewModel
+            var queryable = _context.ArticleCategories.AsNoTracking().Select(x => new ArticleCategoryViewModel
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -43,7 +43,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
 
         public List<ArticleCategoryViewModel> GetArticleCategories()
         {
-            return _context.ArticleCategories.Include(x=>x.Articles).Select(x => new ArticleCategoryViewModel
+            return _context.ArticleCategories.AsNoTracking().Include(x=>x.Articles).Select(x => new ArticleCategoryViewModel
             {
                 Id = x.Id,
                 Name = x.Name
@@ -52,7 +52,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
 
         public EditArticleCategory GetDetails(long id)
         {
-            return _context.ArticleCategories.Select(x => new EditArticleCategory
+            return _context.ArticleCategories.AsNoTracking().Select(x => new EditArticleCategory
             {
                 Id = x.Id,
                 Description = x.Description,

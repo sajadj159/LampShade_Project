@@ -19,6 +19,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
             var queryable = _context.Products
+                .AsNoTracking()
                 .Include(x => x.Category)
                 .Select(x => new ProductViewModel()
                 {

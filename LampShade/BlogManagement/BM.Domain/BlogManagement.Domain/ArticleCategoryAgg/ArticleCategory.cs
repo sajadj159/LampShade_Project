@@ -28,7 +28,7 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
             Name = name;
             PictureUrl = pictureUrl;
             PictureAlt = pictureAlt;
-            PictureUrl = pictureUrl;
+            PictureTitle = pictureTitle;
             Description = description;
             ShowOrder = showOrder;
             Slug = slug;

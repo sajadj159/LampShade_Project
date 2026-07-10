@@ -1,13 +1,17 @@
 using LampShade.Api.Features.ProductCategories.Commands.CreateProductCategory;
 using LampShade.Api.Features.ProductCategories.Commands.EditProductCategory;
+using LampShade.Api.Features.ProductCategories.Commands.DeleteProductCategory;
 using LampShade.Api.Features.ProductCategories.Queries.GetProductCategories;
 using LampShade.Api.Features.ProductCategories.Queries.GetProductCategoryById;
 using LampShade.Api.Features.ProductCategories.Queries.SearchProductCategories;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using _0_Framework.Repository;
 
 namespace LampShade.Api.Controllers.Write;
 
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ProductCategoryController : ControllerBase
@@ -20,6 +24,9 @@ public class ProductCategoryController : ControllerBase
 
     [HttpPut]
     public async Task<IActionResult> Edit([FromForm] EditProductCategoryCommand command) => Ok(await _mediator.Send(command));
+
+    [HttpDelete("{id:long}")]
+    public async Task<IActionResult> Delete(long id) => Ok(await _mediator.Send(new DeleteProductCategoryCommand { Id = id }));
 
     [HttpGet("search")]
     public async Task<IActionResult> Search([FromQuery] SearchProductCategoriesQuery query) => Ok(await _mediator.Send(query));

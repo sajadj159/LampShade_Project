@@ -4,6 +4,7 @@ using _0_Framework.Application;
 using _0_Framework.Repository;
 using CommentManagement.Application.Contract.A.Comment;
 using CommentManagement.Domain.CommentAgg;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommentManagement.Infrastructure.EFCore.Repository
 {
@@ -18,6 +19,7 @@ namespace CommentManagement.Infrastructure.EFCore.Repository
         public List<CommentViewModel> Search(CommentSearchModel searchModel)
         {
             var queryable = _context.Comments
+                .AsNoTracking()
                 .Select(x => new CommentViewModel
                 {
                     Id = x.Id,

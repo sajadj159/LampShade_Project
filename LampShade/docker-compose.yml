@@ -1,19 +1,23 @@
-version: '3.8'
-
 services:
-  app:
+  lampshade.api:
+    image: ${DOCKER_REGISTRY-}lampshadeapi
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: lampshade-api
+      dockerfile: LampShade.Api/Dockerfile
     ports:
-      - "5000:8080"
+      - "5002:8080"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__LampShadeDb=Host=postgres;Database=LampShadeDb;Username=lampshade_user;Password=LampShade@1234
+      - ObjectStorage__ServiceUrl=http://seaweedfs:8333
+      - ObjectStorage__BucketName=lampshade-images
+      - ObjectStorage__AccessKey=${OBJECT_STORAGE_ACCESS_KEY:-lampshade-dev-access}
+      - ObjectStorage__SecretKey=${OBJECT_STORAGE_SECRET_KEY:-lampshade-dev-secret}
     depends_on:
       postgres:
         condition: service_healthy
+      seaweedfs:
+        condition: service_started
     restart: unless-stopped
 
   postgres:
@@ -35,5 +39,21 @@ services:
       start_period: 10s
     restart: unless-stopped
 
+  seaweedfs:
+    image: chrislusf/seaweedfs:latest
+    container_name: lampshade-seaweedfs
+    command: mini -dir=/data
+    environment:
+      - AWS_ACCESS_KEY_ID=${OBJECT_STORAGE_ACCESS_KEY:-lampshade-dev-access}
+      - AWS_SECRET_ACCESS_KEY=${OBJECT_STORAGE_SECRET_KEY:-lampshade-dev-secret}
+      - S3_BUCKET=lampshade-images
+    ports:
+      - "8333:8333"
+      - "9333:9333"
+    volumes:
+      - seaweedfs-data:/data
+    restart: unless-stopped
+
 volumes:
   postgres-data:
+  seaweedfs-data:

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using _0_Framework.Application;
-using AccountManagement.Application.Contracts.AC.Role;
+using AccountManagement.Domain.RoleAgg.Contracts;
 using Microsoft.AspNetCore.Http;
 
 namespace AccountManagement.Application.Contracts.AC.Account
@@ -30,6 +29,6 @@ namespace AccountManagement.Application.Contracts.AC.Account
         public long RoleId { get; set; }
 
         public IFormFile ProfilePhoto { get; set; }
-        public List<RoleViewModel> Roles { get; set; }
+        public List<RoleDto> Roles { get; set; }
     }
 }

@@ -3,10 +3,12 @@ using LampShade.Api.Features.Articles.Commands.EditArticle;
 using LampShade.Api.Features.Articles.Queries.GetArticleById;
 using LampShade.Api.Features.Articles.Queries.SearchArticles;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
 
+[Authorize]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ArticleController : ControllerBase

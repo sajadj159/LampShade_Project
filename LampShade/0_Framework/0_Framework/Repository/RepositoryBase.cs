@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -31,6 +31,11 @@ namespace _0_Framework.Repository
         {
             _context.Add(entity);
         }
+        public void Remove(T entity)
+        {
+            _context.Remove(entity);
+        }
+
         public bool Exist(Expression<Func<T, bool>> expression)
         {
             return _context.Set<T>().Any(expression);

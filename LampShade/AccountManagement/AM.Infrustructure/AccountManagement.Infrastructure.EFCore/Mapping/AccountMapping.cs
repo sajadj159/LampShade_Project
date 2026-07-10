@@ -19,7 +19,7 @@ namespace AccountManagement.Infrastructure.EFCore.Mapping
             builder.Property(x => x.Address).HasMaxLength(10000);
             builder.Property(x => x.PostalCode).HasMaxLength(12);
 
-            builder.HasOne(x => x.Role).WithMany(x => x.Accounts).HasForeignKey(x => x.RoleId);
+            builder.HasOne(x => x.Role).WithMany().HasForeignKey(x => x.RoleId);
         }
     }
 }

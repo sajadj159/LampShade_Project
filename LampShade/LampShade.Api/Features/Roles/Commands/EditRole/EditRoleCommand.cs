@@ -1,6 +1,7 @@
-using AccountManagement.Application.Contracts.AC.Role;
-using MediatR;
 using _0_Framework.Application;
+using AccountManagement.Application.Contracts.AC.Role;
+using AccountManagement.Domain.RoleAgg.Contracts;
+using MediatR;
 
 namespace LampShade.Api.Features.Roles.Commands.EditRole;
 
@@ -8,7 +9,7 @@ public class EditRoleCommand : IRequest<OperationResult>
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;
-    public List<int> Permissions { get; set; } = new();
+    public List<CreatePermissionDto> Permissions { get; set; } = new();
 }
 
 public class EditRoleCommandHandler : IRequestHandler<EditRoleCommand, OperationResult>
