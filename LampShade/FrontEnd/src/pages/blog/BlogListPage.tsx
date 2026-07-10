@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Card, Typography, Spin, Empty, Tag } from 'antd';
 import { CalendarOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { articleApi } from '../../services/api';
+import { articleApi, mediaUrl } from '../../services/api';
 import type { Article } from '../../types';
 
 const { Title, Paragraph, Text } = Typography;
@@ -46,7 +46,7 @@ const BlogListPage: React.FC = () => {
                 cover={
                   <img
                     alt={article.title}
-                    src={`http://localhost:5002/Pictures/${article.picture}`}
+                    src={mediaUrl(article.picture)}
                     style={{ height: 200, objectFit: 'cover' }}
                   />
                 }

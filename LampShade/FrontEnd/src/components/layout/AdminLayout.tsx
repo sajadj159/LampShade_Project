@@ -14,6 +14,7 @@ import {
   MenuUnfoldOutlined,
   CommentOutlined,
   TagsOutlined,
+  AppstoreOutlined,
 } from '@ant-design/icons';
 import { useAuth } from '../../contexts/AuthContext';
 import type { MenuProps } from 'antd';
@@ -43,6 +44,11 @@ const AdminLayout: React.FC = () => {
       key: '/admin/products',
       icon: <ShoppingOutlined />,
       label: 'Products',
+    },
+    {
+      key: '/admin/categories',
+      icon: <AppstoreOutlined />,
+      label: 'Categories',
     },
     {
       key: '/admin/discounts',

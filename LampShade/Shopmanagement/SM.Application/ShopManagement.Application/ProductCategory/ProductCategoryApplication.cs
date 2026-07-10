@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using _0_Framework.Application;
 using ShopManagement.Application.Contract.ProductCategory;
 using ShopManagement.Domain.ProductCategoryAgg;
@@ -51,6 +51,20 @@ namespace ShopManagement.Application.ProductCategory
             return operationResult.Succeeded();
         }
 
+        public OperationResult Delete(long id)
+        {
+            var operationResult = new OperationResult();
+            var productCategory = _productCategoryRepository.Get(id);
+            if (productCategory == null)
+                return operationResult.Failed(ApplicationMessages.RecordNotFound);
+
+            if (_productCategoryRepository.HasProducts(id))
+                return operationResult.Failed("A category with products cannot be deleted.");
+
+            _productCategoryRepository.Remove(productCategory);
+            _productCategoryRepository.Save();
+            return operationResult.Succeeded();
+        }
         public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel)
         {
             return _productCategoryRepository.Search(searchModel);

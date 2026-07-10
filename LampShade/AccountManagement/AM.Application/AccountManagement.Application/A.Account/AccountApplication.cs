@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using AccountManagement.Application.Contracts.AC.Account;
@@ -94,12 +94,15 @@ namespace AccountManagement.Application.A.Account
             if (!result.Verified)
                 return operationResult.Failed(ApplicationMessages.WrongUserPass);
 
-            var permissions = _roleRepository.Get(account.RoleId)
-                .Permissions
+            var role = _roleRepository.Get(account.RoleId);
+            var permissions = role.Permissions
                 .Select(x => x.Code)
                 .ToList();
            
-            var authViewModel = new AuthViewModel(account.Id,account.UserName,account.FullName,account.Mobile,account.RoleId,permissions);
+            var authViewModel = new AuthViewModel(account.Id, account.UserName, account.FullName, account.Mobile, account.RoleId, permissions)
+            {
+                Role = role.Name
+            };
 
             _authHelper.Signin(authViewModel);
             return operationResult.Succeeded();

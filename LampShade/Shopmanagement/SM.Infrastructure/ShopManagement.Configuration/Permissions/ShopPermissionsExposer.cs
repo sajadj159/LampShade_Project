@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using _0_Framework.Repository;
 
 namespace ShopManagement.Configuration.Permissions
@@ -25,7 +25,8 @@ namespace ShopManagement.Configuration.Permissions
                          new PermissionDto(ShopPermissions.ListProductCategories,"ListProductCategories"),
                          new PermissionDto(ShopPermissions.SearchProductCategories,"SearchProductCategories"),
                          new PermissionDto(ShopPermissions.CreateProductCategory,"CreateProductCategory"),
-                         new PermissionDto(ShopPermissions.EditProductCategory,"EditProductCategory")
+                         new PermissionDto(ShopPermissions.EditProductCategory,"EditProductCategory"),
+                         new PermissionDto(ShopPermissions.DeleteProductCategory,"DeleteProductCategory")
                  }
                 }
             };

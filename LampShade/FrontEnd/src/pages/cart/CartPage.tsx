@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Table, Button, Typography, InputNumber, Space, Empty, Card, Row, Col, message, Popconfirm } from 'antd';
 import { DeleteOutlined, ShoppingCartOutlined, HomeOutlined } from '@ant-design/icons';
-import { cartApi } from '../../services/api';
+import { cartApi, mediaUrl } from '../../services/api';
 import type { CartItem, Cart } from '../../types';
 
 const { Title, Text } = Typography;
@@ -64,7 +64,7 @@ const CartPage: React.FC = () => {
       render: (_: any, record: CartItem) => (
         <Space>
           <img
-            src={`http://localhost:5002/ProductPictures/${record.pictureUrl}`}
+            src={mediaUrl(record.pictureUrl)}
             alt={record.name}
             style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: 4 }}
           />

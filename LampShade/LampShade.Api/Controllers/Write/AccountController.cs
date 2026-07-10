@@ -31,11 +31,11 @@ public class AccountController : ControllerBase
         => Ok(await _mediator.Send(command));
 
     [HttpPost("change-password")]
-    public async Task<IActionResult> ChangePassword(ChangePasswordCommand command)
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand command)
         => Ok(await _mediator.Send(command));
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginCommand command)
+    public async Task<IActionResult> Login([FromBody] LoginCommand command)
         => Ok(await _mediator.Send(command));
 
     [HttpPost("logout")]
@@ -44,7 +44,7 @@ public class AccountController : ControllerBase
 
     [Authorize]
     [HttpPost("address")]
-    public async Task<IActionResult> MakeAddress(MakeAddressCommand command)
+    public async Task<IActionResult> MakeAddress([FromBody] MakeAddressCommand command)
         => Ok(await _mediator.Send(command));
 
     [Authorize]

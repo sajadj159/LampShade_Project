@@ -1,4 +1,4 @@
-﻿namespace ShopManagement.Configuration.Permissions
+namespace ShopManagement.Configuration.Permissions
 {
     public static class ShopPermissions
     {
@@ -13,6 +13,7 @@
         public const int SearchProductCategories = 21;
         public const int CreateProductCategory = 22;
         public const int EditProductCategory = 23;
+        public const int DeleteProductCategory = 24;
 
     }
 }

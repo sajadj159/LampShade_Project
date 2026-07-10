@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Space, Modal, Form, Input, Upload, Tag, message, Typography, Image } from 'antd';
 import { EditOutlined, PlusOutlined, DeleteOutlined, UndoOutlined, UploadOutlined } from '@ant-design/icons';
-import { slideApi } from '../../services/api';
+import { slideApi, mediaUrl } from '../../services/api';
 import type { Slide } from '../../types';
 
 const { Title } = Typography;
@@ -89,7 +89,7 @@ const SlidesPage: React.FC = () => {
     { title: 'ID', dataIndex: 'id', key: 'id', width: 60 },
     {
       title: 'Picture', dataIndex: 'pictureUrl', key: 'pictureUrl', width: 80,
-      render: (url: string) => url ? <Image src={`http://localhost:5002/Pictures/${url}`} width={50} height={50} style={{ objectFit: 'cover' }} /> : null,
+      render: (url: string) => url ? <Image src={mediaUrl(url)} width={50} height={50} style={{ objectFit: 'cover' }} /> : null,
     },
     { title: 'Heading', dataIndex: 'heading', key: 'heading' },
     { title: 'Title', dataIndex: 'title', key: 'title' },

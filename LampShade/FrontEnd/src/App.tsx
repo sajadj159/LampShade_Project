@@ -28,6 +28,7 @@ import BlogDetailPage from './pages/blog/BlogDetailPage';
 import DashboardPage from './pages/admin/DashboardPage';
 import UsersPage from './pages/admin/UsersPage';
 import ProductsPage from './pages/admin/ProductsPage';
+import AdminCategoriesPage from './pages/admin/CategoriesPage';
 import DiscountsPage from './pages/admin/DiscountsPage';
 import SlidesPage from './pages/admin/SlidesPage';
 import RolesPage from './pages/admin/RolesPage';
@@ -81,6 +82,7 @@ const App: React.FC = () => {
               <Route index element={<DashboardPage />} />
               <Route path="users" element={<UsersPage />} />
               <Route path="products" element={<ProductsPage />} />
+              <Route path="categories" element={<AdminCategoriesPage />} />
               <Route path="discounts" element={<DiscountsPage />} />
               <Route path="slides" element={<SlidesPage />} />
               <Route path="roles" element={<RolesPage />} />

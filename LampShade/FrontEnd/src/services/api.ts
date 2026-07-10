@@ -26,6 +26,15 @@ import type {
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5002';
 
+export const mediaUrl = (key: string): string => {
+  if (!key || key.startsWith('http://') || key.startsWith('https://')) {
+    return key;
+  }
+
+  const encodedKey = key.split('/').map(encodeURIComponent).join('/');
+  return `${API_BASE_URL}/api/media/${encodedKey}`;
+};
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -37,16 +46,6 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => config,
   (error) => Promise.reject(error)
-);
-
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  }
 );
 
 // ==========================================
@@ -178,6 +177,9 @@ export const categoryApi = {
     api.put('/api/write/ProductCategory', data, {
       headers: { 'Content-Type': 'multipart/form-data' },
     }).then((res) => res.data),
+
+  remove: (id: number): Promise<OperationResult> =>
+    api.delete(`/api/write/ProductCategory/${id}`).then((res) => res.data),
 };
 
 // ==========================================

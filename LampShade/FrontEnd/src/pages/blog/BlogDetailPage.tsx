@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Typography, Tag, Spin, Empty, Breadcrumb, Space, Divider } from 'antd';
 import { CalendarOutlined, HomeOutlined, ReadOutlined } from '@ant-design/icons';
-import { articleApi } from '../../services/api';
+import { articleApi, mediaUrl } from '../../services/api';
 import type { Article } from '../../types';
 
 const { Title, Text } = Typography;
@@ -54,7 +54,7 @@ const BlogDetailPage: React.FC = () => {
       </Space>
 
       <img
-        src={`http://localhost:5002/Pictures/${article.picture}`}
+        src={mediaUrl(article.picture)}
         alt={article.title}
         style={{ width: '100%', maxHeight: 400, objectFit: 'cover', borderRadius: 8, marginBottom: 24 }}
       />

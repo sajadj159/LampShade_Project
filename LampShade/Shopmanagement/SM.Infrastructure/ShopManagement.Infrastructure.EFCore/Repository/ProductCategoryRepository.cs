@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -44,6 +44,11 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         public string GetSlugBy(long id)
         {
             return _context.ProductCategories.Select(x=>new {x.Id,x.Slug}).FirstOrDefault(x=>x.Id==id)?.Slug;
+        }
+
+        public bool HasProducts(long id)
+        {
+            return _context.Products.Any(x => x.CategoryId == id);
         }
 
         public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel)

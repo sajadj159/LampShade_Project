@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Typography, Carousel, Card, Button, Spin, Empty } from 'antd';
 import { RightOutlined, TruckOutlined, SafetyOutlined, CustomerServiceOutlined } from '@ant-design/icons';
 import ProductCard from '../../components/common/ProductCard';
-import { productApi, categoryApi, slideApi } from '../../services/api';
+import { productApi, categoryApi, slideApi, mediaUrl } from '../../services/api';
 import type { Product, ProductCategory, Slide } from '../../types';
 
 const { Title, Text, Paragraph } = Typography;
@@ -131,7 +131,7 @@ const HomePage: React.FC = () => {
                       cover={
                         <img
                           alt={category.name}
-                          src={`http://localhost:5002/ProductPictures/${category.picture}`}
+                          src={mediaUrl(category.picture)}
                           style={{ height: 160, objectFit: 'cover' }}
                         />
                       }

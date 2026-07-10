@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form, Input, Select, Upload, message, Typography, Image } from 'antd';
 import { EditOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { articleApi, articleCategoryApi } from '../../services/api';
+import { articleApi, articleCategoryApi, mediaUrl } from '../../services/api';
 import type { ArticleViewModel, ArticleCategory } from '../../types';
 
 const { Title } = Typography;
@@ -84,7 +84,7 @@ const BlogPage: React.FC = () => {
     { title: 'ID', dataIndex: 'id', key: 'id', width: 60 },
     {
       title: 'Picture', dataIndex: 'pictureUrl', key: 'pictureUrl', width: 80,
-      render: (url: string) => url ? <Image src={`http://localhost:5002/Pictures/${url}`} width={50} height={50} style={{ objectFit: 'cover' }} /> : null,
+      render: (url: string) => url ? <Image src={mediaUrl(url)} width={50} height={50} style={{ objectFit: 'cover' }} /> : null,
     },
     { title: 'Title', dataIndex: 'title', key: 'title' },
     { title: 'Category', dataIndex: 'category', key: 'category' },

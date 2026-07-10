@@ -19,7 +19,7 @@ import {
   Space,
 } from 'antd';
 import { ShoppingCartOutlined, HomeOutlined, RightOutlined } from '@ant-design/icons';
-import { productApi, commentApi } from '../../services/api';
+import { productApi, commentApi, mediaUrl } from '../../services/api';
 import type { Product } from '../../types';
 
 const { Title, Text, Paragraph } = Typography;
@@ -116,7 +116,7 @@ const ProductDetailPage: React.FC = () => {
         {/* Product Images */}
         <Col xs={24} md={12}>
           <Image
-            src={`http://localhost:5002/ProductPictures/${product.pictureUrl}`}
+            src={mediaUrl(product.pictureUrl)}
             alt={product.pictureAlt}
             style={{ width: '100%', maxHeight: 400, objectFit: 'contain' }}
             fallback="https://via.placeholder.com/400"
@@ -126,7 +126,7 @@ const ProductDetailPage: React.FC = () => {
               {product.pictures.map((pic) => (
                 <Col span={6} key={pic.id}>
                   <Image
-                    src={`http://localhost:5002/ProductPictures/${pic.pictureUrl}`}
+                    src={mediaUrl(pic.pictureUrl)}
                     alt={pic.pictureAlt}
                     style={{ width: '100%', height: 80, objectFit: 'cover' }}
                     fallback="https://via.placeholder.com/80"

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
@@ -9,6 +9,7 @@ namespace _0_Framework.Domain
         T Get(TKey id);
         List<T> Get();
         void Create(T entity);
+        void Remove(T entity);
         bool Exist(Expression<Func<T, bool>> expression);
         void Save();
     }

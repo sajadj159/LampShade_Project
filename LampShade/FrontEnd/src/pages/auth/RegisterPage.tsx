@@ -14,13 +14,13 @@ const RegisterPage: React.FC = () => {
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.append('userName', values.mobile);
-      formData.append('fullName', values.fullName);
-      formData.append('password', values.password);
-      formData.append('mobile', values.mobile);
-      formData.append('address', values.address || '');
-      formData.append('postalCode', values.postalCode || '');
-      formData.append('roleId', '2');
+      formData.append('UserName', values.userName.trim());
+      formData.append('FullName', values.fullName.trim());
+      formData.append('Password', values.password);
+      formData.append('Mobile', values.mobile.trim());
+      formData.append('Address', values.address.trim());
+      formData.append('PostalCode', values.postalCode.trim());
+      formData.append('RoleId', '2');
 
       if (values.profilePhoto?.[0]?.originFileObj) {
         formData.append('profilePhoto', values.profilePhoto[0].originFileObj);
@@ -49,14 +49,21 @@ const RegisterPage: React.FC = () => {
         </div>
 
         <Form name="register" onFinish={onFinish} layout="vertical">
+          <Form.Item
+            name="userName"
+            label="Username"
+            rules={[{ required: true, whitespace: true, message: 'Please enter a username' }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="Username" size="large" />
+          </Form.Item>
           <Form.Item name="mobile" label="Phone Number" rules={[
-            { required: true, message: 'Please enter your phone number' },
+            { required: true, whitespace: true, message: 'Please enter your phone number' },
             { pattern: /^09\d{9}$/, message: 'Please enter a valid Iranian phone number (09XXXXXXXXX)' },
           ]}>
             <Input prefix={<PhoneOutlined />} placeholder="e.g. 09121234567" size="large" />
           </Form.Item>
 
-          <Form.Item name="fullName" label="Full Name" rules={[{ required: true, message: 'Please enter your full name' }]}>
+          <Form.Item name="fullName" label="Full Name" rules={[{ required: true, whitespace: true, message: 'Please enter your full name' }]}>
             <Input prefix={<UserOutlined />} placeholder="Full Name" size="large" />
           </Form.Item>
 
@@ -67,12 +74,12 @@ const RegisterPage: React.FC = () => {
             <Input.Password prefix={<LockOutlined />} placeholder="Password" size="large" />
           </Form.Item>
 
-          <Form.Item name="address" label="Address">
-            <Input prefix={<HomeOutlined />} placeholder="Address (optional)" size="large" />
+          <Form.Item name="address" label="Address" rules={[{ required: true, whitespace: true, message: 'Please enter your address' }]}>
+            <Input prefix={<HomeOutlined />} placeholder="Address" size="large" />
           </Form.Item>
 
-          <Form.Item name="postalCode" label="Postal Code">
-            <Input placeholder="Postal Code (optional)" size="large" />
+          <Form.Item name="postalCode" label="Postal Code" rules={[{ required: true, whitespace: true, message: 'Please enter your postal code' }]}>
+            <Input placeholder="Postal Code" size="large" />
           </Form.Item>
 
           <Form.Item name="profilePhoto" label="Profile Photo" valuePropName="fileList">

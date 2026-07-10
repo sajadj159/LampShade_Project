@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Input, Select, Space, Modal, Form, Upload, message, Typography, Card, Image } from 'antd';
 import { SearchOutlined, EditOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { productApi, categoryApi } from '../../services/api';
+import { productApi, categoryApi, mediaUrl } from '../../services/api';
 import type { ProductViewModel, ProductCategoryViewModel } from '../../types';
 
 const { Title } = Typography;
@@ -99,7 +99,7 @@ const ProductsPage: React.FC = () => {
     { title: 'ID', dataIndex: 'id', key: 'id', width: 60 },
     {
       title: 'Picture', dataIndex: 'pictureUrl', key: 'pictureUrl', width: 80,
-      render: (url: string) => url ? <Image src={`http://localhost:5002/ProductPictures/${url}`} width={50} height={50} style={{ objectFit: 'cover' }} /> : null,
+      render: (url: string) => url ? <Image src={mediaUrl(url)} width={50} height={50} style={{ objectFit: 'cover' }} /> : null,
     },
     { title: 'Name', dataIndex: 'name', key: 'name' },
     { title: 'Code', dataIndex: 'code', key: 'code' },

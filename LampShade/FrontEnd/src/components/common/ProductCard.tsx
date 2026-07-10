@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Tag, Typography } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
+import { mediaUrl } from '../../services/api';
 import type { Product } from '../../types';
 
 const { Meta } = Card;
@@ -20,7 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <div style={{ overflow: 'hidden', height: 200 }}>
             <img
               alt={product.pictureAlt}
-              src={`http://localhost:5002/ProductPictures/${product.pictureUrl}`}
+              src={mediaUrl(product.pictureUrl)}
               style={{
                 width: '100%',
                 height: 200,

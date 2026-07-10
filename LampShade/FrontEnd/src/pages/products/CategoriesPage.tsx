@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Typography, Card, Spin, Empty, Breadcrumb } from 'antd';
 import { HomeOutlined, AppstoreOutlined } from '@ant-design/icons';
-import { categoryApi } from '../../services/api';
+import { categoryApi, mediaUrl } from '../../services/api';
 import type { ProductCategory } from '../../types';
 
 const { Title, Text } = Typography;
@@ -63,7 +63,7 @@ const CategoriesPage: React.FC = () => {
                   cover={
                     <img
                       alt={category.name}
-                      src={`http://localhost:5002/ProductPictures/${category.picture}`}
+                      src={mediaUrl(category.picture)}
                       style={{ height: 200, objectFit: 'cover' }}
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://via.placeholder.com/300x200';
