@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, theme } from 'antd';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
@@ -7,13 +7,14 @@ import Footer from './Footer';
 const { Content } = Layout;
 
 const MainLayout: React.FC = () => {
+  const { token } = theme.useToken();
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Header />
       <Content
         style={{
           padding: 0,
-          background: '#f5f5f5',
+          background: token.colorBgLayout,
           minHeight: 'calc(100vh - 64px - 200px)',
         }}
       >

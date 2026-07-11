@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using _0_Framework.Application;
 using CommentManagement.Application.Contract.A.Comment;
 using CommentManagement.Domain.CommentAgg;
@@ -17,7 +17,7 @@ namespace CommentManagement.Application.Comment
         public OperationResult Add(AddComment command)
         {
             var operationResult = new OperationResult();
-            var comment = new Domain.CommentAgg.Comment(command.Name,command.Email,command.Website,command.Description,command.OwnerRecordId,command.Type,command.ParentId);
+            var comment = new Domain.CommentAgg.Comment(command.Name,command.Email,command.Website,command.Description,command.Rating,command.OwnerRecordId,command.Type,command.ParentId);
             _commentRepository.Create(comment);
             _commentRepository.Save();          
             return operationResult.Succeeded();

@@ -34,7 +34,7 @@ namespace AccountManagement.Application.A.Account
             var passwordHash = _passwordHasher.Hash(command.Password);
             var path = $"profilePhotos";
             var profilePath = _uploader.Upload(command.ProfilePhoto, path);
-            var account = new Domain.AccountAgg.Account(command.UserName, command.FullName, passwordHash, command.Mobile, command.RoleId, profilePath);
+            var account = new Domain.AccountAgg.Account(command.UserName, command.FullName, passwordHash, command.Mobile, command.RoleId, profilePath, command.Address, command.PostalCode);
             _accountRepository.Create(account);
             _accountRepository.Save();
             return operationResult.Succeeded();
@@ -56,7 +56,7 @@ namespace AccountManagement.Application.A.Account
 
             var path = $"profilePhotos";
             var profilePath = _uploader.Upload(command.ProfilePhoto, path);
-            account.Edit(command.UserName, command.FullName, command.Mobile, command.RoleId, profilePath);
+            account.Edit(command.UserName, command.FullName, command.Mobile, command.RoleId, profilePath, command.Address, command.PostalCode);
             _accountRepository.Save();
             return operationResult.Succeeded();
         }
@@ -99,7 +99,7 @@ namespace AccountManagement.Application.A.Account
                 .Select(x => x.Code)
                 .ToList();
            
-            var authViewModel = new AuthViewModel(account.Id, account.UserName, account.FullName, account.Mobile, account.RoleId, permissions)
+            var authViewModel = new AuthViewModel(account.Id, account.UserName, account.FullName, account.Mobile, account.RoleId, permissions, account.ProfilePhoto)
             {
                 Role = role.Name
             };
@@ -148,12 +148,7 @@ namespace AccountManagement.Application.A.Account
 
         public AccountViewModel GetAccountBy(long id)
         {
-            var account = _accountRepository.Get(id);
-            return new AccountViewModel
-            {
-                FullName = account.FullName,
-                Mobile = account.Mobile,
-            };
+            return _accountRepository.GetDetails(id);
         }
 
         public void Logout()
@@ -162,3 +157,4 @@ namespace AccountManagement.Application.A.Account
         }
     }
 }
+

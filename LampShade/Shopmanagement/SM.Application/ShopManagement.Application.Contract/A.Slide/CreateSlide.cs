@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using _0_Framework.Application;
 using Microsoft.AspNetCore.Http;
 
@@ -6,6 +7,7 @@ namespace ShopManagement.Application.Contract.A.Slide
 {
     public class CreateSlide
     {
+        [JsonIgnore]
         public IFormFile PictureUrl { get; set; }
         [Required(ErrorMessage = ValidationMessages.IsRequired)]
         public string PictureTitle { get; set; }
@@ -29,3 +31,4 @@ namespace ShopManagement.Application.Contract.A.Slide
         public string BtnText { get;  set; }
     }
 }
+

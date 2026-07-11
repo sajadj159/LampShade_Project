@@ -82,9 +82,12 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 					FullName = x.FullName,
 					Mobile = x.Mobile,
 					RoleId = x.RoleId,
+					Role = x.Role.Name,
 					Id = x.Id,
 					Address = x.Address,
-					PostalCode = x.PostalCode
+					PostalCode = x.PostalCode,
+					ProfilePhoto = x.ProfilePhoto,
+					CreationDate = x.CreationDate.ToFarsi()
 				}).FirstOrDefault(x => x.Id == id);
 		}
 

@@ -1,4 +1,4 @@
-﻿using CommentManagement.Domain.CommentAgg;
+using CommentManagement.Domain.CommentAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,6 +16,8 @@ namespace CommentManagement.Infrastructure.EFCore.Mapping
             builder.Property(x => x.Email).HasMaxLength(500);
             builder.Property(x => x.Description).HasMaxLength(1000);
             builder.Property(x => x.Website).HasMaxLength(500);
+            builder.Property(x => x.Rating).HasDefaultValue(0);
+            builder.ToTable(x => x.HasCheckConstraint("CK_Comments_Rating", "\"Rating\" >= 0 AND \"Rating\" <= 5"));
         }
     }
 }

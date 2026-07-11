@@ -11,6 +11,7 @@ public class CreateProductCommand : IRequest<OperationResult>
     public string ShortDescription { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public IFormFile? PictureUrl { get; set; }
+    public List<IFormFile> AdditionalPictures { get; set; } = new();
     public string PictureTitle { get; set; } = string.Empty;
     public string PictureAlt { get; set; } = string.Empty;
     public string Slug { get; set; } = string.Empty;
@@ -37,6 +38,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
             ShortDescription = request.ShortDescription,
             Description = request.Description,
             PictureUrl = request.PictureUrl,
+            AdditionalPictures = request.AdditionalPictures,
             PictureTitle = request.PictureTitle,
             PictureAlt = request.PictureAlt,
             Slug = request.Slug,

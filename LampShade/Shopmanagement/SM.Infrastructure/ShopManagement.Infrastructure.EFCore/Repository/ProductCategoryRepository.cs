@@ -22,7 +22,9 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
             {
                 Id = x.Id,
                 Name = x.Name,
-            }).ToList();
+                PictureUrl = x.PictureUrl,
+                CreationDate = x.CreationDate.ToFarsi(),
+            }).OrderByDescending(x => x.Id).ToList();
         }
 
         public EditProductCategory GetDetails(long id)
@@ -33,6 +35,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 Name = x.Name,
                 Slug = x.Slug,
                 Keywords = x.Keywords,
+                SavedPictureUrl = x.PictureUrl,
                 PictureAlt = x.PictureAlt,
                 Description = x.Description,
                 PictureTitle = x.PictureTitle,
@@ -67,3 +70,4 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         }
     }
 }
+

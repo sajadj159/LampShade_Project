@@ -1,5 +1,6 @@
 using CommentManagement.Application.Contract.A.Comment;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 using _0_Framework.Application;
 
 namespace LampShade.Api.Features.Comments.Commands.AddComment;
@@ -10,6 +11,8 @@ public class AddCommentCommand : IRequest<OperationResult>
     public string Email { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string Website { get; set; } = string.Empty;
+    [Range(0, 5)]
+    public int Rating { get; set; }
     public long OwnerRecordId { get; set; }
     public int Type { get; set; }
     public long? ParentId { get; set; }
@@ -32,9 +35,10 @@ public class AddCommentCommandHandler : IRequestHandler<AddCommentCommand, Opera
             Email = request.Email,
             Description = request.Description,
             Website = request.Website,
+            Rating = request.Rating,
             OwnerRecordId = request.OwnerRecordId,
             Type = request.Type,
-            ParentId = request.ParentId ?? 0
+            ParentId = request.ParentId
         };
         return await Task.FromResult(_commentApplication.Add(command));
     }

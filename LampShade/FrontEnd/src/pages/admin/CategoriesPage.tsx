@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, Input, Modal, Popconfirm, Space, Table, Typography, Upload, message } from 'antd';
-import { DeleteOutlined, EditOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { categoryApi } from '../../services/api';
+import { Button, Form, Image, Input, Modal, Popconfirm, Space, Table, Typography, message } from 'antd';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { categoryApi, mediaUrl } from '../../services/api';
+import ImageUploadField from '../../components/common/ImageUploadField';
 import type { ProductCategoryViewModel } from '../../types';
 
 const { Title } = Typography;
@@ -13,6 +14,7 @@ const CategoriesPage: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<ProductCategoryViewModel | null>(null);
   const [form] = Form.useForm();
+  const [currentPicture, setCurrentPicture] = useState('');
 
   const fetchCategories = async () => {
     setLoading(true);
@@ -33,10 +35,12 @@ const CategoriesPage: React.FC = () => {
     setModalOpen(false);
     setEditingCategory(null);
     form.resetFields();
+    setCurrentPicture('');
   };
 
   const openCreate = () => {
     form.resetFields();
+    setCurrentPicture('');
     setEditingCategory(null);
     setModalOpen(true);
   };
@@ -45,7 +49,9 @@ const CategoriesPage: React.FC = () => {
     try {
       const details = await categoryApi.getDetails(category.id);
       setEditingCategory(category);
-      form.setFieldsValue(details);
+      const { pictureUrl, PictureUrl, picture, Picture, ...formFields } = details;
+      setCurrentPicture(pictureUrl || PictureUrl || picture || Picture || '');
+      form.setFieldsValue(formFields);
       setModalOpen(true);
     } catch {
       message.error('Failed to load category details');
@@ -106,6 +112,10 @@ const CategoriesPage: React.FC = () => {
 
   const columns = [
     { title: 'ID', dataIndex: 'id', key: 'id', width: 80 },
+    {
+      title: 'Picture', dataIndex: 'pictureUrl', key: 'pictureUrl', width: 80,
+      render: (url: string) => url ? <Image src={mediaUrl(url)} width={50} height={50} style={{ objectFit: 'cover' }} /> : null,
+    },
     { title: 'Name', dataIndex: 'name', key: 'name' },
     {
       title: 'Actions',
@@ -167,11 +177,7 @@ const CategoriesPage: React.FC = () => {
           <Form.Item name="pictureTitle" label="Picture Title">
             <Input />
           </Form.Item>
-          <Form.Item name="pictureUrl" label="Picture" valuePropName="fileList">
-            <Upload listType="picture" maxCount={1} beforeUpload={() => false}>
-              <Button icon={<UploadOutlined />}>Upload Picture</Button>
-            </Upload>
-          </Form.Item>
+          <ImageUploadField currentImage={currentPicture} name="pictureUrl" label="Picture" />
         </Form>
       </Modal>
     </div>
@@ -179,3 +185,4 @@ const CategoriesPage: React.FC = () => {
 };
 
 export default CategoriesPage;
+

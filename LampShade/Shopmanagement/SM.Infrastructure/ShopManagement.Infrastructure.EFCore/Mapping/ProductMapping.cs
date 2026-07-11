@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopManagement.Domain.ProductAgg;
 
@@ -13,8 +13,8 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
 
             builder.Property(p => p.Name).HasMaxLength(255).IsRequired();
             builder.Property(p => p.Code).HasMaxLength(15).IsRequired();
-            builder.Property(p => p.ShortDescription).HasMaxLength(500).IsRequired();
-            builder.Property(p => p.Description).HasMaxLength(1000);
+            builder.Property(p => p.ShortDescription).HasColumnType("text").IsRequired();
+            builder.Property(p => p.Description).HasColumnType("text");
             builder.Property(p => p.PictureUrl).HasMaxLength(1000);
             builder.Property(p => p.PictureTitle).HasMaxLength(500);
             builder.Property(p => p.PictureAlt).HasMaxLength(255);

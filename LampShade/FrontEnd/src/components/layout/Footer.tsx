@@ -1,11 +1,13 @@
 import React from 'react';
 import { Layout, Row, Col, Typography, Space } from 'antd';
 import { FacebookOutlined, TwitterOutlined, InstagramOutlined, YoutubeOutlined } from '@ant-design/icons';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const { Footer: AntFooter } = Layout;
 const { Title, Text } = Typography;
 
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <AntFooter
       style={{
@@ -18,19 +20,19 @@ const Footer: React.FC = () => {
         <Col xs={24} sm={12} md={8}>
           <Title level={4} style={{ color: '#fff' }}>LampShade</Title>
           <Text style={{ color: 'rgba(255,255,255,0.65)' }}>
-            Your trusted online shopping destination for quality products.
+            {t('trustedStore')}
           </Text>
         </Col>
         <Col xs={24} sm={12} md={8}>
-          <Title level={5} style={{ color: '#fff' }}>Quick Links</Title>
+          <Title level={5} style={{ color: '#fff' }}>{t('quickLinks')}</Title>
           <Space direction="vertical" size="small">
-            <a href="/" style={{ color: 'rgba(255,255,255,0.65)' }}>Home</a>
-            <a href="/products" style={{ color: 'rgba(255,255,255,0.65)' }}>Products</a>
-            <a href="/categories" style={{ color: 'rgba(255,255,255,0.65)' }}>Categories</a>
+            <a href="/" style={{ color: 'rgba(255,255,255,0.65)' }}>{t('home')}</a>
+            <a href="/products" style={{ color: 'rgba(255,255,255,0.65)' }}>{t('products')}</a>
+            <a href="/categories" style={{ color: 'rgba(255,255,255,0.65)' }}>{t('categories')}</a>
           </Space>
         </Col>
         <Col xs={24} sm={12} md={8}>
-          <Title level={5} style={{ color: '#fff' }}>Contact</Title>
+          <Title level={5} style={{ color: '#fff' }}>{t('contact')}</Title>
           <Space direction="vertical" size="small">
             <Text style={{ color: 'rgba(255,255,255,0.65)' }}>support@lampshade.com</Text>
             <Text style={{ color: 'rgba(255,255,255,0.65)' }}>+1 (555) 123-4567</Text>
@@ -52,7 +54,7 @@ const Footer: React.FC = () => {
         }}
       >
         <Text style={{ color: 'rgba(255,255,255,0.45)' }}>
-          © {new Date().getFullYear()} LampShade. All rights reserved.
+          © {new Date().getFullYear()} LampShade. {t('allRightsReserved')}
         </Text>
       </div>
     </AntFooter>

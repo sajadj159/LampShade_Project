@@ -12,7 +12,7 @@ const ProductListPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState<string>('default');
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000000]);
+  const [priceRange, setPriceRange] = useState<[number, number] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +28,10 @@ const ProductListPage: React.FC = () => {
     fetchData();
   }, []);
 
+  const maximumPrice = Math.max(...products.map(product => product.doublePrice), 1);
+
   const filteredProducts = products.filter((product) => {
+    if (!priceRange) return true;
     const price = product.doublePrice;
     return price >= priceRange[0] && price <= priceRange[1];
   });
@@ -94,8 +97,8 @@ const ProductListPage: React.FC = () => {
               <Slider
                 range
                 min={0}
-                max={100000000}
-                value={priceRange}
+                max={maximumPrice}
+                value={priceRange ?? [0, maximumPrice]}
                 onChange={(value) => setPriceRange(value as [number, number])}
               />
             </div>

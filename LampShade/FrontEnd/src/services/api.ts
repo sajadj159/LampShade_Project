@@ -2,6 +2,7 @@ import axios from 'axios';
 import type {
   Product,
   ProductViewModel,
+  ProductGalleryImage,
   ProductCategory,
   ProductCategoryViewModel,
   ProductSearchModel,
@@ -22,6 +23,9 @@ import type {
   StockStatus,
   CheckStockRequest,
   CommentModel,
+  Inventory,
+  InventoryOperation,
+
 } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5002';
@@ -81,6 +85,11 @@ export const accountApi = {
 
   getDetails: (id: number): Promise<any> =>
     api.get(`/api/write/Account/${id}`).then((res) => res.data),
+
+  create: (data: FormData): Promise<OperationResult> =>
+    api.post('/api/write/Account/register', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }).then((res) => res.data),
 
   edit: (data: FormData): Promise<OperationResult> =>
     api.put('/api/write/Account/edit', data, {
@@ -147,6 +156,12 @@ export const productApi = {
     }).then((res) => res.data),
 };
 
+export const productPictureApi = {
+  search: (productId: number): Promise<ProductGalleryImage[]> =>
+    api.get('/api/write/ProductPicture/search', { params: { productId } }).then((res) => res.data),
+  remove: (id: number): Promise<OperationResult> =>
+    api.delete('/api/write/ProductPicture/' + id).then((res) => res.data),
+};
 // ==========================================
 // Product Category APIs
 // ==========================================
@@ -316,22 +331,38 @@ export const discountApi = {
     api.put('/api/write/CustomerDiscount', data).then((res) => res.data),
 };
 
+export const editorImageApi = {
+  upload: (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append('file', file);
+    return api.post('/api/write/EditorImage', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }).then((res) => res.data.key);
+  },
+};
 // ==========================================
 // Comment APIs
 // ==========================================
 
 export const commentApi = {
-  add: (data: { name: string; email: string; description: string; ownerRecordId: number; productSlug: string }): Promise<OperationResult> =>
+  add: (data: { name: string; email: string; description: string; rating: number; ownerRecordId: number; type: number }): Promise<OperationResult> =>
     api.post('/api/write/Comment', data).then((res) => res.data),
-
-  getAll: (): Promise<CommentModel[]> =>
-    api.get('/api/write/Comment').then((res) => res.data),
-
+  search: (params: { name?: string; email?: string } = {}): Promise<CommentModel[]> =>
+    api.get('/api/write/Comment/search', { params }).then((res) => res.data),
   confirm: (id: number): Promise<OperationResult> =>
     api.post(`/api/write/Comment/${id}/confirm`).then((res) => res.data),
-
   cancel: (id: number): Promise<OperationResult> =>
     api.post(`/api/write/Comment/${id}/cancel`).then((res) => res.data),
 };
 
+export const inventoryApi = {
+  search: (): Promise<Inventory[]> => api.get('/api/write/Inventory/search').then((res) => res.data),
+  create: (data: { productId: number; unitPrice: number }): Promise<OperationResult> => api.post('/api/write/Inventory', data).then((res) => res.data),
+  edit: (data: { id: number; productId: number; unitPrice: number }): Promise<OperationResult> => api.put('/api/write/Inventory', data).then((res) => res.data),
+  increase: (data: { inventoryId: number; count: number; description: string }): Promise<OperationResult> => api.post('/api/write/Inventory/increase', data).then((res) => res.data),
+  reduce: (data: { inventoryId: number; count: number; description: string }): Promise<OperationResult> => api.post('/api/write/Inventory/reduce', data).then((res) => res.data),
+  operations: (id: number): Promise<InventoryOperation[]> => api.get(`/api/write/Inventory/${id}/operations`).then((res) => res.data),
+};
+
 export default api;
+

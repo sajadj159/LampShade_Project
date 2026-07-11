@@ -66,6 +66,7 @@ namespace _01_LampShadeQuery.Query
                 {
                     Id = x.Id,
                     Description = x.Description,
+                    Rating = x.Rating,
                     Name = x.Name,
                     CreationDate = x.CreationDate.ToFarsi()
                 }).OrderByDescending(x => x.Id).ToList();
@@ -121,9 +122,15 @@ namespace _01_LampShadeQuery.Query
 
                 var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
                 if (productInventory == null)
+                {
+                    product.Price = "0";
+                    product.DoublePrice = 0;
+                    product.InStock = false;
                     continue;
+                }
                 var unitPrice = productInventory.UnitPrice;
                 product.Price = unitPrice.ToMoney();
+                product.DoublePrice = unitPrice;
                 var productInStock = productInventory.InStock;
                 product.InStock = productInStock;
                 var productDiscount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
@@ -136,7 +143,7 @@ namespace _01_LampShadeQuery.Query
                 var discountAmount = Math.Round((unitPrice * rate) / 100);
                 product.PriceWithDiscount = (unitPrice - discountAmount).ToMoney();
             }
-            return latestArrivals.Where(x=>x.InStock).ToList();
+            return latestArrivals.OrderByDescending(x => x.Id).ToList();
         }
 
 
@@ -218,3 +225,4 @@ namespace _01_LampShadeQuery.Query
         }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -49,6 +49,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                     Name = x.Name,
                     Code = x.Code,
                     Keywords = x.Keywords,
+                    SavedPictureUrl = x.PictureUrl,
                     PictureAlt = x.PictureAlt,
                     CategoryId = x.CategoryId,  
                     ShortDescription = x.ShortDescription,
@@ -70,8 +71,14 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
             {
                 Id = x.Id,
                 Name = x.Name,
-            }).ToList();
+                Code = x.Code,
+                Category = x.Category.Name,
+                CategoryId = x.CategoryId,
+                PictureUrl = x.PictureUrl,
+                CreationDate = x.CreationDate.ToFarsi(),
+            }).OrderByDescending(x => x.Id).ToList();
 
         }
     }
 }
+

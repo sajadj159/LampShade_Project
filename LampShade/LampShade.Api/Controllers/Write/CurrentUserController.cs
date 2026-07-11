@@ -1,5 +1,5 @@
 using _0_Framework.Application;
-using MediatR;
+using AccountManagement.Application.Contracts.AC.Account;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
@@ -9,10 +9,12 @@ namespace LampShade.Api.Controllers.Write;
 public class CurrentUserController : ControllerBase
 {
     private readonly IAuthHelper _authHelper;
+    private readonly IAccountApplication _accountApplication;
 
-    public CurrentUserController(IAuthHelper authHelper)
+    public CurrentUserController(IAuthHelper authHelper, IAccountApplication accountApplication)
     {
         _authHelper = authHelper;
+        _accountApplication = accountApplication;
     }
 
     [HttpGet]
@@ -22,14 +24,17 @@ public class CurrentUserController : ControllerBase
             return Unauthorized();
 
         var info = _authHelper.CurrentAccountInfo();
+        var account = _accountApplication.GetAccountBy(info.Id);
+
         return Ok(new
         {
-            info.Id,
-            info.Username,
-            info.Fullname,
-            info.Mobile,
-            info.RoleId,
-            info.Role,
+            Id = account?.Id > 0 ? account.Id : info.Id,
+            Username = string.IsNullOrWhiteSpace(account?.UserName) ? info.Username : account.UserName,
+            Fullname = string.IsNullOrWhiteSpace(account?.FullName) ? info.Fullname : account.FullName,
+            Mobile = string.IsNullOrWhiteSpace(account?.Mobile) ? info.Mobile : account.Mobile,
+            RoleId = account?.RoleId > 0 ? account.RoleId : info.RoleId,
+            Role = string.IsNullOrWhiteSpace(account?.Role) ? info.Role : account.Role,
+            ProfilePhoto = string.IsNullOrWhiteSpace(account?.ProfilePhoto) ? info.ProfilePhoto : account.ProfilePhoto,
             info.Permissions
         });
     }

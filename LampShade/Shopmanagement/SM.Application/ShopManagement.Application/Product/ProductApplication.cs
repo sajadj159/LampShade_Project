@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using _0_Framework.Application;
 using ShopManagement.Application.Contract.A.Product;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
+using ShopManagement.Domain.ProductPictureAgg;
 
 namespace ShopManagement.Application.Product
 {
@@ -11,12 +13,14 @@ namespace ShopManagement.Application.Product
         private readonly IFIleUploader _uploader;
         private readonly IProductRepository _productRepository;
         private readonly IProductCategoryRepository _productCategoryRepository;
+        private readonly IProductPictureRepository _productPictureRepository;
 
-        public ProductApplication(IProductRepository productRepository, IFIleUploader uploader, IProductCategoryRepository productCategoryRepository)
+        public ProductApplication(IProductRepository productRepository, IFIleUploader uploader, IProductCategoryRepository productCategoryRepository, IProductPictureRepository productPictureRepository)
         {
             _productRepository = productRepository;
             _uploader = uploader;
             _productCategoryRepository = productCategoryRepository;
+            _productPictureRepository = productPictureRepository;
         }
 
         public OperationResult Create(CreateProduct command)
@@ -35,6 +39,7 @@ namespace ShopManagement.Application.Product
                 command.Keywords, command.MetaDescription, command.CategoryId);
             _productRepository.Create(product);
             _productRepository.Save();
+            AddAdditionalPictures(product, command.AdditionalPictures, picturePath);
             return operationResult.Succeeded();
         }
 
@@ -51,15 +56,30 @@ namespace ShopManagement.Application.Product
             var slugify = command.Slug.Slugify();
             var picturePath = $"{product.Category.Slug}/{slugify}";
             var fileName = _uploader.Upload(command.PictureUrl, picturePath);
+            if (command.ClearMainPicture) product.ClearPicture();
 
             product.Edit(command.Name, command.Code, command.ShortDescription,
                 command.Description, fileName, command.PictureTitle, command.PictureAlt,
                 slugify, command.Keywords, command.MetaDescription, command.CategoryId);
             _productRepository.Save();
+            AddAdditionalPictures(product, command.AdditionalPictures, picturePath);
             return operationResult.Succeeded();
 
         }
 
+        private void AddAdditionalPictures(Domain.ProductAgg.Product product, List<Microsoft.AspNetCore.Http.IFormFile> pictures, string path)
+        {
+            if (pictures == null) return;
+
+            foreach (var picture in pictures.Where(x => x is { Length: > 0 }))
+            {
+                var picturePath = _uploader.Upload(picture, path);
+                var title = System.IO.Path.GetFileNameWithoutExtension(picture.FileName);
+                _productPictureRepository.Create(new ShopManagement.Domain.ProductPictureAgg.ProductPicture(product.Id, picturePath, title, title));
+            }
+
+            _productPictureRepository.Save();
+        }
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {
             return _productRepository.Search(searchModel);

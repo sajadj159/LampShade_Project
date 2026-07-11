@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using _01_LampShadeQuery.Contract.Slide;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +21,7 @@ namespace _01_LampShadeQuery.Query
                 .Where(x => x.IsRemoved == false)
                 .Select(x => new SlideQueryModel
                 {
+                    Id = x.Id,
                     Title = x.Title,
                     Heading = x.Heading,
                     Link = x.Link,
@@ -33,3 +34,4 @@ namespace _01_LampShadeQuery.Query
         }    
     }
 }
+

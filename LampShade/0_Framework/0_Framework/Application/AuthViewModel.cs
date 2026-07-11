@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace _0_Framework.Application
 {
@@ -10,12 +10,13 @@ namespace _0_Framework.Application
         public long RoleId { get; set; }
         public string Role { get; set; }
         public string Mobile { get; set; }
+        public string ProfilePhoto { get; set; }
         public List<int> Permissions { get; set; }
 
         public AuthViewModel()
         {
         }
-        public AuthViewModel(long id, string username, string fullname, string mobile, long roleId, List<int> permissions)
+        public AuthViewModel(long id, string username, string fullname, string mobile, long roleId, List<int> permissions, string profilePhoto = "")
         {
             Id = id;
             Username = username;
@@ -23,6 +24,7 @@ namespace _0_Framework.Application
             Mobile = mobile;
             RoleId = roleId;
             Permissions = permissions;
+            ProfilePhoto = profilePhoto;
         }
     }
 }

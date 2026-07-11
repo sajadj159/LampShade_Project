@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { Layout, Menu, Avatar, Dropdown, Space, Typography, theme } from 'antd';
+import { Layout, Menu, Avatar, Dropdown, Space, Typography, theme, Button } from 'antd';
 import {
   DashboardOutlined,
   UserOutlined,
@@ -15,8 +15,15 @@ import {
   CommentOutlined,
   TagsOutlined,
   AppstoreOutlined,
+  InboxOutlined,
+  MoonOutlined,
+  SunOutlined,
 } from '@ant-design/icons';
 import { useAuth } from '../../contexts/AuthContext';
+import { mediaUrl } from '../../services/api';
+import { useThemeMode } from '../../contexts/ThemeModeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
+import LanguageToggle from '../common/LanguageToggle';
 import type { MenuProps } from 'antd';
 
 const { Header, Sider, Content } = Layout;
@@ -27,53 +34,59 @@ const AdminLayout: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
+  const { isDark, toggleTheme } = useThemeMode();
   const { token: themeToken } = theme.useToken();
+  const { t } = useLanguage();
 
   const menuItems: MenuProps['items'] = [
     {
       key: '/admin',
       icon: <DashboardOutlined />,
-      label: 'Dashboard',
+      label: t('dashboard'),
     },
     {
       key: '/admin/users',
       icon: <UserOutlined />,
-      label: 'Users',
+      label: t('users'),
     },
     {
       key: '/admin/products',
       icon: <ShoppingOutlined />,
-      label: 'Products',
+      label: t('products'),
     },
     {
       key: '/admin/categories',
       icon: <AppstoreOutlined />,
-      label: 'Categories',
+      label: t('categories'),
     },
     {
+      key: '/admin/inventory',
+      icon: <InboxOutlined />,
+      label: t('inventory'),
+    },    {
       key: '/admin/discounts',
       icon: <PercentageOutlined />,
-      label: 'Discounts',
+      label: t('discounts'),
     },
     {
       key: '/admin/slides',
       icon: <PictureOutlined />,
-      label: 'Slides',
+      label: t('slides'),
     },
     {
       key: '/admin/roles',
       icon: <SafetyCertificateOutlined />,
-      label: 'Roles',
+      label: t('roles'),
     },
     {
       key: '/admin/blog',
       icon: <ReadOutlined />,
-      label: 'Blog Posts',
+      label: t('blogPosts'),
     },
     {
       key: '/admin/comments',
       icon: <CommentOutlined />,
-      label: 'Comments',
+      label: t('comments'),
     },
   ];
 
@@ -86,7 +99,7 @@ const AdminLayout: React.FC = () => {
     {
       key: 'profile',
       icon: <UserOutlined />,
-      label: 'Profile',
+      label: t('profile'),
       onClick: () => navigate('/account/profile'),
     },
     {
@@ -99,7 +112,7 @@ const AdminLayout: React.FC = () => {
     {
       key: 'logout',
       icon: <LogoutOutlined />,
-      label: 'Logout',
+      label: t('logout'),
       onClick: handleLogout,
     },
   ];
@@ -155,15 +168,16 @@ const AdminLayout: React.FC = () => {
             })}
           </Space>
 
-          <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
+<LanguageToggle />
+          <Button type="text" icon={isDark ? <SunOutlined /> : <MoonOutlined />} onClick={toggleTheme} />          <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
             <Space style={{ cursor: 'pointer' }}>
-              <Avatar icon={<UserOutlined />} style={{ backgroundColor: '#1677ff' }} />
+              <Avatar src={user?.profilePhoto ? mediaUrl(user.profilePhoto) : undefined} icon={<UserOutlined />} style={{ backgroundColor: '#1677ff' }} />
               <Text>{user?.fullname || user?.username || 'Admin'}</Text>
             </Space>
           </Dropdown>
         </Header>
 
-        <Content style={{ margin: 24, padding: 24, background: themeToken.colorBgContainer, borderRadius: 8, minHeight: 280 }}>
+        <Content className="admin-content" style={{ margin: 24, padding: 24, background: themeToken.colorBgContainer, borderRadius: 8, minHeight: 280 }}>
           <Outlet />
         </Content>
       </Layout>
@@ -172,3 +186,4 @@ const AdminLayout: React.FC = () => {
 };
 
 export default AdminLayout;
+

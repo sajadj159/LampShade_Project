@@ -37,6 +37,9 @@ namespace _01_LampShadeQuery.Query
                     Id = x.Id,
                     Name = x.Name,
                     Description = x.Description,
+                    PictureUrl = x.PictureUrl,
+                    PictureAlt = x.PictureAlt,
+                    PictureTitle = x.PictureTitle,
                     MetaDescription = x.MetaDescription,
                     Keywords = x.Keywords,
                     Products = MapProducts(x.Products),
@@ -91,6 +94,10 @@ namespace _01_LampShadeQuery.Query
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    PictureUrl = x.PictureUrl,
+                    PictureAlt = x.PictureAlt,
+                    PictureTitle = x.PictureTitle,
+                    Slug = x.Slug,
                     Products = MapProducts(x.Products)
                 }).ToList();
 
@@ -130,3 +137,4 @@ namespace _01_LampShadeQuery.Query
         }
     }
 }
+

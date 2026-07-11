@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, Typography, Card, Upload, message } from 'antd';
-import { PhoneOutlined, UserOutlined, LockOutlined, HomeOutlined, UploadOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Typography, Card, message } from 'antd';
+import { PhoneOutlined, UserOutlined, LockOutlined, HomeOutlined } from '@ant-design/icons';
 import { authApi } from '../../services/api';
+import ImageUploadField from '../../components/common/ImageUploadField';
 
 const { Title, Text } = Typography;
 
@@ -82,11 +83,7 @@ const RegisterPage: React.FC = () => {
             <Input placeholder="Postal Code" size="large" />
           </Form.Item>
 
-          <Form.Item name="profilePhoto" label="Profile Photo" valuePropName="fileList">
-            <Upload listType="picture" maxCount={1} beforeUpload={() => false}>
-              <Button icon={<UploadOutlined />}>Upload Photo</Button>
-            </Upload>
-          </Form.Item>
+          <ImageUploadField name="profilePhoto" label="Profile photo" />
 
           <Form.Item>
             <Button type="primary" htmlType="submit" block size="large" loading={loading}>Register</Button>

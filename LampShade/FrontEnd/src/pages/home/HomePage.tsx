@@ -4,15 +4,17 @@ import { Row, Col, Typography, Carousel, Card, Button, Spin, Empty } from 'antd'
 import { RightOutlined, TruckOutlined, SafetyOutlined, CustomerServiceOutlined } from '@ant-design/icons';
 import ProductCard from '../../components/common/ProductCard';
 import { productApi, categoryApi, slideApi, mediaUrl } from '../../services/api';
-import type { Product, ProductCategory, Slide } from '../../types';
+import type { Product, ProductCategory, SlideQuery } from '../../types';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const { Title, Text, Paragraph } = Typography;
 const { Meta } = Card;
 
 const HomePage: React.FC = () => {
+  const { t } = useLanguage();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<ProductCategory[]>([]);
-  const [slides, setSlides] = useState<Slide[]>([]);
+  const [slides, setSlides] = useState<SlideQuery[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const HomePage: React.FC = () => {
         const [productsData, categoriesData, slidesData] = await Promise.all([
           productApi.getLatest(),
           categoryApi.getWithProducts(),
-          slideApi.getAll(),
+          slideApi.getForQuery(),
         ]);
         setProducts(productsData);
         setCategories(categoriesData);
@@ -43,20 +45,24 @@ const HomePage: React.FC = () => {
     );
   }
 
+  const slideBackground = (pictureUrl?: string) => pictureUrl
+    ? `linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url(${mediaUrl(pictureUrl)})`
+    : 'linear-gradient(135deg, #1677ff 0%, #0958d9 100%)';
+
   const features = [
     {
       icon: <TruckOutlined style={{ fontSize: 40, color: '#1677ff' }} />,
-      title: 'Free Shipping',
+      title: t('freeShipping'),
       description: 'On orders over $100',
     },
     {
       icon: <SafetyOutlined style={{ fontSize: 40, color: '#52c41a' }} />,
-      title: 'Secure Payment',
+      title: t('securePayment'),
       description: '100% secure payment',
     },
     {
       icon: <CustomerServiceOutlined style={{ fontSize: 40, color: '#faad14' }} />,
-      title: '24/7 Support',
+      title: t('support'),
       description: 'Dedicated support',
     },
   ];
@@ -71,7 +77,9 @@ const HomePage: React.FC = () => {
               <div
                 style={{
                   height: 400,
-                  background: 'linear-gradient(135deg, #1677ff 0%, #0958d9 100%)',
+                  background: slideBackground(slide.pictureUrl),
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -86,7 +94,7 @@ const HomePage: React.FC = () => {
                     {slide.text}
                   </Paragraph>
                   {slide.btnText && (
-                    <Button type="primary" size="large" ghost>
+                    <Button type="primary" size="large" ghost href={slide.link || undefined}>
                       {slide.btnText}
                     </Button>
                   )}
@@ -120,7 +128,7 @@ const HomePage: React.FC = () => {
         <div style={{ padding: '48px 24px' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <Title level={2} style={{ textAlign: 'center', marginBottom: 48 }}>
-              Shop by Category
+              {t('shopByCategory')}
             </Title>
             <Row gutter={[24, 24]}>
               {categories.map((category) => (
@@ -131,7 +139,7 @@ const HomePage: React.FC = () => {
                       cover={
                         <img
                           alt={category.name}
-                          src={mediaUrl(category.picture)}
+                          src={mediaUrl(category.pictureUrl || category.picture || '')}
                           style={{ height: 160, objectFit: 'cover' }}
                         />
                       }
@@ -146,19 +154,19 @@ const HomePage: React.FC = () => {
         </div>
       )}
 
-      {/* Latest Products Section */}
+      {/* {t('latestProducts')} Section */}
       <div style={{ padding: '48px 24px', background: '#fff' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
-            <Title level={2} style={{ margin: 0 }}>Latest Products</Title>
+            <Title level={2} style={{ margin: 0 }}>{t('latestProducts')}</Title>
             <Link to="/products">
               <Button type="link">
-                View All <RightOutlined />
+                {t('viewAll')} <RightOutlined />
               </Button>
             </Link>
           </div>
           {products.length === 0 ? (
-            <Empty description="No products available" />
+            <Empty description={t('noProducts')} />
           ) : (
             <Row gutter={[24, 24]}>
               {products.slice(0, 8).map((product) => (

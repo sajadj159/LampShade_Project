@@ -18,7 +18,7 @@ namespace AccountManagement.Domain.AccountAgg
         protected Account()
         {
         }
-        public Account(string userName, string fullName, string password, string mobile, long roleId, string profilePhoto)
+        public Account(string userName, string fullName, string password, string mobile, long roleId, string profilePhoto, string address, string postalCode)
         {
             UserName = userName;
             FullName = fullName;
@@ -26,15 +26,19 @@ namespace AccountManagement.Domain.AccountAgg
             Mobile = mobile;
             RoleId = roleId == 0 ? 2 : roleId;
             ProfilePhoto = profilePhoto;
+            Address = address;
+            PostalCode = postalCode;
         }
 
 
-        public void Edit(string userName, string fullName, string mobile, long roleId, string profilePhoto)
+        public void Edit(string userName, string fullName, string mobile, long roleId, string profilePhoto, string address, string postalCode)
         {
             UserName = userName;
             FullName = fullName;
             Mobile = mobile;
             RoleId = roleId;
+            Address = address;
+            PostalCode = postalCode;
             if (!string.IsNullOrWhiteSpace(profilePhoto))
             {
                 ProfilePhoto = profilePhoto;
@@ -53,3 +57,4 @@ namespace AccountManagement.Domain.AccountAgg
         }
     }
 }
+

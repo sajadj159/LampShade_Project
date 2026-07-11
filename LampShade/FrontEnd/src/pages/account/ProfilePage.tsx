@@ -3,6 +3,7 @@ import { Card, Typography, Button, Avatar, Space, Divider } from 'antd';
 import { UserOutlined, OrderedListOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { mediaUrl } from '../../services/api';
 
 const { Title, Text } = Typography;
 
@@ -19,7 +20,7 @@ const ProfilePage: React.FC = () => {
     <div style={{ padding: '24px', maxWidth: 800, margin: '0 auto' }}>
       <Card>
         <div style={{ textAlign: 'center', marginBottom: 24 }}>
-          <Avatar size={80} icon={<UserOutlined />} style={{ backgroundColor: '#1677ff' }} />
+          <Avatar size={80} src={user?.profilePhoto ? mediaUrl(user.profilePhoto) : undefined} icon={<UserOutlined />} style={{ backgroundColor: '#1677ff' }} />
           <Title level={3} style={{ marginTop: 16 }}>My Profile</Title>
         </div>
 
@@ -66,3 +67,4 @@ const ProfilePage: React.FC = () => {
 };
 
 export default ProfilePage;
+

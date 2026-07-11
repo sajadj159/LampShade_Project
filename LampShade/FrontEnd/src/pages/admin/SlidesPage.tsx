@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Space, Modal, Form, Input, Upload, Tag, message, Typography, Image } from 'antd';
-import { EditOutlined, PlusOutlined, DeleteOutlined, UndoOutlined, UploadOutlined } from '@ant-design/icons';
+import { Table, Button, Space, Modal, Form, Input, Tag, message, Typography, Image } from 'antd';
+import { EditOutlined, PlusOutlined, DeleteOutlined, UndoOutlined } from '@ant-design/icons';
 import { slideApi, mediaUrl } from '../../services/api';
+import ImageUploadField from '../../components/common/ImageUploadField';
 import type { Slide } from '../../types';
 
 const { Title } = Typography;
@@ -12,6 +13,7 @@ const SlidesPage: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Slide | null>(null);
   const [form] = Form.useForm();
+  const [currentPicture, setCurrentPicture] = useState('');
 
   const fetchSlides = async () => {
     setLoading(true);
@@ -29,7 +31,9 @@ const SlidesPage: React.FC = () => {
     setEditing(record);
     try {
       const details = await slideApi.getDetails(record.id);
-      form.setFieldsValue(details);
+      const { pictureUrl, ...formFields } = details;
+      setCurrentPicture(pictureUrl || '');
+      form.setFieldsValue(formFields);
       setModalOpen(true);
     } catch {
       message.error('Failed to load slide details');
@@ -53,15 +57,20 @@ const SlidesPage: React.FC = () => {
       if (values.pictureUrl?.[0]?.originFileObj) {
         formData.append('PictureUrl', values.pictureUrl[0].originFileObj);
       }
-      if (editing) {
-        await slideApi.edit(formData);
-      } else {
-        await slideApi.create(formData);
+      const result = editing
+        ? await slideApi.edit(formData)
+        : await slideApi.create(formData);
+
+      if (!result.isSucceeded) {
+        message.error(result.message || 'Failed to save slide');
+        return;
       }
+
       message.success(editing ? 'Slide updated' : 'Slide created');
       setModalOpen(false);
       form.resetFields();
       setEditing(null);
+      setCurrentPicture('');
       fetchSlides();
     } catch {
       message.error('Failed to save slide');
@@ -117,7 +126,7 @@ const SlidesPage: React.FC = () => {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
         <Title level={3} style={{ margin: 0 }}>Slides</Title>
-        <Button type="primary" icon={<PlusOutlined />} onClick={() => { setEditing(null); form.resetFields(); setModalOpen(true); }}>
+        <Button type="primary" icon={<PlusOutlined />} onClick={() => { setEditing(null); setCurrentPicture(''); form.resetFields(); setModalOpen(true); }}>
           Add Slide
         </Button>
       </div>
@@ -128,7 +137,7 @@ const SlidesPage: React.FC = () => {
         title={editing ? 'Edit Slide' : 'Create Slide'}
         open={modalOpen}
         onOk={handleSave}
-        onCancel={() => { setModalOpen(false); setEditing(null); form.resetFields(); }}
+        onCancel={() => { setModalOpen(false); setEditing(null); setCurrentPicture(''); form.resetFields(); }}
         width={600}
       >
         <Form form={form} layout="vertical">
@@ -153,11 +162,7 @@ const SlidesPage: React.FC = () => {
           <Form.Item name="pictureAlt" label="Picture Alt">
             <Input />
           </Form.Item>
-          <Form.Item name="pictureUrl" label="Picture" valuePropName="fileList">
-            <Upload listType="picture" maxCount={1} beforeUpload={() => false}>
-              <Button icon={<UploadOutlined />}>Upload Picture</Button>
-            </Upload>
-          </Form.Item>
+          <ImageUploadField currentImage={currentPicture} name="pictureUrl" label="Picture" />
         </Form>
       </Modal>
     </div>
@@ -165,3 +170,4 @@ const SlidesPage: React.FC = () => {
 };
 
 export default SlidesPage;
+

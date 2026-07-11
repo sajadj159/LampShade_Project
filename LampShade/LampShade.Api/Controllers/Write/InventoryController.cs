@@ -9,10 +9,11 @@ using LampShade.Api.Features.Inventories.Queries.SearchInventories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using _0_Framework.Repository;
 
 namespace LampShade.Api.Controllers.Write;
 
-[Authorize]
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class InventoryController : ControllerBase
