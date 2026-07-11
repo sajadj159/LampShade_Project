@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form, InputNumber, Input, Select, message, Typography } from 'antd';
+import { Table, Button, Modal, Form, InputNumber, Input, Select, DatePicker, message, Typography } from 'antd';
 import { EditOutlined, PlusOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
 import { discountApi, productApi } from '../../services/api';
 import type { CustomerDiscount, ProductViewModel } from '../../types';
 
 const { Title } = Typography;
 const { TextArea } = Input;
+
+const toPersianDate = (date: { toDate: () => Date }) => {
+  const parts = new Intl.DateTimeFormat('en-US-u-ca-persian', {
+    year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(date.toDate());
+  const value = (type: string) => parts.find(part => part.type === type)?.value ?? '';
+  return `${value('year')}/${value('month')}/${value('day')}`;
+};
+
+const fromDiscountDate = (storedDate: string, displayDate: string) => {
+  const stored = dayjs(storedDate);
+  if (stored.isValid() && stored.year() <= 2200) return stored;
+
+  const [year, month, day] = displayDate.split('/').map(Number);
+  return dayjs(new Date(year, month - 1, day));
+};
 
 const DiscountsPage: React.FC = () => {
   const [discounts, setDiscounts] = useState<CustomerDiscount[]>([]);
@@ -42,8 +59,8 @@ const DiscountsPage: React.FC = () => {
     form.setFieldsValue({
       productId: record.productId,
       discountRate: record.discountRate,
-      startDate: record.startDate,
-      endDate: record.endDate,
+      startDate: fromDiscountDate(record.startDateGr, record.startDate),
+      endDate: fromDiscountDate(record.endDateGr, record.endDate),
       reason: record.reason,
     });
     setModalOpen(true);
@@ -55,8 +72,8 @@ const DiscountsPage: React.FC = () => {
       const payload = {
         productId: values.productId,
         discountRate: values.discountRate,
-        startDate: values.startDate,
-        endDate: values.endDate,
+        startDate: toPersianDate(values.startDate),
+        endDate: toPersianDate(values.endDate),
         reason: values.reason,
         ...(editing ? { id: editing.id } : {}),
       };
@@ -118,10 +135,10 @@ const DiscountsPage: React.FC = () => {
             <InputNumber min={1} max={99} style={{ width: '100%' }} />
           </Form.Item>
           <Form.Item name="startDate" label="Start Date" rules={[{ required: true }]}>
-            <Input placeholder="e.g. 2026/01/01" />
+            <DatePicker format="YYYY/MM/DD" style={{ width: '100%' }} />
           </Form.Item>
           <Form.Item name="endDate" label="End Date" rules={[{ required: true }]}>
-            <Input placeholder="e.g. 2026/12/31" />
+            <DatePicker format="YYYY/MM/DD" style={{ width: '100%' }} />
           </Form.Item>
           <Form.Item name="reason" label="Reason">
             <TextArea rows={2} />

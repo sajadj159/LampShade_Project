@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using _0_Framework.Application;
 using Microsoft.AspNetCore.Http;
 
@@ -12,6 +13,7 @@ namespace ShopManagement.Application.Contract.ProductCategory
 
         [FileExtensionLimitation(new string[] { ".jpeg", ".jpg", ".png" },ErrorMessage = ValidationMessages.InvalidFileFormat)]
         [MaxFileSIze(3 * 1024 * 1024, ErrorMessage = ValidationMessages.MaxFileSize)]
+        [JsonIgnore]
         public IFormFile PictureUrl { get; set; }
         public string PictureAlt { get; set; }
         public string PictureTitle { get; set; }
@@ -27,3 +29,4 @@ namespace ShopManagement.Application.Contract.ProductCategory
 
     }
 }
+

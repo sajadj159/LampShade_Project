@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using _0_Framework.Application;
 using DiscountManagement.Application.Contract.AC.CustomerDiscount;
 using DiscountManagement.Domain.CustomerDiscountAgg;
@@ -21,7 +21,7 @@ namespace DiscountManagement.Application.A.CustomerDiscount
                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var startDate = command.StartDate.ToGeorgianDateTime();
-            var endDate = command.EndDate.ToGeorgianDateTime();
+            var endDate = command.EndDate.ToGeorgianDateTime().Date.AddDays(1).AddTicks(-1);
             var customerDiscount = new Domain.CustomerDiscountAgg.CustomerDiscount(command.ProductId, command.DiscountRate, startDate, endDate, command.Reason);
             _customerDiscountRepository.Create(customerDiscount);
             _customerDiscountRepository.Save();
@@ -43,7 +43,7 @@ namespace DiscountManagement.Application.A.CustomerDiscount
             }
 
             var startDate = command.StartDate.ToGeorgianDateTime();
-            var endDate = command.EndDate.ToGeorgianDateTime();
+            var endDate = command.EndDate.ToGeorgianDateTime().Date.AddDays(1).AddTicks(-1);
             customerDiscount.Edit(command.ProductId, command.DiscountRate, startDate, endDate, command.Reason);
             _customerDiscountRepository.Save();
             return operationResult.Succeeded();

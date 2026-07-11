@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using _0_Framework.Application;
 using Microsoft.AspNetCore.Http;
 using ShopManagement.Application.Contract.ProductCategory;
@@ -20,7 +21,9 @@ namespace ShopManagement.Application.Contract.A.Product
         public string Description { get; set; }
 
 
+        [JsonIgnore]
         public IFormFile PictureUrl { get; set; }
+        public List<IFormFile> AdditionalPictures { get; set; } = new();
         public string PictureTitle { get; set; }
         public string PictureAlt { get; set; }
 
@@ -38,3 +41,4 @@ namespace ShopManagement.Application.Contract.A.Product
         public List<ProductCategoryViewModel> Products{ get; set; }
     }
 }
+

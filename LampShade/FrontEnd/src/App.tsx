@@ -1,7 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, theme as antdTheme } from 'antd';
+import faIR from 'antd/locale/fa_IR';
+import enUS from 'antd/locale/en_US';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeModeProvider, useThemeMode } from './contexts/ThemeModeContext';
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import MainLayout from './components/layout/MainLayout';
 import AdminLayout from './components/layout/AdminLayout';
 import ProtectedRoute from './components/common/ProtectedRoute';
@@ -34,15 +38,22 @@ import SlidesPage from './pages/admin/SlidesPage';
 import RolesPage from './pages/admin/RolesPage';
 import BlogAdminPage from './pages/admin/BlogPage';
 import CommentsPage from './pages/admin/CommentsPage';
+import InventoryPage from './pages/admin/InventoryPage';
 
-const App: React.FC = () => {
+const ThemedApp: React.FC = () => {
+  const { isDark } = useThemeMode();
+  const { isRtl } = useLanguage();
+
   return (
     <ConfigProvider
+      direction={isRtl ? 'rtl' : 'ltr'}
+      locale={isRtl ? faIR : enUS}
       theme={{
+        algorithm: isDark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
         token: {
           colorPrimary: '#1677ff',
           borderRadius: 8,
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+          fontFamily: isRtl ? '"Vazirmatn Variable", Tahoma, sans-serif' : '"Inter Variable", Inter, sans-serif',
         },
       }}
     >
@@ -88,6 +99,7 @@ const App: React.FC = () => {
               <Route path="roles" element={<RolesPage />} />
               <Route path="blog" element={<BlogAdminPage />} />
               <Route path="comments" element={<CommentsPage />} />
+              <Route path="inventory" element={<InventoryPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
@@ -95,5 +107,7 @@ const App: React.FC = () => {
     </ConfigProvider>
   );
 };
+
+const App: React.FC = () => <LanguageProvider><ThemeModeProvider><ThemedApp /></ThemeModeProvider></LanguageProvider>;
 
 export default App;

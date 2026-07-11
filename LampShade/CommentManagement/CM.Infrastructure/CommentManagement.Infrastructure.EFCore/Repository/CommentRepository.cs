@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -27,6 +27,7 @@ namespace CommentManagement.Infrastructure.EFCore.Repository
                     Email = x.Email,
                     Website = x.Website,
                     Description = x.Description,
+                    Rating = x.Rating,
                     IsCanceled = x.IsCanceled,
                     IsConfirmed = x.IsConfirmed,
                     CommentDate = x.CreationDate.ToFarsi(),

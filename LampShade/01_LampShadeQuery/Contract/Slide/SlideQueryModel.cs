@@ -1,7 +1,8 @@
-﻿namespace _01_LampShadeQuery.Contract.Slide
+namespace _01_LampShadeQuery.Contract.Slide
 {
     public class SlideQueryModel
     {
+        public long Id { get; set; }
         public string PictureUrl { get; set; }
         public string PictureAlt { get; set; }
         public string PictureTitle { get; set; }
@@ -12,3 +13,4 @@
         public string Link { get; set; }
     }
 }
+

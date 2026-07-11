@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Layout, Menu, Input, Badge, Avatar, Dropdown, Space, Drawer, Button } from 'antd';
+import { Layout, Menu, Input, Badge, Avatar, Dropdown, Space, Drawer, Button, Tooltip, theme } from 'antd';
 import {
   SearchOutlined,
   ShoppingOutlined,
@@ -12,9 +12,15 @@ import {
   LoginOutlined,
   UserAddOutlined,
   DashboardOutlined,
+  MoonOutlined,
+  SunOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { useAuth } from '../../contexts/AuthContext';
+import { mediaUrl } from '../../services/api';
+import { useThemeMode } from '../../contexts/ThemeModeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
+import LanguageToggle from '../common/LanguageToggle';
 
 const { Header: AntHeader } = Layout;
 const { Search } = Input;
@@ -22,7 +28,10 @@ const { Search } = Input;
 const Header: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated, isAdmin, logout } = useAuth();
+  const { isAuthenticated, isAdmin, logout, user } = useAuth();
+  const { isDark, toggleTheme } = useThemeMode();
+  const { token } = theme.useToken();
+  const { t } = useLanguage();
 
   const handleSearch = (value: string) => {
     if (value.trim()) {
@@ -37,29 +46,29 @@ const Header: React.FC = () => {
 
   const userMenuItems: MenuProps['items'] = isAuthenticated
     ? [
-        { key: 'profile', icon: <ProfileOutlined />, label: <Link to="/account/profile">Profile</Link> },
-        { key: 'orders', icon: <HistoryOutlined />, label: <Link to="/account/orders">Order History</Link> },
+        { key: 'profile', icon: <ProfileOutlined />, label: <Link to="/account/profile">{t('profile')}</Link> },
+        { key: 'orders', icon: <HistoryOutlined />, label: <Link to="/account/orders">{t('orderHistory')}</Link> },
         { type: 'divider' },
-        { key: 'logout', icon: <LogoutOutlined />, label: 'Logout', onClick: handleLogout },
+        { key: 'logout', icon: <LogoutOutlined />, label: t('logout'), onClick: handleLogout },
       ]
     : [
-        { key: 'login', icon: <LoginOutlined />, label: <Link to="/login">Login</Link> },
-        { key: 'register', icon: <UserAddOutlined />, label: <Link to="/register">Register</Link> },
+        { key: 'login', icon: <LoginOutlined />, label: <Link to="/login">{t('login')}</Link> },
+        { key: 'register', icon: <UserAddOutlined />, label: <Link to="/register">{t('register')}</Link> },
       ];
 
   if (isAuthenticated && isAdmin) {
-    userMenuItems?.splice(1, 0, { key: 'admin', icon: <DashboardOutlined />, label: <Link to="/admin">Admin Panel</Link> });
+    userMenuItems?.splice(1, 0, { key: 'admin', icon: <DashboardOutlined />, label: <Link to="/admin">{t('adminPanel')}</Link> });
   }
 
   const navMenuItems: MenuProps['items'] = [
-    { key: 'home', label: <Link to="/">Home</Link> },
-    { key: 'products', label: <Link to="/products">Products</Link> },
-    { key: 'blog', label: <Link to="/blog">Blog</Link> },
+    { key: 'home', label: <Link to="/">{t('home')}</Link> },
+    { key: 'products', label: <Link to="/products">{t('products')}</Link> },
+    { key: 'blog', label: <Link to="/blog">{t('blog')}</Link> },
   ];
 
   return (
     <>
-      <AntHeader style={{ position: 'sticky', top: 0, zIndex: 1000, width: '100%', display: 'flex', alignItems: 'center', padding: '0 24px', background: '#fff', borderBottom: '1px solid #f0f0f0' }}>
+      <AntHeader className="store-header" style={{ position: 'sticky', top: 0, zIndex: 1000, width: '100%', display: 'flex', alignItems: 'center', padding: '0 24px', background: token.colorBgContainer, borderBottom: '1px solid ' + token.colorBorder }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 24, width: '100%' }}>
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <span style={{ fontSize: 20, fontWeight: 600, color: '#1677ff' }}>LampShade</span>
@@ -69,17 +78,21 @@ const Header: React.FC = () => {
             <Menu mode="horizontal" items={navMenuItems} style={{ border: 'none', flex: 1, justifyContent: 'center', maxWidth: 600 }} />
           </div>
 
-          <Search placeholder="Search products..." onSearch={handleSearch} style={{ maxWidth: 400, flex: 1 }} prefix={<SearchOutlined />} />
+          <Search className="store-search" placeholder={t('searchProducts')} onSearch={handleSearch} style={{ maxWidth: 400, flex: 1 }} prefix={<SearchOutlined />} />
 
           <Space size="middle">
+            <LanguageToggle />
+            <Tooltip title={isDark ? t('lightMode') : t('darkMode')}>
+              <Button type="text" icon={isDark ? <SunOutlined /> : <MoonOutlined />} onClick={toggleTheme} />
+            </Tooltip>
             <Badge count={0} size="small">
               <Link to="/cart">
-                <ShoppingOutlined style={{ fontSize: 22, color: '#333' }} />
+                <ShoppingOutlined style={{ fontSize: 22, color: token.colorText }} />
               </Link>
             </Badge>
 
             <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-              <Avatar style={{ backgroundColor: '#1677ff', cursor: 'pointer' }} icon={<UserOutlined />} />
+              <Avatar src={user?.profilePhoto ? mediaUrl(user.profilePhoto) : undefined} style={{ backgroundColor: '#1677ff', cursor: 'pointer' }} icon={<UserOutlined />} />
             </Dropdown>
 
             <Button className="mobile-menu-btn" type="text" icon={<MenuOutlined />} onClick={() => setDrawerOpen(true)} style={{ display: 'none' }} />
@@ -96,3 +109,4 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+

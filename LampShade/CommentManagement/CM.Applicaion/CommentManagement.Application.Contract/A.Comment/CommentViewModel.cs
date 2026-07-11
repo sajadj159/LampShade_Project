@@ -1,4 +1,4 @@
-﻿namespace CommentManagement.Application.Contract.A.Comment
+namespace CommentManagement.Application.Contract.A.Comment
 {
     public class CommentViewModel
     {
@@ -7,6 +7,7 @@
         public string Email { get; set; }
         public string Website { get; set; }
         public string Description { get; set; }
+        public int Rating { get; set; }
         public long OwnerRecordId { get; set; }
         public bool IsConfirmed { get; set; }
         public bool IsCanceled { get; set; }

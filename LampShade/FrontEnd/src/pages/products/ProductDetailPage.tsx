@@ -21,6 +21,7 @@ import {
 import { ShoppingCartOutlined, HomeOutlined, RightOutlined } from '@ant-design/icons';
 import { productApi, commentApi, mediaUrl } from '../../services/api';
 import type { Product } from '../../types';
+import { useAuth } from '../../contexts/AuthContext';
 
 const { Title, Text, Paragraph } = Typography;
 const { TabPane } = Tabs;
@@ -28,6 +29,7 @@ const { TextArea } = Input;
 
 const ProductDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { isAuthenticated, user } = useAuth();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -47,6 +49,16 @@ const ProductDetailPage: React.FC = () => {
     };
     fetchProduct();
   }, [slug]);
+
+  useEffect(() => {
+    if (!isAuthenticated || !user) return;
+
+    const email = user.username?.includes('@') ? user.username : undefined;
+    commentForm.setFieldsValue({
+      name: user.fullname || user.username,
+      ...(email ? { email } : {}),
+    });
+  }, [commentForm, isAuthenticated, user]);
 
   const handleAddToCart = () => {
     if (!product) return;
@@ -79,7 +91,8 @@ const ProductDetailPage: React.FC = () => {
         email: values.email,
         description: values.description,
         ownerRecordId: product.id,
-        productSlug: product.slug,
+        type: 1,
+        rating: values.rating,
       });
       message.success('Comment submitted successfully!');
       commentForm.resetFields();
@@ -218,14 +231,14 @@ const ProductDetailPage: React.FC = () => {
       {/* Tabs Section */}
       <Tabs defaultActiveKey="1" style={{ marginTop: 48 }}>
         <TabPane tab="Description" key="1">
-          <div dangerouslySetInnerHTML={{ __html: product.description }} />
+          <article className="product-description" dangerouslySetInnerHTML={{ __html: product.description }} />
         </TabPane>
         <TabPane tab={`Reviews (${product.comments?.length || 0})`} key="2">
           {product.comments && product.comments.length > 0 ? (
             <div>
               {product.comments.map((comment) => (
                 <div key={comment.id} style={{ marginBottom: 24, padding: 16, background: '#fafafa', borderRadius: 8 }}>
-                  <Text strong>{comment.name}</Text>
+                  <Space><Text strong>{comment.name}</Text><Rate disabled value={comment.rating} /></Space>
                   <Paragraph style={{ marginTop: 8 }}>{comment.description}</Paragraph>
                 </div>
               ))}
@@ -237,25 +250,21 @@ const ProductDetailPage: React.FC = () => {
           <Divider />
 
           <Title level={4}>Write a Review</Title>
-          <Form
-            form={commentForm}
-            layout="vertical"
-            onFinish={handleCommentSubmit}
-            style={{ maxWidth: 600 }}
-          >
+          <Form form={commentForm} layout="vertical" onFinish={handleCommentSubmit} style={{ maxWidth: 600 }}>
             <Form.Item name="name" label="Name" rules={[{ required: true }]}>
               <Input placeholder="Your name" />
             </Form.Item>
             <Form.Item name="email" label="Email" rules={[{ required: true, type: 'email' }]}>
               <Input placeholder="Your email" />
             </Form.Item>
+            <Form.Item name="rating" label="Rating" initialValue={0} rules={[{ required: true }]}>
+              <Rate allowClear />
+            </Form.Item>
             <Form.Item name="description" label="Review" rules={[{ required: true }]}>
               <TextArea rows={4} placeholder="Write your review..." />
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Submit Review
-              </Button>
+              <Button type="primary" htmlType="submit">Submit Review</Button>
             </Form.Item>
           </Form>
         </TabPane>

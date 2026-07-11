@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using _0_Framework.Domain;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
@@ -41,6 +41,10 @@ namespace ShopManagement.Domain.ProductAgg
             Keywords = keywords;
             MetaDescription = metaDescription;
             CategoryId = categoryId;
+        }
+        public void ClearPicture()
+        {
+            PictureUrl = string.Empty;
         }
         public void Edit(string name, string code, string shortDescription,
             string description, string pictureUrl, string pictureTitle, string pictureAlt,

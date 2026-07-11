@@ -10,6 +10,7 @@ export interface AuthUser {
   roleId: number;
   role: string;
   permissions: number[];
+  profilePhoto: string;
 }
 
 export interface Account {
@@ -49,11 +50,21 @@ export interface ProductPicture {
   pictureTitle: string;
 }
 
+export interface ProductGalleryImage {
+  id: number;
+  productId: number;
+  product: string;
+  pictureUrl: string;
+  creationDate: string;
+  isRemoved: boolean;
+}
+
 export interface Comment {
   id: number;
   name: string;
   email: string;
   description: string;
+  rating: number;
 }
 
 export interface Product {
@@ -101,7 +112,8 @@ export interface ProductCategory {
   id: number;
   name: string;
   slug: string;
-  picture: string;
+  pictureUrl: string;
+  picture?: string;
   description: string;
   keywords: string;
   metaDescription: string;
@@ -112,7 +124,8 @@ export interface ProductCategoryViewModel {
   id: number;
   name: string;
   slug: string;
-  picture: string;
+  pictureUrl: string;
+  picture?: string;
   description: string;
   keywords: string;
   metaDescription: string;
@@ -187,12 +200,14 @@ export interface Slide {
 
 export interface SlideQuery {
   id: number;
-  picture: string;
+  pictureUrl: string;
+  pictureAlt: string;
+  pictureTitle: string;
   heading: string;
   title: string;
   text: string;
   link: string;
-  linkText: string;
+  btnText: string;
 }
 
 // ==========================================
@@ -242,7 +257,9 @@ export interface CustomerDiscount {
   product: string;
   discountRate: number;
   startDate: string;
+  startDateGr: string;
   endDate: string;
+  endDateGr: string;
   reason: string;
   creationDate: string;
 }
@@ -255,14 +272,35 @@ export interface CommentModel {
   id: number;
   name: string;
   email: string;
+  website: string;
   description: string;
-  creationDate: string;
-  ownerId: number;
+  rating: number;
+  commentDate: string;
+  ownerName: string;
   ownerRecordId: number;
   type: number;
   isConfirmed: boolean;
   isCanceled: boolean;
-  isRemoved: boolean;
+}
+
+export interface Inventory {
+  id: number;
+  productId: number;
+  product: string;
+  unitPrice: number;
+  inStock: boolean;
+  currentCount: number;
+  creationDate: string;
+}
+
+export interface InventoryOperation {
+  id: number;
+  operation: boolean;
+  count: number;
+  operator: string;
+  operationDate: string;
+  currentCount: number;
+  description: string;
 }
 
 // ==========================================
@@ -307,3 +345,4 @@ export interface PaymentMethod {
   name: string;
   description: string;
 }
+

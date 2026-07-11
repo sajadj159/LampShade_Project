@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form, Input, Select, Upload, message, Typography, Image } from 'antd';
-import { EditOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { Table, Button, Modal, Form, Input, Select, message, Typography, Image } from 'antd';
+import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { articleApi, articleCategoryApi, mediaUrl } from '../../services/api';
+import ImageUploadField from '../../components/common/ImageUploadField';
 import type { ArticleViewModel, ArticleCategory } from '../../types';
 
 const { Title } = Typography;
@@ -14,6 +15,7 @@ const BlogPage: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<ArticleViewModel | null>(null);
   const [form] = Form.useForm();
+  const [currentPicture, setCurrentPicture] = useState('');
 
   const fetchArticles = async () => {
     setLoading(true);
@@ -38,7 +40,9 @@ const BlogPage: React.FC = () => {
     setEditing(record);
     try {
       const details = await articleApi.getDetails(record.id);
-      form.setFieldsValue(details);
+      const { pictureUrl, PictureUrl, picture, Picture, ...formFields } = details;
+      setCurrentPicture(pictureUrl || PictureUrl || picture || Picture || '');
+      form.setFieldsValue(formFields);
       setModalOpen(true);
     } catch {
       message.error('Failed to load article details');
@@ -74,6 +78,7 @@ const BlogPage: React.FC = () => {
       setModalOpen(false);
       form.resetFields();
       setEditing(null);
+      setCurrentPicture('');
       fetchArticles();
     } catch {
       message.error('Failed to save article');
@@ -101,7 +106,7 @@ const BlogPage: React.FC = () => {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
         <Title level={3} style={{ margin: 0 }}>Blog Posts</Title>
-        <Button type="primary" icon={<PlusOutlined />} onClick={() => { setEditing(null); form.resetFields(); setModalOpen(true); }}>
+        <Button type="primary" icon={<PlusOutlined />} onClick={() => { setEditing(null); setCurrentPicture(''); form.resetFields(); setModalOpen(true); }}>
           Add Article
         </Button>
       </div>
@@ -112,7 +117,7 @@ const BlogPage: React.FC = () => {
         title={editing ? 'Edit Article' : 'Create Article'}
         open={modalOpen}
         onOk={handleSave}
-        onCancel={() => { setModalOpen(false); setEditing(null); form.resetFields(); }}
+        onCancel={() => { setModalOpen(false); setEditing(null); setCurrentPicture(''); form.resetFields(); }}
         width={700}
       >
         <Form form={form} layout="vertical">
@@ -148,11 +153,7 @@ const BlogPage: React.FC = () => {
           <Form.Item name="pictureAlt" label="Picture Alt">
             <Input />
           </Form.Item>
-          <Form.Item name="pictureUrl" label="Picture" valuePropName="fileList">
-            <Upload listType="picture" maxCount={1} beforeUpload={() => false}>
-              <Button icon={<UploadOutlined />}>Upload Picture</Button>
-            </Upload>
-          </Form.Item>
+          <ImageUploadField currentImage={currentPicture} name="pictureUrl" label="Picture" />
         </Form>
       </Modal>
     </div>

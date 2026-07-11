@@ -66,6 +66,7 @@ namespace _0_Framework.Application
                 ? roleId
                 : 0;
             result.Role = claims.FirstOrDefault(x => x.Type == "RoleName")?.Value;
+            result.ProfilePhoto = claims.FirstOrDefault(x => x.Type == "ProfilePhoto")?.Value;
 
             var permissions = claims.FirstOrDefault(x => x.Type == "permissions")?.Value;
             result.Permissions = string.IsNullOrWhiteSpace(permissions)
@@ -92,6 +93,7 @@ namespace _0_Framework.Application
                 new Claim("permissions",permissions),
                 new Claim("Mobile", account.Mobile),
                 new Claim("RoleName", account.Role ?? string.Empty),
+                new Claim("ProfilePhoto", account.ProfilePhoto ?? string.Empty),
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -112,3 +114,4 @@ namespace _0_Framework.Application
         }
     }
 }
+

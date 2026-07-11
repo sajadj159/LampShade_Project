@@ -63,7 +63,7 @@ const CategoriesPage: React.FC = () => {
                   cover={
                     <img
                       alt={category.name}
-                      src={mediaUrl(category.picture)}
+                      src={mediaUrl(category.pictureUrl || category.picture || '')}
                       style={{ height: 200, objectFit: 'cover' }}
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://via.placeholder.com/300x200';
