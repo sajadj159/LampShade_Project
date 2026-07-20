@@ -64,7 +64,7 @@ const CategoriesPage: React.FC = () => {
                     <img
                       alt={category.name}
                       src={mediaUrl(category.pictureUrl || category.picture || '')}
-                      style={{ height: 200, objectFit: 'cover' }}
+                      className="catalog-card__image"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://via.placeholder.com/300x200';
                       }}
@@ -100,3 +100,4 @@ const CategoriesPage: React.FC = () => {
 };
 
 export default CategoriesPage;
+

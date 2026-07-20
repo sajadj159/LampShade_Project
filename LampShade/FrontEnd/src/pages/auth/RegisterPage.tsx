@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Typography, Card, message } from 'antd';
 import { PhoneOutlined, UserOutlined, LockOutlined, HomeOutlined } from '@ant-design/icons';
 import { authApi } from '../../services/api';
@@ -9,6 +9,8 @@ const { Title, Text } = Typography;
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = (location.state as { from?: string } | null)?.from || '/';
   const [loading, setLoading] = React.useState(false);
 
   const onFinish = async (values: any) => {
@@ -30,7 +32,7 @@ const RegisterPage: React.FC = () => {
       const result = await authApi.register(formData);
       if (result.isSucceeded) {
         message.success('Registration successful! You can now login.');
-        navigate('/login');
+        navigate('/login', { state: { from: returnTo } });
       } else {
         message.error(result.message || 'Registration failed');
       }
@@ -91,7 +93,7 @@ const RegisterPage: React.FC = () => {
         </Form>
 
         <div style={{ textAlign: 'center' }}>
-          <Text type="secondary">Already have an account? <Link to="/login">Login</Link></Text>
+          <Text type="secondary">Already have an account? <Link to="/login" state={{ from: returnTo }}>Login</Link></Text>
         </div>
       </Card>
     </div>
@@ -99,3 +101,4 @@ const RegisterPage: React.FC = () => {
 };
 
 export default RegisterPage;
+

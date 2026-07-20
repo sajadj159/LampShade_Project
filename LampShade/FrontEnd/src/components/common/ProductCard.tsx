@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Tag, Typography } from 'antd';
+import { Card, message, Tag, Typography } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { mediaUrl } from '../../services/api';
 import type { Product } from '../../types';
+import { addProductToCart } from '../../utils/cart';
 
 const { Meta } = Card;
 const { Text } = Typography;
@@ -13,33 +14,35 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const handleAddToCart = () => {
+    if (!addProductToCart(product)) {
+      message.warning('This product is out of stock');
+      return;
+    }
+
+    message.success('Added to cart');
+  };
+
   return (
     <Card
       hoverable
       cover={
         <Link to={`/product/${product.slug}`}>
-          <div style={{ overflow: 'hidden', height: 200 }}>
+          <div className="product-card__image-frame">
             <img
               alt={product.pictureAlt}
-              src={mediaUrl(product.pictureUrl)}
-              style={{
-                width: '100%',
-                height: 200,
-                objectFit: 'cover',
-                transition: 'transform 0.3s',
-              }}
-              onMouseOver={(e) => {
-                (e.target as HTMLImageElement).style.transform = 'scale(1.05)';
-              }}
-              onMouseOut={(e) => {
-                (e.target as HTMLImageElement).style.transform = 'scale(1)';
-              }}
+              src={mediaUrl(product.pictureUrl)} className="product-card__image"
             />
           </div>
         </Link>
       }
       actions={[
-        <ShoppingCartOutlined key="cart" style={{ fontSize: 18 }} />,
+        <ShoppingCartOutlined
+          key="cart"
+          aria-label="Add to cart"
+          style={{ fontSize: 18, opacity: product.inStock ? 1 : 0.45, cursor: product.inStock ? 'pointer' : 'not-allowed' }}
+          onClick={handleAddToCart}
+        />,
       ]}
       style={{ height: '100%' }}
     >
@@ -86,3 +89,5 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 };
 
 export default ProductCard;
+
+

@@ -5,6 +5,7 @@ import {
   DashboardOutlined,
   UserOutlined,
   ShoppingOutlined,
+  ShoppingCartOutlined,
   PercentageOutlined,
   PictureOutlined,
   SafetyCertificateOutlined,
@@ -63,6 +64,10 @@ const AdminLayout: React.FC = () => {
       key: '/admin/inventory',
       icon: <InboxOutlined />,
       label: t('inventory'),
+    },    {
+      key: '/admin/orders',
+      icon: <ShoppingCartOutlined />,
+      label: 'Orders',
     },    {
       key: '/admin/discounts',
       icon: <PercentageOutlined />,
@@ -186,4 +191,7 @@ const AdminLayout: React.FC = () => {
 };
 
 export default AdminLayout;
+
+
+
 

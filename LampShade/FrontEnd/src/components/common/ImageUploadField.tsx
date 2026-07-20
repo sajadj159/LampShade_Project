@@ -37,7 +37,7 @@ const ImageUploadField = ({ name, label, currentImage, required = false }: Image
         height={96}
         preview
         src={mediaUrl(currentImage)}
-        style={{ display: 'block', marginBottom: 12, maxWidth: '100%', objectFit: 'cover' }}
+        className="image-upload-field__preview"
         width={96}
       />
     )}
@@ -56,3 +56,4 @@ const ImageUploadField = ({ name, label, currentImage, required = false }: Image
 );
 
 export default ImageUploadField;
+

@@ -7,6 +7,7 @@ using LampShade.Api.Features.Accounts.Commands.Register;
 using LampShade.Api.Features.Accounts.Queries.GetAccountById;
 using LampShade.Api.Features.Accounts.Queries.GetAccounts;
 using LampShade.Api.Features.Accounts.Queries.SearchAccounts;
+using _0_Framework.Application;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +19,13 @@ namespace LampShade.Api.Controllers.Write;
 public class AccountController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IAuthHelper _authHelper;
 
-    public AccountController(IMediator mediator) => _mediator = mediator;
+    public AccountController(IMediator mediator, IAuthHelper authHelper)
+    {
+        _mediator = mediator;
+        _authHelper = authHelper;
+    }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromForm] RegisterCommand command)
@@ -45,7 +51,10 @@ public class AccountController : ControllerBase
     [Authorize]
     [HttpPost("address")]
     public async Task<IActionResult> MakeAddress([FromBody] MakeAddressCommand command)
-        => Ok(await _mediator.Send(command));
+    {
+        command.AccountId = _authHelper.CurrentAccountId();
+        return Ok(await _mediator.Send(command));
+    }
 
     [Authorize]
     [HttpGet("search")]
@@ -75,3 +84,5 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> GetAccountBy(long id)
         => Ok(await _mediator.Send(new GetAccountByIdQuery { Id = id }));
 }
+
+

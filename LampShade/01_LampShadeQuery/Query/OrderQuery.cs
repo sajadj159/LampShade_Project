@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _01_LampShadeQuery.Contract.Order;
@@ -34,12 +34,16 @@ namespace _01_LampShadeQuery.Query
                 PaymentMethodId = x.PaymentMethod,
                 PayAmount = x.PayAmount,
                 IsPaid = x.IsPaid,
+                IsCanceled = x.IsCanceled,
                 AccountId = x.AccountId,
                 TotalAmount = x.TotalAmount,
                 DiscountAmount = x.DiscountAmount,
                 IssueTrackingNo = x.IssueTrackingNumber,
+                PaymentProofUrl = x.PaymentProofUrl,
                 PayDate = x.CreationDate.ToFarsi()
             }).Where(x=>x.AccountId==accountId).ToList();
         }
     }
 }
+
+

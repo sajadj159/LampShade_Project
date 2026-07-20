@@ -32,6 +32,8 @@ public class CurrentUserController : ControllerBase
             Username = string.IsNullOrWhiteSpace(account?.UserName) ? info.Username : account.UserName,
             Fullname = string.IsNullOrWhiteSpace(account?.FullName) ? info.Fullname : account.FullName,
             Mobile = string.IsNullOrWhiteSpace(account?.Mobile) ? info.Mobile : account.Mobile,
+            Address = account?.Address ?? string.Empty,
+            PostalCode = account?.PostalCode ?? string.Empty,
             RoleId = account?.RoleId > 0 ? account.RoleId : info.RoleId,
             Role = string.IsNullOrWhiteSpace(account?.Role) ? info.Role : account.Role,
             ProfilePhoto = string.IsNullOrWhiteSpace(account?.ProfilePhoto) ? info.ProfilePhoto : account.ProfilePhoto,
@@ -39,3 +41,4 @@ public class CurrentUserController : ControllerBase
         });
     }
 }
+

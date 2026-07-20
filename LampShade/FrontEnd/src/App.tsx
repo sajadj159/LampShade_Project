@@ -23,6 +23,7 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import ProfilePage from './pages/account/ProfilePage';
 import OrdersPage from './pages/account/OrdersPage';
+import AdminOrdersPage from './pages/admin/OrdersPage';
 
 // Blog Pages
 import BlogListPage from './pages/blog/BlogListPage';
@@ -100,6 +101,7 @@ const ThemedApp: React.FC = () => {
               <Route path="blog" element={<BlogAdminPage />} />
               <Route path="comments" element={<CommentsPage />} />
               <Route path="inventory" element={<InventoryPage />} />
+              <Route path="orders" element={<AdminOrdersPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
@@ -111,3 +113,5 @@ const ThemedApp: React.FC = () => {
 const App: React.FC = () => <LanguageProvider><ThemeModeProvider><ThemedApp /></ThemeModeProvider></LanguageProvider>;
 
 export default App;
+
+

@@ -80,6 +80,8 @@ const HomePage: React.FC = () => {
                   background: slideBackground(slide.pictureUrl),
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundColor: '#101828',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -140,7 +142,7 @@ const HomePage: React.FC = () => {
                         <img
                           alt={category.name}
                           src={mediaUrl(category.pictureUrl || category.picture || '')}
-                          style={{ height: 160, objectFit: 'cover' }}
+                          className="catalog-card__image"
                         />
                       }
                     >
@@ -183,3 +185,5 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
+
+

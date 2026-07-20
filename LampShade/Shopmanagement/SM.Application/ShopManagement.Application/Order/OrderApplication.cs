@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using _0_Framework.Application;
 using _0_Framework.Application.SMS;
 using Microsoft.Extensions.Configuration;
@@ -46,15 +46,53 @@ namespace ShopManagement.Application.Order
 
         public string PaymentSucceeded(long orderId, long refId)
         {
+            return ConfirmOrder(orderId, refId, false);
+        }
+
+        public string ApproveCashOnDelivery(long orderId)
+        {
             var order = _orderRepository.Get(orderId);
+            if (order != null && order.PaymentMethod == 2 && order.IsPaid && !order.IsCanceled)
+                return order.IssueTrackingNumber;
+
+            return ConfirmOrder(orderId, 0, true);
+        }
+
+        public string ApprovePaymentProof(long orderId)
+        {
+            var order = _orderRepository.Get(orderId);
+            if (order == null || order.PaymentMethod != 1 || string.IsNullOrWhiteSpace(order.PaymentProofUrl) || order.IsCanceled)
+                return string.Empty;
+            if (order.IsPaid)
+                return order.IssueTrackingNumber;
+
+            return ConfirmOrder(orderId, 0, false);
+        }
+        public OperationResult UploadPaymentProof(long orderId, string paymentProofUrl)
+        {
+            var result = new OperationResult();
+            var order = _orderRepository.Get(orderId);
+            if (order == null || order.AccountId != _authHelper.CurrentAccountId() || order.PaymentMethod != 1 || order.IsCanceled || order.IsPaid)
+                return result.Failed("Payment proof cannot be uploaded for this order.");
+
+            order.SetPaymentProof(paymentProofUrl);
+            _orderRepository.Save();
+            return result.Succeeded();
+        }
+        private string ConfirmOrder(long orderId, long refId, bool cashOnDeliveryOnly)
+        {
+            var order = _orderRepository.Get(orderId);
+            if (order == null || order.IsCanceled || order.IsPaid || (cashOnDeliveryOnly && order.PaymentMethod != 2))
+                return string.Empty;
+
             order.PaymentSucceeded(refId);
             var issueCodeTracking = CodeGenerator.Generate("S");
             order.SetIssueTrackingNumber(issueCodeTracking);
-            if (!_inventoryAcl.ReduceFromInventory(order.Items)) return "";
+            if (!_inventoryAcl.ReduceFromInventory(order.Items)) return string.Empty;
 
             _orderRepository.Save();
             var (name, mobile) = _accountAcl.GetAccountBy(order.AccountId);
-            _smsService.Send(mobile,$"{name} گرامی سفارش شما با شماره پیگیری {issueCodeTracking} موفقیت پرداخت شد و ارسال خواهد شد.");
+            _smsService.Send(mobile,$"{name} گرامی سفارش شما با شماره پیگیری {issueCodeTracking} تایید شد و ارسال خواهد شد.");
             return issueCodeTracking;
         }
 
@@ -76,3 +114,7 @@ namespace ShopManagement.Application.Order
         }
     }
 }
+
+
+
+

@@ -33,6 +33,7 @@ namespace _01_LampShadeQuery.Query
             var currentAccountRole = _authHelper.CurrentAccountRole();
             foreach (var cartItem in cartItems)
             {
+                cartItem.CalculateTotalItemPrice();
                 if (currentAccountRole == Roles.ColleagueUser)
                 {
                     var colleagueDiscount = colleagueDiscounts.FirstOrDefault(x => x.ProductId == cartItem.Id);
@@ -53,3 +54,4 @@ namespace _01_LampShadeQuery.Query
         }
     }
 }
+

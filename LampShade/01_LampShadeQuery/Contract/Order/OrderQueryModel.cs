@@ -1,4 +1,4 @@
-﻿namespace _01_LampShadeQuery.Contract.Order
+namespace _01_LampShadeQuery.Contract.Order
 {
     public class OrderQueryModel
     {
@@ -6,13 +6,17 @@
         public int PaymentMethodId { get; set; }
         public double PayAmount { get; set; }
         public bool IsPaid { get; set; }
+        public bool IsCanceled { get; set; }
         public long AccountId { get; set; }
         public double TotalAmount { get; set; }
         public double DiscountAmount { get; set; }
         public string IssueTrackingNo { get; set; }
+        public string PaymentProofUrl { get; set; }
         public string PayDate { get; set; }
 
     }
 
 
 }
+
+

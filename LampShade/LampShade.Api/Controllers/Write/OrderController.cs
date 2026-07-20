@@ -1,6 +1,10 @@
+using _0_Framework.Repository;
+using LampShade.Api.Features.Orders.Commands.ApproveCashOnDelivery;
+using LampShade.Api.Features.Orders.Commands.ApprovePaymentProof;
 using LampShade.Api.Features.Orders.Commands.CancelOrder;
 using LampShade.Api.Features.Orders.Commands.PaymentSucceeded;
 using LampShade.Api.Features.Orders.Commands.PlaceOrder;
+using LampShade.Api.Features.Orders.Commands.UploadPaymentProof;
 using LampShade.Api.Features.Orders.Queries.GetOrderAmount;
 using LampShade.Api.Features.Orders.Queries.GetOrderItems;
 using LampShade.Api.Features.Orders.Queries.SearchOrders;
@@ -24,16 +28,47 @@ public class OrderController : ControllerBase
     [HttpGet("{id}/amount")]
     public async Task<IActionResult> GetAmountBy(long id) => Ok(new { Amount = await _mediator.Send(new GetOrderAmountQuery { Id = id }) });
 
+    [Authorize(Roles = Roles.Administrator)]
+    [HttpPost("{id}/approve-cash-on-delivery")]
+    public async Task<IActionResult> ApproveCashOnDelivery(long id)
+    {
+        var trackingNumber = await _mediator.Send(new ApproveCashOnDeliveryCommand { OrderId = id });
+        return string.IsNullOrWhiteSpace(trackingNumber)
+            ? BadRequest(new { Message = "The order cannot be approved." })
+            : Ok(new { IssueTrackingNumber = trackingNumber });
+    }
     [HttpPost("{orderId}/payment-succeeded")]
     public async Task<IActionResult> PaymentSucceeded(long orderId, [FromQuery] long refId)
         => Ok(new { IssueTrackingNumber = await _mediator.Send(new PaymentSucceededCommand { OrderId = orderId, RefId = refId }) });
 
+    [HttpPost("{id}/payment-proof")]
+    public async Task<IActionResult> UploadPaymentProof(long id, [FromForm] UploadPaymentProofCommand command)
+    {
+        command.OrderId = id;
+        return Ok(await _mediator.Send(command));
+    }
+
+    [Authorize(Roles = Roles.Administrator)]
+    [HttpPost("{id}/approve-payment-proof")]
+    public async Task<IActionResult> ApprovePaymentProof(long id)
+    {
+        var trackingNumber = await _mediator.Send(new ApprovePaymentProofCommand { OrderId = id });
+        return string.IsNullOrWhiteSpace(trackingNumber)
+            ? BadRequest(new { Message = "The order cannot be approved." })
+            : Ok(new { IssueTrackingNumber = trackingNumber });
+    }
+
     [HttpPost("{id}/cancel")]
     public async Task<IActionResult> Cancel(long id) { await _mediator.Send(new CancelOrderCommand { Id = id }); return Ok(); }
 
+    [Authorize(Roles = Roles.Administrator)]
     [HttpGet("search")]
     public async Task<IActionResult> Search([FromQuery] SearchOrdersQuery query) => Ok(await _mediator.Send(query));
 
     [HttpGet("{id}/items")]
     public async Task<IActionResult> GetItemsBy(long id) => Ok(await _mediator.Send(new GetOrderItemsQuery { OrderId = id }));
 }
+
+
+
+

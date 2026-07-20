@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Table, Button, Typography, InputNumber, Space, Empty, Card, Row, Col, message, Popconfirm } from 'antd';
-import { DeleteOutlined, ShoppingCartOutlined, HomeOutlined } from '@ant-design/icons';
+import { Button, Typography, InputNumber, Empty, message, Popconfirm, Tag } from 'antd';
+import { DeleteOutlined, ShoppingCartOutlined, HomeOutlined, ReloadOutlined, SafetyCertificateOutlined } from '@ant-design/icons';
 import { cartApi, mediaUrl } from '../../services/api';
 import type { CartItem, Cart } from '../../types';
 
@@ -14,197 +14,110 @@ const CartPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    loadCart();
+    const storedCart = localStorage.getItem('cartItems');
+    if (storedCart) setCartItems(JSON.parse(storedCart));
   }, []);
 
-  const loadCart = () => {
-    const stored = localStorage.getItem('cartItems');
-    if (stored) {
-      const items = JSON.parse(stored);
-      setCartItems(items);
-    }
-  };
-
   const updateQuantity = (id: number, count: number) => {
-    const updated = cartItems.map((item) =>
-      item.id === id ? { ...item, count } : item
-    );
-    setCartItems(updated);
-    localStorage.setItem('cartItems', JSON.stringify(updated));
+    const updatedItems = cartItems.map((item) => item.id === id ? { ...item, count } : item);
+    setCartItems(updatedItems);
+    setCart(null);
+    localStorage.setItem('cartItems', JSON.stringify(updatedItems));
   };
 
   const removeItem = (id: number) => {
-    const updated = cartItems.filter((item) => item.id !== id);
-    setCartItems(updated);
-    localStorage.setItem('cartItems', JSON.stringify(updated));
+    const updatedItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedItems);
+    setCart(null);
+    localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     message.success('Item removed from cart');
   };
 
   const computeCart = async () => {
-    if (cartItems.length === 0) {
+    if (!cartItems.length) {
       message.warning('Cart is empty');
       return;
     }
 
     setLoading(true);
     try {
-      const result = await cartApi.compute(cartItems);
-      setCart(result);
-    } catch (error) {
-      message.error('Failed to compute cart');
+      setCart(await cartApi.compute(cartItems));
+    } catch {
+      message.error('Failed to update cart totals');
     } finally {
       setLoading(false);
     }
   };
 
-  const columns = [
-    {
-      title: 'Product',
-      key: 'product',
-      render: (_: any, record: CartItem) => (
-        <Space>
-          <img
-            src={mediaUrl(record.pictureUrl)}
-            alt={record.name}
-            style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: 4 }}
-          />
-          <Text>{record.name}</Text>
-        </Space>
-      ),
-    },
-    {
-      title: 'Price',
-      dataIndex: 'unitPrice',
-      key: 'unitPrice',
-      render: (price: number) => <Text>{price.toLocaleString()} Tomans</Text>,
-    },
-    {
-      title: 'Quantity',
-      key: 'quantity',
-      render: (_: any, record: CartItem) => (
-        <InputNumber
-          min={1}
-          max={100}
-          value={record.count}
-          onChange={(value) => updateQuantity(record.id, value || 1)}
-        />
-      ),
-    },
-    {
-      title: 'Total',
-      key: 'total',
-      render: (_: any, record: CartItem) => (
-        <Text strong>{(record.unitPrice * record.count).toLocaleString()} Tomans</Text>
-      ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (_: any, record: CartItem) => (
-        <Popconfirm
-          title="Remove this item?"
-          onConfirm={() => removeItem(record.id)}
-        >
-          <Button type="text" danger icon={<DeleteOutlined />} />
-        </Popconfirm>
-      ),
-    },
-  ];
-
   const handleCheckout = () => {
     if (!cart) {
-      message.warning('Please compute your cart first');
+      message.warning('Update the cart before continuing to checkout');
       return;
     }
     localStorage.setItem('computedCart', JSON.stringify(cart));
     navigate('/checkout');
   };
 
+  const displayedSubtotal = cart?.totalAmount ?? cartItems.reduce((sum, item) => sum + item.unitPrice * item.count, 0);
+  const displayedDiscount = cart?.discountAmount ?? 0;
+  const displayedPayable = cart?.payAmount ?? displayedSubtotal;
+
   return (
-    <div style={{ padding: '24px', maxWidth: 1200, margin: '0 auto' }}>
-      <Space style={{ marginBottom: 24 }}>
+    <div className="cart-page">
+      <div className="cart-page__breadcrumb">
         <Link to="/"><HomeOutlined /> Home</Link>
         <Text type="secondary">/</Text>
         <ShoppingCartOutlined /> Shopping Cart
-      </Space>
+      </div>
 
-      <Title level={2}>Shopping Cart</Title>
+      <div className="cart-page__heading">
+        <Title level={2}>Shopping Cart</Title>
+        <Text type="secondary">{cartItems.length} {cartItems.length === 1 ? 'item' : 'items'}</Text>
+      </div>
 
-      {cartItems.length === 0 ? (
-        <Empty
-          description="Your cart is empty"
-          style={{ padding: '48px 0' }}
-        >
-          <Link to="/products">
-            <Button type="primary">Continue Shopping</Button>
-          </Link>
+      {!cartItems.length ? (
+        <Empty description="Your cart is empty" className="cart-page__empty">
+          <Link to="/products"><Button type="primary">Continue Shopping</Button></Link>
         </Empty>
       ) : (
-        <Row gutter={[24, 24]}>
-          <Col xs={24} lg={16}>
-            <Table
-              columns={columns}
-              dataSource={cartItems.map((item) => ({ ...item, key: item.id }))}
-              pagination={false}
-              loading={loading}
-            />
-          </Col>
-          <Col xs={24} lg={8}>
-            <Card title="Cart Summary">
-              <Space direction="vertical" style={{ width: '100%' }} size="middle">
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Text>Items:</Text>
-                  <Text>{cartItems.length}</Text>
+        <div className="cart-layout">
+          <section className="cart-items-panel">
+            {cartItems.map((item) => (
+              <article className="cart-product" key={item.id}>
+                <img src={mediaUrl(item.pictureUrl)} alt={item.name} className="cart-product__image" />
+                <div className="cart-product__details">
+                  <Text className="cart-product__name">{item.name}</Text>
+                  <Text type="secondary" className="cart-product__unit-price">Unit price: {item.unitPrice.toLocaleString()} Tomans</Text>
+                  <Tag color="green" className="cart-product__stock">In stock</Tag>
+                  <div className="cart-product__actions">
+                    <InputNumber min={1} max={100} value={item.count} onChange={(value) => updateQuantity(item.id, value || 1)} aria-label="Quantity" />
+                    <Popconfirm title="Remove this item?" onConfirm={() => removeItem(item.id)}>
+                      <Button type="text" danger icon={<DeleteOutlined />} aria-label="Remove item" />
+                    </Popconfirm>
+                  </div>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Text>Total Quantity:</Text>
-                  <Text>{cartItems.reduce((sum, item) => sum + item.count, 0)}</Text>
+                <div className="cart-product__total">
+                  <span className="cart-money cart-money--total">{(item.unitPrice * item.count).toLocaleString()} <span className="cart-money__unit">Tomans</span></span>
                 </div>
-                
-                <Button
-                  type="default"
-                  block
-                  onClick={computeCart}
-                  loading={loading}
-                >
-                  Compute Cart
-                </Button>
+              </article>
+            ))}
+          </section>
 
-                {cart && (
-                  <>
-                    <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: 16 }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Text>Total Amount:</Text>
-                        <Text>{cart.totalAmount.toLocaleString()} Tomans</Text>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Text type="success">Discount:</Text>
-                        <Text type="success">-{cart.discountAmount.toLocaleString()} Tomans</Text>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
-                        <Text strong style={{ fontSize: 18 }}>Pay Amount:</Text>
-                        <Text strong style={{ fontSize: 18, color: '#ff4d4f' }}>
-                          {cart.payAmount.toLocaleString()} Tomans
-                        </Text>
-                      </div>
-                    </div>
-                    <Button
-                      type="primary"
-                      size="large"
-                      block
-                      onClick={handleCheckout}
-                    >
-                      Proceed to Checkout
-                    </Button>
-                  </>
-                )}
-              </Space>
-            </Card>
-          </Col>
-        </Row>
+          <aside className="cart-summary-panel">
+            <Title level={4}>Payment details</Title>
+            <div className="cart-summary-panel__line"><Text>Items subtotal</Text><span className="cart-money">{displayedSubtotal.toLocaleString()} <span className="cart-money__unit">Tomans</span></span></div>
+            <div className="cart-summary-panel__line"><Text type="success">Discount</Text><span className="cart-money">-{displayedDiscount.toLocaleString()} <span className="cart-money__unit">Tomans</span></span></div>
+            <div className="cart-summary-panel__total"><Text strong>Order total</Text><span className="cart-money cart-money--total">{displayedPayable.toLocaleString()} <span className="cart-money__unit">Tomans</span></span></div>
+            <Button block icon={<ReloadOutlined />} loading={loading} onClick={computeCart}>Update totals</Button>
+            <Button type="primary" size="large" block onClick={handleCheckout} disabled={!cart} className="cart-summary-panel__checkout">Continue to checkout</Button>
+            {!cart && <Text type="secondary" className="cart-summary-panel__hint">Update totals to apply active discounts before checkout.</Text>}
+            <div className="cart-summary-panel__notice"><SafetyCertificateOutlined /><span>Secure checkout. Your delivery details are collected before payment.</span></div>
+          </aside>
+        </div>
       )}
     </div>
   );
 };
 
 export default CartPage;
+

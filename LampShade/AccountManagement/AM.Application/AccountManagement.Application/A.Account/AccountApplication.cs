@@ -116,11 +116,6 @@ namespace AccountManagement.Application.A.Account
             {
                 return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
-
-            if (_accountRepository.Exist(x=>x.Address==command.Address&&x.PostalCode==command.PostalCode))
-            {
-                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
-            }
             account.MakeAddress(command.Address,command.PostalCode);
             _accountRepository.Save();
             return operationResult.Succeeded();
@@ -157,4 +152,5 @@ namespace AccountManagement.Application.A.Account
         }
     }
 }
+
 
