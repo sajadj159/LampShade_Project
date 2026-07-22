@@ -1,4 +1,4 @@
-using LampShade.Api.Features.Inventories.Queries.CheckStock;
+using _01_LampShadeQuery.Features.Inventories.Queries.CheckStock;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

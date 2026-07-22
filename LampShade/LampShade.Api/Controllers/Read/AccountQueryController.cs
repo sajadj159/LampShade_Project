@@ -1,4 +1,4 @@
-using LampShade.Api.Features.Accounts.Queries.GetAllAccountsForQuery;
+using _01_LampShadeQuery.Features.Accounts.Queries.GetAllAccountsForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

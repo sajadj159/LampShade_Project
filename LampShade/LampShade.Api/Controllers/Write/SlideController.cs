@@ -1,9 +1,9 @@
-using LampShade.Api.Features.Slides.Commands.CreateSlide;
-using LampShade.Api.Features.Slides.Commands.EditSlide;
-using LampShade.Api.Features.Slides.Commands.RemoveSlide;
-using LampShade.Api.Features.Slides.Commands.RestoreSlide;
-using LampShade.Api.Features.Slides.Queries.GetSlideById;
-using LampShade.Api.Features.Slides.Queries.GetSlides;
+using ShopManagement.Application.Features.Slides.Commands.CreateSlide;
+using ShopManagement.Application.Features.Slides.Commands.EditSlide;
+using ShopManagement.Application.Features.Slides.Commands.RemoveSlide;
+using ShopManagement.Application.Features.Slides.Commands.RestoreSlide;
+using ShopManagement.Application.Features.Slides.Queries.GetSlideById;
+using ShopManagement.Application.Features.Slides.Queries.GetSlides;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

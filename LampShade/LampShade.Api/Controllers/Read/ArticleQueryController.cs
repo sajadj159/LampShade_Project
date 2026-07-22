@@ -1,5 +1,5 @@
-using LampShade.Api.Features.Articles.Queries.GetArticleBySlug;
-using LampShade.Api.Features.Articles.Queries.LatestArticles;
+using _01_LampShadeQuery.Features.Articles.Queries.GetArticleBySlug;
+using _01_LampShadeQuery.Features.Articles.Queries.LatestArticles;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

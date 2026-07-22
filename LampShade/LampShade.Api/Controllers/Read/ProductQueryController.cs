@@ -1,7 +1,7 @@
-using LampShade.Api.Features.Products.Queries.CheckInventoryStatus;
-using LampShade.Api.Features.Products.Queries.GetLatestArrivals;
-using LampShade.Api.Features.Products.Queries.GetProductBySlug;
-using LampShade.Api.Features.Products.Queries.SearchProductsForQuery;
+using _01_LampShadeQuery.Features.Products.Queries.CheckInventoryStatus;
+using _01_LampShadeQuery.Features.Products.Queries.GetLatestArrivals;
+using _01_LampShadeQuery.Features.Products.Queries.GetProductBySlug;
+using _01_LampShadeQuery.Features.Products.Queries.SearchProductsForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

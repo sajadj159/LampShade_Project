@@ -1,9 +1,9 @@
-using LampShade.Api.Features.ProductPictures.Commands.CreateProductPicture;
-using LampShade.Api.Features.ProductPictures.Commands.EditProductPicture;
-using LampShade.Api.Features.ProductPictures.Commands.RemoveProductPicture;
-using LampShade.Api.Features.ProductPictures.Commands.RestoreProductPicture;
-using LampShade.Api.Features.ProductPictures.Queries.GetProductPictureById;
-using LampShade.Api.Features.ProductPictures.Queries.SearchProductPictures;
+using ShopManagement.Application.Features.ProductPictures.Commands.CreateProductPicture;
+using ShopManagement.Application.Features.ProductPictures.Commands.EditProductPicture;
+using ShopManagement.Application.Features.ProductPictures.Commands.RemoveProductPicture;
+using ShopManagement.Application.Features.ProductPictures.Commands.RestoreProductPicture;
+using ShopManagement.Application.Features.ProductPictures.Queries.GetProductPictureById;
+using ShopManagement.Application.Features.ProductPictures.Queries.SearchProductPictures;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

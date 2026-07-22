@@ -1,5 +1,5 @@
-using LampShade.Api.Features.ProductCategories.Queries.GetProductCategoriesWithProductsForQuery;
-using LampShade.Api.Features.ProductCategories.Queries.GetProductCategoryWithProducts;
+using _01_LampShadeQuery.Features.ProductCategories.Queries.GetProductCategoriesWithProductsForQuery;
+using _01_LampShadeQuery.Features.ProductCategories.Queries.GetProductCategoryWithProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

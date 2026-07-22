@@ -1,4 +1,4 @@
-using LampShade.Api.Features.Slides.Queries.GetSlidesForQuery;
+using _01_LampShadeQuery.Features.Slides.Queries.GetSlidesForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

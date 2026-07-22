@@ -1,5 +1,5 @@
-using LampShade.Api.Features.Orders.Queries.GetOrdersByAccount;
-using LampShade.Api.Features.Orders.Queries.GetPaidOrders;
+using _01_LampShadeQuery.Features.Orders.Queries.GetOrdersByAccount;
+using _01_LampShadeQuery.Features.Orders.Queries.GetPaidOrders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

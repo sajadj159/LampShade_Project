@@ -1,5 +1,6 @@
 using _0_Framework.Application;
-using AccountManagement.Application.Contracts.AC.Account;
+using AccountManagement.Application.Features.Accounts.Queries.GetAccountById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
@@ -9,22 +10,22 @@ namespace LampShade.Api.Controllers.Write;
 public class CurrentUserController : ControllerBase
 {
     private readonly IAuthHelper _authHelper;
-    private readonly IAccountApplication _accountApplication;
+    private readonly IMediator _mediator;
 
-    public CurrentUserController(IAuthHelper authHelper, IAccountApplication accountApplication)
+    public CurrentUserController(IAuthHelper authHelper, IMediator mediator)
     {
         _authHelper = authHelper;
-        _accountApplication = accountApplication;
+        _mediator = mediator;
     }
 
     [HttpGet]
-    public IActionResult GetCurrentUserInfo()
+    public async Task<IActionResult> GetCurrentUserInfo(CancellationToken cancellationToken)
     {
         if (!_authHelper.IsAuthenticated())
             return Unauthorized();
 
         var info = _authHelper.CurrentAccountInfo();
-        var account = _accountApplication.GetAccountBy(info.Id);
+        var account = await _mediator.Send(new GetAccountByIdQuery { Id = info.Id }, cancellationToken);
 
         return Ok(new
         {

@@ -1,4 +1,4 @@
-using LampShade.Api.Features.Comments.Queries.GetAllComments;
+using _01_LampShadeQuery.Features.Comments.Queries.GetAllComments;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

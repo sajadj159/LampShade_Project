@@ -1,8 +1,8 @@
-using LampShade.Api.Features.ArticleCategories.Commands.CreateArticleCategory;
-using LampShade.Api.Features.ArticleCategories.Commands.EditArticleCategory;
-using LampShade.Api.Features.ArticleCategories.Queries.GetArticleCategories;
-using LampShade.Api.Features.ArticleCategories.Queries.GetArticleCategoryById;
-using LampShade.Api.Features.ArticleCategories.Queries.SearchArticleCategories;
+using BlogManagement.Application.Features.ArticleCategories.Commands.CreateArticleCategory;
+using BlogManagement.Application.Features.ArticleCategories.Commands.EditArticleCategory;
+using BlogManagement.Application.Features.ArticleCategories.Queries.GetArticleCategories;
+using BlogManagement.Application.Features.ArticleCategories.Queries.GetArticleCategoryById;
+using BlogManagement.Application.Features.ArticleCategories.Queries.SearchArticleCategories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

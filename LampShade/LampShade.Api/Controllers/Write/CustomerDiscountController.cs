@@ -1,7 +1,7 @@
-using LampShade.Api.Features.CustomerDiscounts.Commands.DefineCustomerDiscount;
-using LampShade.Api.Features.CustomerDiscounts.Commands.EditCustomerDiscount;
-using LampShade.Api.Features.CustomerDiscounts.Queries.GetCustomerDiscountById;
-using LampShade.Api.Features.CustomerDiscounts.Queries.SearchCustomerDiscounts;
+using DiscountManagement.Application.Features.CustomerDiscounts.Commands.DefineCustomerDiscount;
+using DiscountManagement.Application.Features.CustomerDiscounts.Commands.EditCustomerDiscount;
+using DiscountManagement.Application.Features.CustomerDiscounts.Queries.GetCustomerDiscountById;
+using DiscountManagement.Application.Features.CustomerDiscounts.Queries.SearchCustomerDiscounts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

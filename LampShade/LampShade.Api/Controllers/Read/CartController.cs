@@ -1,4 +1,4 @@
-using LampShade.Api.Features.Cart.ComputeCart;
+using _01_LampShadeQuery.Features.Cart.ComputeCart;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

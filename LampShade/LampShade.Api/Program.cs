@@ -67,7 +67,15 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IHttpContextGetter, HttpContextGetter>();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+    typeof(Program).Assembly,
+    typeof(AccountManagement.Application.A.Account.AccountApplication).Assembly,
+    typeof(CommentManagement.Application.Comment.CommentApplication).Assembly,
+    typeof(BlogManagement.Application.A.Article.ArticleApplication).Assembly,
+    typeof(DiscountManagement.Application.A.CustomerDiscount.CustomerDiscountApplication).Assembly,
+    typeof(ShopManagement.Application.Product.ProductApplication).Assembly,
+    typeof(InventoryManagement.Application.InventoryApplication).Assembly,
+    typeof(_01_LampShadeQuery.MenuModel).Assembly));
 
 // Configure Cookie Authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
