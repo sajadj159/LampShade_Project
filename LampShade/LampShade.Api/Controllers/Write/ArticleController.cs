@@ -1,7 +1,7 @@
-using BlogManagement.Application.Features.Articles.Commands.CreateArticle;
-using BlogManagement.Application.Features.Articles.Commands.EditArticle;
-using BlogManagement.Application.Features.Articles.Queries.GetArticleById;
-using BlogManagement.Application.Features.Articles.Queries.SearchArticles;
+using BlogManagement.Application.Contracts.Commands.Articles.CreateArticle;
+using BlogManagement.Application.Contracts.Commands.Articles.EditArticle;
+using LampShade.ReadModel.Contracts.Queries.Articles.GetArticleById;
+using LampShade.ReadModel.Contracts.Queries.Articles.SearchArticles;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,3 +28,4 @@ public class ArticleController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetArticleByIdQuery { Id = id }));
 }
+

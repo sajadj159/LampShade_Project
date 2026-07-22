@@ -1,8 +1,8 @@
-using ShopManagement.Application.Features.Products.Commands.CreateProduct;
-using ShopManagement.Application.Features.Products.Commands.EditProduct;
-using ShopManagement.Application.Features.Products.Queries.GetProductById;
-using ShopManagement.Application.Features.Products.Queries.GetProducts;
-using ShopManagement.Application.Features.Products.Queries.SearchProducts;
+using ShopManagement.Application.Contracts.Commands.Products.CreateProduct;
+using ShopManagement.Application.Contracts.Commands.Products.EditProduct;
+using LampShade.ReadModel.Contracts.Queries.Products.GetProductById;
+using LampShade.ReadModel.Contracts.Queries.Products.GetProducts;
+using LampShade.ReadModel.Contracts.Queries.Products.SearchProducts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,3 +32,4 @@ public class ProductController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetProductByIdQuery { Id = id }));
 }
+

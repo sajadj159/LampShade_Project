@@ -1,5 +1,5 @@
 using _0_Framework.Application;
-using AccountManagement.Application.Features.Accounts.Queries.GetAccountById;
+using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccountById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,4 +42,5 @@ public class CurrentUserController : ControllerBase
         });
     }
 }
+
 

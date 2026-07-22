@@ -1,9 +1,9 @@
-using ShopManagement.Application.Features.ProductPictures.Commands.CreateProductPicture;
-using ShopManagement.Application.Features.ProductPictures.Commands.EditProductPicture;
-using ShopManagement.Application.Features.ProductPictures.Commands.RemoveProductPicture;
-using ShopManagement.Application.Features.ProductPictures.Commands.RestoreProductPicture;
-using ShopManagement.Application.Features.ProductPictures.Queries.GetProductPictureById;
-using ShopManagement.Application.Features.ProductPictures.Queries.SearchProductPictures;
+using ShopManagement.Application.Contracts.Commands.ProductPictures.CreateProductPicture;
+using ShopManagement.Application.Contracts.Commands.ProductPictures.EditProductPicture;
+using ShopManagement.Application.Contracts.Commands.ProductPictures.RemoveProductPicture;
+using ShopManagement.Application.Contracts.Commands.ProductPictures.RestoreProductPicture;
+using LampShade.ReadModel.Contracts.Queries.ProductPictures.GetProductPictureById;
+using LampShade.ReadModel.Contracts.Queries.ProductPictures.SearchProductPictures;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,3 +36,4 @@ public class ProductPictureController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetProductPictureByIdQuery { Id = id }));
 }
+

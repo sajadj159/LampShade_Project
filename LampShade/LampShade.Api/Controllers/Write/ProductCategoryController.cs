@@ -1,9 +1,9 @@
-using ShopManagement.Application.Features.ProductCategories.Commands.CreateProductCategory;
-using ShopManagement.Application.Features.ProductCategories.Commands.EditProductCategory;
-using ShopManagement.Application.Features.ProductCategories.Commands.DeleteProductCategory;
-using ShopManagement.Application.Features.ProductCategories.Queries.GetProductCategories;
-using ShopManagement.Application.Features.ProductCategories.Queries.GetProductCategoryById;
-using ShopManagement.Application.Features.ProductCategories.Queries.SearchProductCategories;
+using ShopManagement.Application.Contracts.Commands.ProductCategories.CreateProductCategory;
+using ShopManagement.Application.Contracts.Commands.ProductCategories.EditProductCategory;
+using ShopManagement.Application.Contracts.Commands.ProductCategories.DeleteProductCategory;
+using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategories;
+using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoryById;
+using LampShade.ReadModel.Contracts.Queries.ProductCategories.SearchProductCategories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,3 +37,4 @@ public class ProductCategoryController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetProductCategories() => Ok(await _mediator.Send(new GetProductCategoriesQuery()));
 }
+

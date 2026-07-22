@@ -1,7 +1,7 @@
-using AccountManagement.Application.Features.Roles.Commands.CreateRole;
-using AccountManagement.Application.Features.Roles.Commands.EditRole;
-using AccountManagement.Application.Features.Roles.Queries.GetRoleById;
-using AccountManagement.Application.Features.Roles.Queries.GetRoles;
+using AccountManagement.Application.Contracts.Commands.Roles.CreateRole;
+using AccountManagement.Application.Contracts.Commands.Roles.EditRole;
+using LampShade.ReadModel.Contracts.Queries.Roles.GetRoleById;
+using LampShade.ReadModel.Contracts.Queries.Roles.GetRoles;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,3 +28,4 @@ public class RoleController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetRoleByIdQuery { Id = id }));
 }
+

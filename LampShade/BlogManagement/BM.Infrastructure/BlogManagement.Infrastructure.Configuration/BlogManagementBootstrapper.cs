@@ -1,6 +1,6 @@
-using _01_LampShadeQuery.Contract.Article;
-using _01_LampShadeQuery.Contract.ArticleCategory;
-using _01_LampShadeQuery.Query;
+using LampShade.ReadModel.Contracts.Article;
+using LampShade.ReadModel.Contracts.ArticleCategory;
+using LampShade.ReadModel.Application.Query;
 using BlogManagement.Application.A.Article;
 using BlogManagement.Application.A.ArticleCategory;
 using BlogManagement.Application.Contract.AC.Article;
@@ -31,3 +31,4 @@ namespace BlogManagement.Infrastructure.Configuration
         }
     }
 }
+

@@ -1,5 +1,5 @@
-using _01_LampShadeQuery.Contract.Account;
-using _01_LampShadeQuery.Query;
+using LampShade.ReadModel.Contracts.Account;
+using LampShade.ReadModel.Application.Query;
 using AccountManagement.Application.A.Account;
 using AccountManagement.Application.A.Role;
 using AccountManagement.Application.Contracts.AC.Account;
@@ -28,3 +28,5 @@ namespace AccountManagement.Configuration
         }
     }
 }
+
+

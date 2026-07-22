@@ -1,4 +1,4 @@
-using _01_LampShadeQuery.Features.Comments.Queries.GetAllComments;
+using LampShade.ReadModel.Contracts.Queries.Comments.GetAllComments;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,3 +14,4 @@ public class CommentQueryController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetComments() => Ok(await _mediator.Send(new GetAllCommentsQuery()));
 }
+

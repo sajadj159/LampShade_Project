@@ -1,13 +1,13 @@
 using _0_Framework.Repository;
-using ShopManagement.Application.Features.Orders.Commands.ApproveCashOnDelivery;
-using ShopManagement.Application.Features.Orders.Commands.ApprovePaymentProof;
-using ShopManagement.Application.Features.Orders.Commands.CancelOrder;
-using ShopManagement.Application.Features.Orders.Commands.PaymentSucceeded;
-using ShopManagement.Application.Features.Orders.Commands.PlaceOrder;
-using ShopManagement.Application.Features.Orders.Commands.UploadPaymentProof;
-using ShopManagement.Application.Features.Orders.Queries.GetOrderAmount;
-using ShopManagement.Application.Features.Orders.Queries.GetOrderItems;
-using ShopManagement.Application.Features.Orders.Queries.SearchOrders;
+using ShopManagement.Application.Contracts.Commands.Orders.ApproveCashOnDelivery;
+using ShopManagement.Application.Contracts.Commands.Orders.ApprovePaymentProof;
+using ShopManagement.Application.Contracts.Commands.Orders.CancelOrder;
+using ShopManagement.Application.Contracts.Commands.Orders.PaymentSucceeded;
+using ShopManagement.Application.Contracts.Commands.Orders.PlaceOrder;
+using ShopManagement.Application.Contracts.Commands.Orders.UploadPaymentProof;
+using LampShade.ReadModel.Contracts.Queries.Orders.GetOrderAmount;
+using LampShade.ReadModel.Contracts.Queries.Orders.GetOrderItems;
+using LampShade.ReadModel.Contracts.Queries.Orders.SearchOrders;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -68,6 +68,7 @@ public class OrderController : ControllerBase
     [HttpGet("{id}/items")]
     public async Task<IActionResult> GetItemsBy(long id) => Ok(await _mediator.Send(new GetOrderItemsQuery { OrderId = id }));
 }
+
 
 
 

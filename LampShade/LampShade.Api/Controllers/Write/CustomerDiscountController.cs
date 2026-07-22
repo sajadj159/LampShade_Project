@@ -1,7 +1,7 @@
-using DiscountManagement.Application.Features.CustomerDiscounts.Commands.DefineCustomerDiscount;
-using DiscountManagement.Application.Features.CustomerDiscounts.Commands.EditCustomerDiscount;
-using DiscountManagement.Application.Features.CustomerDiscounts.Queries.GetCustomerDiscountById;
-using DiscountManagement.Application.Features.CustomerDiscounts.Queries.SearchCustomerDiscounts;
+using DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.DefineCustomerDiscount;
+using DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.EditCustomerDiscount;
+using LampShade.ReadModel.Contracts.Queries.CustomerDiscounts.GetCustomerDiscountById;
+using LampShade.ReadModel.Contracts.Queries.CustomerDiscounts.SearchCustomerDiscounts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,3 +28,4 @@ public class CustomerDiscountController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetCustomerDiscountByIdQuery { Id = id }));
 }
+

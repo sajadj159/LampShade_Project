@@ -1,9 +1,9 @@
-using ShopManagement.Application.Features.Slides.Commands.CreateSlide;
-using ShopManagement.Application.Features.Slides.Commands.EditSlide;
-using ShopManagement.Application.Features.Slides.Commands.RemoveSlide;
-using ShopManagement.Application.Features.Slides.Commands.RestoreSlide;
-using ShopManagement.Application.Features.Slides.Queries.GetSlideById;
-using ShopManagement.Application.Features.Slides.Queries.GetSlides;
+using ShopManagement.Application.Contracts.Commands.Slides.CreateSlide;
+using ShopManagement.Application.Contracts.Commands.Slides.EditSlide;
+using ShopManagement.Application.Contracts.Commands.Slides.RemoveSlide;
+using ShopManagement.Application.Contracts.Commands.Slides.RestoreSlide;
+using LampShade.ReadModel.Contracts.Queries.Slides.GetSlideById;
+using LampShade.ReadModel.Contracts.Queries.Slides.GetSlides;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,3 +36,4 @@ public class SlideController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetSlideByIdQuery { Id = id }));
 }
+

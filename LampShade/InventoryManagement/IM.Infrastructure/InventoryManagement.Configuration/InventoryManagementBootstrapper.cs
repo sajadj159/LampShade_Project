@@ -1,6 +1,6 @@
 using _0_Framework.Repository;
-using _01_LampShadeQuery.Contract.Inventory;
-using _01_LampShadeQuery.Query;
+using LampShade.ReadModel.Contracts.Inventory;
+using LampShade.ReadModel.Application.Query;
 using InventoryManagement.Application;
 using InventoryManagement.Application.Contract.AC.Inventory;
 using InventoryManagement.Configuration.Permissions;
@@ -26,3 +26,4 @@ namespace InventoryManagement.Configuration
         }
     }
 }
+

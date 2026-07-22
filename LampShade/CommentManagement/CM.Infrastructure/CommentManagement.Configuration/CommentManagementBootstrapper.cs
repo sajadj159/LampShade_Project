@@ -1,5 +1,5 @@
-using _01_LampShadeQuery.Contract.Comment;
-using _01_LampShadeQuery.Query;
+using LampShade.ReadModel.Contracts.Comment;
+using LampShade.ReadModel.Application.Query;
 using CommentManagement.Application.Comment;
 using CommentManagement.Application.Contract.A.Comment;
 using CommentManagement.Domain.CommentAgg;
@@ -23,3 +23,4 @@ namespace CommentManagement.Configuration
         }
     }
 }
+

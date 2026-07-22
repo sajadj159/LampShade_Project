@@ -1,5 +1,5 @@
-using _01_LampShadeQuery.Features.ProductCategories.Queries.GetProductCategoriesWithProductsForQuery;
-using _01_LampShadeQuery.Features.ProductCategories.Queries.GetProductCategoryWithProducts;
+using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoriesWithProductsForQuery;
+using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoryWithProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,3 +21,4 @@ public class ProductCategoryQueryController : ControllerBase
     [HttpGet("with-products")]
     public async Task<IActionResult> GetProductCategoriesWithProducts() => Ok(await _mediator.Send(new GetProductCategoriesWithProductsForQuery()));
 }
+

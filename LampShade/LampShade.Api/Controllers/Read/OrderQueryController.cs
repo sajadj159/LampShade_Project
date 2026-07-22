@@ -1,5 +1,5 @@
-using _01_LampShadeQuery.Features.Orders.Queries.GetOrdersByAccount;
-using _01_LampShadeQuery.Features.Orders.Queries.GetPaidOrders;
+using LampShade.ReadModel.Contracts.Queries.Orders.GetOrdersByAccount;
+using LampShade.ReadModel.Contracts.Queries.Orders.GetPaidOrders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,3 +18,4 @@ public class OrderQueryController : ControllerBase
     [HttpGet("account/{accountId}")]
     public async Task<IActionResult> GetOrders(long accountId) => Ok(await _mediator.Send(new GetOrdersByAccountQuery { AccountId = accountId }));
 }
+

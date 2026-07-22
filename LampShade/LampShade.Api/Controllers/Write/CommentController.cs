@@ -1,7 +1,7 @@
-using CommentManagement.Application.Features.Comments.Commands.AddComment;
-using CommentManagement.Application.Features.Comments.Commands.CancelComment;
-using CommentManagement.Application.Features.Comments.Commands.ConfirmComment;
-using CommentManagement.Application.Features.Comments.Queries.SearchComments;
+using CommentManagement.Application.Contracts.Commands.Comments.AddComment;
+using CommentManagement.Application.Contracts.Commands.Comments.CancelComment;
+using CommentManagement.Application.Contracts.Commands.Comments.ConfirmComment;
+using LampShade.ReadModel.Contracts.Queries.Comments.SearchComments;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,3 +33,4 @@ public class CommentController : ControllerBase
     [Authorize(Roles = Roles.Administrator)]
     public async Task<IActionResult> Cancel(long id) => Ok(await _mediator.Send(new CancelCommentCommand { Id = id }));
 }
+

@@ -75,7 +75,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(DiscountManagement.Application.A.CustomerDiscount.CustomerDiscountApplication).Assembly,
     typeof(ShopManagement.Application.Product.ProductApplication).Assembly,
     typeof(InventoryManagement.Application.InventoryApplication).Assembly,
-    typeof(_01_LampShadeQuery.MenuModel).Assembly));
+    typeof(LampShade.ReadModel.Application.ReadModelAssemblyMarker).Assembly));
 
 // Configure Cookie Authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -160,3 +160,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

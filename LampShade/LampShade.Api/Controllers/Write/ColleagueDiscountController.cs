@@ -1,9 +1,9 @@
-using DiscountManagement.Application.Features.ColleagueDiscounts.Commands.DefineColleagueDiscount;
-using DiscountManagement.Application.Features.ColleagueDiscounts.Commands.EditColleagueDiscount;
-using DiscountManagement.Application.Features.ColleagueDiscounts.Commands.RemoveColleagueDiscount;
-using DiscountManagement.Application.Features.ColleagueDiscounts.Commands.RestoreColleagueDiscount;
-using DiscountManagement.Application.Features.ColleagueDiscounts.Queries.GetColleagueDiscountById;
-using DiscountManagement.Application.Features.ColleagueDiscounts.Queries.SearchColleagueDiscounts;
+using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.DefineColleagueDiscount;
+using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.EditColleagueDiscount;
+using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.RemoveColleagueDiscount;
+using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.RestoreColleagueDiscount;
+using LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.GetColleagueDiscountById;
+using LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.SearchColleagueDiscounts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,3 +36,4 @@ public class ColleagueDiscountController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetColleagueDiscountByIdQuery { Id = id }));
 }
+

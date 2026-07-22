@@ -1,10 +1,10 @@
 using _0_Framework.Repository;
-using _01_LampShadeQuery.Contract.Cart;
-using _01_LampShadeQuery.Contract.Order;
-using _01_LampShadeQuery.Contract.Product;
-using _01_LampShadeQuery.Contract.ProductCategory;
-using _01_LampShadeQuery.Contract.Slide;
-using _01_LampShadeQuery.Query;
+using LampShade.ReadModel.Contracts.Cart;
+using LampShade.ReadModel.Contracts.Order;
+using LampShade.ReadModel.Contracts.Product;
+using LampShade.ReadModel.Contracts.ProductCategory;
+using LampShade.ReadModel.Contracts.Slide;
+using LampShade.ReadModel.Application.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ShopManagement.Application.Cart;
@@ -69,3 +69,4 @@ namespace ShopManagement.Configuration
         }
     }
 }
+

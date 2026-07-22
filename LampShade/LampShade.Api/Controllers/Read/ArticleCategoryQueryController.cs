@@ -1,5 +1,5 @@
-using _01_LampShadeQuery.Features.ArticleCategories.Queries.GetArticleCategoriesForQuery;
-using _01_LampShadeQuery.Features.ArticleCategories.Queries.GetArticleCategoryBySlug;
+using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoriesForQuery;
+using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoryBySlug;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,3 +18,4 @@ public class ArticleCategoryQueryController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetArticleCategories() => Ok(await _mediator.Send(new GetArticleCategoriesForQuery()));
 }
+

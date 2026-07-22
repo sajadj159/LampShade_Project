@@ -1,5 +1,5 @@
-using _01_LampShadeQuery.Features.Articles.Queries.GetArticleBySlug;
-using _01_LampShadeQuery.Features.Articles.Queries.LatestArticles;
+using LampShade.ReadModel.Contracts.Queries.Articles.GetArticleBySlug;
+using LampShade.ReadModel.Contracts.Queries.Articles.LatestArticles;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,3 +18,4 @@ public class ArticleQueryController : ControllerBase
     [HttpGet("latest")]
     public async Task<IActionResult> LatestArticles() => Ok(await _mediator.Send(new LatestArticlesQuery()));
 }
+

@@ -1,7 +1,7 @@
-using _01_LampShadeQuery.Features.Products.Queries.CheckInventoryStatus;
-using _01_LampShadeQuery.Features.Products.Queries.GetLatestArrivals;
-using _01_LampShadeQuery.Features.Products.Queries.GetProductBySlug;
-using _01_LampShadeQuery.Features.Products.Queries.SearchProductsForQuery;
+using LampShade.ReadModel.Contracts.Queries.Products.CheckInventoryStatus;
+using LampShade.ReadModel.Contracts.Queries.Products.GetLatestArrivals;
+using LampShade.ReadModel.Contracts.Queries.Products.GetProductBySlug;
+using LampShade.ReadModel.Contracts.Queries.Products.SearchProductsForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,3 +26,4 @@ public class ProductQueryController : ControllerBase
     [HttpPost("check-inventory")]
     public async Task<IActionResult> CheckInventoryStatus([FromBody] CheckInventoryStatusQuery query) => Ok(await _mediator.Send(query));
 }
+

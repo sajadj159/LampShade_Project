@@ -1,11 +1,11 @@
-using InventoryManagement.Application.Features.Inventories.Commands.CreateInventory;
-using InventoryManagement.Application.Features.Inventories.Commands.EditInventory;
-using InventoryManagement.Application.Features.Inventories.Commands.IncreaseInventory;
-using InventoryManagement.Application.Features.Inventories.Commands.ReduceInventory;
-using InventoryManagement.Application.Features.Inventories.Commands.ReduceInventoryRange;
-using InventoryManagement.Application.Features.Inventories.Queries.GetInventoryById;
-using InventoryManagement.Application.Features.Inventories.Queries.GetInventoryOperations;
-using InventoryManagement.Application.Features.Inventories.Queries.SearchInventories;
+using InventoryManagement.Application.Contracts.Commands.Inventories.CreateInventory;
+using InventoryManagement.Application.Contracts.Commands.Inventories.EditInventory;
+using InventoryManagement.Application.Contracts.Commands.Inventories.IncreaseInventory;
+using InventoryManagement.Application.Contracts.Commands.Inventories.ReduceInventory;
+using InventoryManagement.Application.Contracts.Commands.Inventories.ReduceInventoryRange;
+using LampShade.ReadModel.Contracts.Queries.Inventories.GetInventoryById;
+using LampShade.ReadModel.Contracts.Queries.Inventories.GetInventoryOperations;
+using LampShade.ReadModel.Contracts.Queries.Inventories.SearchInventories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,3 +45,4 @@ public class InventoryController : ControllerBase
     [HttpGet("{id}/operations")]
     public async Task<IActionResult> GetOperationLog(long id) => Ok(await _mediator.Send(new GetInventoryOperationsQuery { InventoryId = id }));
 }
+

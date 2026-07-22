@@ -1,8 +1,8 @@
-using BlogManagement.Application.Features.ArticleCategories.Commands.CreateArticleCategory;
-using BlogManagement.Application.Features.ArticleCategories.Commands.EditArticleCategory;
-using BlogManagement.Application.Features.ArticleCategories.Queries.GetArticleCategories;
-using BlogManagement.Application.Features.ArticleCategories.Queries.GetArticleCategoryById;
-using BlogManagement.Application.Features.ArticleCategories.Queries.SearchArticleCategories;
+using BlogManagement.Application.Contracts.Commands.ArticleCategories.CreateArticleCategory;
+using BlogManagement.Application.Contracts.Commands.ArticleCategories.EditArticleCategory;
+using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategories;
+using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoryById;
+using LampShade.ReadModel.Contracts.Queries.ArticleCategories.SearchArticleCategories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,3 +32,4 @@ public class ArticleCategoryController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetArticleCategoryByIdQuery { Id = id }));
 }
+

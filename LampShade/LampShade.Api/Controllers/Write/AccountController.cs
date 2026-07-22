@@ -1,12 +1,12 @@
-using AccountManagement.Application.Features.Accounts.Commands.ChangePassword;
-using AccountManagement.Application.Features.Accounts.Commands.Edit;
-using AccountManagement.Application.Features.Accounts.Commands.Login;
-using AccountManagement.Application.Features.Accounts.Commands.Logout;
-using AccountManagement.Application.Features.Accounts.Commands.MakeAddress;
-using AccountManagement.Application.Features.Accounts.Commands.Register;
-using AccountManagement.Application.Features.Accounts.Queries.GetAccountById;
-using AccountManagement.Application.Features.Accounts.Queries.GetAccounts;
-using AccountManagement.Application.Features.Accounts.Queries.SearchAccounts;
+using AccountManagement.Application.Contracts.Commands.Accounts.ChangePassword;
+using AccountManagement.Application.Contracts.Commands.Accounts.Edit;
+using AccountManagement.Application.Contracts.Commands.Accounts.Login;
+using AccountManagement.Application.Contracts.Commands.Accounts.Logout;
+using AccountManagement.Application.Contracts.Commands.Accounts.MakeAddress;
+using AccountManagement.Application.Contracts.Commands.Accounts.Register;
+using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccountById;
+using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccounts;
+using LampShade.ReadModel.Contracts.Queries.Accounts.SearchAccounts;
 using _0_Framework.Application;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -84,5 +84,6 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> GetAccountBy(long id)
         => Ok(await _mediator.Send(new GetAccountByIdQuery { Id = id }));
 }
+
 
 
