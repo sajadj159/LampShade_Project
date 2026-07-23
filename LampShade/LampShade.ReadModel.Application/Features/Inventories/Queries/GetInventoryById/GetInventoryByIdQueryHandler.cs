@@ -1,4 +1,5 @@
 using InventoryManagement.Application.Contract.AC.Inventory;
+using InventoryManagement.Domain.InventoryAgg;
 using MediatR;
 
 using LampShade.ReadModel.Contracts.Queries.Inventories.GetInventoryById;
@@ -9,15 +10,16 @@ namespace LampShade.ReadModel.Application.Features.Inventories.Queries.GetInvent
 
 public class GetInventoryByIdQueryHandler : IRequestHandler<GetInventoryByIdQuery, EditInventory>
 {
-    private readonly IInventoryApplication _application;
+    private readonly IInventoryRepository _repository;
 
-    public GetInventoryByIdQueryHandler(IInventoryApplication application)
+    public GetInventoryByIdQueryHandler(IInventoryRepository repository)
     {
-        _application = application;
+        _repository = repository;
     }
 
     public Task<EditInventory> Handle(GetInventoryByIdQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_application.GetDetails(request.Id));
+        return Task.FromResult(_repository.GetDetails(request.Id));
     }
 }
+

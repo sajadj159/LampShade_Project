@@ -1,5 +1,5 @@
-using AccountManagement.Application.Contracts.AC.Role;
-using AccountManagement.Domain.RoleAgg.Contracts;
+using LampShade.ReadModel.Contracts.Account;
+using LampShade.ReadModel.Contracts.Roles.Dto;
 using MediatR;
 
 using LampShade.ReadModel.Contracts.Queries.Roles.GetRoleById;
@@ -10,15 +10,16 @@ namespace LampShade.ReadModel.Application.Features.Roles.Queries.GetRoleById;
 
 public class GetRoleByIdQueryHandler : IRequestHandler<GetRoleByIdQuery, RoleDto>
 {
-    private readonly IRoleApplication _roleApplication;
+    private readonly IAccountQuery _query;
 
-    public GetRoleByIdQueryHandler(IRoleApplication roleApplication)
+    public GetRoleByIdQueryHandler(IAccountQuery query)
     {
-        _roleApplication = roleApplication;
+        _query = query;
     }
 
     public Task<RoleDto> Handle(GetRoleByIdQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_roleApplication.GetDetails(request.Id));
+        return Task.FromResult(_query.GetRole(request.Id));
     }
 }
+

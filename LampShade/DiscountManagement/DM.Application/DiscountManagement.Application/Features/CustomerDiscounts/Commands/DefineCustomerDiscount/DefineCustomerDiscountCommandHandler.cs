@@ -1,32 +1,16 @@
-using DiscountManagement.Application.Contract.AC.CustomerDiscount;
-using MediatR;
 using _0_Framework.Application;
-
 using DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.DefineCustomerDiscount;
+using DiscountManagement.Domain.CustomerDiscountAgg;
+using MediatR;
 
 namespace DiscountManagement.Application.Features.CustomerDiscounts.Commands.DefineCustomerDiscount;
 
-
-
-public class DefineCustomerDiscountCommandHandler : IRequestHandler<DefineCustomerDiscountCommand, OperationResult>
+public class DefineCustomerDiscountCommandHandler(ICustomerDiscountRepository discounts) : IRequestHandler<DefineCustomerDiscountCommand, OperationResult>
 {
-    private readonly ICustomerDiscountApplication _application;
-
-    public DefineCustomerDiscountCommandHandler(ICustomerDiscountApplication application)
-    {
-        _application = application;
-    }
-
     public Task<OperationResult> Handle(DefineCustomerDiscountCommand request, CancellationToken cancellationToken)
     {
-        var command = new DiscountManagement.Application.Contract.AC.CustomerDiscount.DefineCustomerDiscount
-        {
-            ProductId = request.ProductId,
-            DiscountRate = request.DiscountRate,
-            StartDate = request.StartDate,
-            EndDate = request.EndDate,
-            Reason = request.Reason
-        };
-        return Task.FromResult(_application.Define(command));
+        var operation = new OperationResult();
+        if (discounts.Exist(x => x.ProductId == request.ProductId && x.DiscountRate == request.DiscountRate)) return Task.FromResult(operation.Failed(ApplicationMessages.DuplicatedRecord));
+        discounts.Create(new CustomerDiscount(request.ProductId, request.DiscountRate, request.StartDate.ToGeorgianDateTime(), request.EndDate.ToGeorgianDateTime().Date.AddDays(1).AddTicks(-1), request.Reason)); discounts.Save(); return Task.FromResult(operation.Succeeded());
     }
 }

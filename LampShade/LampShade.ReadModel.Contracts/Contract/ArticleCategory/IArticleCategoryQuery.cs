@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
 
 namespace LampShade.ReadModel.Contracts.ArticleCategory
 {
@@ -6,5 +7,10 @@ namespace LampShade.ReadModel.Contracts.ArticleCategory
     {
         ArticleCategoryQueryModel GetArticleCategory(string slug);
         List<ArticleCategoryQueryModel> GetArticleCategories();
+        ArticleCategoryDetailsDto GetArticleCategoryForManagement(long id);
+        List<ArticleCategoryViewModel> GetArticleCategoriesForManagement();
+        List<ArticleCategoryViewModel> SearchArticleCategories(string name);
     }
 }
+
+

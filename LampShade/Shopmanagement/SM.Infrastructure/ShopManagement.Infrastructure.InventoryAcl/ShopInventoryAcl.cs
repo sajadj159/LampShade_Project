@@ -1,25 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using InventoryManagement.Application.Contract.AC.Inventory;
+using System.Collections.Generic;
+using _0_Framework.Application;
+using InventoryManagement.Domain.InventoryAgg;
 using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.Services;
 
-namespace ShopManagement.Infrastructure.InventoryAcl
+namespace ShopManagement.Infrastructure.InventoryAcl;
+
+public class ShopInventoryAcl(IInventoryRepository inventories, IAuthHelper authHelper) : IShopInventoryAcl
 {
-    public class ShopInventoryAcl : IShopInventoryAcl
+    public bool ReduceFromInventory(List<OrderItem> items)
     {
-        private readonly IInventoryApplication _inventoryApplication;
-
-        public ShopInventoryAcl(IInventoryApplication inventoryApplication)
-        {
-            _inventoryApplication = inventoryApplication;
-        }
-
-        public bool ReduceFromInventory(List<OrderItem> items)
-        {
-            var command = items.Select(x => new ReduceInventory(x.ProductId, x.Count, "خرید مشتری", x.OrderId)).ToList();
-
-            return _inventoryApplication.Reduce(command).IsSucceeded;
-        }
+        foreach (var item in items) inventories.GetBy(item.ProductId).Reduce(item.Count, authHelper.CurrentAccountId(), "خرید مشتری", item.OrderId);
+        inventories.Save();
+        return true;
     }
 }
+

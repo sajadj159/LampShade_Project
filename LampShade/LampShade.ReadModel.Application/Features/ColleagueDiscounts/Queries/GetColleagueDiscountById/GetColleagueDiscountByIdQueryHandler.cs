@@ -1,5 +1,6 @@
 using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
 using MediatR;
+using DiscountManagement.Domain.ColleagueDiscountAgg;
 
 using LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.GetColleagueDiscountById;
 
@@ -9,15 +10,16 @@ namespace LampShade.ReadModel.Application.Features.ColleagueDiscounts.Queries.Ge
 
 public class GetColleagueDiscountByIdQueryHandler : IRequestHandler<GetColleagueDiscountByIdQuery, EditColleagueDiscount>
 {
-    private readonly IColleagueDiscountApplication _application;
+    private readonly IColleagueDiscountRepository _repository;
 
-    public GetColleagueDiscountByIdQueryHandler(IColleagueDiscountApplication application)
+    public GetColleagueDiscountByIdQueryHandler(IColleagueDiscountRepository repository)
     {
-        _application = application;
+        _repository = repository;
     }
 
     public Task<EditColleagueDiscount> Handle(GetColleagueDiscountByIdQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_application.GetDetails(request.Id));
+        return Task.FromResult(_repository.GetDetails(request.Id));
     }
 }
+

@@ -1,6 +1,6 @@
 #nullable enable
 
-using AccountManagement.Application.Contracts.AC.Account;
+using LampShade.ReadModel.Contracts.Accounts.Dto;
 using MediatR;
 
 namespace LampShade.ReadModel.Contracts.Queries.Accounts.SearchAccounts;
@@ -12,3 +12,4 @@ public class SearchAccountsQuery : IRequest<List<AccountViewModel>>
     public string? Mobile { get; set; }
     public long? RoleId { get; set; }
 }
+

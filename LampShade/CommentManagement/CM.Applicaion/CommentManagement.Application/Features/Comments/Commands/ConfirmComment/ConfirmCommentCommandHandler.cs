@@ -1,24 +1,19 @@
-using CommentManagement.Application.Contract.A.Comment;
-using MediatR;
 using _0_Framework.Application;
-
 using CommentManagement.Application.Contracts.Commands.Comments.ConfirmComment;
+using CommentManagement.Domain.CommentAgg;
+using MediatR;
 
 namespace CommentManagement.Application.Features.Comments.Commands.ConfirmComment;
 
-
-
-public class ConfirmCommentCommandHandler : IRequestHandler<ConfirmCommentCommand, OperationResult>
+public class ConfirmCommentCommandHandler(ICommentRepository comments) : IRequestHandler<ConfirmCommentCommand, OperationResult>
 {
-    private readonly ICommentApplication _commentApplication;
-
-    public ConfirmCommentCommandHandler(ICommentApplication commentApplication)
-    {
-        _commentApplication = commentApplication;
-    }
-
     public Task<OperationResult> Handle(ConfirmCommentCommand request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_commentApplication.Confirm(request.Id));
+        var operation = new OperationResult();
+        var comment = comments.Get(request.Id);
+        if (comment is null) return Task.FromResult(operation.Failed(ApplicationMessages.RecordNotFound));
+        comment.Confirm();
+        comments.Save();
+        return Task.FromResult(operation.Succeeded());
     }
 }

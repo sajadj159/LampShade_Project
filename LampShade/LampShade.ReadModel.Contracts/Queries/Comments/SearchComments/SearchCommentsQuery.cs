@@ -1,6 +1,6 @@
 #nullable enable
 
-using CommentManagement.Application.Contract.A.Comment;
+using LampShade.ReadModel.Contracts.Comments.Dto;
 using MediatR;
 
 namespace LampShade.ReadModel.Contracts.Queries.Comments.SearchComments;

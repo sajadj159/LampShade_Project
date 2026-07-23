@@ -1,30 +1,29 @@
-#nullable enable
-
-using BlogManagement.Application.Contract.AC.ArticleCategory;
-using MediatR;
-using Microsoft.AspNetCore.Http;
 using _0_Framework.Application;
-
 using BlogManagement.Application.Contracts.Commands.ArticleCategories.EditArticleCategory;
+using BlogManagement.Domain.ArticleCategoryAgg;
+using MediatR;
 
 namespace BlogManagement.Application.Features.ArticleCategories.Commands.EditArticleCategory;
 
-
-
-public class EditArticleCategoryCommandHandler : IRequestHandler<EditArticleCategoryCommand, OperationResult>
+public class EditArticleCategoryCommandHandler(
+    IArticleCategoryRepository articleCategoryRepository,
+    IFIleUploader uploader) : IRequestHandler<EditArticleCategoryCommand, OperationResult>
 {
-    private readonly IArticleCategoryApplication _application;
-    public EditArticleCategoryCommandHandler(IArticleCategoryApplication application) => _application = application;
-
     public Task<OperationResult> Handle(EditArticleCategoryCommand request, CancellationToken cancellationToken)
     {
-        var command = new BlogManagement.Application.Contract.AC.ArticleCategory.EditArticleCategory
-        {
-            Id = request.Id, Name = request.Name, PictureUrl = request.PictureUrl, PictureAlt = request.PictureAlt,
-            PictureTitle = request.PictureTitle, Description = request.Description,
-            ShowOrder = request.ShowOrder, Slug = request.Slug, Keywords = request.Keywords,
-            MetaDescription = request.MetaDescription, CanonicalAddress = request.CanonicalAddress
-        };
-        return Task.FromResult(_application.Edit(command));
+        var operation = new OperationResult();
+        var category = articleCategoryRepository.Get(request.Id);
+        if (category is null)
+            return Task.FromResult(operation.Failed(ApplicationMessages.RecordNotFound));
+        if (articleCategoryRepository.Exist(x => x.Name == request.Name && x.Id != request.Id))
+            return Task.FromResult(operation.Failed(ApplicationMessages.DuplicatedRecord));
+
+        var slug = request.Slug.Slugify();
+        var picturePath = uploader.Upload(request.PictureUrl, slug);
+        category.Edit(request.Name, picturePath, request.PictureAlt, request.PictureTitle,
+            request.Description, request.ShowOrder, slug, request.Keywords, request.MetaDescription,
+            request.CanonicalAddress);
+        articleCategoryRepository.Save();
+        return Task.FromResult(operation.Succeeded());
     }
 }

@@ -3,7 +3,9 @@ using System.Linq;
 using _0_Framework.Application;
 using LampShade.ReadModel.Contracts.Article;
 using LampShade.ReadModel.Contracts.ArticleCategory;
+using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
 using BlogManagement.Domain.ArticleAgg;
+using BlogManagement.Domain.ArticleCategoryAgg;
 using BlogManagement.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -72,5 +74,58 @@ namespace LampShade.ReadModel.Application.Query
                     Articles = MapArticles(x.Articles)
                 }).ToList();
         }
+
+        public ArticleCategoryDetailsDto GetArticleCategoryForManagement(long id)
+        {
+            return _context.ArticleCategories.AsNoTracking()
+                .Where(x => x.Id == id)
+                .Select(x => new ArticleCategoryDetailsDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    PictureUrl = x.PictureUrl,
+                    PictureAlt = x.PictureAlt,
+                    PictureTitle = x.PictureTitle,
+                    Description = x.Description,
+                    ShowOrder = x.ShowOrder,
+                    Slug = x.Slug,
+                    Keywords = x.Keywords,
+                    MetaDescription = x.MetaDescription,
+                    CanonicalAddress = x.CanonicalAddress
+                })
+                .FirstOrDefault();
+        }
+        public List<ArticleCategoryViewModel> GetArticleCategoriesForManagement()
+        {
+            return ProjectArticleCategories(_context.ArticleCategories);
+        }
+
+        public List<ArticleCategoryViewModel> SearchArticleCategories(string name)
+        {
+            var query = _context.ArticleCategories.AsNoTracking();
+            if (!string.IsNullOrWhiteSpace(name))
+                query = query.Where(x => x.Name.Contains(name));
+
+            return ProjectArticleCategories(query);
+        }
+
+        private static List<ArticleCategoryViewModel> ProjectArticleCategories(IQueryable<ArticleCategory> query)
+        {
+            return query.AsNoTracking()
+                .Select(x => new ArticleCategoryViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    PictureUrl = x.PictureUrl,
+                    ShowOrder = x.ShowOrder,
+                    CreationDate = x.CreationDate.ToFarsi(),
+                    ArticlesCount = x.Articles.Count
+                })
+                .ToList();
+        }
     }
 }
+
+
+

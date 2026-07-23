@@ -2,9 +2,7 @@ using LampShade.ReadModel.Contracts.Article;
 using LampShade.ReadModel.Contracts.ArticleCategory;
 using LampShade.ReadModel.Application.Query;
 using BlogManagement.Application.A.Article;
-using BlogManagement.Application.A.ArticleCategory;
 using BlogManagement.Application.Contract.AC.Article;
-using BlogManagement.Application.Contract.AC.ArticleCategory;
 using BlogManagement.Domain.ArticleAgg;
 using BlogManagement.Domain.ArticleCategoryAgg;
 using BlogManagement.Infrastructure.EFCore;
@@ -18,7 +16,6 @@ namespace BlogManagement.Infrastructure.Configuration
     {
         public static void Configure(IServiceCollection service, string connectionString)
         {
-            service.AddTransient<IArticleCategoryApplication, ArticleCategoryApplication>();
             service.AddTransient<IArticleCategoryRepository, ArticleCategoryRepository>();
 
             service.AddTransient<IArticleRepository, ArticleRepository>();
@@ -31,4 +28,5 @@ namespace BlogManagement.Infrastructure.Configuration
         }
     }
 }
+
 

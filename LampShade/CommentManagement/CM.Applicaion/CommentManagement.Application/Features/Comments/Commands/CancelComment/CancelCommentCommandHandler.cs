@@ -1,24 +1,19 @@
-using CommentManagement.Application.Contract.A.Comment;
-using MediatR;
 using _0_Framework.Application;
-
 using CommentManagement.Application.Contracts.Commands.Comments.CancelComment;
+using CommentManagement.Domain.CommentAgg;
+using MediatR;
 
 namespace CommentManagement.Application.Features.Comments.Commands.CancelComment;
 
-
-
-public class CancelCommentCommandHandler : IRequestHandler<CancelCommentCommand, OperationResult>
+public class CancelCommentCommandHandler(ICommentRepository comments) : IRequestHandler<CancelCommentCommand, OperationResult>
 {
-    private readonly ICommentApplication _commentApplication;
-
-    public CancelCommentCommandHandler(ICommentApplication commentApplication)
-    {
-        _commentApplication = commentApplication;
-    }
-
     public Task<OperationResult> Handle(CancelCommentCommand request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_commentApplication.Cancel(request.Id));
+        var operation = new OperationResult();
+        var comment = comments.Get(request.Id);
+        if (comment is null) return Task.FromResult(operation.Failed(ApplicationMessages.RecordNotFound));
+        comment.Cancel();
+        comments.Save();
+        return Task.FromResult(operation.Succeeded());
     }
 }

@@ -1,7 +1,5 @@
 using LampShade.ReadModel.Contracts.Comment;
 using LampShade.ReadModel.Application.Query;
-using CommentManagement.Application.Comment;
-using CommentManagement.Application.Contract.A.Comment;
 using CommentManagement.Domain.CommentAgg;
 using CommentManagement.Infrastructure.EFCore;
 using CommentManagement.Infrastructure.EFCore.Repository;
@@ -13,9 +11,7 @@ namespace CommentManagement.Configuration
     public class CommentManagementBootstrapper
     {
         public static void Configure(IServiceCollection service, string connectionString)
-        {
-            service.AddTransient<ICommentApplication, CommentApplication>();
-            service.AddTransient<ICommentRepository, CommentRepository>();
+        {            service.AddTransient<ICommentRepository, CommentRepository>();
 
             service.AddTransient<ICommentQuery, CommentQuery>();
 
@@ -23,4 +19,5 @@ namespace CommentManagement.Configuration
         }
     }
 }
+
 

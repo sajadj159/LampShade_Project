@@ -1,21 +1,13 @@
-﻿using AccountManagement.Application.Contracts.AC.Account;
+using LampShade.ReadModel.Contracts.Account;
 using ShopManagement.Domain.Services;
 
-namespace ShopManagement.Infrastructure.AccountAcl
+namespace ShopManagement.Infrastructure.AccountAcl;
+
+public class ShopAccountAcl(IAccountQuery accountQuery) : IShopAccountAcl
 {
-    public class ShopAccountAcl:IShopAccountAcl
+    public (string name, string mobile) GetAccountBy(long id)
     {
-        private readonly IAccountApplication _accountApplication;
-
-        public ShopAccountAcl(IAccountApplication accountApplication)
-        {
-            _accountApplication = accountApplication;
-        }
-
-        public (string name, string mobile) GetAccountBy(long id)
-        {
-            var accountViewModel = _accountApplication.GetAccountBy(id);
-            return (accountViewModel.FullName, accountViewModel.Mobile);
-        }
+        var account = accountQuery.GetAccount(id);
+        return (account.FullName, account.Mobile);
     }
 }

@@ -1,24 +1,16 @@
-using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
-using MediatR;
 using _0_Framework.Application;
-
 using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.RestoreColleagueDiscount;
+using DiscountManagement.Domain.ColleagueDiscountAgg;
+using MediatR;
 
 namespace DiscountManagement.Application.Features.ColleagueDiscounts.Commands.RestoreColleagueDiscount;
 
-
-
-public class RestoreColleagueDiscountCommandHandler : IRequestHandler<RestoreColleagueDiscountCommand, OperationResult>
+public class RestoreColleagueDiscountCommandHandler(IColleagueDiscountRepository discounts) : IRequestHandler<RestoreColleagueDiscountCommand, OperationResult>
 {
-    private readonly IColleagueDiscountApplication _application;
-
-    public RestoreColleagueDiscountCommandHandler(IColleagueDiscountApplication application)
-    {
-        _application = application;
-    }
-
     public Task<OperationResult> Handle(RestoreColleagueDiscountCommand request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_application.Restore(request.Id));
+        var operation = new OperationResult(); var discount = discounts.Get(request.Id);
+        if (discount is null) return Task.FromResult(operation.Failed(ApplicationMessages.RecordNotFound));
+        discount.Restore(); discounts.Save(); return Task.FromResult(operation.Succeeded());
     }
 }

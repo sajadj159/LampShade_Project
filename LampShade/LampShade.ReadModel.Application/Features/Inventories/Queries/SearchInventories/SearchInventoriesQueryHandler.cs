@@ -1,6 +1,7 @@
 #nullable enable
 
 using InventoryManagement.Application.Contract.AC.Inventory;
+using InventoryManagement.Domain.InventoryAgg;
 using MediatR;
 
 using LampShade.ReadModel.Contracts.Queries.Inventories.SearchInventories;
@@ -11,11 +12,11 @@ namespace LampShade.ReadModel.Application.Features.Inventories.Queries.SearchInv
 
 public class SearchInventoriesQueryHandler : IRequestHandler<SearchInventoriesQuery, List<InventoryViewModel>>
 {
-    private readonly IInventoryApplication _application;
+    private readonly IInventoryRepository _repository;
 
-    public SearchInventoriesQueryHandler(IInventoryApplication application)
+    public SearchInventoriesQueryHandler(IInventoryRepository repository)
     {
-        _application = application;
+        _repository = repository;
     }
 
     public Task<List<InventoryViewModel>> Handle(SearchInventoriesQuery request, CancellationToken cancellationToken)
@@ -25,7 +26,8 @@ public class SearchInventoriesQueryHandler : IRequestHandler<SearchInventoriesQu
             ProductId = request.ProductId ?? 0,
             InStock = request.InStock ?? false
         };
-        return Task.FromResult(_application.Search(searchModel));
+        return Task.FromResult(_repository.Search(searchModel));
     }
 }
+
 

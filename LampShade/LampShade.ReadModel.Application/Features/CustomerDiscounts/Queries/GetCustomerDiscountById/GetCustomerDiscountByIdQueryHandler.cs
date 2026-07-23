@@ -1,5 +1,6 @@
 using DiscountManagement.Application.Contract.AC.CustomerDiscount;
 using MediatR;
+using DiscountManagement.Domain.CustomerDiscountAgg;
 
 using LampShade.ReadModel.Contracts.Queries.CustomerDiscounts.GetCustomerDiscountById;
 
@@ -9,15 +10,16 @@ namespace LampShade.ReadModel.Application.Features.CustomerDiscounts.Queries.Get
 
 public class GetCustomerDiscountByIdQueryHandler : IRequestHandler<GetCustomerDiscountByIdQuery, EditCustomerDiscount>
 {
-    private readonly ICustomerDiscountApplication _application;
+    private readonly ICustomerDiscountRepository _repository;
 
-    public GetCustomerDiscountByIdQueryHandler(ICustomerDiscountApplication application)
+    public GetCustomerDiscountByIdQueryHandler(ICustomerDiscountRepository repository)
     {
-        _application = application;
+        _repository = repository;
     }
 
     public Task<EditCustomerDiscount> Handle(GetCustomerDiscountByIdQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_application.GetDetails(request.Id));
+        return Task.FromResult(_repository.GetDetails(request.Id));
     }
 }
+

@@ -1,30 +1,18 @@
 using _0_Framework.Application;
-using AccountManagement.Application.Contracts.AC.Role;
-using AccountManagement.Domain.RoleAgg.Contracts;
-using MediatR;
-
 using AccountManagement.Application.Contracts.Commands.Roles.CreateRole;
+using AccountManagement.Domain.RoleAgg;
+using MediatR;
 
 namespace AccountManagement.Application.Features.Roles.Commands.CreateRole;
 
-
-
-public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, OperationResult>
+public class CreateRoleCommandHandler(IRoleRepository roles) : IRequestHandler<CreateRoleCommand, OperationResult>
 {
-    private readonly IRoleApplication _roleApplication;
-
-    public CreateRoleCommandHandler(IRoleApplication roleApplication)
-    {
-        _roleApplication = roleApplication;
-    }
-
     public Task<OperationResult> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
     {
-        var command = new AccountManagement.Application.Contracts.AC.Role.CreateRole
-        {
-            Name = request.Name,
-            Permissions = request.Permissions
-        };
-        return Task.FromResult(_roleApplication.Create(command));
+        var operation = new OperationResult();
+        if (roles.Exist(x => x.Name == request.Name)) return Task.FromResult(operation.Failed(ApplicationMessages.DuplicatedRecord));
+        roles.Create(new Role(request.Name, request.Permissions));
+        roles.Save();
+        return Task.FromResult(operation.Succeeded());
     }
 }

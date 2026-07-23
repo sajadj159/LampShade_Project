@@ -1,7 +1,3 @@
-using DiscountManagement.Application.A.ColleagueDiscount;
-using DiscountManagement.Application.A.CustomerDiscount;
-using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
-using DiscountManagement.Application.Contract.AC.CustomerDiscount;
 using DiscountManagement.Domain.ColleagueDiscountAgg;
 using DiscountManagement.Domain.CustomerDiscountAgg;
 using DiscountManagement.Infrastructure.EFCore;
@@ -14,15 +10,11 @@ namespace DiscountManagement.Configuration
     public class DiscountManagementBootstrapper
     {
         public static void Configure(IServiceCollection service, string connectionString)
-        {
-            service.AddTransient<ICustomerDiscountApplication, CustomerDiscountApplication>();
-            service.AddTransient<ICustomerDiscountRepository, CustomerDiscountRepository>();
-
-            service.AddTransient<IColleagueDiscountApplication, ColleagueDiscountApplication>();
-            service.AddTransient<IColleagueDiscountRepository, ColleagueDiscountRepository>();
+        {            service.AddTransient<ICustomerDiscountRepository, CustomerDiscountRepository>();            service.AddTransient<IColleagueDiscountRepository, ColleagueDiscountRepository>();
 
             service.AddDbContext<DiscountContext>(x => x.UseNpgsql(connectionString));
         }
     }
 }
+
 

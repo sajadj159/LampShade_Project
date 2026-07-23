@@ -1,4 +1,5 @@
-using AccountManagement.Application.Contracts.AC.Account;
+using LampShade.ReadModel.Contracts.Account;
+using LampShade.ReadModel.Contracts.Accounts.Dto;
 using MediatR;
 
 using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccountById;
@@ -9,15 +10,16 @@ namespace LampShade.ReadModel.Application.Features.Accounts.Queries.GetAccountBy
 
 public class GetAccountByIdQueryHandler : IRequestHandler<GetAccountByIdQuery, AccountViewModel>
 {
-    private readonly IAccountApplication _accountApplication;
+    private readonly IAccountQuery _query;
 
-    public GetAccountByIdQueryHandler(IAccountApplication accountApplication)
+    public GetAccountByIdQueryHandler(IAccountQuery query)
     {
-        _accountApplication = accountApplication;
+        _query = query;
     }
 
     public Task<AccountViewModel> Handle(GetAccountByIdQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_accountApplication.GetAccountBy(request.Id));
+        return Task.FromResult(_query.GetAccount(request.Id));
     }
 }
+

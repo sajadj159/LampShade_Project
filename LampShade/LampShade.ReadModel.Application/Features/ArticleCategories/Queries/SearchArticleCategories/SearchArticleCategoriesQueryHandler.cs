@@ -1,6 +1,7 @@
 #nullable enable
 
-using BlogManagement.Application.Contract.AC.ArticleCategory;
+using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
+using LampShade.ReadModel.Contracts.ArticleCategory;
 using MediatR;
 
 using LampShade.ReadModel.Contracts.Queries.ArticleCategories.SearchArticleCategories;
@@ -11,11 +12,12 @@ namespace LampShade.ReadModel.Application.Features.ArticleCategories.Queries.Sea
 
 public class SearchArticleCategoriesQueryHandler : IRequestHandler<SearchArticleCategoriesQuery, List<ArticleCategoryViewModel>>
 {
-    private readonly IArticleCategoryApplication _application;
-    public SearchArticleCategoriesQueryHandler(IArticleCategoryApplication application) => _application = application;
+    private readonly IArticleCategoryQuery _query;
+    public SearchArticleCategoriesQueryHandler(IArticleCategoryQuery query) => _query = query;
 
     public Task<List<ArticleCategoryViewModel>> Handle(SearchArticleCategoriesQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_application.Search(new ArticleCategorySearchModel { Name = request.Name }));
+        return Task.FromResult(_query.SearchArticleCategories(request.Name));
     }
 }
+

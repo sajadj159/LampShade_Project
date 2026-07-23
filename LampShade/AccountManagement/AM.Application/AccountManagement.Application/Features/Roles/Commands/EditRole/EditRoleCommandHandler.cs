@@ -1,31 +1,20 @@
 using _0_Framework.Application;
-using AccountManagement.Application.Contracts.AC.Role;
-using AccountManagement.Domain.RoleAgg.Contracts;
-using MediatR;
-
 using AccountManagement.Application.Contracts.Commands.Roles.EditRole;
+using AccountManagement.Domain.RoleAgg;
+using MediatR;
 
 namespace AccountManagement.Application.Features.Roles.Commands.EditRole;
 
-
-
-public class EditRoleCommandHandler : IRequestHandler<EditRoleCommand, OperationResult>
+public class EditRoleCommandHandler(IRoleRepository roles) : IRequestHandler<EditRoleCommand, OperationResult>
 {
-    private readonly IRoleApplication _roleApplication;
-
-    public EditRoleCommandHandler(IRoleApplication roleApplication)
-    {
-        _roleApplication = roleApplication;
-    }
-
     public Task<OperationResult> Handle(EditRoleCommand request, CancellationToken cancellationToken)
     {
-        var command = new AccountManagement.Application.Contracts.AC.Role.EditRole
-        {
-            Id = request.Id,
-            Name = request.Name,
-            Permissions = request.Permissions
-        };
-        return Task.FromResult(_roleApplication.Edit(command));
+        var operation = new OperationResult();
+        var role = roles.Get(request.Id);
+        if (role is null) return Task.FromResult(operation.Failed(ApplicationMessages.RecordNotFound));
+        if (roles.Exist(x => x.Name == request.Name && x.Id != request.Id)) return Task.FromResult(operation.Failed(ApplicationMessages.DuplicatedRecord));
+        role.Edit(request.Name, request.Permissions);
+        roles.Save();
+        return Task.FromResult(operation.Succeeded());
     }
 }

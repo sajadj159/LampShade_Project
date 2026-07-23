@@ -1,32 +1,16 @@
-using InventoryManagement.Application.Contract.AC.Inventory;
-using MediatR;
 using _0_Framework.Application;
-
 using InventoryManagement.Application.Contracts.Commands.Inventories.ReduceInventory;
+using InventoryManagement.Domain.InventoryAgg;
+using MediatR;
 
 namespace InventoryManagement.Application.Features.Inventories.Commands.ReduceInventory;
 
-
-
-public class ReduceInventoryCommandHandler : IRequestHandler<ReduceInventoryCommand, OperationResult>
+public class ReduceInventoryCommandHandler(IInventoryRepository inventories, IAuthHelper authHelper) : IRequestHandler<ReduceInventoryCommand, OperationResult>
 {
-    private readonly IInventoryApplication _application;
-
-    public ReduceInventoryCommandHandler(IInventoryApplication application)
-    {
-        _application = application;
-    }
-
     public Task<OperationResult> Handle(ReduceInventoryCommand request, CancellationToken cancellationToken)
     {
-        var command = new InventoryManagement.Application.Contract.AC.Inventory.ReduceInventory
-        {
-            InventoryId = request.InventoryId,
-            ProductId = request.ProductId,
-            Count = request.Count,
-            Description = request.Description,
-            OrderId = request.OrderId
-        };
-        return Task.FromResult(_application.Reduce(command));
+        var operation = new OperationResult(); var inventory = inventories.Get(request.InventoryId);
+        if (inventory is null) return Task.FromResult(operation.Failed(ApplicationMessages.RecordNotFound));
+        inventory.Reduce(request.Count, authHelper.CurrentAccountId(), request.Description, request.OrderId); inventories.Save(); return Task.FromResult(operation.Succeeded());
     }
 }

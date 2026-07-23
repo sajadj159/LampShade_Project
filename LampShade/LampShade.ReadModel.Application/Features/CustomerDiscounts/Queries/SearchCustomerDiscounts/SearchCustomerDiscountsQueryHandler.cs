@@ -2,6 +2,7 @@
 
 using DiscountManagement.Application.Contract.AC.CustomerDiscount;
 using MediatR;
+using DiscountManagement.Domain.CustomerDiscountAgg;
 
 using LampShade.ReadModel.Contracts.Queries.CustomerDiscounts.SearchCustomerDiscounts;
 
@@ -11,11 +12,11 @@ namespace LampShade.ReadModel.Application.Features.CustomerDiscounts.Queries.Sea
 
 public class SearchCustomerDiscountsQueryHandler : IRequestHandler<SearchCustomerDiscountsQuery, List<CustomerDiscountViewmodel>>
 {
-    private readonly ICustomerDiscountApplication _application;
+    private readonly ICustomerDiscountRepository _repository;
 
-    public SearchCustomerDiscountsQueryHandler(ICustomerDiscountApplication application)
+    public SearchCustomerDiscountsQueryHandler(ICustomerDiscountRepository repository)
     {
-        _application = application;
+        _repository = repository;
     }
 
     public Task<List<CustomerDiscountViewmodel>> Handle(SearchCustomerDiscountsQuery request, CancellationToken cancellationToken)
@@ -26,7 +27,8 @@ public class SearchCustomerDiscountsQueryHandler : IRequestHandler<SearchCustome
             StartDate = request.StartDate,
             EndDate = request.EndDate
         };
-        return Task.FromResult(_application.Search(searchModel));
+        return Task.FromResult(_repository.Search(searchModel));
     }
 }
+
 

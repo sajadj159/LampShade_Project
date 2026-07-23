@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+using LampShade.ReadModel.Contracts.Comments.Dto;
 
-namespace LampShade.ReadModel.Contracts.Comment
+namespace LampShade.ReadModel.Contracts.Comment;
+
+public interface ICommentQuery
 {
-    public interface ICommentQuery
-    {
-        List<CommentQueryModel> GetComments();
-    }
+    List<CommentQueryModel> GetComments();
+    List<CommentViewModel> SearchComments(string name, string email);
 }

@@ -1,30 +1,12 @@
-#nullable enable
-
-using CommentManagement.Application.Contract.A.Comment;
-using MediatR;
-
+using LampShade.ReadModel.Contracts.Comment;
+using LampShade.ReadModel.Contracts.Comments.Dto;
 using LampShade.ReadModel.Contracts.Queries.Comments.SearchComments;
+using MediatR;
 
 namespace LampShade.ReadModel.Application.Features.Comments.Queries.SearchComments;
 
-
-
-public class SearchCommentsQueryHandler : IRequestHandler<SearchCommentsQuery, List<CommentViewModel>>
+public class SearchCommentsQueryHandler(ICommentQuery query) : IRequestHandler<SearchCommentsQuery, List<CommentViewModel>>
 {
-    private readonly ICommentApplication _commentApplication;
-
-    public SearchCommentsQueryHandler(ICommentApplication commentApplication)
-    {
-        _commentApplication = commentApplication;
-    }
-
-    public Task<List<CommentViewModel>> Handle(SearchCommentsQuery request, CancellationToken cancellationToken)
-    {
-        var searchModel = new CommentSearchModel
-        {
-            Name = request.Name,
-            Email = request.Email
-        };
-        return Task.FromResult(_commentApplication.Search(searchModel));
-    }
+    public Task<List<CommentViewModel>> Handle(SearchCommentsQuery request, CancellationToken cancellationToken) =>
+        Task.FromResult(query.SearchComments(request.Name ?? string.Empty, request.Email ?? string.Empty));
 }

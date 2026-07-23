@@ -69,12 +69,12 @@ builder.Services.AddTransient<IHttpContextGetter, HttpContextGetter>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(Program).Assembly,
-    typeof(AccountManagement.Application.A.Account.AccountApplication).Assembly,
-    typeof(CommentManagement.Application.Comment.CommentApplication).Assembly,
-    typeof(BlogManagement.Application.A.Article.ArticleApplication).Assembly,
-    typeof(DiscountManagement.Application.A.CustomerDiscount.CustomerDiscountApplication).Assembly,
-    typeof(ShopManagement.Application.Product.ProductApplication).Assembly,
-    typeof(InventoryManagement.Application.InventoryApplication).Assembly,
+    typeof(AccountManagement.Application.Features.Accounts.Commands.Register.RegisterCommandHandler).Assembly,
+    typeof(CommentManagement.Application.Features.Comments.Commands.AddComment.AddCommentCommandHandler).Assembly,
+    typeof(BlogManagement.Application.Features.Articles.Commands.CreateArticle.CreateArticleCommandHandler).Assembly,
+    typeof(DiscountManagement.Application.Features.CustomerDiscounts.Commands.DefineCustomerDiscount.DefineCustomerDiscountCommandHandler).Assembly,
+    typeof(ShopManagement.Application.Features.Products.Commands.CreateProduct.CreateProductCommandHandler).Assembly,
+    typeof(InventoryManagement.Application.Features.Inventories.Commands.CreateInventory.CreateInventoryCommandHandler).Assembly,
     typeof(LampShade.ReadModel.Application.ReadModelAssemblyMarker).Assembly));
 
 // Configure Cookie Authentication
@@ -160,4 +160,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
 

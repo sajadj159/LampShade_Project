@@ -1,29 +1,15 @@
-using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
-using MediatR;
 using _0_Framework.Application;
-
 using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.DefineColleagueDiscount;
+using DiscountManagement.Domain.ColleagueDiscountAgg;
+using MediatR;
 
 namespace DiscountManagement.Application.Features.ColleagueDiscounts.Commands.DefineColleagueDiscount;
 
-
-
-public class DefineColleagueDiscountCommandHandler : IRequestHandler<DefineColleagueDiscountCommand, OperationResult>
+public class DefineColleagueDiscountCommandHandler(IColleagueDiscountRepository discounts) : IRequestHandler<DefineColleagueDiscountCommand, OperationResult>
 {
-    private readonly IColleagueDiscountApplication _application;
-
-    public DefineColleagueDiscountCommandHandler(IColleagueDiscountApplication application)
-    {
-        _application = application;
-    }
-
     public Task<OperationResult> Handle(DefineColleagueDiscountCommand request, CancellationToken cancellationToken)
     {
-        var command = new DiscountManagement.Application.Contract.AC.ColleagueDiscount.DefineColleagueDiscount
-        {
-            ProductId = request.ProductId,
-            DiscountRate = request.DiscountRate
-        };
-        return Task.FromResult(_application.Define(command));
+        var operation = new OperationResult(); if (discounts.Exist(x => x.ProductId == request.ProductId && x.DiscountRate == request.DiscountRate)) return Task.FromResult(operation.Failed(ApplicationMessages.DuplicatedRecord));
+        discounts.Create(new ColleagueDiscount(request.ProductId, request.DiscountRate)); discounts.Save(); return Task.FromResult(operation.Succeeded());
     }
 }

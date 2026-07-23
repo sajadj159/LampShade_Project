@@ -2,6 +2,7 @@
 
 using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
 using MediatR;
+using DiscountManagement.Domain.ColleagueDiscountAgg;
 
 using LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.SearchColleagueDiscounts;
 
@@ -11,17 +12,18 @@ namespace LampShade.ReadModel.Application.Features.ColleagueDiscounts.Queries.Se
 
 public class SearchColleagueDiscountsQueryHandler : IRequestHandler<SearchColleagueDiscountsQuery, List<ColleagueDiscountViewModel>>
 {
-    private readonly IColleagueDiscountApplication _application;
+    private readonly IColleagueDiscountRepository _repository;
 
-    public SearchColleagueDiscountsQueryHandler(IColleagueDiscountApplication application)
+    public SearchColleagueDiscountsQueryHandler(IColleagueDiscountRepository repository)
     {
-        _application = application;
+        _repository = repository;
     }
 
     public Task<List<ColleagueDiscountViewModel>> Handle(SearchColleagueDiscountsQuery request, CancellationToken cancellationToken)
     {
         var searchModel = new ColleagueDiscountSearchModel { ProductId = request.ProductId ?? 0 };
-        return Task.FromResult(_application.Search(searchModel));
+        return Task.FromResult(_repository.Search(searchModel));
     }
 }
+
 
