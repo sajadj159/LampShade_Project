@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace ShopManagement.Application.Contracts.Commands.ProductPictures.CreateProductPicture;
 
-public class CreateProductPictureCommand : IRequest<OperationResult>
+public class CreateProductPictureCommand : ICommand<OperationResult>
 {
     public long ProductId { get; set; }
     public IFormFile? PictureUrl { get; set; }

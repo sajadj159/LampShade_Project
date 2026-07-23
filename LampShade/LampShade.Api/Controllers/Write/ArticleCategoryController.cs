@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using BlogManagement.Application.Contracts.Commands.ArticleCategories.CreateArticleCategory;
 using BlogManagement.Application.Contracts.Commands.ArticleCategories.EditArticleCategory;
 using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategories;
@@ -32,4 +34,3 @@ public class ArticleCategoryController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetArticleCategoryByIdQuery { Id = id }));
 }
-

@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace ShopManagement.Application.Contracts.Commands.ProductCategories.CreateProductCategory;
 
-public class CreateProductCategoryCommand : IRequest<OperationResult>
+public class CreateProductCategoryCommand : ICommand<OperationResult>
 {
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;

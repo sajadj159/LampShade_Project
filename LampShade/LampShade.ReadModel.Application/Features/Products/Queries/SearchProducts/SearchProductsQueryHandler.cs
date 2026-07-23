@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using ShopManagement.Application.Contract.A.Product;
@@ -29,4 +31,3 @@ public class SearchProductsQueryHandler : IRequestHandler<SearchProductsQuery, L
         return Task.FromResult(_application.Search(searchModel));
     }
 }
-

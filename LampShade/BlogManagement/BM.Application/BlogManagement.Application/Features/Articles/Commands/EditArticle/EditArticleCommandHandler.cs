@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using BlogManagement.Application.Contract.AC.Article;
@@ -20,7 +22,7 @@ public class EditArticleCommandHandler : IRequestHandler<EditArticleCommand, Ope
         _articleApplication = articleApplication;
     }
 
-    public Task<OperationResult> Handle(EditArticleCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(EditArticleCommand request, CancellationToken cancellationToken)
     {
         var command = new BlogManagement.Application.Contract.AC.Article.EditArticle
         {
@@ -38,6 +40,6 @@ public class EditArticleCommandHandler : IRequestHandler<EditArticleCommand, Ope
             CanonicalAddress = request.CanonicalAddress,
             CategoryId = request.CategoryId
         };
-        return Task.FromResult(_articleApplication.Edit(command));
+        return await _articleApplication.EditAsync(command, cancellationToken);
     }
 }

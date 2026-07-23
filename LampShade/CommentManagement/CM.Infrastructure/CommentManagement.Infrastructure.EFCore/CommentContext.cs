@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using CommentManagement.Domain.CommentAgg;
 using CommentManagement.Infrastructure.EFCore.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommentManagement.Infrastructure.EFCore
 {
-    public class CommentContext : DbContext
+    public class CommentContext : DbContext, _0_Framework.Domain.IDbContext
     {
         public DbSet<Comment> Comments { get; set; }
 

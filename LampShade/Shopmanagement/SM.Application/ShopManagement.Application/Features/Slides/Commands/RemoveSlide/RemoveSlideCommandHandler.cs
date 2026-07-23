@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using _0_Framework.Application;
 using ShopManagement.Application.Contract.A.Slide;
@@ -12,5 +14,5 @@ public class RemoveSlideCommandHandler : IRequestHandler<RemoveSlideCommand, Ope
 {
     private readonly ISlideApplication _application;
     public RemoveSlideCommandHandler(ISlideApplication application) => _application = application;
-    public Task<OperationResult> Handle(RemoveSlideCommand r, CancellationToken c) => Task.FromResult(_application.Remove(r.Id));
+    public async Task<OperationResult> Handle(RemoveSlideCommand r, CancellationToken c) => await _application.RemoveAsync(r.Id, c);
 }

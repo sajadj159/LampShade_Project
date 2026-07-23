@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using ShopManagement.Application.Contracts.Commands.Products.CreateProduct;
 using ShopManagement.Application.Contracts.Commands.Products.EditProduct;
 using LampShade.ReadModel.Contracts.Queries.Products.GetProductById;
@@ -32,4 +34,3 @@ public class ProductController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetProductByIdQuery { Id = id }));
 }
-

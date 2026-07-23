@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using _0_Framework.Application;
 using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccountById;
 using MediatR;
@@ -42,5 +44,3 @@ public class CurrentUserController : ControllerBase
         });
     }
 }
-
-

@@ -6,6 +6,7 @@ using AccountManagement.Infrastructure.EFCore;
 using AccountManagement.Infrastructure.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 namespace AccountManagement.Configuration
 {
@@ -16,7 +17,8 @@ namespace AccountManagement.Configuration
             service.AddTransient<IAccountRepository, AccountRepository>();
             service.AddTransient<IRoleRepository, RoleRepository>();
             service.AddTransient<IAccountQuery, AccountQuery>();
-            service.AddDbContext<AccountContext>(x => x.UseNpgsql(connectionString));
+            service.AddDbContext<AccountContext>((sp, options) => options.UseNpgsql(sp.GetRequiredService<NpgsqlConnection>()));
+            service.AddScoped<_0_Framework.Domain.IDbContext>(sp => sp.GetRequiredService<AccountContext>());
         }
     }
 }

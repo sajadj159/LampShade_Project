@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Queries.Products.CheckInventoryStatus;
 using LampShade.ReadModel.Contracts.Queries.Products.GetLatestArrivals;
 using LampShade.ReadModel.Contracts.Queries.Products.GetProductBySlug;
@@ -26,4 +28,3 @@ public class ProductQueryController : ControllerBase
     [HttpPost("check-inventory")]
     public async Task<IActionResult> CheckInventoryStatus([FromBody] CheckInventoryStatusQuery query) => Ok(await _mediator.Send(query));
 }
-

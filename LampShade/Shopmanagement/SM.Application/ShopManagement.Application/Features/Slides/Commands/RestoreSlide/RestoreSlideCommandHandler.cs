@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using _0_Framework.Application;
 using ShopManagement.Application.Contract.A.Slide;
@@ -12,5 +14,5 @@ public class RestoreSlideCommandHandler : IRequestHandler<RestoreSlideCommand, O
 {
     private readonly ISlideApplication _application;
     public RestoreSlideCommandHandler(ISlideApplication application) => _application = application;
-    public Task<OperationResult> Handle(RestoreSlideCommand r, CancellationToken c) => Task.FromResult(_application.Restore(r.Id));
+    public async Task<OperationResult> Handle(RestoreSlideCommand r, CancellationToken c) => await _application.RestoreAsync(r.Id, c);
 }

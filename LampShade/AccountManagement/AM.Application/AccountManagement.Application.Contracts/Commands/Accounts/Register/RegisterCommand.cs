@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace AccountManagement.Application.Contracts.Commands.Accounts.Register;
 
-public class RegisterCommand : IRequest<OperationResult>
+public class RegisterCommand : ICommand<OperationResult>
 {
     public string UserName { get; set; } = string.Empty;
     public string FullName { get; set; } = string.Empty;

@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using BlogManagement.Application.Contracts.Commands.Articles.CreateArticle;
 using BlogManagement.Application.Contracts.Commands.Articles.EditArticle;
 using LampShade.ReadModel.Contracts.Queries.Articles.GetArticleById;
@@ -28,4 +30,3 @@ public class ArticleController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetArticleByIdQuery { Id = id }));
 }
-

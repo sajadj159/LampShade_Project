@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using _0_Framework.Application;
 using CommentManagement.Application.Contracts.Commands.Comments.ConfirmComment;
 using CommentManagement.Domain.CommentAgg;
@@ -7,13 +9,12 @@ namespace CommentManagement.Application.Features.Comments.Commands.ConfirmCommen
 
 public class ConfirmCommentCommandHandler(ICommentRepository comments) : IRequestHandler<ConfirmCommentCommand, OperationResult>
 {
-    public Task<OperationResult> Handle(ConfirmCommentCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(ConfirmCommentCommand request, CancellationToken cancellationToken)
     {
         var operation = new OperationResult();
-        var comment = comments.Get(request.Id);
-        if (comment is null) return Task.FromResult(operation.Failed(ApplicationMessages.RecordNotFound));
+        var comment = await comments.GetAsync(request.Id, cancellationToken);
+        if (comment is null) return operation.Failed(ApplicationMessages.RecordNotFound);
         comment.Confirm();
-        comments.Save();
-        return Task.FromResult(operation.Succeeded());
+        return operation.Succeeded();
     }
 }

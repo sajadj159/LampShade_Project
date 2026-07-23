@@ -4,7 +4,7 @@ using _0_Framework.Application;
 
 namespace InventoryManagement.Application.Contracts.Commands.Inventories.ReduceInventory;
 
-public class ReduceInventoryCommand : IRequest<OperationResult>
+public class ReduceInventoryCommand : ICommand<OperationResult>
 {
     public long InventoryId { get; set; }
     public long ProductId { get; set; }

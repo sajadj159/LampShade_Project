@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace CommentManagement.Application.Contracts.Commands.Comments.AddComment;
 
-public class AddCommentCommand : IRequest<OperationResult>
+public class AddCommentCommand : ICommand<OperationResult>
 {
     public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;

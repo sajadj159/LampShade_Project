@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using InventoryManagement.Application.Contract.AC.Inventory;
@@ -29,5 +31,3 @@ public class SearchInventoriesQueryHandler : IRequestHandler<SearchInventoriesQu
         return Task.FromResult(_repository.Search(searchModel));
     }
 }
-
-

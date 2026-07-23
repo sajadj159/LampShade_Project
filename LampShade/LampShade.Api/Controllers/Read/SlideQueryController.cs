@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Queries.Slides.GetSlidesForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,4 +16,3 @@ public class SlideQueryController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetSlides() => Ok(await _mediator.Send(new GetSlidesForQuery()));
 }
-

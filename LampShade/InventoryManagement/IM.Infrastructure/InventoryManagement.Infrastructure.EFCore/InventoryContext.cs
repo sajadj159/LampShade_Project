@@ -1,10 +1,10 @@
-﻿using InventoryManagement.Domain.InventoryAgg;
+using InventoryManagement.Domain.InventoryAgg;
 using InventoryManagement.Infrastructure.EFCore.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagement.Infrastructure.EFCore
 {
-    public class InventoryContext : DbContext
+    public class InventoryContext : DbContext, _0_Framework.Domain.IDbContext
     {
         public DbSet<Inventory> Inventory { get; set; }
         public InventoryContext(DbContextOptions<InventoryContext> options):base(options)

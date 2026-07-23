@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
@@ -20,4 +22,3 @@ public class SearchArticleCategoriesQueryHandler : IRequestHandler<SearchArticle
         return Task.FromResult(_query.SearchArticleCategories(request.Name));
     }
 }
-

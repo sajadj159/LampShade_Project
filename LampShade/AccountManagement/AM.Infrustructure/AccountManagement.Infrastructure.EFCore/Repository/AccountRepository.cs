@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
@@ -20,8 +22,13 @@ namespace AccountManagement.Infrastructure.EFCore.Repository
 		{
 			return _context.Accounts.FirstOrDefault(x => x.UserName == userName || x.Mobile == userName);
 		}
-
-		public List<AccountViewModel> Search(AccountSearchModel searchModel)
+    public Task<Account> GetByAsync(string userName, CancellationToken cancellationToken = default)
+    {
+        return _context.Accounts.FirstOrDefaultAsync(
+            x => x.UserName == userName || x.Mobile == userName,
+            cancellationToken);
+    }
+    public List<AccountViewModel> Search(AccountSearchModel searchModel)
 		{
 			var queryable = _context.Accounts
 				.AsNoTracking()

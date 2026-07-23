@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using DiscountManagement.Application.Contract.AC.CustomerDiscount;
@@ -30,5 +32,3 @@ public class SearchCustomerDiscountsQueryHandler : IRequestHandler<SearchCustome
         return Task.FromResult(_repository.Search(searchModel));
     }
 }
-
-

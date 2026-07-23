@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using MediatR;
@@ -16,7 +18,7 @@ public class EditProductCategoryCommandHandler : IRequestHandler<EditProductCate
     private readonly IProductCategoryApplication _application;
     public EditProductCategoryCommandHandler(IProductCategoryApplication application) => _application = application;
 
-    public Task<OperationResult> Handle(EditProductCategoryCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(EditProductCategoryCommand request, CancellationToken cancellationToken)
     {
         var command = new ShopManagement.Application.Contract.ProductCategory.EditProductCategory
         {
@@ -24,6 +26,6 @@ public class EditProductCategoryCommandHandler : IRequestHandler<EditProductCate
             PictureAlt = request.PictureAlt, PictureTitle = request.PictureTitle,
             Keywords = request.Keywords, MetaDescription = request.MetaDescription, Slug = request.Slug
         };
-        return Task.FromResult(_application.Edit(command));
+        return await _application.EditAsync(command, cancellationToken);
     }
 }

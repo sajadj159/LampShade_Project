@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
 using MediatR;
 using DiscountManagement.Domain.ColleagueDiscountAgg;
@@ -22,4 +24,3 @@ public class GetColleagueDiscountByIdQueryHandler : IRequestHandler<GetColleague
         return Task.FromResult(_repository.GetDetails(request.Id));
     }
 }
-

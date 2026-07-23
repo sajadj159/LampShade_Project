@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using ShopManagement.Application.Contract.A.Slide;
@@ -20,7 +22,7 @@ public class CreateSlideCommandHandler : IRequestHandler<CreateSlideCommand, Ope
         _application = application;
     }
 
-    public Task<OperationResult> Handle(CreateSlideCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(CreateSlideCommand request, CancellationToken cancellationToken)
     {
         var command = new ShopManagement.Application.Contract.A.Slide.CreateSlide
         {
@@ -33,6 +35,6 @@ public class CreateSlideCommandHandler : IRequestHandler<CreateSlideCommand, Ope
             Link = request.Link,
             BtnText = request.BtnText
         };
-        return Task.FromResult(_application.Create(command));
+        return await _application.CreateAsync(command, cancellationToken);
     }
 }

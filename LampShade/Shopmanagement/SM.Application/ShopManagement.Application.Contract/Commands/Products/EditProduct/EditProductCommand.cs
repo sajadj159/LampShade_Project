@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace ShopManagement.Application.Contracts.Commands.Products.EditProduct;
 
-public class EditProductCommand : IRequest<OperationResult>
+public class EditProductCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
     public bool ClearMainPicture { get; set; }

@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.DefineCustomerDiscount;
 using DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.EditCustomerDiscount;
 using LampShade.ReadModel.Contracts.Queries.CustomerDiscounts.GetCustomerDiscountById;
@@ -28,4 +30,3 @@ public class CustomerDiscountController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetCustomerDiscountByIdQuery { Id = id }));
 }
-

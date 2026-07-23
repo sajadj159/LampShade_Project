@@ -4,7 +4,7 @@ using _0_Framework.Application;
 
 namespace DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.RemoveColleagueDiscount;
 
-public class RemoveColleagueDiscountCommand : IRequest<OperationResult>
+public class RemoveColleagueDiscountCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
 }

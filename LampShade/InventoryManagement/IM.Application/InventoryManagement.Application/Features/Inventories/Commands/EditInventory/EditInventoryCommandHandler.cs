@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using _0_Framework.Application;
 using InventoryManagement.Application.Contracts.Commands.Inventories.EditInventory;
 using InventoryManagement.Domain.InventoryAgg;
@@ -7,11 +9,11 @@ namespace InventoryManagement.Application.Features.Inventories.Commands.EditInve
 
 public class EditInventoryCommandHandler(IInventoryRepository inventories) : IRequestHandler<EditInventoryCommand, OperationResult>
 {
-    public Task<OperationResult> Handle(EditInventoryCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(EditInventoryCommand request, CancellationToken cancellationToken)
     {
-        var operation = new OperationResult(); var inventory = inventories.Get(request.Id);
-        if (inventory is null) return Task.FromResult(operation.Failed(ApplicationMessages.RecordNotFound));
-        if (inventories.Exist(x => x.ProductId == request.ProductId && x.Id != request.Id)) return Task.FromResult(operation.Failed(ApplicationMessages.DuplicatedRecord));
-        inventory.Edit(request.ProductId, request.UnitPrice); inventories.Save(); return Task.FromResult(operation.Succeeded());
+        var operation = new OperationResult(); var inventory = await inventories.GetAsync(request.Id, cancellationToken);
+        if (inventory is null) return operation.Failed(ApplicationMessages.RecordNotFound);
+        if (await inventories.ExistAsync(x => x.ProductId == request.ProductId && x.Id != request.Id, cancellationToken)) return operation.Failed(ApplicationMessages.DuplicatedRecord);
+        inventory.Edit(request.ProductId, request.UnitPrice); return operation.Succeeded();
     }
 }

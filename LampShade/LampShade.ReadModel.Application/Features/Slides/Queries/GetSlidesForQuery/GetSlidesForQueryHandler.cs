@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using LampShade.ReadModel.Contracts.Slide;
 
@@ -13,6 +15,3 @@ public class GetSlidesForQueryHandler : IRequestHandler<QueryRequest, List<Slide
     public GetSlidesForQueryHandler(ISlideQuery query) => _query = query;
     public Task<List<SlideQueryModel>> Handle(QueryRequest r, CancellationToken c) => Task.FromResult(_query.GetSlides());
 }
-
-
-

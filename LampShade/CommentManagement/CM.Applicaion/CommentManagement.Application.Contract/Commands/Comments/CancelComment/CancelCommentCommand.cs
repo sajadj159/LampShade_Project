@@ -4,7 +4,7 @@ using _0_Framework.Application;
 
 namespace CommentManagement.Application.Contracts.Commands.Comments.CancelComment;
 
-public class CancelCommentCommand : IRequest<OperationResult>
+public class CancelCommentCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
 }

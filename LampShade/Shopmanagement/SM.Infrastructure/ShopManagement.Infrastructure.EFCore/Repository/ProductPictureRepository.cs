@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using _0_Framework.Repository;
@@ -34,6 +36,11 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 .Include(x => x.Product)
                 .ThenInclude(x => x.Category)
                 .FirstOrDefault(x => x.Id == id);
+        }
+
+        public Task<ProductPicture> GetWithProductsAndCategoriesAsync(long id, CancellationToken cancellationToken = default)
+        {
+            return _context.ProductPictures.Include(x => x.Product).ThenInclude(x => x.Category).FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel)

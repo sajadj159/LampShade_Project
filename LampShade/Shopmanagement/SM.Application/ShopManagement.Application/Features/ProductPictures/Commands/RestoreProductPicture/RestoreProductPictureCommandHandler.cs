@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using ShopManagement.Application.Contract.A.ProductPicture;
 using MediatR;
 using _0_Framework.Application;
@@ -17,8 +19,8 @@ public class RestoreProductPictureCommandHandler : IRequestHandler<RestoreProduc
         _application = application;
     }
 
-    public Task<OperationResult> Handle(RestoreProductPictureCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(RestoreProductPictureCommand request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_application.Restore(request.Id));
+        return await _application.RestoreAsync(request.Id, cancellationToken);
     }
 }

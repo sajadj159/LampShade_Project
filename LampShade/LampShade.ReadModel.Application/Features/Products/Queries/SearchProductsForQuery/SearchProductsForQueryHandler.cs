@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Product;
 using MediatR;
 
@@ -21,6 +23,3 @@ public class SearchProductsForQueryHandler : IRequestHandler<QueryRequest, List<
         return Task.FromResult(_productQuery.Search(request.Value));
     }
 }
-
-
-

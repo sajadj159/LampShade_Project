@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using LampShade.ReadModel.Contracts.Account;
 
@@ -13,6 +15,3 @@ public class GetAllAccountsForQueryHandler : IRequestHandler<QueryRequest, List<
     public GetAllAccountsForQueryHandler(IAccountQuery query) => _query = query;
     public Task<List<AccountQueryModel>> Handle(QueryRequest r, CancellationToken c) => Task.FromResult(_query.GetAccounts());
 }
-
-
-

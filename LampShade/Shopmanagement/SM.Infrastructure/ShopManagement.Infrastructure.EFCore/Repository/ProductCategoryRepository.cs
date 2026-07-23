@@ -1,9 +1,12 @@
+using System.Threading;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
 using ShopManagement.Application.Contract.ProductCategory;
 using ShopManagement.Domain.ProductCategoryAgg;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShopManagement.Infrastructure.EFCore.Repository
 {
@@ -54,6 +57,16 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
             return _context.Products.Any(x => x.CategoryId == id);
         }
 
+        public Task<string> GetSlugByAsync(long id, CancellationToken cancellationToken = default)
+        {
+            return _context.ProductCategories.AsNoTracking().Where(x => x.Id == id).Select(x => x.Slug).FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public Task<bool> HasProductsAsync(long id, CancellationToken cancellationToken = default)
+        {
+            return _context.Products.AnyAsync(x => x.CategoryId == id, cancellationToken);
+        }
+
         public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel)
         {
             var query = _context.ProductCategories.Select(x => new ProductCategoryViewModel()
@@ -70,4 +83,3 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         }
     }
 }
-

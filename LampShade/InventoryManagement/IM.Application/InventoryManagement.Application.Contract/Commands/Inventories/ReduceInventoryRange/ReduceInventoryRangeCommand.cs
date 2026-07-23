@@ -4,7 +4,7 @@ using _0_Framework.Application;
 
 namespace InventoryManagement.Application.Contracts.Commands.Inventories.ReduceInventoryRange;
 
-public class ReduceInventoryRangeCommand : IRequest<OperationResult>
+public class ReduceInventoryRangeCommand : ICommand<OperationResult>
 {
     public List<ReduceInventoryItem> Items { get; set; } = new();
 }

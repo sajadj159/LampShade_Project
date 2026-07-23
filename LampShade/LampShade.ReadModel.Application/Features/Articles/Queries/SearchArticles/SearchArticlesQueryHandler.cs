@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using BlogManagement.Application.Contract.AC.Article;
@@ -28,4 +30,3 @@ public class SearchArticlesQueryHandler : IRequestHandler<SearchArticlesQuery, L
         return Task.FromResult(_articleApplication.Search(searchModel));
     }
 }
-

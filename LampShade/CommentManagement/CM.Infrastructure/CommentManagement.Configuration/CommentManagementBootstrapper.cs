@@ -5,6 +5,7 @@ using CommentManagement.Infrastructure.EFCore;
 using CommentManagement.Infrastructure.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 namespace CommentManagement.Configuration
 {
@@ -15,7 +16,8 @@ namespace CommentManagement.Configuration
 
             service.AddTransient<ICommentQuery, CommentQuery>();
 
-            service.AddDbContext<CommentContext>(x => x.UseNpgsql(connectionString));
+            service.AddDbContext<CommentContext>((sp, options) => options.UseNpgsql(sp.GetRequiredService<NpgsqlConnection>()));
+            service.AddScoped<_0_Framework.Domain.IDbContext>(sp => sp.GetRequiredService<CommentContext>());
         }
     }
 }

@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using LampShade.ReadModel.Contracts.ProductCategory;
 
@@ -13,6 +15,3 @@ public class GetProductCategoriesWithProductsForQueryHandler : IRequestHandler<Q
     public GetProductCategoriesWithProductsForQueryHandler(IProductCategoryQuery query) => _query = query;
     public Task<List<ProductCategoryQueryModel>> Handle(QueryRequest r, CancellationToken c) => Task.FromResult(_query.GetProductCategoriesWithProducts());
 }
-
-
-

@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace ShopManagement.Application.Contracts.Commands.ProductPictures.EditProductPicture;
 
-public class EditProductPictureCommand : IRequest<OperationResult>
+public class EditProductPictureCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
     public long ProductId { get; set; }

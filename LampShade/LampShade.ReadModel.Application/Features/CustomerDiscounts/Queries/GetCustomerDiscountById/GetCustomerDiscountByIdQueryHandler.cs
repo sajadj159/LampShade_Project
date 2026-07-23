@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using DiscountManagement.Application.Contract.AC.CustomerDiscount;
 using MediatR;
 using DiscountManagement.Domain.CustomerDiscountAgg;
@@ -22,4 +24,3 @@ public class GetCustomerDiscountByIdQueryHandler : IRequestHandler<GetCustomerDi
         return Task.FromResult(_repository.GetDetails(request.Id));
     }
 }
-

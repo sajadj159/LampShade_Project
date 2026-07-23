@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace ShopManagement.Application.Contracts.Commands.Slides.EditSlide;
 
-public class EditSlideCommand : IRequest<OperationResult>
+public class EditSlideCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
     public IFormFile? PictureUrl { get; set; }

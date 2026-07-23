@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using _0_Framework.Application;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -21,14 +23,14 @@ public class UploadPaymentProofCommandHandler : IRequestHandler<UploadPaymentPro
         _application = application;
     }
 
-    public Task<OperationResult> Handle(UploadPaymentProofCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(UploadPaymentProofCommand request, CancellationToken cancellationToken)
     {
         var result = new OperationResult();
         if (request.Proof == null || request.Proof.Length == 0 || !request.Proof.ContentType.StartsWith("image/") || request.Proof.Length > MaximumFileSize)
-            return Task.FromResult(result.Failed("Upload an image smaller than 5 MB."));
+            return result.Failed("Upload an image smaller than 5 MB.");
 
         var fileKey = _uploader.Upload(request.Proof, "Orders/PaymentProofs");
-        return Task.FromResult(_application.UploadPaymentProof(request.OrderId, fileKey));
+        return await _application.UploadPaymentProofAsync(request.OrderId, fileKey, cancellationToken);
     }
 
 }

@@ -4,7 +4,7 @@ using _0_Framework.Application;
 
 namespace DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.DefineCustomerDiscount;
 
-public class DefineCustomerDiscountCommand : IRequest<OperationResult>
+public class DefineCustomerDiscountCommand : ICommand<OperationResult>
 {
     public long ProductId { get; set; }
     public int DiscountRate { get; set; }

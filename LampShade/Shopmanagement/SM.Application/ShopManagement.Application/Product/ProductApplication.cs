@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
@@ -23,34 +25,33 @@ namespace ShopManagement.Application.Product
             _productPictureRepository = productPictureRepository;
         }
 
-        public OperationResult Create(CreateProduct command)
+        public async Task<OperationResult> CreateAsync(CreateProduct command, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            if (_productRepository.Exist(x => x.Name == command.Name))
+            if (await _productRepository.ExistAsync(x => x.Name == command.Name, cancellationToken))
                return  operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slugify = command.Slug.Slugify();
-            var slugBy = _productCategoryRepository.GetSlugBy(command.CategoryId);
+            var slugBy = await _productCategoryRepository.GetSlugByAsync(command.CategoryId, cancellationToken);
             var picturePath = $"{slugBy}/{slugify}";
             var fileName = _uploader.Upload(command.PictureUrl, picturePath);
 
             var product = new Domain.ProductAgg.Product(command.Name, command.Code, command.ShortDescription,
                 command.Description, fileName, command.PictureTitle, command.PictureAlt, slugify,
                 command.Keywords, command.MetaDescription, command.CategoryId);
-            _productRepository.Create(product);
-            _productRepository.Save();
-            AddAdditionalPictures(product, command.AdditionalPictures, picturePath);
+            _productRepository.Add(product);
+            await AddAdditionalPicturesAsync(product, command.AdditionalPictures, picturePath, cancellationToken);
             return operationResult.Succeeded();
         }
 
-        public OperationResult Edit(EditProduct command)
+        public async Task<OperationResult> EditAsync(EditProduct command, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
 
-            var product = _productRepository.GetProductWithCategories(command.Id);
+            var product = await _productRepository.GetProductWithCategoriesAsync(command.Id, cancellationToken);
             if (product == null)
                return operationResult.Failed(ApplicationMessages.RecordNotFound);
-            if (_productRepository.Exist(x => x.Name == command.Name && x.Id != command.Id))
+            if (await _productRepository.ExistAsync(x => x.Name == command.Name && x.Id != command.Id, cancellationToken))
                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slugify = command.Slug.Slugify();
@@ -61,13 +62,12 @@ namespace ShopManagement.Application.Product
             product.Edit(command.Name, command.Code, command.ShortDescription,
                 command.Description, fileName, command.PictureTitle, command.PictureAlt,
                 slugify, command.Keywords, command.MetaDescription, command.CategoryId);
-            _productRepository.Save();
-            AddAdditionalPictures(product, command.AdditionalPictures, picturePath);
+            await AddAdditionalPicturesAsync(product, command.AdditionalPictures, picturePath, cancellationToken);
             return operationResult.Succeeded();
 
         }
 
-        private void AddAdditionalPictures(Domain.ProductAgg.Product product, List<Microsoft.AspNetCore.Http.IFormFile> pictures, string path)
+        private async Task AddAdditionalPicturesAsync(Domain.ProductAgg.Product product, List<Microsoft.AspNetCore.Http.IFormFile> pictures, string path, CancellationToken cancellationToken)
         {
             if (pictures == null) return;
 
@@ -75,10 +75,8 @@ namespace ShopManagement.Application.Product
             {
                 var picturePath = _uploader.Upload(picture, path);
                 var title = System.IO.Path.GetFileNameWithoutExtension(picture.FileName);
-                _productPictureRepository.Create(new ShopManagement.Domain.ProductPictureAgg.ProductPicture(product.Id, picturePath, title, title));
+                _productPictureRepository.Add(new ShopManagement.Domain.ProductPictureAgg.ProductPicture(product.Id, picturePath, title, title));
             }
-
-            _productPictureRepository.Save();
         }
         public List<ProductViewModel> Search(ProductSearchModel searchModel)
         {

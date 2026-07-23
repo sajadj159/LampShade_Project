@@ -9,6 +9,7 @@ using BlogManagement.Infrastructure.EFCore;
 using BlogManagement.Infrastructure.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 namespace BlogManagement.Infrastructure.Configuration
 {
@@ -24,7 +25,8 @@ namespace BlogManagement.Infrastructure.Configuration
             service.AddTransient<IArticleQuery, ArticleQuery>();
             service.AddTransient<IArticleCategoryQuery, ArticleCategoryQuery>();
             
-            service.AddDbContext<BlogContext>(x => x.UseNpgsql(connectionString));
+            service.AddDbContext<BlogContext>((sp, options) => options.UseNpgsql(sp.GetRequiredService<NpgsqlConnection>()));
+            service.AddScoped<_0_Framework.Domain.IDbContext>(sp => sp.GetRequiredService<BlogContext>());
         }
     }
 }

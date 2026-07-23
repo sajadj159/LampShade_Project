@@ -7,6 +7,7 @@ using LampShade.ReadModel.Contracts.Slide;
 using LampShade.ReadModel.Application.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using ShopManagement.Application.Cart;
 using ShopManagement.Application.Contract.A.Product;
 using ShopManagement.Application.Contract.A.ProductPicture;
@@ -65,7 +66,8 @@ namespace ShopManagement.Configuration
             service.AddSingleton<ICartService, CartService>();
 
             service.AddTransient<IOrderQuery, OrderQuery>();
-            service.AddDbContext<ShopContext>(x => x.UseNpgsql(connectionString));
+            service.AddDbContext<ShopContext>((sp, options) => options.UseNpgsql(sp.GetRequiredService<NpgsqlConnection>()));
+            service.AddScoped<_0_Framework.Domain.IDbContext>(sp => sp.GetRequiredService<ShopContext>());
         }
     }
 }

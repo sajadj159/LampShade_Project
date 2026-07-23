@@ -4,7 +4,7 @@ using _0_Framework.Application;
 
 namespace DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.DefineColleagueDiscount;
 
-public class DefineColleagueDiscountCommand : IRequest<OperationResult>
+public class DefineColleagueDiscountCommand : ICommand<OperationResult>
 {
     public long ProductId { get; set; }
     public int DiscountRate { get; set; }

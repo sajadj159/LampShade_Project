@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using _0_Framework.Repository;
 using ShopManagement.Application.Contracts.Commands.Orders.ApproveCashOnDelivery;
 using ShopManagement.Application.Contracts.Commands.Orders.ApprovePaymentProof;
@@ -23,7 +25,11 @@ public class OrderController : ControllerBase
     public OrderController(IMediator mediator) => _mediator = mediator;
 
     [HttpPost]
-    public async Task<IActionResult> PlaceOrder(PlaceOrderCommand command) => Ok(new { OrderId = await _mediator.Send(command) });
+    public async Task<IActionResult> PlaceOrder(PlaceOrderCommand command)
+    {
+        var order = await _mediator.Send(command);
+        return Ok(new { order.OrderId });
+    }
 
     [HttpGet("{id}/amount")]
     public async Task<IActionResult> GetAmountBy(long id) => Ok(new { Amount = await _mediator.Send(new GetOrderAmountQuery { Id = id }) });
@@ -68,8 +74,3 @@ public class OrderController : ControllerBase
     [HttpGet("{id}/items")]
     public async Task<IActionResult> GetItemsBy(long id) => Ok(await _mediator.Send(new GetOrderItemsQuery { OrderId = id }));
 }
-
-
-
-
-

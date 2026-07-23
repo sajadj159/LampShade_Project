@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using AccountManagement.Application.Contracts.Commands.Accounts.ChangePassword;
 using AccountManagement.Application.Contracts.Commands.Accounts.Edit;
 using AccountManagement.Application.Contracts.Commands.Accounts.Login;
@@ -84,6 +86,3 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> GetAccountBy(long id)
         => Ok(await _mediator.Send(new GetAccountByIdQuery { Id = id }));
 }
-
-
-

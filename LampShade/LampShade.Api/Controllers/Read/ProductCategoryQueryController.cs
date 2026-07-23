@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoriesWithProductsForQuery;
 using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoryWithProducts;
 using MediatR;
@@ -21,4 +23,3 @@ public class ProductCategoryQueryController : ControllerBase
     [HttpGet("with-products")]
     public async Task<IActionResult> GetProductCategoriesWithProducts() => Ok(await _mediator.Send(new GetProductCategoriesWithProductsForQuery()));
 }
-

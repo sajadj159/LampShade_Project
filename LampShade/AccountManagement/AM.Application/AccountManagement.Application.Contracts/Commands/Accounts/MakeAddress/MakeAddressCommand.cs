@@ -4,7 +4,7 @@ using _0_Framework.Application;
 
 namespace AccountManagement.Application.Contracts.Commands.Accounts.MakeAddress;
 
-public class MakeAddressCommand : IRequest<OperationResult>
+public class MakeAddressCommand : ICommand<OperationResult>
 {
     public long AccountId { get; set; }
     public string Address { get; set; } = string.Empty;

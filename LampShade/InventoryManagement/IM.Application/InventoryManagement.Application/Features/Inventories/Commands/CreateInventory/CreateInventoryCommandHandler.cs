@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using _0_Framework.Application;
 using InventoryManagement.Application.Contracts.Commands.Inventories.CreateInventory;
 using InventoryManagement.Domain.InventoryAgg;
@@ -7,11 +9,11 @@ namespace InventoryManagement.Application.Features.Inventories.Commands.CreateIn
 
 public class CreateInventoryCommandHandler(IInventoryRepository inventories) : IRequestHandler<CreateInventoryCommand, OperationResult>
 {
-    public Task<OperationResult> Handle(CreateInventoryCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(CreateInventoryCommand request, CancellationToken cancellationToken)
     {
         var operation = new OperationResult();
-        if (inventories.Exist(x => x.ProductId == request.ProductId)) return Task.FromResult(operation.Failed(ApplicationMessages.DuplicatedRecord));
-        inventories.Create(new Inventory(request.ProductId, request.UnitPrice)); inventories.Save();
-        return Task.FromResult(operation.Succeeded());
+        if (await inventories.ExistAsync(x => x.ProductId == request.ProductId, cancellationToken)) return operation.Failed(ApplicationMessages.DuplicatedRecord);
+        inventories.Add(new Inventory(request.ProductId, request.UnitPrice));
+        return operation.Succeeded();
     }
 }

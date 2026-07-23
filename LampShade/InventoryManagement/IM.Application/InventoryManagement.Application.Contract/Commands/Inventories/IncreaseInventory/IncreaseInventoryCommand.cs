@@ -4,7 +4,7 @@ using _0_Framework.Application;
 
 namespace InventoryManagement.Application.Contracts.Commands.Inventories.IncreaseInventory;
 
-public class IncreaseInventoryCommand : IRequest<OperationResult>
+public class IncreaseInventoryCommand : ICommand<OperationResult>
 {
     public long InventoryId { get; set; }
     public int Count { get; set; }

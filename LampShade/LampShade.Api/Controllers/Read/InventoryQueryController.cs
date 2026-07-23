@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Queries.Inventories.CheckStock;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,4 +16,3 @@ public class InventoryQueryController : ControllerBase
     [HttpPost("checkstock")]
     public async Task<IActionResult> CheckStock([FromBody] CheckStockQuery query) => Ok(await _mediator.Send(query));
 }
-

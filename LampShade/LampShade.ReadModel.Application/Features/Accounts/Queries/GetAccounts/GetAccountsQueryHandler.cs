@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Account;
 using LampShade.ReadModel.Contracts.Accounts.Dto;
 using MediatR;
@@ -22,4 +24,3 @@ public class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery, List<Ac
         return Task.FromResult(_query.GetAccountsForManagement());
     }
 }
-

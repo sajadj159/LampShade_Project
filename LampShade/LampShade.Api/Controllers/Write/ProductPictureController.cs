@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using ShopManagement.Application.Contracts.Commands.ProductPictures.CreateProductPicture;
 using ShopManagement.Application.Contracts.Commands.ProductPictures.EditProductPicture;
 using ShopManagement.Application.Contracts.Commands.ProductPictures.RemoveProductPicture;
@@ -36,4 +38,3 @@ public class ProductPictureController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetProductPictureByIdQuery { Id = id }));
 }
-

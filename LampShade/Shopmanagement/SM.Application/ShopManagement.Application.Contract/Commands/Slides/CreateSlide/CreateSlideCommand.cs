@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace ShopManagement.Application.Contracts.Commands.Slides.CreateSlide;
 
-public class CreateSlideCommand : IRequest<OperationResult>
+public class CreateSlideCommand : ICommand<OperationResult>
 {
     public IFormFile? PictureUrl { get; set; }
     public string PictureTitle { get; set; } = string.Empty;

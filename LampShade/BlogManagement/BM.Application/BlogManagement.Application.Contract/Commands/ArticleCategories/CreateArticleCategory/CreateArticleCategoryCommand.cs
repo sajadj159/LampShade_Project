@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace BlogManagement.Application.Contracts.Commands.ArticleCategories.CreateArticleCategory;
 
-public class CreateArticleCategoryCommand : IRequest<OperationResult>
+public class CreateArticleCategoryCommand : ICommand<OperationResult>
 {
     public string Name { get; set; } = string.Empty;
     public IFormFile? PictureUrl { get; set; }

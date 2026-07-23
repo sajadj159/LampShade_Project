@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Queries.Orders.GetOrdersByAccount;
 using LampShade.ReadModel.Contracts.Queries.Orders.GetPaidOrders;
 using MediatR;
@@ -18,4 +20,3 @@ public class OrderQueryController : ControllerBase
     [HttpGet("account/{accountId}")]
     public async Task<IActionResult> GetOrders(long accountId) => Ok(await _mediator.Send(new GetOrdersByAccountQuery { AccountId = accountId }));
 }
-

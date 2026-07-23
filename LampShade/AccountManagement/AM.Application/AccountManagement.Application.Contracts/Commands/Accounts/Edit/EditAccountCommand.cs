@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace AccountManagement.Application.Contracts.Commands.Accounts.Edit;
 
-public class EditAccountCommand : IRequest<OperationResult>
+public class EditAccountCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
     public string UserName { get; set; } = string.Empty;

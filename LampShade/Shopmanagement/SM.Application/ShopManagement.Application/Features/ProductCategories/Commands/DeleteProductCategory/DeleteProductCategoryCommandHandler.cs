@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using ShopManagement.Application.Contract.ProductCategory;
 using _0_Framework.Application;
@@ -14,6 +16,6 @@ public class DeleteProductCategoryCommandHandler : IRequestHandler<DeleteProduct
 
     public DeleteProductCategoryCommandHandler(IProductCategoryApplication application) => _application = application;
 
-    public Task<OperationResult> Handle(DeleteProductCategoryCommand request, CancellationToken cancellationToken)
-        => Task.FromResult(_application.Delete(request.Id));
+    public async Task<OperationResult> Handle(DeleteProductCategoryCommand request, CancellationToken cancellationToken)
+        => await _application.DeleteAsync(request.Id, cancellationToken);
 }

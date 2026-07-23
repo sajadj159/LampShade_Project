@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using CommentManagement.Application.Contracts.Commands.Comments.AddComment;
 using CommentManagement.Application.Contracts.Commands.Comments.CancelComment;
 using CommentManagement.Application.Contracts.Commands.Comments.ConfirmComment;
@@ -33,4 +35,3 @@ public class CommentController : ControllerBase
     [Authorize(Roles = Roles.Administrator)]
     public async Task<IActionResult> Cancel(long id) => Ok(await _mediator.Send(new CancelCommentCommand { Id = id }));
 }
-

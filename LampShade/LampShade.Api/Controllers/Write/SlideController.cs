@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using ShopManagement.Application.Contracts.Commands.Slides.CreateSlide;
 using ShopManagement.Application.Contracts.Commands.Slides.EditSlide;
 using ShopManagement.Application.Contracts.Commands.Slides.RemoveSlide;
@@ -36,4 +38,3 @@ public class SlideController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetSlideByIdQuery { Id = id }));
 }
-

@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using ShopManagement.Application.Contract.A.ProductPicture;
@@ -20,7 +22,7 @@ public class CreateProductPictureCommandHandler : IRequestHandler<CreateProductP
         _application = application;
     }
 
-    public Task<OperationResult> Handle(CreateProductPictureCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(CreateProductPictureCommand request, CancellationToken cancellationToken)
     {
         var command = new ShopManagement.Application.Contract.A.ProductPicture.CreateProductPicture
         {
@@ -29,6 +31,6 @@ public class CreateProductPictureCommandHandler : IRequestHandler<CreateProductP
             PictureAlt = request.PictureAlt,
             PictureTitle = request.PictureTitle
         };
-        return Task.FromResult(_application.Create(command));
+        return await _application.CreateAsync(command, cancellationToken);
     }
 }

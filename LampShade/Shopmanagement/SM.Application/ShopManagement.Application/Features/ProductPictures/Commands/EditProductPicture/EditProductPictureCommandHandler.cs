@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using ShopManagement.Application.Contract.A.ProductPicture;
@@ -20,7 +22,7 @@ public class EditProductPictureCommandHandler : IRequestHandler<EditProductPictu
         _application = application;
     }
 
-    public Task<OperationResult> Handle(EditProductPictureCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(EditProductPictureCommand request, CancellationToken cancellationToken)
     {
         var command = new ShopManagement.Application.Contract.A.ProductPicture.EditProductPicture
         {
@@ -30,6 +32,6 @@ public class EditProductPictureCommandHandler : IRequestHandler<EditProductPictu
             PictureAlt = request.PictureAlt,
             PictureTitle = request.PictureTitle
         };
-        return Task.FromResult(_application.Edit(command));
+        return await _application.EditAsync(command, cancellationToken);
     }
 }

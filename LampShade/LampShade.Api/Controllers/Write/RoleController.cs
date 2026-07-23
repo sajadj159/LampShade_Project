@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using AccountManagement.Application.Contracts.Commands.Roles.CreateRole;
 using AccountManagement.Application.Contracts.Commands.Roles.EditRole;
 using LampShade.ReadModel.Contracts.Queries.Roles.GetRoleById;
@@ -28,4 +30,3 @@ public class RoleController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetRoleByIdQuery { Id = id }));
 }
-

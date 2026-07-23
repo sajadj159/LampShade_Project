@@ -7,6 +7,7 @@ using InventoryManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 namespace InventoryManagement.Configuration
 {
@@ -18,7 +19,8 @@ namespace InventoryManagement.Configuration
             service.AddTransient<IPermissionExposer, InventoryPermissionExposer>();
             service.AddTransient<IInventoryQuery, InventoryQuery>();
 
-            service.AddDbContext<InventoryContext>(x => x.UseNpgsql(connectionString));
+            service.AddDbContext<InventoryContext>((sp, options) => options.UseNpgsql(sp.GetRequiredService<NpgsqlConnection>()));
+            service.AddScoped<_0_Framework.Domain.IDbContext>(sp => sp.GetRequiredService<InventoryContext>());
         }
     }
 }

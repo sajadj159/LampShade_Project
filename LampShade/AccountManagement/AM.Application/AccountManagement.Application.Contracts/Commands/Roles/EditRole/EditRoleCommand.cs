@@ -5,7 +5,7 @@ using MediatR;
 
 namespace AccountManagement.Application.Contracts.Commands.Roles.EditRole;
 
-public class EditRoleCommand : IRequest<OperationResult>
+public class EditRoleCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;

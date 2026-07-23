@@ -4,4 +4,4 @@ using _0_Framework.Application;
 
 namespace AccountManagement.Application.Contracts.Commands.Accounts.Logout;
 
-public class LogoutCommand : IRequest<OperationResult> { }
+public class LogoutCommand : ICommand<OperationResult> { }

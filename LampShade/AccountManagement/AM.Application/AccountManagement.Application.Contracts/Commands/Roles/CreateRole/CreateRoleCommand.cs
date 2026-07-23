@@ -5,7 +5,7 @@ using MediatR;
 
 namespace AccountManagement.Application.Contracts.Commands.Roles.CreateRole;
 
-public class CreateRoleCommand : IRequest<OperationResult>
+public class CreateRoleCommand : ICommand<OperationResult>
 {
     public string Name { get; set; } = string.Empty;
     public List<CreatePermissionDto> Permissions { get; set; } = new();

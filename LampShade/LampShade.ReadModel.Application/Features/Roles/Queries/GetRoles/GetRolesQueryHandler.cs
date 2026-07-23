@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Account;
 using LampShade.ReadModel.Contracts.Roles.Dto;
 using MediatR;
@@ -20,4 +22,3 @@ public class GetRolesQueryHandler : IRequestHandler<GetRolesQuery, List<RoleDto>
         return Task.FromResult(_query.GetRoles());
     }
 }
-

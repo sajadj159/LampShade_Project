@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.DefineColleagueDiscount;
 using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.EditColleagueDiscount;
 using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.RemoveColleagueDiscount;
@@ -36,4 +38,3 @@ public class ColleagueDiscountController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDetails(long id) => Ok(await _mediator.Send(new GetColleagueDiscountByIdQuery { Id = id }));
 }
-

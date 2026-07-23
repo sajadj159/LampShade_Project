@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
@@ -25,5 +27,3 @@ public class SearchColleagueDiscountsQueryHandler : IRequestHandler<SearchCollea
         return Task.FromResult(_repository.Search(searchModel));
     }
 }
-
-

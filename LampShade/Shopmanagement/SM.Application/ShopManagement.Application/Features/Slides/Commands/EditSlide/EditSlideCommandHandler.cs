@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 #nullable enable
 
 using ShopManagement.Application.Contract.A.Slide;
@@ -20,7 +22,7 @@ public class EditSlideCommandHandler : IRequestHandler<EditSlideCommand, Operati
         _application = application;
     }
 
-    public Task<OperationResult> Handle(EditSlideCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult> Handle(EditSlideCommand request, CancellationToken cancellationToken)
     {
         var command = new ShopManagement.Application.Contract.A.Slide.EditSlide
         {
@@ -34,6 +36,6 @@ public class EditSlideCommandHandler : IRequestHandler<EditSlideCommand, Operati
             Link = request.Link,
             BtnText = request.BtnText
         };
-        return Task.FromResult(_application.Edit(command));
+        return await _application.EditAsync(command, cancellationToken);
     }
 }

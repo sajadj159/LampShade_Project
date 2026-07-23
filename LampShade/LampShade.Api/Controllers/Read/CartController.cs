@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Queries.Cart.ComputeCart;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,4 +16,3 @@ public class CartController : ControllerBase
     [HttpPost("compute")]
     public async Task<IActionResult> ComputeCart([FromBody] ComputeCartQuery query) => Ok(await _mediator.Send(query));
 }
-

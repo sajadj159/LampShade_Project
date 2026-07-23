@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace ShopManagement.Application.Contracts.Commands.ProductCategories.EditProductCategory;
 
-public class EditProductCategoryCommand : IRequest<OperationResult>
+public class EditProductCategoryCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;

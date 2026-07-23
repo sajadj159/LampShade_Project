@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
 using LampShade.ReadModel.Contracts.ArticleCategory;
 using MediatR;
@@ -14,4 +16,3 @@ public class GetArticleCategoriesQueryHandler : IRequestHandler<GetArticleCatego
     public GetArticleCategoriesQueryHandler(IArticleCategoryQuery query) => _query = query;
     public Task<List<ArticleCategoryViewModel>> Handle(GetArticleCategoriesQuery r, CancellationToken c) => Task.FromResult(_query.GetArticleCategoriesForManagement());
 }
-

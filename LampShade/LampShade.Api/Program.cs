@@ -17,10 +17,12 @@ using InventoryManagement.Infrastructure.EFCore;
 using LampShade.Api;
 using LampShade.Api.SeedData;
 using LampShade.Api.Storage;
+using LampShade.Api.MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Configuration;
 using ShopManagement.Infrastructure.EFCore;
+using Npgsql;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -39,6 +41,8 @@ if (string.IsNullOrWhiteSpace(objectStorageOptions.ServiceUrl)
 {
     throw new InvalidOperationException("Object storage configuration is incomplete.");
 }
+
+builder.Services.AddScoped<NpgsqlConnection>(_ => new NpgsqlConnection(connectionString));
 
 ShopManagementBootstrapper.Configure(builder.Services, connectionString);
 DiscountManagementBootstrapper.Configure(builder.Services, connectionString);
@@ -67,7 +71,7 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IHttpContextGetter, HttpContextGetter>();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+builder.Services.AddMediatR(cfg => { cfg.AddOpenBehavior(typeof(UnitOfWorkPipelineBehavior<,>)); cfg.RegisterServicesFromAssemblies(
     typeof(Program).Assembly,
     typeof(AccountManagement.Application.Features.Accounts.Commands.Register.RegisterCommandHandler).Assembly,
     typeof(CommentManagement.Application.Features.Comments.Commands.AddComment.AddCommentCommandHandler).Assembly,
@@ -75,7 +79,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(DiscountManagement.Application.Features.CustomerDiscounts.Commands.DefineCustomerDiscount.DefineCustomerDiscountCommandHandler).Assembly,
     typeof(ShopManagement.Application.Features.Products.Commands.CreateProduct.CreateProductCommandHandler).Assembly,
     typeof(InventoryManagement.Application.Features.Inventories.Commands.CreateInventory.CreateInventoryCommandHandler).Assembly,
-    typeof(LampShade.ReadModel.Application.ReadModelAssemblyMarker).Assembly));
+    typeof(LampShade.ReadModel.Application.ReadModelAssemblyMarker).Assembly); });
 
 // Configure Cookie Authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

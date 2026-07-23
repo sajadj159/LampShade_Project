@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using ShopManagement.Application.Contracts.Commands.ProductCategories.CreateProductCategory;
 using ShopManagement.Application.Contracts.Commands.ProductCategories.EditProductCategory;
 using ShopManagement.Application.Contracts.Commands.ProductCategories.DeleteProductCategory;
@@ -37,4 +39,3 @@ public class ProductCategoryController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetProductCategories() => Ok(await _mediator.Send(new GetProductCategoriesQuery()));
 }
-

@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Product;
 using MediatR;
 using ShopManagement.Application.Contract.Order;
@@ -33,4 +35,3 @@ public class CheckInventoryStatusQueryHandler : IRequestHandler<CheckInventorySt
         return Task.FromResult(_productQuery.CheckInventoryStatus(cartItems));
     }
 }
-

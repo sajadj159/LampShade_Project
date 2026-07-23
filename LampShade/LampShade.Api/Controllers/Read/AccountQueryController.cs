@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using LampShade.ReadModel.Contracts.Queries.Accounts.GetAllAccountsForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,4 +16,3 @@ public class AccountQueryController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAccounts() => Ok(await _mediator.Send(new GetAllAccountsForQuery()));
 }
-

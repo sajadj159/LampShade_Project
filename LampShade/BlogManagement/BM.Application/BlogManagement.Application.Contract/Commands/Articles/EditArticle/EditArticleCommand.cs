@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace BlogManagement.Application.Contracts.Commands.Articles.EditArticle;
 
-public class EditArticleCommand : IRequest<OperationResult>
+public class EditArticleCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
     public string Title { get; set; } = string.Empty;

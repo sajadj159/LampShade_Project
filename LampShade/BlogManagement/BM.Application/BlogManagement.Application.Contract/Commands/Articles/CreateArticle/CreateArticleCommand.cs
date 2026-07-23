@@ -7,7 +7,7 @@ using _0_Framework.Application;
 
 namespace BlogManagement.Application.Contracts.Commands.Articles.CreateArticle;
 
-public class CreateArticleCommand : IRequest<OperationResult>
+public class CreateArticleCommand : ICommand<OperationResult>
 {
     public string Title { get; set; } = string.Empty;
     public string ShortDescription { get; set; } = string.Empty;

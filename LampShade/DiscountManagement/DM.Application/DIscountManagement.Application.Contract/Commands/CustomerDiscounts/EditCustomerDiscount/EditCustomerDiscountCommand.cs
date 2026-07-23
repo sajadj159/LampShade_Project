@@ -4,7 +4,7 @@ using _0_Framework.Application;
 
 namespace DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.EditCustomerDiscount;
 
-public class EditCustomerDiscountCommand : IRequest<OperationResult>
+public class EditCustomerDiscountCommand : ICommand<OperationResult>
 {
     public long Id { get; set; }
     public long ProductId { get; set; }
