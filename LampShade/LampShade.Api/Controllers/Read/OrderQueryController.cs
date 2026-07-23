@@ -1,5 +1,7 @@
-using LampShade.Api.Features.Orders.Queries.GetOrdersByAccount;
-using LampShade.Api.Features.Orders.Queries.GetPaidOrders;
+using System.Threading;
+using System.Threading.Tasks;
+using LampShade.ReadModel.Contracts.Queries.Orders.GetOrdersByAccount;
+using LampShade.ReadModel.Contracts.Queries.Orders.GetPaidOrders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

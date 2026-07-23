@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using _0_Framework.Application;
 using ShopManagement.Application.Contract.ProductCategory;
@@ -16,10 +18,10 @@ namespace ShopManagement.Application.ProductCategory
             _uploader = uploader;
         }
 
-        public OperationResult Create(CreateProductCategory command)
+        public async Task<OperationResult> CreateAsync(CreateProductCategory command, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            if (_productCategoryRepository.Exist(x => x.Name == command.Name))
+            if (await _productCategoryRepository.ExistAsync(x => x.Name == command.Name, cancellationToken))
                 return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slug = command.Slug.Slugify();
@@ -28,41 +30,38 @@ namespace ShopManagement.Application.ProductCategory
 
             var productCategory = new Domain.ProductCategoryAgg.ProductCategory(command.Name, command.Description, picturePath,
                 command.PictureAlt, command.PictureTitle, command.Keywords, command.MetaDescription, slug);
-            _productCategoryRepository.Create(productCategory);
-            _productCategoryRepository.Save();
+            _productCategoryRepository.Add(productCategory);
             return operationResult.Succeeded();
         }
 
-        public OperationResult Edit(EditProductCategory command)
+        public async Task<OperationResult> EditAsync(EditProductCategory command, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            var productCategory = _productCategoryRepository.Get(command.Id);
+            var productCategory = await _productCategoryRepository.GetAsync(command.Id, cancellationToken);
             if (productCategory == null)
                 return operationResult.Failed(ApplicationMessages.RecordNotFound);
 
-            if (_productCategoryRepository.Exist(x => x.Name == command.Name && x.Id != command.Id))
+            if (await _productCategoryRepository.ExistAsync(x => x.Name == command.Name && x.Id != command.Id, cancellationToken))
                 return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var slugify = command.Slug.Slugify();
             var Path = $"{command.Slug}";
             var picturePath = _uploader.Upload(command.PictureUrl,Path);
             productCategory.Edit(command.Name, command.Description, picturePath, command.PictureAlt, command.PictureTitle, command.Keywords, command.MetaDescription, slugify);
-            _productCategoryRepository.Save();
             return operationResult.Succeeded();
         }
 
-        public OperationResult Delete(long id)
+        public async Task<OperationResult> DeleteAsync(long id, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            var productCategory = _productCategoryRepository.Get(id);
+            var productCategory = await _productCategoryRepository.GetAsync(id, cancellationToken);
             if (productCategory == null)
                 return operationResult.Failed(ApplicationMessages.RecordNotFound);
 
-            if (_productCategoryRepository.HasProducts(id))
+            if (await _productCategoryRepository.HasProductsAsync(id, cancellationToken))
                 return operationResult.Failed("A category with products cannot be deleted.");
 
-            _productCategoryRepository.Remove(productCategory);
-            _productCategoryRepository.Save();
+            await _productCategoryRepository.RemoveAsync(productCategory);
             return operationResult.Succeeded();
         }
         public List<ProductCategoryViewModel> Search(ProductCategorySearchModel searchModel)

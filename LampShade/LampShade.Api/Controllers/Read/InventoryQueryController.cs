@@ -1,4 +1,6 @@
-using LampShade.Api.Features.Inventories.Queries.CheckStock;
+using System.Threading;
+using System.Threading.Tasks;
+using LampShade.ReadModel.Contracts.Queries.Inventories.CheckStock;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

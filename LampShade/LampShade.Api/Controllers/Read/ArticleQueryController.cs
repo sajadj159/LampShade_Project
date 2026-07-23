@@ -1,5 +1,7 @@
-using LampShade.Api.Features.Articles.Queries.GetArticleBySlug;
-using LampShade.Api.Features.Articles.Queries.LatestArticles;
+using System.Threading;
+using System.Threading.Tasks;
+using LampShade.ReadModel.Contracts.Queries.Articles.GetArticleBySlug;
+using LampShade.ReadModel.Contracts.Queries.Articles.LatestArticles;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

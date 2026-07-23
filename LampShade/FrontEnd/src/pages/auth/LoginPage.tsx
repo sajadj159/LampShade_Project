@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Typography, Card, message } from 'antd';
 import { PhoneOutlined, LockOutlined } from '@ant-design/icons';
 import { useAuth } from '../../contexts/AuthContext';
@@ -8,6 +8,8 @@ const { Title, Text } = Typography;
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = (location.state as { from?: string } | null)?.from || '/';
   const { login } = useAuth();
   const [loading, setLoading] = React.useState(false);
 
@@ -17,7 +19,7 @@ const LoginPage: React.FC = () => {
       const success = await login(values.userName, values.password);
       if (success) {
         message.success('Login successful!');
-        navigate('/');
+        navigate(returnTo, { replace: true });
       } else {
         message.error('Invalid phone number or password');
       }
@@ -51,7 +53,7 @@ const LoginPage: React.FC = () => {
         </Form>
 
         <div style={{ textAlign: 'center' }}>
-          <Text type="secondary">Don't have an account? <Link to="/register">Register</Link></Text>
+          <Text type="secondary">Don't have an account? <Link to="/register" state={{ from: returnTo }}>Register</Link></Text>
         </div>
       </Card>
     </div>
@@ -59,3 +61,4 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
+

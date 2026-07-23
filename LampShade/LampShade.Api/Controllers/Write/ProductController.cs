@@ -1,8 +1,10 @@
-using LampShade.Api.Features.Products.Commands.CreateProduct;
-using LampShade.Api.Features.Products.Commands.EditProduct;
-using LampShade.Api.Features.Products.Queries.GetProductById;
-using LampShade.Api.Features.Products.Queries.GetProducts;
-using LampShade.Api.Features.Products.Queries.SearchProducts;
+using System.Threading;
+using System.Threading.Tasks;
+using ShopManagement.Application.Contracts.Commands.Products.CreateProduct;
+using ShopManagement.Application.Contracts.Commands.Products.EditProduct;
+using LampShade.ReadModel.Contracts.Queries.Products.GetProductById;
+using LampShade.ReadModel.Contracts.Queries.Products.GetProducts;
+using LampShade.ReadModel.Contracts.Queries.Products.SearchProducts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

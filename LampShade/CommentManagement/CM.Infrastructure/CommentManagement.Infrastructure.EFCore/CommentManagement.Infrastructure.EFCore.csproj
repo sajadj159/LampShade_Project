@@ -20,3 +20,4 @@
     <ProjectReference Include="..\..\CM.Domain\CommentManagement.Domain\CommentManagement.Domain.csproj" />
   </ItemGroup>
 </Project>
+

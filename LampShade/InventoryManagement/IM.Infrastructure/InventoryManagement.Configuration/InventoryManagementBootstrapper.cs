@@ -1,14 +1,13 @@
 using _0_Framework.Repository;
-using _01_LampShadeQuery.Contract.Inventory;
-using _01_LampShadeQuery.Query;
-using InventoryManagement.Application;
-using InventoryManagement.Application.Contract.AC.Inventory;
+using LampShade.ReadModel.Contracts.Inventory;
+using LampShade.ReadModel.Application.Query;
 using InventoryManagement.Configuration.Permissions;
 using InventoryManagement.Domain.InventoryAgg;
 using InventoryManagement.Infrastructure.EFCore;
 using InventoryManagement.Infrastructure.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 namespace InventoryManagement.Configuration
 {
@@ -17,12 +16,13 @@ namespace InventoryManagement.Configuration
         public static void Configure(IServiceCollection service, string connectionString)
         {
             service.AddTransient<IInventoryRepository,InventoryRepository>();
-            service.AddTransient<IInventoryApplication, InventoryApplication>();
-
             service.AddTransient<IPermissionExposer, InventoryPermissionExposer>();
             service.AddTransient<IInventoryQuery, InventoryQuery>();
 
-            service.AddDbContext<InventoryContext>(x => x.UseNpgsql(connectionString));
+            service.AddDbContext<InventoryContext>((sp, options) => options.UseNpgsql(sp.GetRequiredService<NpgsqlConnection>()));
+            service.AddScoped<_0_Framework.Domain.IDbContext>(sp => sp.GetRequiredService<InventoryContext>());
         }
     }
 }
+
+

@@ -1,7 +1,9 @@
-using LampShade.Api.Features.Roles.Commands.CreateRole;
-using LampShade.Api.Features.Roles.Commands.EditRole;
-using LampShade.Api.Features.Roles.Queries.GetRoleById;
-using LampShade.Api.Features.Roles.Queries.GetRoles;
+using System.Threading;
+using System.Threading.Tasks;
+using AccountManagement.Application.Contracts.Commands.Roles.CreateRole;
+using AccountManagement.Application.Contracts.Commands.Roles.EditRole;
+using LampShade.ReadModel.Contracts.Queries.Roles.GetRoleById;
+using LampShade.ReadModel.Contracts.Queries.Roles.GetRoles;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

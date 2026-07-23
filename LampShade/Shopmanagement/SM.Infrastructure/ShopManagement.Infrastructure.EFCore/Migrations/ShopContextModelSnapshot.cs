@@ -55,6 +55,10 @@ namespace ShopManagement.Infrastructure.EFCore.Migrations
                     b.Property<int>("PaymentMethod")
                         .HasColumnType("integer");
 
+                    b.Property<string>("PaymentProofUrl")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
                     b.Property<long>("RefId")
                         .HasColumnType("bigint");
 

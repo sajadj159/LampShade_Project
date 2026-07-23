@@ -10,9 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\01_LampShadeQuery\01_LampShadeQuery.csproj" />
+    <ProjectReference Include="..\..\..\LampShade.ReadModel.Contracts\LampShade.ReadModel.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\LampShade.ReadModel.Application\LampShade.ReadModel.Application.csproj" />
     <ProjectReference Include="..\..\IM.Application\InventoryManagement.Application\InventoryManagement.Application.csproj" />
     <ProjectReference Include="..\InventoryManagement.Infrastructure.EFCore\InventoryManagement.Infrastructure.EFCore.csproj" />
   </ItemGroup>
 
 </Project>
+
+

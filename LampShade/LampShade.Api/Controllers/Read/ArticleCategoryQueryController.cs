@@ -1,5 +1,7 @@
-using LampShade.Api.Features.ArticleCategories.Queries.GetArticleCategoriesForQuery;
-using LampShade.Api.Features.ArticleCategories.Queries.GetArticleCategoryBySlug;
+using System.Threading;
+using System.Threading.Tasks;
+using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoriesForQuery;
+using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoryBySlug;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

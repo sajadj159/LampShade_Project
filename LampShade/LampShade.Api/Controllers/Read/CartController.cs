@@ -1,4 +1,6 @@
-using LampShade.Api.Features.Cart.ComputeCart;
+using System.Threading;
+using System.Threading.Tasks;
+using LampShade.ReadModel.Contracts.Queries.Cart.ComputeCart;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

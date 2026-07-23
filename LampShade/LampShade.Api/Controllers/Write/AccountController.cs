@@ -1,12 +1,15 @@
-using LampShade.Api.Features.Accounts.Commands.ChangePassword;
-using LampShade.Api.Features.Accounts.Commands.Edit;
-using LampShade.Api.Features.Accounts.Commands.Login;
-using LampShade.Api.Features.Accounts.Commands.Logout;
-using LampShade.Api.Features.Accounts.Commands.MakeAddress;
-using LampShade.Api.Features.Accounts.Commands.Register;
-using LampShade.Api.Features.Accounts.Queries.GetAccountById;
-using LampShade.Api.Features.Accounts.Queries.GetAccounts;
-using LampShade.Api.Features.Accounts.Queries.SearchAccounts;
+using System.Threading;
+using System.Threading.Tasks;
+using AccountManagement.Application.Contracts.Commands.Accounts.ChangePassword;
+using AccountManagement.Application.Contracts.Commands.Accounts.Edit;
+using AccountManagement.Application.Contracts.Commands.Accounts.Login;
+using AccountManagement.Application.Contracts.Commands.Accounts.Logout;
+using AccountManagement.Application.Contracts.Commands.Accounts.MakeAddress;
+using AccountManagement.Application.Contracts.Commands.Accounts.Register;
+using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccountById;
+using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccounts;
+using LampShade.ReadModel.Contracts.Queries.Accounts.SearchAccounts;
+using _0_Framework.Application;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +21,13 @@ namespace LampShade.Api.Controllers.Write;
 public class AccountController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IAuthHelper _authHelper;
 
-    public AccountController(IMediator mediator) => _mediator = mediator;
+    public AccountController(IMediator mediator, IAuthHelper authHelper)
+    {
+        _mediator = mediator;
+        _authHelper = authHelper;
+    }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromForm] RegisterCommand command)
@@ -45,7 +53,10 @@ public class AccountController : ControllerBase
     [Authorize]
     [HttpPost("address")]
     public async Task<IActionResult> MakeAddress([FromBody] MakeAddressCommand command)
-        => Ok(await _mediator.Send(command));
+    {
+        command.AccountId = _authHelper.CurrentAccountId();
+        return Ok(await _mediator.Send(command));
+    }
 
     [Authorize]
     [HttpGet("search")]

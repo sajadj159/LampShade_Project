@@ -1,4 +1,6 @@
-using LampShade.Api.Features.Slides.Queries.GetSlidesForQuery;
+using System.Threading;
+using System.Threading.Tasks;
+using LampShade.ReadModel.Contracts.Queries.Slides.GetSlidesForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

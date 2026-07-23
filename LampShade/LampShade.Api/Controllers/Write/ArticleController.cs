@@ -1,7 +1,9 @@
-using LampShade.Api.Features.Articles.Commands.CreateArticle;
-using LampShade.Api.Features.Articles.Commands.EditArticle;
-using LampShade.Api.Features.Articles.Queries.GetArticleById;
-using LampShade.Api.Features.Articles.Queries.SearchArticles;
+using System.Threading;
+using System.Threading.Tasks;
+using BlogManagement.Application.Contracts.Commands.Articles.CreateArticle;
+using BlogManagement.Application.Contracts.Commands.Articles.EditArticle;
+using LampShade.ReadModel.Contracts.Queries.Articles.GetArticleById;
+using LampShade.ReadModel.Contracts.Queries.Articles.SearchArticles;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

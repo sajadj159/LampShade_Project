@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using _0_Framework.Domain;
 
 namespace ShopManagement.Domain.OrderAgg
@@ -14,6 +14,7 @@ namespace ShopManagement.Domain.OrderAgg
         public bool IsCanceled { get; private set; }
         public string IssueTrackingNumber { get; private set; }
         public long RefId { get; private set; }
+        public string PaymentProofUrl { get; private set; }
         public List<OrderItem> Items { get; private set; }
 
         public Order(long accountId, double totalAmount,int paymentMethod, double discountAmount, double payAmount)
@@ -36,6 +37,11 @@ namespace ShopManagement.Domain.OrderAgg
                 RefId = refId;
         }
 
+        public void SetPaymentProof(string paymentProofUrl)
+        {
+            PaymentProofUrl = paymentProofUrl;
+        }
+
         public void Cancel()
         {
             IsCanceled = true;
@@ -53,3 +59,4 @@ namespace ShopManagement.Domain.OrderAgg
 
     }
 }
+

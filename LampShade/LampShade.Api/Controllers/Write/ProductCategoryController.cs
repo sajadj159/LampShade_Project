@@ -1,9 +1,11 @@
-using LampShade.Api.Features.ProductCategories.Commands.CreateProductCategory;
-using LampShade.Api.Features.ProductCategories.Commands.EditProductCategory;
-using LampShade.Api.Features.ProductCategories.Commands.DeleteProductCategory;
-using LampShade.Api.Features.ProductCategories.Queries.GetProductCategories;
-using LampShade.Api.Features.ProductCategories.Queries.GetProductCategoryById;
-using LampShade.Api.Features.ProductCategories.Queries.SearchProductCategories;
+using System.Threading;
+using System.Threading.Tasks;
+using ShopManagement.Application.Contracts.Commands.ProductCategories.CreateProductCategory;
+using ShopManagement.Application.Contracts.Commands.ProductCategories.EditProductCategory;
+using ShopManagement.Application.Contracts.Commands.ProductCategories.DeleteProductCategory;
+using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategories;
+using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoryById;
+using LampShade.ReadModel.Contracts.Queries.ProductCategories.SearchProductCategories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

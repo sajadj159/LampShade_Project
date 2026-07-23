@@ -7,6 +7,8 @@ export interface AuthUser {
   username: string;
   fullname: string;
   mobile: string;
+  address: string;
+  postalCode: string;
   roleId: number;
   role: string;
   permissions: number[];
@@ -165,10 +167,14 @@ export interface Order {
   paymentMethodId: number;
   payAmount: number;
   isPaid: boolean;
+  isCanceled: boolean;
+  accountFullName?: string;
+  creationDate?: string;
   accountId: number;
   totalAmount: number;
   discountAmount: number;
   issueTrackingNo: string;
+  paymentProofUrl?: string;
   payDate: string;
 }
 
@@ -345,4 +351,10 @@ export interface PaymentMethod {
   name: string;
   description: string;
 }
+
+
+
+
+
+
 

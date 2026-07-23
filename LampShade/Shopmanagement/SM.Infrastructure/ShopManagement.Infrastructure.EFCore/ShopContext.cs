@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
@@ -8,7 +8,7 @@ using ShopManagement.Infrastructure.EFCore.Mapping;
 
 namespace ShopManagement.Infrastructure.EFCore
 {
-    public class ShopContext : DbContext
+    public class ShopContext : DbContext, _0_Framework.Domain.IDbContext
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<Slide> Slides { get; set; }

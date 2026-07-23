@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using _0_Framework.Application;
 using ShopManagement.Application.Contract.A.Slide;
 using ShopManagement.Domain.SlideAgg;
@@ -16,58 +18,54 @@ namespace ShopManagement.Application.Slide
             _uploader = uploader;
         }
 
-        public OperationResult Create(CreateSlide command)
+        public async Task<OperationResult> CreateAsync(CreateSlide command, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            if (_slideRepository.Exist(x => x.PictureTitle == command.PictureTitle))
+            if (await _slideRepository.ExistAsync(x => x.PictureTitle == command.PictureTitle, cancellationToken))
                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var picturePath = _uploader.Upload(command.PictureUrl,"Slides");
             var slide = new Domain.SlideAgg.Slide(picturePath, command.PictureAlt, command.PictureTitle, command.Heading,
                 command.Title, command.Text, command.BtnText,command.Link);
-            _slideRepository.Create(slide);
-            _slideRepository.Save();
+            _slideRepository.Add(slide);
             return operationResult.Succeeded();
         }
 
-        public OperationResult Edit(EditSlide command)
+        public async Task<OperationResult> EditAsync(EditSlide command, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            var editSlide = _slideRepository.Get(command.Id);
+            var editSlide = await _slideRepository.GetAsync(command.Id, cancellationToken);
             if (editSlide == null)
             {
                return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
-            if (_slideRepository.Exist(x => x.PictureTitle == command.PictureTitle && x.Id != command.Id))
+            if (await _slideRepository.ExistAsync(x => x.PictureTitle == command.PictureTitle && x.Id != command.Id, cancellationToken))
                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
 
             var pictureUrl = _uploader.Upload(command.PictureUrl,"Slides");
             editSlide.Edit(pictureUrl, command.PictureAlt, command.PictureTitle, command.Heading, command.Title,
                 command.Text, command.BtnText,command.Link);
-            _slideRepository.Save();
             return operationResult.Succeeded();
         }
 
-        public OperationResult Remove(long id)
+        public async Task<OperationResult> RemoveAsync(long id, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            var slide = _slideRepository.Get(id);
+            var slide = await _slideRepository.GetAsync(id, cancellationToken);
             if (slide == null)
                return operationResult.Failed(ApplicationMessages.RecordNotFound);
             slide.Remove();
-            _slideRepository.Save();
             return operationResult.Succeeded();
         }
 
-        public OperationResult Restore(long id)
+        public async Task<OperationResult> RestoreAsync(long id, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            var slide = _slideRepository.Get(id);
+            var slide = await _slideRepository.GetAsync(id, cancellationToken);
             if (slide == null)
                return operationResult.Failed(ApplicationMessages.RecordNotFound);
             slide.Restore();
-            _slideRepository.Save();
             return operationResult.Succeeded();
 
         }

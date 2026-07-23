@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>LampShade.ReadModel.Contracts</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccountManagement\AM.Application\AccountManagement.Application.Contracts\AccountManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\BlogManagement\BM.Application\BlogManagement.Application.Contract\BlogManagement.Application.Contract.csproj" />
+    <ProjectReference Include="..\CommentManagement\CM.Applicaion\CommentManagement.Application.Contract\CommentManagement.Application.Contract.csproj" />
+    <ProjectReference Include="..\DiscountManagement\DM.Application\DIscountManagement.Application.Contract\DiscountManagement.Application.Contract.csproj" />
+    <ProjectReference Include="..\InventoryManagement\IM.Application\InventoryManagement.Application.Contract\InventoryManagement.Application.Contract.csproj" />
+    <ProjectReference Include="..\Shopmanagement\SM.Application\ShopManagement.Application.Contract\ShopManagement.Application.Contract.csproj" />
+  </ItemGroup>
+</Project>

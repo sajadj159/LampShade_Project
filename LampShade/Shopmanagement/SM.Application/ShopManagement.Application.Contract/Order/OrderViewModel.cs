@@ -1,4 +1,4 @@
-﻿namespace ShopManagement.Application.Contract.Order
+namespace ShopManagement.Application.Contract.Order
 {
     public class OrderViewModel
     {
@@ -14,6 +14,8 @@
         public bool IsCanceled { get; set; }
         public string IssueTrackingNumber { get; set; }
         public long RefId { get; set; }
+        public string PaymentProofUrl { get; set; }
         public string CreationDate { get; set; }
     }
 }
+

@@ -1,11 +1,11 @@
-﻿using AccountManagement.Domain.AccountAgg;
+using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
 using AccountManagement.Infrastructure.EFCore.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infrastructure.EFCore
 {
-    public class AccountContext : DbContext
+    public class AccountContext : DbContext, _0_Framework.Domain.IDbContext
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Role> Roles { get; set; }

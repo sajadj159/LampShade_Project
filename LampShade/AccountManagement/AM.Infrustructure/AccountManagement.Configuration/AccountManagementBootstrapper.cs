@@ -1,15 +1,12 @@
-using _01_LampShadeQuery.Contract.Account;
-using _01_LampShadeQuery.Query;
-using AccountManagement.Application.A.Account;
-using AccountManagement.Application.A.Role;
-using AccountManagement.Application.Contracts.AC.Account;
-using AccountManagement.Application.Contracts.AC.Role;
+using LampShade.ReadModel.Contracts.Account;
+using LampShade.ReadModel.Application.Query;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
 using AccountManagement.Infrastructure.EFCore;
 using AccountManagement.Infrastructure.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 namespace AccountManagement.Configuration
 {
@@ -18,13 +15,13 @@ namespace AccountManagement.Configuration
         public static void Configure(IServiceCollection service, string connectionString)
         {
             service.AddTransient<IAccountRepository, AccountRepository>();
-            service.AddTransient<IAccountApplication, AccountApplication>();
-
             service.AddTransient<IRoleRepository, RoleRepository>();
-            service.AddTransient<IRoleApplication, RoleApplication>();
-
             service.AddTransient<IAccountQuery, AccountQuery>();
-            service.AddDbContext<AccountContext>(x => x.UseNpgsql(connectionString));
+            service.AddDbContext<AccountContext>((sp, options) => options.UseNpgsql(sp.GetRequiredService<NpgsqlConnection>()));
+            service.AddScoped<_0_Framework.Domain.IDbContext>(sp => sp.GetRequiredService<AccountContext>());
         }
     }
 }
+
+
+

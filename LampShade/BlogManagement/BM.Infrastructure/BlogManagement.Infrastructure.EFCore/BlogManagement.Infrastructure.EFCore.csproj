@@ -23,3 +23,4 @@
     <ProjectReference Include="..\..\BM.Domain\BlogManagement.Domain\BlogManagement.Domain.csproj" />
   </ItemGroup>
 </Project>
+

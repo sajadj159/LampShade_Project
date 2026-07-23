@@ -1,78 +1,62 @@
-﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using _0_Framework.Application;
 using _0_Framework.Application.SMS;
-using Microsoft.Extensions.Configuration;
-using Org.BouncyCastle.Asn1.Cms;
 using ShopManagement.Application.Contract.Order;
+using ShopManagement.Application.Contracts.Commands.Orders.PlaceOrder;
 using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.Services;
 
-namespace ShopManagement.Application.Order
+namespace ShopManagement.Application.Order;
+
+public class OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IShopInventoryAcl inventoryAcl, ISmsService smsService, IShopAccountAcl accountAcl) : IOrderApplication
 {
-    public class OrderApplication : IOrderApplication
+    public async Task<PlaceOrderResult> PlaceOrderAsync(ShopManagement.Application.Contract.Order.Cart cart, CancellationToken cancellationToken = default)
     {
-        private readonly IOrderRepository _orderRepository;
-        private readonly IAuthHelper _authHelper;
-        private readonly IShopInventoryAcl _inventoryAcl;
-        private readonly ISmsService _smsService;
-        private readonly IShopAccountAcl _accountAcl;
-        public OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IShopInventoryAcl inventoryAcl, ISmsService smsService, IShopAccountAcl accountAcl)
-        {
-            _orderRepository = orderRepository;
-            _authHelper = authHelper;
-            _inventoryAcl = inventoryAcl;
-            _smsService = smsService;
-            _accountAcl = accountAcl;
-        }
-
-        public long PlaceOrder(Contract.Order.Cart cart)
-        {
-            var accountId = _authHelper.CurrentAccountId();
-            var order = new Domain.OrderAgg.Order(accountId, cart.TotalAmount, cart.PaymentMethod, cart.DiscountAmount, cart.PayAmount);
-            foreach (var cartItem in cart.Items)
-            {
-                var orderItem = new OrderItem(cartItem.Id, cartItem.Count, cartItem.UnitPrice, cartItem.DiscountRate);
-                order.AddItem(orderItem);
-            }
-            _orderRepository.Create(order);
-            _orderRepository.Save();
-            return order.Id;
-        }
-
-        public double GetAmountBy(long id)
-        {
-            return _orderRepository.GetAmountBy(id);
-        }
-
-        public string PaymentSucceeded(long orderId, long refId)
-        {
-            var order = _orderRepository.Get(orderId);
-            order.PaymentSucceeded(refId);
-            var issueCodeTracking = CodeGenerator.Generate("S");
-            order.SetIssueTrackingNumber(issueCodeTracking);
-            if (!_inventoryAcl.ReduceFromInventory(order.Items)) return "";
-
-            _orderRepository.Save();
-            var (name, mobile) = _accountAcl.GetAccountBy(order.AccountId);
-            _smsService.Send(mobile,$"{name} گرامی سفارش شما با شماره پیگیری {issueCodeTracking} موفقیت پرداخت شد و ارسال خواهد شد.");
-            return issueCodeTracking;
-        }
-
-        public void Cancel(long id)
-        {
-            var order = _orderRepository.Get(id);
-            order?.Cancel();
-            _orderRepository.Save();
-        }
-
-        public List<OrderViewModel> Search(OrderSearchModel searchModel)
-        {
-            return _orderRepository.Search(searchModel);
-        }
-
-        public List<OrderItemViewModel> GetItemsBy(long orderId)
-        {
-            return _orderRepository.GetItemsBy(orderId);
-        }
+        var order = new Domain.OrderAgg.Order(authHelper.CurrentAccountId(), cart.TotalAmount, cart.PaymentMethod, cart.DiscountAmount, cart.PayAmount);
+        foreach (var item in cart.Items) order.AddItem(new OrderItem(item.Id, item.Count, item.UnitPrice, item.DiscountRate));
+        orderRepository.Add(order); return new PlaceOrderResult(() => order.Id);
     }
+
+    public double GetAmountBy(long id) => orderRepository.GetAmountBy(id);
+    public Task<string> PaymentSucceededAsync(long orderId, long refId, CancellationToken cancellationToken = default) => ConfirmOrderAsync(orderId, refId, false, cancellationToken);
+
+    public async Task<string> ApproveCashOnDeliveryAsync(long orderId, CancellationToken cancellationToken = default)
+    {
+        var order = await orderRepository.GetAsync(orderId, cancellationToken);
+        if (order is not null && order.PaymentMethod == 2 && order.IsPaid && !order.IsCanceled) return order.IssueTrackingNumber;
+        return await ConfirmOrderAsync(orderId, 0, true, cancellationToken);
+    }
+
+    public async Task<string> ApprovePaymentProofAsync(long orderId, CancellationToken cancellationToken = default)
+    {
+        var order = await orderRepository.GetAsync(orderId, cancellationToken);
+        if (order is null || order.PaymentMethod != 1 || string.IsNullOrWhiteSpace(order.PaymentProofUrl) || order.IsCanceled) return string.Empty;
+        return order.IsPaid ? order.IssueTrackingNumber : await ConfirmOrderAsync(orderId, 0, false, cancellationToken);
+    }
+
+    public async Task<OperationResult> UploadPaymentProofAsync(long orderId, string paymentProofUrl, CancellationToken cancellationToken = default)
+    {
+        var result = new OperationResult(); var order = await orderRepository.GetAsync(orderId, cancellationToken);
+        if (order is null || order.AccountId != authHelper.CurrentAccountId() || order.PaymentMethod != 1 || order.IsCanceled || order.IsPaid) return result.Failed("Payment proof cannot be uploaded for this order.");
+        order.SetPaymentProof(paymentProofUrl); return result.Succeeded();
+    }
+
+    public async Task CancelAsync(long id, CancellationToken cancellationToken = default)
+    {
+        var order = await orderRepository.GetAsync(id, cancellationToken); order?.Cancel();
+    }
+
+    private async Task<string> ConfirmOrderAsync(long orderId, long refId, bool cashOnDeliveryOnly, CancellationToken cancellationToken)
+    {
+        var order = await orderRepository.GetAsync(orderId, cancellationToken);
+        if (order is null || order.IsCanceled || order.IsPaid || (cashOnDeliveryOnly && order.PaymentMethod != 2)) return string.Empty;
+        order.PaymentSucceeded(refId); var issue = CodeGenerator.Generate("S"); order.SetIssueTrackingNumber(issue);
+        if (!await inventoryAcl.ReduceFromInventoryAsync(order.Items, cancellationToken)) return string.Empty;
+        var (name, mobile) = accountAcl.GetAccountBy(order.AccountId); smsService.Send(mobile, $"{name} گرامی سفارش شما با شماره پیگیری {issue} تایید شد و ارسال خواهد شد.");
+        return issue;
+    }
+
+    public List<OrderViewModel> Search(OrderSearchModel searchModel) => orderRepository.Search(searchModel);
+    public List<OrderItemViewModel> GetItemsBy(long orderId) => orderRepository.GetItemsBy(orderId);
 }

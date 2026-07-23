@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -44,6 +44,7 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
                 IsCanceled = x.IsCanceled,
                 IssueTrackingNumber = x.IssueTrackingNumber,
                 RefId = x.RefId,
+                PaymentProofUrl = x.PaymentProofUrl,
                 CreationDate = x.CreationDate.ToFarsi()
             });
             
@@ -92,3 +93,4 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
         }
     }
 }
+

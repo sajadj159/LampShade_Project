@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\01_LampShadeQuery\01_LampShadeQuery.csproj" />
+    <ProjectReference Include="..\..\..\LampShade.ReadModel.Contracts\LampShade.ReadModel.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\LampShade.ReadModel.Application\LampShade.ReadModel.Application.csproj" />
     <ProjectReference Include="..\..\..\InventoryManagement\IM.Application\InventoryManagement.Application.Contract\InventoryManagement.Application.Contract.csproj" />
     <ProjectReference Include="..\..\..\InventoryManagement\IM.Domain\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />
     <ProjectReference Include="..\..\SM.Application\ShopManagement.Application\ShopManagement.Application.csproj" />
@@ -31,3 +32,5 @@
   </ItemGroup>
 
 </Project>
+
+

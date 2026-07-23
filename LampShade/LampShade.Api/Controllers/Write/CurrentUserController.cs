@@ -1,5 +1,8 @@
+using System.Threading;
+using System.Threading.Tasks;
 using _0_Framework.Application;
-using AccountManagement.Application.Contracts.AC.Account;
+using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccountById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LampShade.Api.Controllers.Write;
@@ -9,22 +12,22 @@ namespace LampShade.Api.Controllers.Write;
 public class CurrentUserController : ControllerBase
 {
     private readonly IAuthHelper _authHelper;
-    private readonly IAccountApplication _accountApplication;
+    private readonly IMediator _mediator;
 
-    public CurrentUserController(IAuthHelper authHelper, IAccountApplication accountApplication)
+    public CurrentUserController(IAuthHelper authHelper, IMediator mediator)
     {
         _authHelper = authHelper;
-        _accountApplication = accountApplication;
+        _mediator = mediator;
     }
 
     [HttpGet]
-    public IActionResult GetCurrentUserInfo()
+    public async Task<IActionResult> GetCurrentUserInfo(CancellationToken cancellationToken)
     {
         if (!_authHelper.IsAuthenticated())
             return Unauthorized();
 
         var info = _authHelper.CurrentAccountInfo();
-        var account = _accountApplication.GetAccountBy(info.Id);
+        var account = await _mediator.Send(new GetAccountByIdQuery { Id = info.Id }, cancellationToken);
 
         return Ok(new
         {
@@ -32,6 +35,8 @@ public class CurrentUserController : ControllerBase
             Username = string.IsNullOrWhiteSpace(account?.UserName) ? info.Username : account.UserName,
             Fullname = string.IsNullOrWhiteSpace(account?.FullName) ? info.Fullname : account.FullName,
             Mobile = string.IsNullOrWhiteSpace(account?.Mobile) ? info.Mobile : account.Mobile,
+            Address = account?.Address ?? string.Empty,
+            PostalCode = account?.PostalCode ?? string.Empty,
             RoleId = account?.RoleId > 0 ? account.RoleId : info.RoleId,
             Role = string.IsNullOrWhiteSpace(account?.Role) ? info.Role : account.Role,
             ProfilePhoto = string.IsNullOrWhiteSpace(account?.ProfilePhoto) ? info.ProfilePhoto : account.ProfilePhoto,

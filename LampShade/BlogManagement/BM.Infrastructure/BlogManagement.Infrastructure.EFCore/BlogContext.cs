@@ -1,11 +1,11 @@
-﻿using BlogManagement.Domain.ArticleAgg;
+using BlogManagement.Domain.ArticleAgg;
 using BlogManagement.Domain.ArticleCategoryAgg;
 using BlogManagement.Infrastructure.EFCore.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogManagement.Infrastructure.EFCore
 {
-    public class BlogContext : DbContext
+    public class BlogContext : DbContext, _0_Framework.Domain.IDbContext
     {
         public DbSet<ArticleCategory> ArticleCategories { get; set; }
         public DbSet<Article> Articles { get; set; }

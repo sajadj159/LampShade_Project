@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using _0_Framework.Application;
 using BlogManagement.Application.Contract.AC.Article;
 using BlogManagement.Domain.ArticleAgg;
@@ -19,16 +21,16 @@ namespace BlogManagement.Application.A.Article
             _articleCategoryRepository = articleCategoryRepository;
         }
 
-        public OperationResult Create(CreateArticle command)
+        public async Task<OperationResult> CreateAsync(CreateArticle command, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            if (_articleRepository.Exist(x => x.Title == command.Title))
+            if (await _articleRepository.ExistAsync(x => x.Title == command.Title, cancellationToken))
             {
                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
 
             var slugify = command.Slug.Slugify();
-            var slugBy = _articleCategoryRepository.GetSlugBy(command.CategoryId);
+            var slugBy = await _articleCategoryRepository.GetSlugByAsync(command.CategoryId, cancellationToken);
             var path = $"{slugBy}/{slugify}";
             var picturePath = _uploader.Upload(command.PictureUrl, path);
             var publishDate = command.PublishDate.ToGeorgianDateTime();
@@ -36,22 +38,21 @@ namespace BlogManagement.Application.A.Article
             var article = new Domain.ArticleAgg.Article(command.Title, command.ShortDescription, command.Description, picturePath,
                 command.PictureTitle, command.PictureAlt, publishDate, slugify, command.Keywords, command.MetaDescription, command.CanonicalAddress, command.CategoryId);
             
-            _articleRepository.Create(article);
-            _articleRepository.Save();
+            _articleRepository.Add(article);
             return operationResult.Succeeded();
         }
 
-        public OperationResult Edit(EditArticle command)
+        public async Task<OperationResult> EditAsync(EditArticle command, CancellationToken cancellationToken = default)
         {
             var operationResult = new OperationResult();
-            var article = _articleRepository.GetWithCategory(command.Id);
+            var article = await _articleRepository.GetWithCategoryAsync(command.Id, cancellationToken);
 
             if (article == null)
             {
                return operationResult.Failed(ApplicationMessages.RecordNotFound);
             }
 
-            if (_articleRepository.Exist(x => x.Title == command.Title && x.Id != command.Id))
+            if (await _articleRepository.ExistAsync(x => x.Title == command.Title && x.Id != command.Id, cancellationToken))
             {
                return operationResult.Failed(ApplicationMessages.DuplicatedRecord);
             }
@@ -64,8 +65,6 @@ namespace BlogManagement.Application.A.Article
             article.Edit(command.Title, command.ShortDescription, command.Description, picturePath,
                 command.PictureTitle, command.PictureAlt, publishDate, slugify, command.Keywords,
                 command.MetaDescription, command.CanonicalAddress, command.CategoryId);
-
-            _articleRepository.Save();
             return operationResult.Succeeded();
         }
 

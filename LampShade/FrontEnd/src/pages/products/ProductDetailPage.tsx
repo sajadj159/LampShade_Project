@@ -22,6 +22,7 @@ import { ShoppingCartOutlined, HomeOutlined, RightOutlined } from '@ant-design/i
 import { productApi, commentApi, mediaUrl } from '../../services/api';
 import type { Product } from '../../types';
 import { useAuth } from '../../contexts/AuthContext';
+import { addProductToCart } from '../../utils/cart';
 
 const { Title, Text, Paragraph } = Typography;
 const { TabPane } = Tabs;
@@ -62,24 +63,10 @@ const ProductDetailPage: React.FC = () => {
 
   const handleAddToCart = () => {
     if (!product) return;
-    
-    const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-    const existingItem = cartItems.find((item: any) => item.id === product.id);
-    
-    if (existingItem) {
-      existingItem.count += quantity;
-    } else {
-      cartItems.push({
-        id: product.id,
-        name: product.name,
-        unitPrice: product.doublePrice,
-        pictureUrl: product.pictureUrl,
-        count: quantity,
-      });
+
+    if (addProductToCart(product, quantity)) {
+      message.success('Added to cart');
     }
-    
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    message.success('Added to cart!');
   };
 
   const handleCommentSubmit = async (values: any) => {

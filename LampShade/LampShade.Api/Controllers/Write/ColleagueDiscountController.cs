@@ -1,9 +1,11 @@
-using LampShade.Api.Features.ColleagueDiscounts.Commands.DefineColleagueDiscount;
-using LampShade.Api.Features.ColleagueDiscounts.Commands.EditColleagueDiscount;
-using LampShade.Api.Features.ColleagueDiscounts.Commands.RemoveColleagueDiscount;
-using LampShade.Api.Features.ColleagueDiscounts.Commands.RestoreColleagueDiscount;
-using LampShade.Api.Features.ColleagueDiscounts.Queries.GetColleagueDiscountById;
-using LampShade.Api.Features.ColleagueDiscounts.Queries.SearchColleagueDiscounts;
+using System.Threading;
+using System.Threading.Tasks;
+using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.DefineColleagueDiscount;
+using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.EditColleagueDiscount;
+using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.RemoveColleagueDiscount;
+using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.RestoreColleagueDiscount;
+using LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.GetColleagueDiscountById;
+using LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.SearchColleagueDiscounts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="14.2.0" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
     <PackageReference Include="AWSSDK.S3" Version="4.0.25.3" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
     <PackageReference Include="Microsoft.OpenApi" Version="2.7.5" />
@@ -31,7 +32,10 @@
     <ProjectReference Include="..\InventoryManagement\IM.Infrastructure\InventoryManagement.Configuration\InventoryManagement.Configuration.csproj" />
     <ProjectReference Include="..\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\ShopManagement.Configuration.csproj" />
     <ProjectReference Include="..\0_Framework\0_Framework\0_Framework.csproj" />
-    <ProjectReference Include="..\01_LampShadeQuery\01_LampShadeQuery.csproj" />
+    <ProjectReference Include="..\LampShade.ReadModel.Contracts\LampShade.ReadModel.Contracts.csproj" />
+    <ProjectReference Include="..\LampShade.ReadModel.Application\LampShade.ReadModel.Application.csproj" />
   </ItemGroup>
 
 </Project>
+
+

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShopManagement.Domain.OrderAgg;
 
@@ -12,6 +12,7 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.IssueTrackingNumber).HasMaxLength(8);
+            builder.Property(x => x.PaymentProofUrl).HasMaxLength(1000);
 
             builder.OwnsMany(x => x.Items, NavigationBuilder =>
             {
@@ -23,3 +24,4 @@ namespace ShopManagement.Infrastructure.EFCore.Mapping
         }
     }
 }
+

@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using ShopManagement.Domain.OrderAgg;
 
-namespace ShopManagement.Domain.Services
+namespace ShopManagement.Domain.Services;
+
+public interface IShopInventoryAcl
 {
-    public interface IShopInventoryAcl
-    {
-        bool ReduceFromInventory(List<OrderItem> items);
-    }
+    Task<bool> ReduceFromInventoryAsync(List<OrderItem> items, CancellationToken cancellationToken = default);
 }

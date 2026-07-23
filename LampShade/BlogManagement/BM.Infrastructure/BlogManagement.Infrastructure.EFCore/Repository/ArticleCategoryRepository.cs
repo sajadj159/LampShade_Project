@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -19,6 +21,11 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
         public string GetSlugBy(long id)
         {
             return _context.ArticleCategories.AsNoTracking().Select(x => new {x.Id, x.Slug}).FirstOrDefault(x => x.Id == id)?.Slug;
+        }
+
+        public Task<string> GetSlugByAsync(long id, CancellationToken cancellationToken = default)
+        {
+            return _context.ArticleCategories.AsNoTracking().Where(x => x.Id == id).Select(x => x.Slug).FirstOrDefaultAsync(cancellationToken);
         }
 
         public List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel searchModel)

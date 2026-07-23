@@ -98,6 +98,9 @@ export const accountApi = {
 
   changePassword: (data: { id: number; password: string; rePassword: string }): Promise<OperationResult> =>
     api.post('/api/write/Account/change-password', data).then((res) => res.data),
+
+  saveAddress: (data: { address: string; postalCode: string }): Promise<OperationResult> =>
+    api.post('/api/write/Account/address', data).then((res) => res.data),
 };
 
 // ==========================================
@@ -213,6 +216,18 @@ export const cartApi = {
 export const orderApi = {
   place: (cart: Cart): Promise<{ orderId: number }> =>
     api.post('/api/write/Order', cart).then((res) => res.data),
+
+  uploadPaymentProof: (id: number, proof: File): Promise<OperationResult> => {
+    const formData = new FormData();
+    formData.append('proof', proof);
+    return api.post('/api/write/Order/' + id + '/payment-proof', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => res.data);
+  },
+
+  approvePaymentProof: (id: number): Promise<{ issueTrackingNumber: string }> =>
+    api.post('/api/write/Order/' + id + '/approve-payment-proof').then((res) => res.data),
+
+  approveCashOnDelivery: (id: number): Promise<{ issueTrackingNumber: string }> =>
+    api.post('/api/write/Order/' + id + '/approve-cash-on-delivery').then((res) => res.data),
 
   getAmount: (id: number): Promise<{ amount: number }> =>
     api.get(`/api/write/Order/${id}/amount`).then((res) => res.data),
@@ -365,4 +380,8 @@ export const inventoryApi = {
 };
 
 export default api;
+
+
+
+
 

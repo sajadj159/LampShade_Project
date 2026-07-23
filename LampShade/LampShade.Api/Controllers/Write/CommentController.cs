@@ -1,7 +1,9 @@
-using LampShade.Api.Features.Comments.Commands.AddComment;
-using LampShade.Api.Features.Comments.Commands.CancelComment;
-using LampShade.Api.Features.Comments.Commands.ConfirmComment;
-using LampShade.Api.Features.Comments.Queries.SearchComments;
+using System.Threading;
+using System.Threading.Tasks;
+using CommentManagement.Application.Contracts.Commands.Comments.AddComment;
+using CommentManagement.Application.Contracts.Commands.Comments.CancelComment;
+using CommentManagement.Application.Contracts.Commands.Comments.ConfirmComment;
+using LampShade.ReadModel.Contracts.Queries.Comments.SearchComments;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

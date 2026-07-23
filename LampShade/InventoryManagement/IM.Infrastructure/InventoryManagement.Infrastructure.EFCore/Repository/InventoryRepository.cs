@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
@@ -6,6 +8,7 @@ using AccountManagement.Infrastructure.EFCore;
 using InventoryManagement.Application.Contract.AC.Inventory;
 using InventoryManagement.Domain.InventoryAgg;
 using ShopManagement.Infrastructure.EFCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagement.Infrastructure.EFCore.Repository
 {
@@ -61,6 +64,11 @@ namespace InventoryManagement.Infrastructure.EFCore.Repository
         public Inventory GetBy(long productId)
         {
             return _context.Inventory.FirstOrDefault(x => x.ProductId == productId);
+        }
+
+        public Task<Inventory> GetByAsync(long productId, CancellationToken cancellationToken = default)
+        {
+            return _context.Inventory.FirstOrDefaultAsync(x => x.ProductId == productId, cancellationToken);
         }
 
         public List<InventoryOperationViewModel> GetOperationLog(long inventoryId)
