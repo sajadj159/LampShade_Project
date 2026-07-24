@@ -1,10 +1,7 @@
-using System.Collections.Generic;
+namespace LampShade.ReadModel.Contracts.Article;
 
-namespace LampShade.ReadModel.Contracts.Article
+public interface IArticleQuery
 {
-    public interface IArticleQuery
-    {
-        ArticleQueryModel GetArticleDetails(string value);
-        List<ArticleQueryModel> LatestArticles();
-    }
+    Task<ArticleQueryModel> GetArticleDetailsAsync(string value, CancellationToken cancellationToken = default);
+    Task<List<ArticleQueryModel>> LatestArticlesAsync(CancellationToken cancellationToken = default);
 }

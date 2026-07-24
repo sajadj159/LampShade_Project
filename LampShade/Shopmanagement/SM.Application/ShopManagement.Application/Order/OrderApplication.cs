@@ -53,7 +53,7 @@ public class OrderApplication(IOrderRepository orderRepository, IAuthHelper auth
         if (order is null || order.IsCanceled || order.IsPaid || (cashOnDeliveryOnly && order.PaymentMethod != 2)) return string.Empty;
         order.PaymentSucceeded(refId); var issue = CodeGenerator.Generate("S"); order.SetIssueTrackingNumber(issue);
         if (!await inventoryAcl.ReduceFromInventoryAsync(order.Items, cancellationToken)) return string.Empty;
-        var (name, mobile) = accountAcl.GetAccountBy(order.AccountId); smsService.Send(mobile, $"{name} گرامی سفارش شما با شماره پیگیری {issue} تایید شد و ارسال خواهد شد.");
+        var (name, mobile) = await accountAcl.GetAccountByAsync(order.AccountId, cancellationToken); smsService.Send(mobile, $"{name} گرامی سفارش شما با شماره پیگیری {issue} تایید شد و ارسال خواهد شد.");
         return issue;
     }
 

@@ -1,16 +1,12 @@
-using System.Collections.Generic;
 using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
 
-namespace LampShade.ReadModel.Contracts.ArticleCategory
+namespace LampShade.ReadModel.Contracts.ArticleCategory;
+
+public interface IArticleCategoryQuery
 {
-    public interface IArticleCategoryQuery
-    {
-        ArticleCategoryQueryModel GetArticleCategory(string slug);
-        List<ArticleCategoryQueryModel> GetArticleCategories();
-        ArticleCategoryDetailsDto GetArticleCategoryForManagement(long id);
-        List<ArticleCategoryViewModel> GetArticleCategoriesForManagement();
-        List<ArticleCategoryViewModel> SearchArticleCategories(string name);
-    }
+    Task<ArticleCategoryQueryModel> GetArticleCategoryAsync(string slug, CancellationToken cancellationToken = default);
+    Task<List<ArticleCategoryQueryModel>> GetArticleCategoriesAsync(CancellationToken cancellationToken = default);
+    Task<ArticleCategoryDetailsDto> GetArticleCategoryForManagementAsync(long id, CancellationToken cancellationToken = default);
+    Task<List<ArticleCategoryViewModel>> GetArticleCategoriesForManagementAsync(CancellationToken cancellationToken = default);
+    Task<List<ArticleCategoryViewModel>> SearchArticleCategoriesAsync(string name, CancellationToken cancellationToken = default);
 }
-
-

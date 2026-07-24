@@ -1,10 +1,7 @@
-using System.Collections.Generic;
+namespace LampShade.ReadModel.Contracts.Order;
 
-namespace LampShade.ReadModel.Contracts.Order
+public interface IOrderQuery
 {
-    public interface IOrderQuery
-    {
-        List<OrderQueryModel> GetPayedOrders();
-        List<OrderQueryModel> GetOrders(long accountId);
-    }
+    Task<List<OrderQueryModel>> GetPayedOrdersAsync(CancellationToken cancellationToken = default);
+    Task<List<OrderQueryModel>> GetOrdersAsync(long accountId, CancellationToken cancellationToken = default);
 }

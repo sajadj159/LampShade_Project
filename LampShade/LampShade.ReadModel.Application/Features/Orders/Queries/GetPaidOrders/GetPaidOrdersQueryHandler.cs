@@ -16,6 +16,6 @@ public class GetPaidOrdersQueryHandler : IRequestHandler<GetPaidOrdersQuery, Lis
 
     public Task<List<OrderQueryModel>> Handle(GetPaidOrdersQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_orderQuery.GetPayedOrders());
+        return _orderQuery.GetPayedOrdersAsync(cancellationToken);
     }
 }

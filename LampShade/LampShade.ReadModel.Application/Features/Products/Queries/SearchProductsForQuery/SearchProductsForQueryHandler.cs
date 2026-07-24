@@ -20,6 +20,6 @@ public class SearchProductsForQueryHandler : IRequestHandler<QueryRequest, List<
 
     public Task<List<ProductQueryModel>> Handle(QueryRequest request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_productQuery.Search(request.Value));
+        return _productQuery.SearchAsync(request.Value, cancellationToken);
     }
 }

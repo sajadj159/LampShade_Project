@@ -21,8 +21,10 @@
     "@tiptap/react": "^3.27.3",
     "@tiptap/starter-kit": "^3.27.3",
     "antd": "^6.5.0",
+    "apexcharts": "^6.5.0",
     "axios": "^1.18.1",
     "react": "^19.2.7",
+    "react-apexcharts": "^2.1.1",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.1"
   },

@@ -13,5 +13,5 @@ public class GetSlidesForQueryHandler : IRequestHandler<QueryRequest, List<Slide
 {
     private readonly ISlideQuery _query;
     public GetSlidesForQueryHandler(ISlideQuery query) => _query = query;
-    public Task<List<SlideQueryModel>> Handle(QueryRequest r, CancellationToken c) => Task.FromResult(_query.GetSlides());
+    public Task<List<SlideQueryModel>> Handle(QueryRequest r, CancellationToken c) => _query.GetSlidesAsync(c);
 }

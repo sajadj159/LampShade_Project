@@ -20,6 +20,6 @@ public class GetLatestArrivalsQueryHandler : IRequestHandler<GetLatestArrivalsQu
 
     public Task<List<ProductQueryModel>> Handle(GetLatestArrivalsQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_productQuery.GetLatestArrivals());
+        return _productQuery.GetLatestArrivalsAsync(cancellationToken);
     }
 }

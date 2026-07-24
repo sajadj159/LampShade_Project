@@ -1,11 +1,8 @@
-using System.Collections.Generic;
+namespace LampShade.ReadModel.Contracts.ProductCategory;
 
-namespace LampShade.ReadModel.Contracts.ProductCategory
+public interface IProductCategoryQuery
 {
-    public interface IProductCategoryQuery
-    {
-        ProductCategoryQueryModel GetProductCategoryWithProducts(string slug);
-        List<ProductCategoryQueryModel> GetProductCategoryQueries();
-        List<ProductCategoryQueryModel> GetProductCategoriesWithProducts();
-    }
+    Task<ProductCategoryQueryModel> GetProductCategoryWithProductsAsync(string slug, CancellationToken cancellationToken = default);
+    Task<List<ProductCategoryQueryModel>> GetProductCategoryQueriesAsync(CancellationToken cancellationToken = default);
+    Task<List<ProductCategoryQueryModel>> GetProductCategoriesWithProductsAsync(CancellationToken cancellationToken = default);
 }

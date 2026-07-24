@@ -16,6 +16,6 @@ public class GetOrdersByAccountQueryHandler : IRequestHandler<GetOrdersByAccount
 
     public Task<List<OrderQueryModel>> Handle(GetOrdersByAccountQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_orderQuery.GetOrders(request.AccountId));
+        return _orderQuery.GetOrdersAsync(request.AccountId, cancellationToken);
     }
 }

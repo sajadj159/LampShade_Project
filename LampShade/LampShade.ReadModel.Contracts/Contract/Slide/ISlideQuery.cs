@@ -1,9 +1,6 @@
-using System.Collections.Generic;
+namespace LampShade.ReadModel.Contracts.Slide;
 
-namespace LampShade.ReadModel.Contracts.Slide
+public interface ISlideQuery
 {
-    public interface ISlideQuery
-    {
-        List<SlideQueryModel> GetSlides();
-    }
+    Task<List<SlideQueryModel>> GetSlidesAsync(CancellationToken cancellationToken = default);
 }

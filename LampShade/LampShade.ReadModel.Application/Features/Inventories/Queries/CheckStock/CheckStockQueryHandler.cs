@@ -25,6 +25,6 @@ public class CheckStockQueryHandler : IRequestHandler<CheckStockQuery, StockStat
             ProductId = request.ProductId,
             Count = request.Count
         };
-        return Task.FromResult(_inventoryQuery.CheckStock(command));
+        return _inventoryQuery.CheckStockAsync(command, cancellationToken);
     }
 }
