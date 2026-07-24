@@ -15,7 +15,7 @@ public class ProductQuery(ShopContext shopContext, InventoryContext inventoryCon
 {
     public async Task<ProductQueryModel> GetProductDetailsAsync(string slug, CancellationToken cancellationToken = default)
     {
-        var inventories = await inventoryContext.Inventory.AsNoTracking().Select(x => new { x.ProductId, x.InStock, x.UnitPrice }).ToListAsync(cancellationToken);
+        var inventories = await inventoryContext.Inventory.AsNoTracking().Select(x => new InventorySnapshot(x.ProductId, x.InStock, x.UnitPrice)).ToListAsync(cancellationToken);
         var discounts = await ActiveDiscounts(cancellationToken);
         var entity = await shopContext.Products.AsNoTracking().Include(x => x.Category).Include(x => x.ProductPictures).FirstOrDefaultAsync(x => x.Slug == slug, cancellationToken);
         if (entity is null) return new ProductQueryModel();
@@ -27,7 +27,7 @@ public class ProductQuery(ShopContext shopContext, InventoryContext inventoryCon
 
     public async Task<List<ProductQueryModel>> GetLatestArrivalsAsync(CancellationToken cancellationToken = default)
     {
-        var inventories = await inventoryContext.Inventory.AsNoTracking().Where(x => x.InStock).Select(x => new { x.ProductId, x.InStock, x.UnitPrice }).ToListAsync(cancellationToken);
+        var inventories = await inventoryContext.Inventory.AsNoTracking().Where(x => x.InStock).Select(x => new InventorySnapshot(x.ProductId, x.InStock, x.UnitPrice)).ToListAsync(cancellationToken);
         var discounts = await ActiveDiscounts(cancellationToken);
         var products = await shopContext.Products.AsNoTracking().Include(x => x.Category).Include(x => x.ProductPictures).ToListAsync(cancellationToken);
         var result = products.Select(x => MapProduct(x, includeDetails: false)).OrderByDescending(x => x.Id).ToList();
@@ -37,7 +37,7 @@ public class ProductQuery(ShopContext shopContext, InventoryContext inventoryCon
 
     public async Task<List<ProductQueryModel>> SearchAsync(string value, CancellationToken cancellationToken = default)
     {
-        var inventories = await inventoryContext.Inventory.AsNoTracking().Select(x => new { x.ProductId, x.InStock, x.UnitPrice }).ToListAsync(cancellationToken);
+        var inventories = await inventoryContext.Inventory.AsNoTracking().Select(x => new InventorySnapshot(x.ProductId, x.InStock, x.UnitPrice)).ToListAsync(cancellationToken);
         var discounts = await ActiveDiscounts(cancellationToken);
         var query = shopContext.Products.AsNoTracking().Include(x => x.Category).AsQueryable();
         if (!string.IsNullOrWhiteSpace(value)) query = query.Where(x => x.Name.Contains(value) || x.ShortDescription.Contains(value));
@@ -58,9 +58,12 @@ public class ProductQuery(ShopContext shopContext, InventoryContext inventoryCon
         return cartItems;
     }
 
-    private async Task<List<dynamic>> ActiveDiscounts(CancellationToken cancellationToken) => (await discountContext.CustomerDiscounts.AsNoTracking().Where(x => x.StartDate < DateTime.UtcNow && x.EndDate > DateTime.UtcNow).Select(x => new { x.ProductId, x.DiscountRate, x.EndDate }).ToListAsync(cancellationToken)).Cast<dynamic>().ToList();
+    private Task<List<DiscountSnapshot>> ActiveDiscounts(CancellationToken cancellationToken) => discountContext.CustomerDiscounts.AsNoTracking().Where(x => x.StartDate < DateTime.UtcNow && x.EndDate > DateTime.UtcNow).Select(x => new DiscountSnapshot(x.ProductId, x.DiscountRate, x.EndDate)).ToListAsync(cancellationToken);
+    private sealed record InventorySnapshot(long ProductId, bool InStock, double UnitPrice);
+    private sealed record DiscountSnapshot(long ProductId, int DiscountRate, DateTime EndDate);
+
     private static ProductQueryModel MapProduct(ShopManagement.Domain.ProductAgg.Product product, bool includeDetails) => new() { Id = product.Id, Slug = product.Slug, Code = product.Code, Name = product.Name, Keywords = includeDetails ? product.Keywords : string.Empty, PictureUrl = product.PictureUrl, PictureAlt = product.PictureAlt, PictureTitle = product.PictureTitle, Category = product.Category.Name, CategorySlug = product.Category.Slug, Description = includeDetails ? product.Description : string.Empty, MetaDescription = includeDetails ? product.MetaDescription : string.Empty, ShortDescription = product.ShortDescription, Pictures = product.ProductPictures.Select(x => new ProductPictureQueryModel { PictureAlt = x.PictureAlt, IsRemoved = x.IsRemoved, PictureTitle = x.PictureTitle, PictureUrl = x.PictureUrl, ProductId = x.ProductId }).Where(x => !x.IsRemoved).ToList() };
-    private static void ApplyPricing(ProductQueryModel product, IEnumerable<dynamic> inventories, IEnumerable<dynamic> discounts)
+    private static void ApplyPricing(ProductQueryModel product, IEnumerable<InventorySnapshot> inventories, IEnumerable<DiscountSnapshot> discounts)
     {
         var inventory = inventories.FirstOrDefault(x => x.ProductId == product.Id); if (inventory is null) { product.Price = "0"; product.InStock = false; return; }
         var price = inventory.UnitPrice; product.Price = price.ToMoney(); product.DoublePrice = price; product.InStock = inventory.InStock;

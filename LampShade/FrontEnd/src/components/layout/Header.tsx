@@ -61,10 +61,15 @@ const Header: React.FC = () => {
   }
 
   const navMenuItems: MenuProps['items'] = [
-    { key: 'home', label: <Link to="/">{t('home')}</Link> },
-    { key: 'products', label: <Link to="/products">{t('products')}</Link> },
-    { key: 'blog', label: <Link to="/blog">{t('blog')}</Link> },
+    { key: '/', label: t('home') },
+    { key: '/products', label: t('products') },
+    { key: '/blog', label: t('blog') },
   ];
+
+  const handleNavigation: MenuProps['onClick'] = ({ key }) => {
+    navigate(key);
+    setDrawerOpen(false);
+  };
 
   return (
     <>
@@ -75,7 +80,7 @@ const Header: React.FC = () => {
           </Link>
 
           <div className="desktop-nav" style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-            <Menu mode="horizontal" items={navMenuItems} style={{ border: 'none', flex: 1, justifyContent: 'center', maxWidth: 600 }} />
+            <Menu mode="horizontal" items={navMenuItems} onClick={handleNavigation} style={{ border: 'none', flex: 1, justifyContent: 'center', maxWidth: 600 }} />
           </div>
 
           <Search className="store-search" placeholder={t('searchProducts')} onSearch={handleSearch} style={{ maxWidth: 400, flex: 1 }} prefix={<SearchOutlined />} />
@@ -101,7 +106,7 @@ const Header: React.FC = () => {
       </AntHeader>
 
       <Drawer title="Menu" placement="right" onClose={() => setDrawerOpen(false)} open={drawerOpen} width={280}>
-        <Menu mode="inline" items={navMenuItems} onClick={() => setDrawerOpen(false)} />
+        <Menu mode="inline" items={navMenuItems} onClick={handleNavigation} />
         <Menu mode="inline" items={userMenuItems} style={{ marginTop: 16 }} onClick={() => setDrawerOpen(false)} />
       </Drawer>
     </>
