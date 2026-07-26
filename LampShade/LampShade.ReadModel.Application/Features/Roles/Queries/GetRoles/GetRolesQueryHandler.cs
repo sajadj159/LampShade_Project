@@ -19,6 +19,6 @@ public class GetRolesQueryHandler : IRequestHandler<GetRolesQuery, List<RoleDto>
 
     public Task<List<RoleDto>> Handle(GetRolesQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_query.GetRoles());
+        return _query.GetRolesAsync(cancellationToken);
     }
 }

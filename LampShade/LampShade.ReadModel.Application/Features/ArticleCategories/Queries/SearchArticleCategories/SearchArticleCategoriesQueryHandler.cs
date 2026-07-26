@@ -19,6 +19,6 @@ public class SearchArticleCategoriesQueryHandler : IRequestHandler<SearchArticle
 
     public Task<List<ArticleCategoryViewModel>> Handle(SearchArticleCategoriesQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_query.SearchArticleCategories(request.Name));
+        return _query.SearchArticleCategoriesAsync(request.Name, cancellationToken);
     }
 }

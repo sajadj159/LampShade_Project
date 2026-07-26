@@ -21,6 +21,6 @@ public class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery, List<Ac
 
     public Task<List<AccountViewModel>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_query.GetAccountsForManagement());
+        return _query.GetAccountsForManagementAsync(cancellationToken);
     }
 }

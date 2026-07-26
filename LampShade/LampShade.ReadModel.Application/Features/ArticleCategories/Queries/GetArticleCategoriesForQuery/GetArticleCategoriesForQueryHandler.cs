@@ -13,5 +13,5 @@ public class GetArticleCategoriesForQueryHandler : IRequestHandler<QueryRequest,
 {
     private readonly IArticleCategoryQuery _query;
     public GetArticleCategoriesForQueryHandler(IArticleCategoryQuery query) => _query = query;
-    public Task<List<ArticleCategoryQueryModel>> Handle(QueryRequest r, CancellationToken c) => Task.FromResult(_query.GetArticleCategories());
+    public Task<List<ArticleCategoryQueryModel>> Handle(QueryRequest r, CancellationToken c) => _query.GetArticleCategoriesAsync(c);
 }

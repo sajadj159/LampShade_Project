@@ -21,6 +21,6 @@ public class GetAccountByIdQueryHandler : IRequestHandler<GetAccountByIdQuery, A
 
     public Task<AccountViewModel> Handle(GetAccountByIdQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_query.GetAccount(request.Id));
+        return _query.GetAccountAsync(request.Id, cancellationToken);
     }
 }

@@ -12,5 +12,5 @@ namespace LampShade.ReadModel.Application.Features.Accounts.Queries.SearchAccoun
 public class SearchAccountsQueryHandler(IAccountQuery query) : IRequestHandler<SearchAccountsQuery, List<AccountViewModel>>
 {
     public Task<List<AccountViewModel>> Handle(SearchAccountsQuery request, CancellationToken cancellationToken) =>
-        Task.FromResult(query.SearchAccounts(request.FullName ?? string.Empty, request.UserName ?? string.Empty, request.Mobile ?? string.Empty, request.RoleId ?? 0));
+        query.SearchAccountsAsync(request.FullName ?? string.Empty, request.UserName ?? string.Empty, request.Mobile ?? string.Empty, request.RoleId ?? 0, cancellationToken);
 }

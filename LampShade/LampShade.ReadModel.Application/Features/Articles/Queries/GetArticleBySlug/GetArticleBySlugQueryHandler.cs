@@ -13,5 +13,5 @@ public class GetArticleBySlugQueryHandler : IRequestHandler<GetArticleBySlugQuer
 {
     private readonly IArticleQuery _query;
     public GetArticleBySlugQueryHandler(IArticleQuery query) => _query = query;
-    public Task<ArticleQueryModel> Handle(GetArticleBySlugQuery r, CancellationToken c) => Task.FromResult(_query.GetArticleDetails(r.Slug));
+    public Task<ArticleQueryModel> Handle(GetArticleBySlugQuery r, CancellationToken c) => _query.GetArticleDetailsAsync(r.Slug, c);
 }

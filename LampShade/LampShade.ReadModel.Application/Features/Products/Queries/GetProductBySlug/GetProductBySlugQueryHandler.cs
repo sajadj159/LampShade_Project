@@ -20,6 +20,6 @@ public class GetProductBySlugQueryHandler : IRequestHandler<GetProductBySlugQuer
 
     public Task<ProductQueryModel> Handle(GetProductBySlugQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_productQuery.GetProductDetails(request.Slug));
+        return _productQuery.GetProductDetailsAsync(request.Slug, cancellationToken);
     }
 }

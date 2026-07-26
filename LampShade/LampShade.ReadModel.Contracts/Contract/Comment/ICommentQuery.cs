@@ -4,6 +4,6 @@ namespace LampShade.ReadModel.Contracts.Comment;
 
 public interface ICommentQuery
 {
-    List<CommentQueryModel> GetComments();
-    List<CommentViewModel> SearchComments(string name, string email);
+    Task<List<CommentQueryModel>> GetCommentsAsync(CancellationToken cancellationToken = default);
+    Task<List<CommentViewModel>> SearchCommentsAsync(string name, string email, CancellationToken cancellationToken = default);
 }

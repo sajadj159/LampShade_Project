@@ -10,5 +10,5 @@ namespace LampShade.ReadModel.Application.Features.ArticleCategories.Queries.Get
 public class GetArticleCategoryByIdQueryHandler(IArticleCategoryQuery query) : IRequestHandler<GetArticleCategoryByIdQuery, ArticleCategoryDetailsDto>
 {
     public Task<ArticleCategoryDetailsDto> Handle(GetArticleCategoryByIdQuery request, CancellationToken cancellationToken) =>
-        Task.FromResult(query.GetArticleCategoryForManagement(request.Id));
+        query.GetArticleCategoryForManagementAsync(request.Id, cancellationToken);
 }

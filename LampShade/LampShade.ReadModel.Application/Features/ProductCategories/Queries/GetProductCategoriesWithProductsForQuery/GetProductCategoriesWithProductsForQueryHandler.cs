@@ -13,5 +13,5 @@ public class GetProductCategoriesWithProductsForQueryHandler : IRequestHandler<Q
 {
     private readonly IProductCategoryQuery _query;
     public GetProductCategoriesWithProductsForQueryHandler(IProductCategoryQuery query) => _query = query;
-    public Task<List<ProductCategoryQueryModel>> Handle(QueryRequest r, CancellationToken c) => Task.FromResult(_query.GetProductCategoriesWithProducts());
+    public Task<List<ProductCategoryQueryModel>> Handle(QueryRequest r, CancellationToken c) => _query.GetProductCategoriesWithProductsAsync(c);
 }

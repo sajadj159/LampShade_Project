@@ -5,10 +5,10 @@ namespace LampShade.ReadModel.Contracts.Account;
 
 public interface IAccountQuery
 {
-    List<AccountQueryModel> GetAccounts();
-    AccountViewModel GetAccount(long id);
-    List<AccountViewModel> GetAccountsForManagement();
-    List<AccountViewModel> SearchAccounts(string fullName, string userName, string mobile, long roleId);
-    RoleDto GetRole(long id);
-    List<RoleDto> GetRoles();
+    Task<List<AccountQueryModel>> GetAccountsAsync(CancellationToken cancellationToken = default);
+    Task<AccountViewModel> GetAccountAsync(long id, CancellationToken cancellationToken = default);
+    Task<List<AccountViewModel>> GetAccountsForManagementAsync(CancellationToken cancellationToken = default);
+    Task<List<AccountViewModel>> SearchAccountsAsync(string fullName, string userName, string mobile, long roleId, CancellationToken cancellationToken = default);
+    Task<RoleDto> GetRoleAsync(long id, CancellationToken cancellationToken = default);
+    Task<List<RoleDto>> GetRolesAsync(CancellationToken cancellationToken = default);
 }

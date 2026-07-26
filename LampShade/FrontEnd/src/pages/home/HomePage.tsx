@@ -20,14 +20,15 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [productsData, categoriesData, slidesData] = await Promise.all([
+        const [productsResult, categoriesResult, slidesResult] = await Promise.allSettled([
           productApi.getLatest(),
           categoryApi.getWithProducts(),
           slideApi.getForQuery(),
         ]);
-        setProducts(productsData);
-        setCategories(categoriesData);
-        setSlides(slidesData);
+
+        if (productsResult.status === 'fulfilled') setProducts(productsResult.value);
+        if (categoriesResult.status === 'fulfilled') setCategories(categoriesResult.value);
+        if (slidesResult.status === 'fulfilled') setSlides(slidesResult.value);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {

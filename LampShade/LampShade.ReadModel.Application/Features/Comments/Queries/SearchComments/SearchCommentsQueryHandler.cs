@@ -10,5 +10,5 @@ namespace LampShade.ReadModel.Application.Features.Comments.Queries.SearchCommen
 public class SearchCommentsQueryHandler(ICommentQuery query) : IRequestHandler<SearchCommentsQuery, List<CommentViewModel>>
 {
     public Task<List<CommentViewModel>> Handle(SearchCommentsQuery request, CancellationToken cancellationToken) =>
-        Task.FromResult(query.SearchComments(request.Name ?? string.Empty, request.Email ?? string.Empty));
+        query.SearchCommentsAsync(request.Name ?? string.Empty, request.Email ?? string.Empty, cancellationToken);
 }

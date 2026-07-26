@@ -13,5 +13,5 @@ public class GetAllCommentsQueryHandler : IRequestHandler<GetAllCommentsQuery, L
 {
     private readonly ICommentQuery _query;
     public GetAllCommentsQueryHandler(ICommentQuery query) => _query = query;
-    public Task<List<CommentQueryModel>> Handle(GetAllCommentsQuery r, CancellationToken c) => Task.FromResult(_query.GetComments());
+    public Task<List<CommentQueryModel>> Handle(GetAllCommentsQuery r, CancellationToken c) => _query.GetCommentsAsync(c);
 }

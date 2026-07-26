@@ -1,7 +1,6 @@
-namespace LampShade.ReadModel.Contracts.Inventory
+namespace LampShade.ReadModel.Contracts.Inventory;
+
+public interface IInventoryQuery
 {
-    public interface IInventoryQuery
-    {
-        StockStatus CheckStock(IsInStock command);
-    }
+    Task<StockStatus> CheckStockAsync(IsInStock command, CancellationToken cancellationToken = default);
 }

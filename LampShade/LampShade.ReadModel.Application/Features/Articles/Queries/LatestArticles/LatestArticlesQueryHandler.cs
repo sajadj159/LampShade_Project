@@ -13,5 +13,5 @@ public class LatestArticlesQueryHandler : IRequestHandler<LatestArticlesQuery, L
 {
     private readonly IArticleQuery _query;
     public LatestArticlesQueryHandler(IArticleQuery query) => _query = query;
-    public Task<List<ArticleQueryModel>> Handle(LatestArticlesQuery r, CancellationToken c) => Task.FromResult(_query.LatestArticles());
+    public Task<List<ArticleQueryModel>> Handle(LatestArticlesQuery r, CancellationToken c) => _query.LatestArticlesAsync(c);
 }

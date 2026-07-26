@@ -13,5 +13,5 @@ public class GetAllAccountsForQueryHandler : IRequestHandler<QueryRequest, List<
 {
     private readonly IAccountQuery _query;
     public GetAllAccountsForQueryHandler(IAccountQuery query) => _query = query;
-    public Task<List<AccountQueryModel>> Handle(QueryRequest r, CancellationToken c) => Task.FromResult(_query.GetAccounts());
+    public Task<List<AccountQueryModel>> Handle(QueryRequest r, CancellationToken c) => _query.GetAccountsAsync(c);
 }

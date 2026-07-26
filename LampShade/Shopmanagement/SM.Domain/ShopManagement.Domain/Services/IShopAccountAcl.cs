@@ -1,7 +1,9 @@
-﻿namespace ShopManagement.Domain.Services
+using System.Threading;
+using System.Threading.Tasks;
+namespace ShopManagement.Domain.Services
 {
     public interface IShopAccountAcl
     {
-        (string name, string mobile) GetAccountBy(long id);
+        Task<(string name, string mobile)> GetAccountByAsync(long id, CancellationToken cancellationToken = default);
     }
 }

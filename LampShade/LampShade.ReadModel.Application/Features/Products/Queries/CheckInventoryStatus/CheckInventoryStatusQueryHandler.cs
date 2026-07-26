@@ -32,6 +32,6 @@ public class CheckInventoryStatusQueryHandler : IRequestHandler<CheckInventorySt
             Count = i.Count,
             DiscountRate = i.DiscountRate
         }).ToList();
-        return Task.FromResult(_productQuery.CheckInventoryStatus(cartItems));
+        return _productQuery.CheckInventoryStatusAsync(cartItems, cancellationToken);
     }
 }
