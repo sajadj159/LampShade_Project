@@ -29,5 +29,8 @@
     <ProjectReference Include="..\..\IM.Domain\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LampShade.ReadModel.Contracts\LampShade.ReadModel.Contracts.csproj" />
+  </ItemGroup>
 </Project>
 

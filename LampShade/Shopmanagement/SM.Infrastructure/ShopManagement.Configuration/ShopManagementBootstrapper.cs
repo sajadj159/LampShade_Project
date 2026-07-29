@@ -1,4 +1,8 @@
 using _0_Framework.Repository;
+using CommentManagement.Infrastructure.EFCore.ReadAcl;
+using DiscountManagement.Infrastructure.EFCore.ReadAcl;
+using InventoryManagement.Infrastructure.EFCore.ReadAcl;
+using LampShade.ReadModel.Contracts.Acl;
 using LampShade.ReadModel.Contracts.Cart;
 using LampShade.ReadModel.Contracts.Order;
 using LampShade.ReadModel.Contracts.Product;
@@ -51,6 +55,9 @@ namespace ShopManagement.Configuration
 
             service.AddTransient<ISlideQuery, SlideQuery>();
             service.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
+            service.AddTransient<IShopInventoryReadAcl, ShopInventoryReadAcl>();
+            service.AddTransient<IShopDiscountReadAcl, ShopDiscountReadAcl>();
+            service.AddTransient<IShopCommentReadAcl, ShopCommentReadAcl>();
             service.AddTransient<IProductQuery, ProductQuery>();
 
             service.AddTransient<IOrderRepository, OrderRepository>();

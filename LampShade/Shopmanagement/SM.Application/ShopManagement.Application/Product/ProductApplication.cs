@@ -75,7 +75,7 @@ namespace ShopManagement.Application.Product
             {
                 var picturePath = _uploader.Upload(picture, path);
                 var title = System.IO.Path.GetFileNameWithoutExtension(picture.FileName);
-                _productPictureRepository.Add(new ShopManagement.Domain.ProductPictureAgg.ProductPicture(product.Id, picturePath, title, title));
+                product.AddPicture(picturePath, title, title);
             }
         }
         public List<ProductViewModel> Search(ProductSearchModel searchModel)

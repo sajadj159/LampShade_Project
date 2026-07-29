@@ -113,7 +113,18 @@ public class ProductTests
     }
 
     [Fact]
-    public void ClearPicture_ClearsPictureUrl()
+    public void AddPicture_AddsPictureToAggregate()
+    {
+        var product = CreateProduct();
+
+        product.AddPicture("detail.jpg", "Detail", "Detail image");
+
+        product.ProductPictures.Should().ContainSingle();
+        product.ProductPictures[0].PictureUrl.Should().Be("detail.jpg");
+        product.ProductPictures[0].ProductId.Should().Be(0);
+    }
+
+    [Fact]    public void ClearPicture_ClearsPictureUrl()
     {
         var product = CreateProduct();
 

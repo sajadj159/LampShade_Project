@@ -25,6 +25,7 @@ namespace ShopManagement.Domain.ProductAgg
 
         public Product()
         {
+            ProductPictures = new List<ProductPicture>();
         }
         public Product(string name, string code, string shortDescription,
             string description, string pictureUrl, string pictureTitle, string pictureAlt,
@@ -41,6 +42,12 @@ namespace ShopManagement.Domain.ProductAgg
             Keywords = keywords;
             MetaDescription = metaDescription;
             CategoryId = categoryId;
+            ProductPictures = new List<ProductPicture>();
+        }
+        public void AddPicture(string pictureUrl, string pictureTitle, string pictureAlt)
+        {
+            ProductPictures ??= new List<ProductPicture>();
+            ProductPictures.Add(new ProductPicture(0, pictureUrl, pictureTitle, pictureAlt));
         }
         public void ClearPicture()
         {

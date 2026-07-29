@@ -1,57 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using _0_Framework.Application;
 using _0_Framework.Repository;
+using LampShade.ReadModel.Contracts.Acl;
 using LampShade.ReadModel.Contracts.Cart;
-using DiscountManagement.Infrastructure.EFCore;
 using ShopManagement.Application.Contract.Order;
 
-namespace LampShade.ReadModel.Application.Query
+namespace LampShade.ReadModel.Application.Query;
+
+public class CartCalculatorService(IShopDiscountReadAcl discountAcl, IAuthHelper authHelper) : ICartCalculatorService
 {
-    public class CartCalculatorService : ICartCalculatorService
+    public Cart ComputeCart(List<CartItem> cartItems)
     {
-        private readonly IAuthHelper _authHelper;
-        private readonly DiscountContext _discountContext;
-
-        public CartCalculatorService(DiscountContext discountContext, IAuthHelper authHelper)
+        var cart = new Cart();
+        var colleagueDiscounts = discountAcl.GetColleagueDiscounts();
+        var customerDiscounts = discountAcl.GetCustomerDiscounts(true);
+        var currentAccountRole = authHelper.CurrentAccountRole();
+        foreach (var cartItem in cartItems)
         {
-            _discountContext = discountContext;
-            _authHelper = authHelper;
+            cartItem.CalculateTotalItemPrice();
+            var discount = currentAccountRole == Roles.ColleagueUser ? colleagueDiscounts.FirstOrDefault(item => item.ProductId == cartItem.Id) : customerDiscounts.FirstOrDefault(item => item.ProductId == cartItem.Id);
+            if (discount is not null) cartItem.DiscountRate = discount.DiscountRate;
+            cartItem.DiscountAmount = cartItem.TotalItemPrice * cartItem.DiscountRate / 100;
+            cartItem.ItemPayAmount = cartItem.TotalItemPrice - cartItem.DiscountAmount;
+            cart.Add(cartItem);
         }
-
-        public Cart ComputeCart(List<CartItem> cartItems)
-        {
-            var cart = new Cart();
-            var colleagueDiscounts = _discountContext.ColleagueDiscounts
-                .Where(x => !x.IsRemoved)
-                .Select(x => new { x.DiscountRate, x.ProductId }).ToList();
-            var customerDiscounts = _discountContext.CustomerDiscounts
-                .Where(x => x.StartDate <= DateTime.UtcNow && x.EndDate > DateTime.UtcNow)
-                .Select(x => new { x.ProductId, x.DiscountRate }).ToList();
-
-            var currentAccountRole = _authHelper.CurrentAccountRole();
-            foreach (var cartItem in cartItems)
-            {
-                cartItem.CalculateTotalItemPrice();
-                if (currentAccountRole == Roles.ColleagueUser)
-                {
-                    var colleagueDiscount = colleagueDiscounts.FirstOrDefault(x => x.ProductId == cartItem.Id);
-                    if (colleagueDiscount != null)
-                        cartItem.DiscountRate = colleagueDiscount.DiscountRate;
-                }
-                else
-                {
-                    var customerDiscount = customerDiscounts.FirstOrDefault(x => x.ProductId == cartItem.Id);
-                    if (customerDiscount != null)
-                        cartItem.DiscountRate = customerDiscount.DiscountRate;
-                }
-                cartItem.DiscountAmount = ((cartItem.TotalItemPrice * cartItem.DiscountRate) / 100);
-                cartItem.ItemPayAmount = cartItem.TotalItemPrice - cartItem.DiscountAmount;
-                cart.Add(cartItem);
-            }
-            return cart;
-        }
+        return cart;
     }
 }
-

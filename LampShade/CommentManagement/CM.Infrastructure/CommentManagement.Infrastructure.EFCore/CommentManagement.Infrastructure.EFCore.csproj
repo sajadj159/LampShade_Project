@@ -19,5 +19,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\CM.Domain\CommentManagement.Domain\CommentManagement.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LampShade.ReadModel.Contracts\LampShade.ReadModel.Contracts.csproj" />
+  </ItemGroup>
 </Project>
 
