@@ -33,6 +33,7 @@ using ShopManagement.Domain.SlideAgg;
 using ShopManagement.Infrastructure.AccountAcl;
 using ShopManagement.Infrastructure.EFCore;
 using ShopManagement.Infrastructure.EFCore.Repository;
+using ShopManagement.Infrastructure.EFCore.ReadAcl;
 using ShopManagement.Infrastructure.InventoryAcl;
 
 namespace ShopManagement.Configuration
@@ -56,6 +57,7 @@ namespace ShopManagement.Configuration
             service.AddTransient<ISlideQuery, SlideQuery>();
             service.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
             service.AddTransient<IShopInventoryReadAcl, ShopInventoryReadAcl>();
+            service.AddTransient<IInventoryProductReadAcl, InventoryProductReadAcl>();
             service.AddTransient<IShopDiscountReadAcl, ShopDiscountReadAcl>();
             service.AddTransient<IShopCommentReadAcl, ShopCommentReadAcl>();
             service.AddTransient<IProductQuery, ProductQuery>();
