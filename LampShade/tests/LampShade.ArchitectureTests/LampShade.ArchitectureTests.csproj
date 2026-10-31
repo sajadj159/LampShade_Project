@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NetArchTest.Rules" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Host\LampShade.Api\LampShade.Api.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Account\AccountManagement.Contracts\AccountManagement.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Account\AccountManagement.Domain\AccountManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Account\AccountManagement.Application\AccountManagement.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Account\AccountManagement.Infrastructure\AccountManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Account\AccountManagement.Presentation\AccountManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Blog\BlogManagement.Contracts\BlogManagement.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Blog\BlogManagement.Domain\BlogManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Blog\BlogManagement.Application\BlogManagement.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Blog\BlogManagement.Infrastructure\BlogManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Blog\BlogManagement.Presentation\BlogManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Comment\CommentManagement.Contracts\CommentManagement.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Comment\CommentManagement.Domain\CommentManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Comment\CommentManagement.Application\CommentManagement.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Comment\CommentManagement.Infrastructure\CommentManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Comment\CommentManagement.Presentation\CommentManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Discount\DiscountManagement.Contracts\DiscountManagement.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Discount\DiscountManagement.Domain\DiscountManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Discount\DiscountManagement.Application\DiscountManagement.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Discount\DiscountManagement.Infrastructure\DiscountManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Discount\DiscountManagement.Presentation\DiscountManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Inventory\InventoryManagement.Contracts\InventoryManagement.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Inventory\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Inventory\InventoryManagement.Application\InventoryManagement.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Inventory\InventoryManagement.Infrastructure\InventoryManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Inventory\InventoryManagement.Presentation\InventoryManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Shop\ShopManagement.Contracts\ShopManagement.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Shop\ShopManagement.Domain\ShopManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Shop\ShopManagement.Application\ShopManagement.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Shop\ShopManagement.Infrastructure\ShopManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Shop\ShopManagement.Presentation\ShopManagement.Presentation.csproj" />
+  </ItemGroup>
+</Project>

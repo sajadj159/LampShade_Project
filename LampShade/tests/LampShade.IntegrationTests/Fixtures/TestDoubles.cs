@@ -35,8 +35,12 @@ public sealed class TestSmsService : ISmsService
         get { lock (_messages) return _messages.ToList(); }
     }
 
+    /// <summary>When set, sending fails like an unreachable SMS provider.</summary>
+    public bool IsDown { get; set; }
+
     public void Send(string number, string message)
     {
+        if (IsDown) throw new HttpRequestException("SMS provider unavailable");
         lock (_messages) _messages.Add((number, message));
     }
 }

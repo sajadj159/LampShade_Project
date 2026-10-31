@@ -2,51 +2,51 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS restore
 WORKDIR /src
 
-COPY LampShade.sln ./
-COPY 0_Framework/0_Framework/0_Framework.csproj 0_Framework/0_Framework/
-COPY 01_LampShadeQuery/01_LampShadeQuery.csproj 01_LampShadeQuery/
-COPY LampShade.Api/LampShade.Api.csproj LampShade.Api/
-COPY AccountManagement/AM.Domain/AccountManagement.Domain/AccountManagement.Domain.csproj AccountManagement/AM.Domain/AccountManagement.Domain/
-COPY AccountManagement/AM.Application/AccountManagement.Application/AccountManagement.Application.csproj AccountManagement/AM.Application/AccountManagement.Application/
-COPY AccountManagement/AM.Application/AccountManagement.Application.Contracts/AccountManagement.Application.Contracts.csproj AccountManagement/AM.Application/AccountManagement.Application.Contracts/
-COPY AccountManagement/AM.Infrustructure/AccountManagement.Infrastructure.EFCore/AccountManagement.Infrastructure.EFCore.csproj AccountManagement/AM.Infrustructure/AccountManagement.Infrastructure.EFCore/
-COPY AccountManagement/AM.Infrustructure/AccountManagement.Configuration/AccountManagement.Configuration.csproj AccountManagement/AM.Infrustructure/AccountManagement.Configuration/
-COPY BlogManagement/BM.Domain/BlogManagement.Domain/BlogManagement.Domain.csproj BlogManagement/BM.Domain/BlogManagement.Domain/
-COPY BlogManagement/BM.Application/BlogManagement.Application/BlogManagement.Application.csproj BlogManagement/BM.Application/BlogManagement.Application/
-COPY BlogManagement/BM.Application/BlogManagement.Application.Contract/BlogManagement.Application.Contract.csproj BlogManagement/BM.Application/BlogManagement.Application.Contract/
-COPY BlogManagement/BM.Infrastructure/BlogManagement.Infrastructure.EFCore/BlogManagement.Infrastructure.EFCore.csproj BlogManagement/BM.Infrastructure/BlogManagement.Infrastructure.EFCore/
-COPY BlogManagement/BM.Infrastructure/BlogManagement.Infrastructure.Configuration/BlogManagement.Infrastructure.Configuration.csproj BlogManagement/BM.Infrastructure/BlogManagement.Infrastructure.Configuration/
-COPY CommentManagement/CM.Domain/CommentManagement.Domain/CommentManagement.Domain.csproj CommentManagement/CM.Domain/CommentManagement.Domain/
-COPY CommentManagement/CM.Applicaion/CommentManagement.Application/CommentManagement.Application.csproj CommentManagement/CM.Applicaion/CommentManagement.Application/
-COPY CommentManagement/CM.Applicaion/CommentManagement.Application.Contract/CommentManagement.Application.Contract.csproj CommentManagement/CM.Applicaion/CommentManagement.Application.Contract/
-COPY CommentManagement/CM.Infrastructure/CommentManagement.Infrastructure.EFCore/CommentManagement.Infrastructure.EFCore.csproj CommentManagement/CM.Infrastructure/CommentManagement.Infrastructure.EFCore/
-COPY CommentManagement/CM.Infrastructure/CommentManagement.Configuration/CommentManagement.Configuration.csproj CommentManagement/CM.Infrastructure/CommentManagement.Configuration/
-COPY DiscountManagement/DM.Domain/DiscountManagement.Domain/DiscountManagement.Domain.csproj DiscountManagement/DM.Domain/DiscountManagement.Domain/
-COPY DiscountManagement/DM.Application/DiscountManagement.Application/DiscountManagement.Application.csproj DiscountManagement/DM.Application/DiscountManagement.Application/
-COPY DiscountManagement/DM.Application/DIscountManagement.Application.Contract/DiscountManagement.Application.Contract.csproj DiscountManagement/DM.Application/DIscountManagement.Application.Contract/
-COPY DiscountManagement/DM.Infrastructure/DiscountManagement.Infrastructure.EFCore/DiscountManagement.Infrastructure.EFCore.csproj DiscountManagement/DM.Infrastructure/DiscountManagement.Infrastructure.EFCore/
-COPY DiscountManagement/DM.Infrastructure/DiscountManagement.Configuration/DiscountManagement.Configuration.csproj DiscountManagement/DM.Infrastructure/DiscountManagement.Configuration/
-COPY InventoryManagement/IM.Domain/InventoryManagement.Domain/InventoryManagement.Domain.csproj InventoryManagement/IM.Domain/InventoryManagement.Domain/
-COPY InventoryManagement/IM.Application/InventoryManagement.Application/InventoryManagement.Application.csproj InventoryManagement/IM.Application/InventoryManagement.Application/
-COPY InventoryManagement/IM.Application/InventoryManagement.Application.Contract/InventoryManagement.Application.Contract.csproj InventoryManagement/IM.Application/InventoryManagement.Application.Contract/
-COPY InventoryManagement/IM.Infrastructure/InventoryManagement.Infrastructure.EFCore/InventoryManagement.Infrastructure.EFCore.csproj InventoryManagement/IM.Infrastructure/InventoryManagement.Infrastructure.EFCore/
-COPY InventoryManagement/IM.Infrastructure/InventoryManagement.Configuration/InventoryManagement.Configuration.csproj InventoryManagement/IM.Infrastructure/InventoryManagement.Configuration/
-COPY Shopmanagement/SM.Domain/ShopManagement.Domain/ShopManagement.Domain.csproj Shopmanagement/SM.Domain/ShopManagement.Domain/
-COPY Shopmanagement/SM.Application/ShopManagement.Application/ShopManagement.Application.csproj Shopmanagement/SM.Application/ShopManagement.Application/
-COPY Shopmanagement/SM.Application/ShopManagement.Application.Contract/ShopManagement.Application.Contract.csproj Shopmanagement/SM.Application/ShopManagement.Application.Contract/
-COPY Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.EFCore/ShopManagement.Infrastructure.EFCore.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.EFCore/
-COPY Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.AccountAcl/ShopManagement.Infrastructure.AccountAcl.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.AccountAcl/
-COPY Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.InventoryAcl/ShopManagement.Infrastructure.InventoryAcl.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Infrastructure.InventoryAcl/
-COPY Shopmanagement/SM.Infrastructure/ShopManagement.Configuration/ShopManagement.Configuration.csproj Shopmanagement/SM.Infrastructure/ShopManagement.Configuration/
+# Shared build settings and central package versions, then only the project files the API needs,
+# so the restore layer stays cached until a dependency changes.
+COPY Directory.Build.props Directory.Packages.props ./
+COPY src/BuildingBlocks/LampShade.BuildingBlocks.Domain/*.csproj src/BuildingBlocks/LampShade.BuildingBlocks.Domain/
+COPY src/BuildingBlocks/LampShade.BuildingBlocks.Application/*.csproj src/BuildingBlocks/LampShade.BuildingBlocks.Application/
+COPY src/BuildingBlocks/LampShade.BuildingBlocks.Infrastructure/*.csproj src/BuildingBlocks/LampShade.BuildingBlocks.Infrastructure/
+COPY src/Host/LampShade.Api/*.csproj src/Host/LampShade.Api/
+COPY src/Modules/Account/AccountManagement.Contracts/*.csproj src/Modules/Account/AccountManagement.Contracts/
+COPY src/Modules/Account/AccountManagement.Domain/*.csproj src/Modules/Account/AccountManagement.Domain/
+COPY src/Modules/Account/AccountManagement.Application/*.csproj src/Modules/Account/AccountManagement.Application/
+COPY src/Modules/Account/AccountManagement.Infrastructure/*.csproj src/Modules/Account/AccountManagement.Infrastructure/
+COPY src/Modules/Account/AccountManagement.Presentation/*.csproj src/Modules/Account/AccountManagement.Presentation/
+COPY src/Modules/Blog/BlogManagement.Contracts/*.csproj src/Modules/Blog/BlogManagement.Contracts/
+COPY src/Modules/Blog/BlogManagement.Domain/*.csproj src/Modules/Blog/BlogManagement.Domain/
+COPY src/Modules/Blog/BlogManagement.Application/*.csproj src/Modules/Blog/BlogManagement.Application/
+COPY src/Modules/Blog/BlogManagement.Infrastructure/*.csproj src/Modules/Blog/BlogManagement.Infrastructure/
+COPY src/Modules/Blog/BlogManagement.Presentation/*.csproj src/Modules/Blog/BlogManagement.Presentation/
+COPY src/Modules/Comment/CommentManagement.Contracts/*.csproj src/Modules/Comment/CommentManagement.Contracts/
+COPY src/Modules/Comment/CommentManagement.Domain/*.csproj src/Modules/Comment/CommentManagement.Domain/
+COPY src/Modules/Comment/CommentManagement.Application/*.csproj src/Modules/Comment/CommentManagement.Application/
+COPY src/Modules/Comment/CommentManagement.Infrastructure/*.csproj src/Modules/Comment/CommentManagement.Infrastructure/
+COPY src/Modules/Comment/CommentManagement.Presentation/*.csproj src/Modules/Comment/CommentManagement.Presentation/
+COPY src/Modules/Discount/DiscountManagement.Contracts/*.csproj src/Modules/Discount/DiscountManagement.Contracts/
+COPY src/Modules/Discount/DiscountManagement.Domain/*.csproj src/Modules/Discount/DiscountManagement.Domain/
+COPY src/Modules/Discount/DiscountManagement.Application/*.csproj src/Modules/Discount/DiscountManagement.Application/
+COPY src/Modules/Discount/DiscountManagement.Infrastructure/*.csproj src/Modules/Discount/DiscountManagement.Infrastructure/
+COPY src/Modules/Discount/DiscountManagement.Presentation/*.csproj src/Modules/Discount/DiscountManagement.Presentation/
+COPY src/Modules/Inventory/InventoryManagement.Contracts/*.csproj src/Modules/Inventory/InventoryManagement.Contracts/
+COPY src/Modules/Inventory/InventoryManagement.Domain/*.csproj src/Modules/Inventory/InventoryManagement.Domain/
+COPY src/Modules/Inventory/InventoryManagement.Application/*.csproj src/Modules/Inventory/InventoryManagement.Application/
+COPY src/Modules/Inventory/InventoryManagement.Infrastructure/*.csproj src/Modules/Inventory/InventoryManagement.Infrastructure/
+COPY src/Modules/Inventory/InventoryManagement.Presentation/*.csproj src/Modules/Inventory/InventoryManagement.Presentation/
+COPY src/Modules/Shop/ShopManagement.Contracts/*.csproj src/Modules/Shop/ShopManagement.Contracts/
+COPY src/Modules/Shop/ShopManagement.Domain/*.csproj src/Modules/Shop/ShopManagement.Domain/
+COPY src/Modules/Shop/ShopManagement.Application/*.csproj src/Modules/Shop/ShopManagement.Application/
+COPY src/Modules/Shop/ShopManagement.Infrastructure/*.csproj src/Modules/Shop/ShopManagement.Infrastructure/
+COPY src/Modules/Shop/ShopManagement.Presentation/*.csproj src/Modules/Shop/ShopManagement.Presentation/
 
-RUN dotnet restore LampShade.Api/LampShade.Api.csproj
+RUN dotnet restore src/Host/LampShade.Api/LampShade.Api.csproj
 
 # Stage 2: Build and publish
 FROM restore AS build
 ARG BUILD_CONFIG=Release
-COPY . .
-RUN dotnet build LampShade.Api/LampShade.Api.csproj -c ${BUILD_CONFIG} --no-restore
-RUN dotnet publish LampShade.Api/LampShade.Api.csproj -c ${BUILD_CONFIG} -o /app/publish --no-restore
+COPY src/ src/
+RUN dotnet publish src/Host/LampShade.Api/LampShade.Api.csproj -c ${BUILD_CONFIG} -o /app/publish --no-restore /p:UseAppHost=false
 
 # Stage 3: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime

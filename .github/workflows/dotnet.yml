@@ -1,5 +1,6 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+# Builds the modular monolith and runs every test suite:
+# unit tests per module, architecture tests that guard module boundaries,
+# and integration tests that boot all modules against PostgreSQL (Testcontainers, Docker is preinstalled on ubuntu-latest).
 
 name: .NET
 
@@ -19,10 +20,14 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 10.0.x
     - name: Restore dependencies
       run: dotnet restore LampShade/LampShade.sln
     - name: Build
       run: dotnet build LampShade/LampShade.sln --no-restore
-    - name: Test
-      run: dotnet test LampShade/LampShade.sln --no-build --verbosity normal
+    - name: Unit tests
+      run: dotnet test LampShade/LampShade.sln --no-build --verbosity normal --filter "FullyQualifiedName!~LampShade.IntegrationTests&FullyQualifiedName!~LampShade.ArchitectureTests"
+    - name: Architecture tests
+      run: dotnet test LampShade/tests/LampShade.ArchitectureTests --no-build --verbosity normal
+    - name: Integration tests
+      run: dotnet test LampShade/tests/LampShade.IntegrationTests --no-build --verbosity normal

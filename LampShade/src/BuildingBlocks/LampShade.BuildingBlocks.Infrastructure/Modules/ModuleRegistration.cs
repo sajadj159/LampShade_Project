@@ -22,6 +22,7 @@ public static class ModuleRegistration
         {
             cfg.RegisterServicesFromAssemblies(modules.SelectMany(module => module.HandlerAssemblies).Distinct().ToArray());
             cfg.AddOpenBehavior(typeof(UnitOfWorkPipelineBehavior<,>));
+            cfg.NotificationPublisherType = typeof(IsolatedNotificationPublisher);
         });
         return services;
     }

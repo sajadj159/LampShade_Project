@@ -3,7 +3,7 @@ services:
     image: ${DOCKER_REGISTRY-}lampshadeapi
     build:
       context: .
-      dockerfile: LampShade.Api/Dockerfile
+      dockerfile: src/Host/LampShade.Api/Dockerfile
     ports:
       - "5002:8080"
     environment:
@@ -13,6 +13,9 @@ services:
       - ObjectStorage__BucketName=lampshade-images
       - ObjectStorage__AccessKey=${OBJECT_STORAGE_ACCESS_KEY:-lampshade-dev-access}
       - ObjectStorage__SecretKey=${OBJECT_STORAGE_SECRET_KEY:-lampshade-dev-secret}
+      - Account__BootstrapAdmin__UserName=${BOOTSTRAP_ADMIN_USERNAME:-admin}
+      - Account__BootstrapAdmin__Password=${BOOTSTRAP_ADMIN_PASSWORD:-Admin@12345}
+      - Account__BootstrapAdmin__Mobile=${BOOTSTRAP_ADMIN_MOBILE:-09000000000}
     depends_on:
       postgres:
         condition: service_healthy

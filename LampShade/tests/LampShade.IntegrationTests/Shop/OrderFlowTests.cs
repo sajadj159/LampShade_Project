@@ -86,6 +86,39 @@ public class OrderFlowTests(ModularMonolithFixture app)
     }
 
     [Fact]
+    public async Task FailingSubscriber_DoesNotBlockOtherModules_AndIsRetriedWithoutRepeatingTheRest()
+    {
+        var product = await app.ProductAsync();
+        var inventory = await app.StockAsync(product.Id, 100_000, 4);
+        app.Auth.SignInAs(await CustomerAsync(mobile: "09124445566"), Roles.SystemUser);
+        var placed = await app.SendAsync(new PlaceOrderCommand { PaymentMethod = CashOnDelivery, Items = [new CartItem { Id = product.Id, Count = 1 }] });
+        app.Auth.SignInAs(1, Roles.Administrator);
+        await app.SendAsync(new ApproveCashOnDeliveryCommand { OrderId = placed.OrderId });
+
+        app.Sms.IsDown = true;
+        try
+        {
+            await app.ProcessOutboxAsync<ShopContext>();
+        }
+        finally
+        {
+            app.Sms.IsDown = false;
+        }
+
+        // Inventory reacted although Account's SMS failed; the event stays pending with the error.
+        (await CurrentStockAsync(inventory.Id)).Should().Be(3);
+        var pending = await app.WithAsync<ShopContext, OutboxMessage>(c => c.Set<OutboxMessage>().OrderByDescending(x => x.OccurredOn).FirstAsync(CancellationToken));
+        pending.ProcessedOn.Should().BeNull();
+        pending.Error.Should().Contain("SMS provider unavailable");
+
+        await app.ProcessOutboxAsync<ShopContext>();
+
+        (await CurrentStockAsync(inventory.Id)).Should().Be(3);
+        app.Sms.Messages.Should().ContainSingle(x => x.Number == "09124445566");
+        (await app.WithAsync<ShopContext, DateTime?>(c => c.Set<OutboxMessage>().Where(x => x.Id == pending.Id).Select(x => x.ProcessedOn).SingleAsync(CancellationToken))).Should().NotBeNull();
+    }
+
+    [Fact]
     public async Task ApproveCashOnDelivery_FailsWhenStockRanOut()
     {
         var product = await app.ProductAsync();

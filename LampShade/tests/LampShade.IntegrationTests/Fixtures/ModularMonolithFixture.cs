@@ -53,8 +53,10 @@ public sealed class ModularMonolithFixture : IAsyncLifetime
         services.AddSingleton<IFileUploader, TestFileUploader>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
         services.AddSingleton<IHtmlSanitizer, HtmlSanitizerService>();
+        // Account is registered first on purpose: its OrderPaid subscriber then runs before Inventory's,
+        // which is what the "one failing subscriber does not block the others" test needs.
         services.AddModules(configuration,
-            new ShopModule(), new DiscountModule(), new InventoryModule(), new BlogModule(), new CommentModule(), new AccountModule());
+            new AccountModule(), new ShopModule(), new DiscountModule(), new InventoryModule(), new BlogModule(), new CommentModule());
 
         Services = services.BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true });
         await Services.InitializeModulesAsync();
