@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <InternalsVisibleTo Include="CommentManagement.Infrastructure" />
+    <InternalsVisibleTo Include="CommentManagement.Tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\LampShade.BuildingBlocks.Application\LampShade.BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\CommentManagement.Domain\CommentManagement.Domain.csproj" />
+    <ProjectReference Include="..\CommentManagement.Contracts\CommentManagement.Contracts.csproj" />
+  </ItemGroup>
+</Project>

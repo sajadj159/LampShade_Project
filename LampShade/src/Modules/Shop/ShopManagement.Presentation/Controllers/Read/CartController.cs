@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Queries.Cart.ComputeCart;
+using ShopManagement.Application.ReadModel.Queries.Cart.ComputeCart;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Read;
+namespace ShopManagement.Presentation.Controllers.Read;
 
 [ApiController]
 [Route("api/read/[controller]")]

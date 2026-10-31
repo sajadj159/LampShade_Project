@@ -1,9 +1,8 @@
 #nullable enable
 
-using AccountManagement.Application.Contracts.AC.Account;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 
 namespace AccountManagement.Application.Contracts.Commands.Accounts.Register;
 

@@ -3,20 +3,20 @@ using System.Threading.Tasks;
 #nullable enable
 
 using InventoryManagement.Application.Contract.AC.Inventory;
-using InventoryManagement.Domain.InventoryAgg;
 using MediatR;
+using InventoryManagement.Application.ReadModel.Inventory;
 
-using LampShade.ReadModel.Contracts.Queries.Inventories.SearchInventories;
+using InventoryManagement.Application.ReadModel.Queries.Inventories.SearchInventories;
 
-namespace LampShade.ReadModel.Application.Features.Inventories.Queries.SearchInventories;
+namespace InventoryManagement.Application.ReadModel.Features.Inventories.Queries.SearchInventories;
 
 
 
 public class SearchInventoriesQueryHandler : IRequestHandler<SearchInventoriesQuery, List<InventoryViewModel>>
 {
-    private readonly IInventoryRepository _repository;
+    private readonly IInventoryQuery _repository;
 
-    public SearchInventoriesQueryHandler(IInventoryRepository repository)
+    public SearchInventoriesQueryHandler(IInventoryQuery repository)
     {
         _repository = repository;
     }
@@ -28,6 +28,6 @@ public class SearchInventoriesQueryHandler : IRequestHandler<SearchInventoriesQu
             ProductId = request.ProductId ?? 0,
             InStock = request.InStock ?? false
         };
-        return Task.FromResult(_repository.Search(searchModel));
+        return _repository.SearchAsync(searchModel, cancellationToken);
     }
 }

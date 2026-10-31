@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace _0_Framework.Application
+namespace LampShade.BuildingBlocks.Application
 {
     public class CodeGenerator
     {

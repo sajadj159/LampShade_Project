@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.Account
+namespace AccountManagement.Application.ReadModel.Account
 {
     public class AccountQueryModel
     {

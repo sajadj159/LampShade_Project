@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using _0_Framework.Application;
-using ShopManagement.Application.Contract.A.Product;
+using LampShade.BuildingBlocks.Application;
 
 namespace DiscountManagement.Application.Contract.AC.CustomerDiscount
 {
@@ -20,6 +19,5 @@ namespace DiscountManagement.Application.Contract.AC.CustomerDiscount
         public string EndDate { get; set; }
 
         public string Reason { get; set; }
-        public List<ProductViewModel> Products { get; set; }
     }
 }

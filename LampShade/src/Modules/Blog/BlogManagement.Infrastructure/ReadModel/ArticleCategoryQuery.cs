@@ -1,13 +1,13 @@
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using BlogManagement.Domain.ArticleAgg;
 using BlogManagement.Domain.ArticleCategoryAgg;
 using BlogManagement.Infrastructure.EFCore;
-using LampShade.ReadModel.Contracts.Article;
-using LampShade.ReadModel.Contracts.ArticleCategory;
-using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
+using BlogManagement.Application.ReadModel.Article;
+using BlogManagement.Application.ReadModel.ArticleCategory;
+using BlogManagement.Application.ReadModel.ArticleCategories.Dto;
 using Microsoft.EntityFrameworkCore;
 
-namespace LampShade.ReadModel.Application.Query;
+namespace BlogManagement.Infrastructure.ReadModel;
 
 public class ArticleCategoryQuery(BlogContext context) : IArticleCategoryQuery
 {

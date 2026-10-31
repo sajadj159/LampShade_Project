@@ -1,20 +1,17 @@
-using System.Threading;
-using System.Threading.Tasks;
-using _0_Framework.Repository;
-using ShopManagement.Application.Contracts.Commands.Orders.ApproveCashOnDelivery;
-using ShopManagement.Application.Contracts.Commands.Orders.ApprovePaymentProof;
-using ShopManagement.Application.Contracts.Commands.Orders.CancelOrder;
-using ShopManagement.Application.Contracts.Commands.Orders.PaymentSucceeded;
-using ShopManagement.Application.Contracts.Commands.Orders.PlaceOrder;
-using ShopManagement.Application.Contracts.Commands.Orders.UploadPaymentProof;
-using LampShade.ReadModel.Contracts.Queries.Orders.GetOrderAmount;
-using LampShade.ReadModel.Contracts.Queries.Orders.GetOrderItems;
-using LampShade.ReadModel.Contracts.Queries.Orders.SearchOrders;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ShopManagement.Application.Contracts.Commands.Orders.ApproveCashOnDelivery;
+using ShopManagement.Application.Contracts.Commands.Orders.ApprovePaymentProof;
+using ShopManagement.Application.Contracts.Commands.Orders.CancelOrder;
+using ShopManagement.Application.Contracts.Commands.Orders.PlaceOrder;
+using ShopManagement.Application.Contracts.Commands.Orders.UploadPaymentProof;
+using ShopManagement.Application.ReadModel.Queries.Orders.GetOrderAmount;
+using ShopManagement.Application.ReadModel.Queries.Orders.GetOrderItems;
+using ShopManagement.Application.ReadModel.Queries.Orders.SearchOrders;
 
-namespace LampShade.Api.Controllers.Write;
+namespace ShopManagement.Presentation.Controllers.Write;
 
 [Authorize]
 [ApiController]
@@ -24,6 +21,7 @@ public class OrderController : ControllerBase
     private readonly IMediator _mediator;
     public OrderController(IMediator mediator) => _mediator = mediator;
 
+    /// <summary>Places an order from product ids and counts; the server prices it again and checks stock.</summary>
     [HttpPost]
     public async Task<IActionResult> PlaceOrder(PlaceOrderCommand command)
     {
@@ -43,9 +41,6 @@ public class OrderController : ControllerBase
             ? BadRequest(new { Message = "The order cannot be approved." })
             : Ok(new { IssueTrackingNumber = trackingNumber });
     }
-    [HttpPost("{orderId}/payment-succeeded")]
-    public async Task<IActionResult> PaymentSucceeded(long orderId, [FromQuery] long refId)
-        => Ok(new { IssueTrackingNumber = await _mediator.Send(new PaymentSucceededCommand { OrderId = orderId, RefId = refId }) });
 
     [HttpPost("{id}/payment-proof")]
     public async Task<IActionResult> UploadPaymentProof(long id, [FromForm] UploadPaymentProofCommand command)
@@ -65,7 +60,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost("{id}/cancel")]
-    public async Task<IActionResult> Cancel(long id) { await _mediator.Send(new CancelOrderCommand { Id = id }); return Ok(); }
+    public async Task<IActionResult> Cancel(long id) => Ok(await _mediator.Send(new CancelOrderCommand { Id = id }));
 
     [Authorize(Roles = Roles.Administrator)]
     [HttpGet("search")]

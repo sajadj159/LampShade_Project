@@ -1,40 +1,20 @@
-using System.Threading;
-using System.Threading.Tasks;
-#nullable enable
-
-using ShopManagement.Application.Contract.A.Slide;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using _0_Framework.Application;
-
 using ShopManagement.Application.Contracts.Commands.Slides.CreateSlide;
+using ShopManagement.Domain.SlideAgg;
 
 namespace ShopManagement.Application.Features.Slides.Commands.CreateSlide;
 
-
-
-public class CreateSlideCommandHandler : IRequestHandler<CreateSlideCommand, OperationResult>
+public class CreateSlideCommandHandler(ISlideRepository slides, IFileUploader uploader) : IRequestHandler<CreateSlideCommand, OperationResult>
 {
-    private readonly ISlideApplication _application;
-
-    public CreateSlideCommandHandler(ISlideApplication application)
-    {
-        _application = application;
-    }
-
     public async Task<OperationResult> Handle(CreateSlideCommand request, CancellationToken cancellationToken)
     {
-        var command = new ShopManagement.Application.Contract.A.Slide.CreateSlide
-        {
-            PictureUrl = request.PictureUrl,
-            PictureTitle = request.PictureTitle,
-            PictureAlt = request.PictureAlt,
-            Heading = request.Heading,
-            Title = request.Title,
-            Text = request.Text,
-            Link = request.Link,
-            BtnText = request.BtnText
-        };
-        return await _application.CreateAsync(command, cancellationToken);
+        var operation = new OperationResult();
+        if (await slides.ExistAsync(x => x.PictureTitle == request.PictureTitle, cancellationToken))
+            return operation.Failed(ApplicationMessages.DuplicatedRecord);
+
+        slides.Add(new Domain.SlideAgg.Slide(uploader.Upload(request.PictureUrl, "Slides"), request.PictureAlt, request.PictureTitle,
+            request.Heading, request.Title, request.Text, request.BtnText, request.Link));
+        return operation.Succeeded();
     }
 }

@@ -1,6 +1,5 @@
-using CommentManagement.Application.Contract.A.Comment;
 using MediatR;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 
 namespace CommentManagement.Application.Contracts.Commands.Comments.ConfirmComment;
 

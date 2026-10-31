@@ -1,11 +1,11 @@
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using AccountManagement.Infrastructure.EFCore;
-using LampShade.ReadModel.Contracts.Account;
-using LampShade.ReadModel.Contracts.Accounts.Dto;
-using LampShade.ReadModel.Contracts.Roles.Dto;
+using AccountManagement.Application.ReadModel.Account;
+using AccountManagement.Application.ReadModel.Accounts.Dto;
+using AccountManagement.Application.ReadModel.Roles.Dto;
 using Microsoft.EntityFrameworkCore;
 
-namespace LampShade.ReadModel.Application.Query;
+namespace AccountManagement.Infrastructure.ReadModel;
 
 public class AccountQuery(AccountContext context) : IAccountQuery
 {

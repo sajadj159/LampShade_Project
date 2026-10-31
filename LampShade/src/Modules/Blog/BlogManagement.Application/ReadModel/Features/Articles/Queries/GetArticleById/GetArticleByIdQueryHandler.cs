@@ -1,25 +1,11 @@
-using System.Threading;
-using System.Threading.Tasks;
 using BlogManagement.Application.Contract.AC.Article;
+using BlogManagement.Application.ReadModel.Article;
+using BlogManagement.Application.ReadModel.Queries.Articles.GetArticleById;
 using MediatR;
 
-using LampShade.ReadModel.Contracts.Queries.Articles.GetArticleById;
+namespace BlogManagement.Application.ReadModel.Features.Articles.Queries.GetArticleById;
 
-namespace LampShade.ReadModel.Application.Features.Articles.Queries.GetArticleById;
-
-
-
-public class GetArticleByIdQueryHandler : IRequestHandler<GetArticleByIdQuery, EditArticle>
+public class GetArticleByIdQueryHandler(IArticleQuery query) : IRequestHandler<GetArticleByIdQuery, EditArticle>
 {
-    private readonly IArticleApplication _articleApplication;
-
-    public GetArticleByIdQueryHandler(IArticleApplication articleApplication)
-    {
-        _articleApplication = articleApplication;
-    }
-
-    public Task<EditArticle> Handle(GetArticleByIdQuery request, CancellationToken cancellationToken)
-    {
-        return Task.FromResult(_articleApplication.GetDetails(request.Id));
-    }
+    public Task<EditArticle> Handle(GetArticleByIdQuery request, CancellationToken cancellationToken) => query.GetDetailsAsync(request.Id, cancellationToken);
 }

@@ -1,18 +1,19 @@
+using LampShade.BuildingBlocks.Application;
 using System.Threading;
 using System.Threading.Tasks;
 using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.DefineColleagueDiscount;
 using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.EditColleagueDiscount;
 using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.RemoveColleagueDiscount;
 using DiscountManagement.Application.Contracts.Commands.ColleagueDiscounts.RestoreColleagueDiscount;
-using LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.GetColleagueDiscountById;
-using LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.SearchColleagueDiscounts;
+using DiscountManagement.Application.ReadModel.Queries.ColleagueDiscounts.GetColleagueDiscountById;
+using DiscountManagement.Application.ReadModel.Queries.ColleagueDiscounts.SearchColleagueDiscounts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace DiscountManagement.Presentation.Controllers.Write;
 
-[Authorize]
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ColleagueDiscountController : ControllerBase

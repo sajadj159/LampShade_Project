@@ -1,6 +1,6 @@
 using MediatR;
-using LampShade.ReadModel.Contracts.Article;
+using BlogManagement.Application.ReadModel.Article;
 
-namespace LampShade.ReadModel.Contracts.Queries.Articles.LatestArticles;
+namespace BlogManagement.Application.ReadModel.Queries.Articles.LatestArticles;
 
 public class LatestArticlesQuery : IRequest<List<ArticleQueryModel>> { }

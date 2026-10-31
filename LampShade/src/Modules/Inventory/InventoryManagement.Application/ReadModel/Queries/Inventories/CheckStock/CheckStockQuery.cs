@@ -1,7 +1,7 @@
-using LampShade.ReadModel.Contracts.Inventory;
+using InventoryManagement.Application.ReadModel.Inventory;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Inventories.CheckStock;
+namespace InventoryManagement.Application.ReadModel.Queries.Inventories.CheckStock;
 
 public class CheckStockQuery : IRequest<StockStatus>
 {

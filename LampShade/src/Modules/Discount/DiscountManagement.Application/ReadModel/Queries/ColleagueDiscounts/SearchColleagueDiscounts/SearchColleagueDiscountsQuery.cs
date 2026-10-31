@@ -3,7 +3,7 @@
 using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.SearchColleagueDiscounts;
+namespace DiscountManagement.Application.ReadModel.Queries.ColleagueDiscounts.SearchColleagueDiscounts;
 
 public class SearchColleagueDiscountsQuery : IRequest<List<ColleagueDiscountViewModel>>
 {

@@ -1,13 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using BlogManagement.Application.Contracts.Commands.ArticleCategories.CreateArticleCategory;
 using BlogManagement.Domain.ArticleCategoryAgg;
 using MediatR;
 
 namespace BlogManagement.Application.Features.ArticleCategories.Commands.CreateArticleCategory;
 
-public class CreateArticleCategoryCommandHandler(IArticleCategoryRepository articleCategoryRepository, IFIleUploader uploader) : IRequestHandler<CreateArticleCategoryCommand, OperationResult>
+public class CreateArticleCategoryCommandHandler(IArticleCategoryRepository articleCategoryRepository, IFileUploader uploader) : IRequestHandler<CreateArticleCategoryCommand, OperationResult>
 {
     public async Task<OperationResult> Handle(CreateArticleCategoryCommand request, CancellationToken cancellationToken)
     {

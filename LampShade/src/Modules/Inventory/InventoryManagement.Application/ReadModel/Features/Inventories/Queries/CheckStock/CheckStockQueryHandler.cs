@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Inventory;
+using InventoryManagement.Application.ReadModel.Inventory;
 using MediatR;
 
-using LampShade.ReadModel.Contracts.Queries.Inventories.CheckStock;
+using InventoryManagement.Application.ReadModel.Queries.Inventories.CheckStock;
 
-namespace LampShade.ReadModel.Application.Features.Inventories.Queries.CheckStock;
+namespace InventoryManagement.Application.ReadModel.Features.Inventories.Queries.CheckStock;
 
 
 

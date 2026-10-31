@@ -1,9 +1,9 @@
 #nullable enable
 
-using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
+using BlogManagement.Application.ReadModel.ArticleCategories.Dto;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.ArticleCategories.SearchArticleCategories;
+namespace BlogManagement.Application.ReadModel.Queries.ArticleCategories.SearchArticleCategories;
 
 public class SearchArticleCategoriesQuery : IRequest<List<ArticleCategoryViewModel>>
 {

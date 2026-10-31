@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.DefineCustomerDiscount;
 using DiscountManagement.Domain.CustomerDiscountAgg;
 using MediatR;

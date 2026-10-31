@@ -1,5 +1,5 @@
 using AwesomeAssertions;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 using ShopManagement.Domain.SlideAgg;
 using Xunit;
 

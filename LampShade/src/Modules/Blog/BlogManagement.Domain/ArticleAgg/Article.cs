@@ -1,5 +1,5 @@
 ﻿using System;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 using BlogManagement.Domain.ArticleCategoryAgg;
 
 namespace BlogManagement.Domain.ArticleAgg

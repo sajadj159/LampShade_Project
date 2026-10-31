@@ -1,7 +1,7 @@
 using MediatR;
-using LampShade.ReadModel.Contracts.Order;
+using ShopManagement.Application.ReadModel.Order;
 
-namespace LampShade.ReadModel.Contracts.Queries.Orders.GetOrdersByAccount;
+namespace ShopManagement.Application.ReadModel.Queries.Orders.GetOrdersByAccount;
 
 public class GetOrdersByAccountQuery : IRequest<List<OrderQueryModel>>
 {

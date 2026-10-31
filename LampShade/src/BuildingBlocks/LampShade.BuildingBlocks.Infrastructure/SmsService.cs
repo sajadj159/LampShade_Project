@@ -6,7 +6,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 
-namespace _0_Framework.Application.SMS
+namespace LampShade.BuildingBlocks.Infrastructure
 {
     public class SmsService : ISmsService
     {

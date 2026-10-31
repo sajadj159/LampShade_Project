@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Testcontainers.PostgreSql" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\BuildingBlocks\LampShade.BuildingBlocks.Infrastructure\LampShade.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Account\AccountManagement.Infrastructure\AccountManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Blog\BlogManagement.Infrastructure\BlogManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Comment\CommentManagement.Infrastructure\CommentManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Discount\DiscountManagement.Infrastructure\DiscountManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Inventory\InventoryManagement.Infrastructure\InventoryManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Shop\ShopManagement.Infrastructure\ShopManagement.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

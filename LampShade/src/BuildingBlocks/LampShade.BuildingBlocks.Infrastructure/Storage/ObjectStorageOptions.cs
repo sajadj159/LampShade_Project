@@ -1,4 +1,4 @@
-namespace LampShade.Api.Storage;
+namespace LampShade.BuildingBlocks.Infrastructure;
 
 public sealed class ObjectStorageOptions
 {

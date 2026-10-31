@@ -1,13 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using AccountManagement.Application.Contracts.Commands.Accounts.Edit;
 using AccountManagement.Domain.AccountAgg;
 using MediatR;
 
 namespace AccountManagement.Application.Features.Accounts.Commands.Edit;
 
-public class EditAccountCommandHandler(IAccountRepository accounts, IFIleUploader uploader) : IRequestHandler<EditAccountCommand, OperationResult>
+public class EditAccountCommandHandler(IAccountRepository accounts, IFileUploader uploader) : IRequestHandler<EditAccountCommand, OperationResult>
 {
     public async Task<OperationResult> Handle(EditAccountCommand request, CancellationToken cancellationToken)
     {

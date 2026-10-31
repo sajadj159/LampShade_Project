@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 using AccountManagement.Domain.RoleAgg.Contracts;
 
 namespace AccountManagement.Domain.RoleAgg

@@ -1,10 +1,11 @@
-using _0_Framework.Application;
+using CommentManagement.Contracts;
+using LampShade.BuildingBlocks.Application;
 using CommentManagement.Infrastructure.EFCore;
-using LampShade.ReadModel.Contracts.Comment;
-using LampShade.ReadModel.Contracts.Comments.Dto;
+using CommentManagement.Application.ReadModel.Comment;
+using CommentManagement.Application.ReadModel.Comments.Dto;
 using Microsoft.EntityFrameworkCore;
 
-namespace LampShade.ReadModel.Application.Query;
+namespace CommentManagement.Infrastructure.ReadModel;
 
 public class CommentQuery(CommentContext commentContext) : ICommentQuery
 {

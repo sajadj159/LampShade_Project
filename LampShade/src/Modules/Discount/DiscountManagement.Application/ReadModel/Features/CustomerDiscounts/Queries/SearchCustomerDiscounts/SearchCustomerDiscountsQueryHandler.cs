@@ -4,19 +4,19 @@ using System.Threading.Tasks;
 
 using DiscountManagement.Application.Contract.AC.CustomerDiscount;
 using MediatR;
-using DiscountManagement.Domain.CustomerDiscountAgg;
+using DiscountManagement.Application.ReadModel.Discounts;
 
-using LampShade.ReadModel.Contracts.Queries.CustomerDiscounts.SearchCustomerDiscounts;
+using DiscountManagement.Application.ReadModel.Queries.CustomerDiscounts.SearchCustomerDiscounts;
 
-namespace LampShade.ReadModel.Application.Features.CustomerDiscounts.Queries.SearchCustomerDiscounts;
+namespace DiscountManagement.Application.ReadModel.Features.CustomerDiscounts.Queries.SearchCustomerDiscounts;
 
 
 
 public class SearchCustomerDiscountsQueryHandler : IRequestHandler<SearchCustomerDiscountsQuery, List<CustomerDiscountViewmodel>>
 {
-    private readonly ICustomerDiscountRepository _repository;
+    private readonly IDiscountQuery _repository;
 
-    public SearchCustomerDiscountsQueryHandler(ICustomerDiscountRepository repository)
+    public SearchCustomerDiscountsQueryHandler(IDiscountQuery repository)
     {
         _repository = repository;
     }
@@ -29,6 +29,6 @@ public class SearchCustomerDiscountsQueryHandler : IRequestHandler<SearchCustome
             StartDate = request.StartDate,
             EndDate = request.EndDate
         };
-        return Task.FromResult(_repository.Search(searchModel));
+        return _repository.SearchCustomerDiscountsAsync(searchModel, cancellationToken);
     }
 }

@@ -1,9 +1,9 @@
 #nullable enable
 
-using LampShade.ReadModel.Contracts.Comments.Dto;
+using CommentManagement.Application.ReadModel.Comments.Dto;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Comments.SearchComments;
+namespace CommentManagement.Application.ReadModel.Queries.Comments.SearchComments;
 
 public class SearchCommentsQuery : IRequest<List<CommentViewModel>>
 {

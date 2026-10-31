@@ -1,11 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using LampShade.ReadModel.Contracts.Comment;
+using CommentManagement.Application.ReadModel.Comment;
+using CommentManagement.Contracts;
 
-using LampShade.ReadModel.Contracts.Queries.Comments.GetAllComments;
+using CommentManagement.Application.ReadModel.Queries.Comments.GetAllComments;
 
-namespace LampShade.ReadModel.Application.Features.Comments.Queries.GetAllComments;
+namespace CommentManagement.Application.ReadModel.Features.Comments.Queries.GetAllComments;
 
 
 

@@ -3,7 +3,7 @@
 using BlogManagement.Application.Contract.AC.Article;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Articles.SearchArticles;
+namespace BlogManagement.Application.ReadModel.Queries.Articles.SearchArticles;
 
 public class SearchArticlesQuery : IRequest<List<ArticleViewModel>>
 {

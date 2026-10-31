@@ -4,18 +4,19 @@ using System.Threading.Tasks;
 
 using ShopManagement.Application.Contract.A.Product;
 using MediatR;
+using ShopManagement.Application.ReadModel.Admin;
 
-using LampShade.ReadModel.Contracts.Queries.Products.SearchProducts;
+using ShopManagement.Application.ReadModel.Queries.Products.SearchProducts;
 
-namespace LampShade.ReadModel.Application.Features.Products.Queries.SearchProducts;
+namespace ShopManagement.Application.ReadModel.Features.Products.Queries.SearchProducts;
 
 
 
 public class SearchProductsQueryHandler : IRequestHandler<SearchProductsQuery, List<ProductViewModel>>
 {
-    private readonly IProductApplication _application;
+    private readonly IProductReadRepository _application;
 
-    public SearchProductsQueryHandler(IProductApplication application)
+    public SearchProductsQueryHandler(IProductReadRepository application)
     {
         _application = application;
     }

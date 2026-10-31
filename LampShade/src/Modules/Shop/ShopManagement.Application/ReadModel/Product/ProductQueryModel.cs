@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using LampShade.ReadModel.Contracts.Comment;
+using CommentManagement.Contracts;
 
-namespace LampShade.ReadModel.Contracts.Product
+namespace ShopManagement.Application.ReadModel.Product
 {
     public class ProductQueryModel
     {

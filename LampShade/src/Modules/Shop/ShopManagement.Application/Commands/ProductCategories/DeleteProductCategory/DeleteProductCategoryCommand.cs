@@ -1,6 +1,6 @@
 using MediatR;
 using ShopManagement.Application.Contract.ProductCategory;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 
 namespace ShopManagement.Application.Contracts.Commands.ProductCategories.DeleteProductCategory;
 

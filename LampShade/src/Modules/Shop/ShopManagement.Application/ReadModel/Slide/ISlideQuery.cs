@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.Slide;
+namespace ShopManagement.Application.ReadModel.Slide;
 
 public interface ISlideQuery
 {

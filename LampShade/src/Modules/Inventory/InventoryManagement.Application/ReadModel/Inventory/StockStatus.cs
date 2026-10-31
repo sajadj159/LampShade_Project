@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.Inventory
+namespace InventoryManagement.Application.ReadModel.Inventory
 {
     public class StockStatus
     {

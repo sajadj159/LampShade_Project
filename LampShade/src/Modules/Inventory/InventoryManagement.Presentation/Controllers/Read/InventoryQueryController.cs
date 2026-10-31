@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Queries.Inventories.CheckStock;
+using InventoryManagement.Application.ReadModel.Queries.Inventories.CheckStock;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Read;
+namespace InventoryManagement.Presentation.Controllers.Read;
 
 [ApiController]
 [Route("api/read/[controller]")]

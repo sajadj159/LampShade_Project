@@ -1,46 +1,30 @@
-using System.Threading;
-using System.Threading.Tasks;
-#nullable enable
-
-using ShopManagement.Application.Contract.A.Product;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using _0_Framework.Application;
-
 using ShopManagement.Application.Contracts.Commands.Products.EditProduct;
+using ShopManagement.Domain.ProductAgg;
 
 namespace ShopManagement.Application.Features.Products.Commands.EditProduct;
 
-
-
-public class EditProductCommandHandler : IRequestHandler<EditProductCommand, OperationResult>
+public class EditProductCommandHandler(IProductRepository products, IFileUploader uploader, IHtmlSanitizer sanitizer)
+    : IRequestHandler<EditProductCommand, OperationResult>
 {
-    private readonly IProductApplication _application;
-
-    public EditProductCommandHandler(IProductApplication application)
-    {
-        _application = application;
-    }
-
     public async Task<OperationResult> Handle(EditProductCommand request, CancellationToken cancellationToken)
     {
-        var command = new ShopManagement.Application.Contract.A.Product.EditProduct
-        {
-            Id = request.Id,
-            ClearMainPicture = request.ClearMainPicture,
-            Name = request.Name,
-            Code = request.Code,
-            ShortDescription = request.ShortDescription,
-            Description = request.Description,
-            PictureUrl = request.PictureUrl,
-            AdditionalPictures = request.AdditionalPictures,
-            PictureTitle = request.PictureTitle,
-            PictureAlt = request.PictureAlt,
-            Slug = request.Slug,
-            Keywords = request.Keywords,
-            MetaDescription = request.MetaDescription,
-            CategoryId = request.CategoryId
-        };
-        return await _application.EditAsync(command, cancellationToken);
+        var operation = new OperationResult();
+        var product = await products.GetProductWithCategoriesAsync(request.Id, cancellationToken);
+        if (product is null)
+            return operation.Failed(ApplicationMessages.RecordNotFound);
+        if (await products.ExistAsync(x => x.Name == request.Name && x.Id != request.Id, cancellationToken))
+            return operation.Failed(ApplicationMessages.DuplicatedRecord);
+
+        var slug = request.Slug.Slugify();
+        var picturePath = $"{product.Category.Slug}/{slug}";
+        var fileName = uploader.Upload(request.PictureUrl, picturePath);
+        if (request.ClearMainPicture) product.ClearPicture();
+
+        product.Edit(request.Name, request.Code, request.ShortDescription, sanitizer.Sanitize(request.Description), fileName,
+            request.PictureTitle, request.PictureAlt, slug, request.Keywords, request.MetaDescription, request.CategoryId);
+        ProductPictures.AddAdditional(product, request.AdditionalPictures, picturePath, uploader);
+        return operation.Succeeded();
     }
 }

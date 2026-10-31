@@ -1,23 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
-using _0_Framework.Application;
-using _0_Framework.Repository;
-using AccountManagement.Infrastructure.EFCore;
+using LampShade.BuildingBlocks.Application;
+using LampShade.BuildingBlocks.Application;
+using AccountManagement.Contracts;
+using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contract;
 using ShopManagement.Application.Contract.Order;
 using ShopManagement.Domain.OrderAgg;
 
+using ShopManagement.Application.ReadModel.Admin;
+
 namespace ShopManagement.Infrastructure.EFCore.Repository
 {
-    public class OrderRepository : RepositoryBase<long, Order>, IOrderRepository
+    public class OrderRepository : RepositoryBase<long, Order>, IOrderRepository, IOrderReadRepository
     {
         private readonly ShopContext _context;
-        private readonly AccountContext _accountContext;
+        private readonly IAccountModuleApi _accounts;
 
-        public OrderRepository(ShopContext context, AccountContext accountContext):base(context)
+        public OrderRepository(ShopContext context, IAccountModuleApi accounts):base(context)
         {
             _context = context;
-            _accountContext = accountContext;
+            _accounts = accounts;
         }
 
         public double GetAmountBy(long id)
@@ -28,9 +31,8 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
             return 0;
         }
 
-        public List<OrderViewModel> Search(OrderSearchModel searchModel)
+        public async Task<List<OrderViewModel>> SearchAsync(OrderSearchModel searchModel, CancellationToken cancellationToken = default)
         {
-            var accounts = _accountContext.Accounts.Select(x=>new {x.FullName,x.Id}).ToList();
             var queryable = _context.Orders
                 .Select(x => new OrderViewModel
             {
@@ -54,11 +56,12 @@ namespace ShopManagement.Infrastructure.EFCore.Repository
             {
                 queryable = queryable.Where(x => x.AccountId == searchModel.AccountId);
             }
-            var orders= queryable.OrderByDescending(x=>x.Id).ToList();
+            var orders = await queryable.OrderByDescending(x => x.Id).ToListAsync(cancellationToken);
+            var accounts = await _accounts.GetAccountsAsync(orders.Select(x => x.AccountId), cancellationToken);
 
             foreach (var model in orders)
             {
-                   var account = accounts.FirstOrDefault(x => x.Id == model.AccountId);
+                   var account = accounts.GetValueOrDefault(model.AccountId);
                    model.AccountFullName = account?.FullName;
                    model.PaymentMethodName = PaymentMethod.GetBy(model.PaymentMethodId).Name;
             }

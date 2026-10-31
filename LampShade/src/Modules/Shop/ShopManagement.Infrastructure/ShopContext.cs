@@ -1,3 +1,4 @@
+using LampShade.BuildingBlocks.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.ProductAgg;
@@ -8,8 +9,10 @@ using ShopManagement.Infrastructure.EFCore.Mapping;
 
 namespace ShopManagement.Infrastructure.EFCore
 {
-    public class ShopContext : DbContext, _0_Framework.Domain.IDbContext
+    public class ShopContext : DbContext, IDbContext
     {
+        public const string Schema = "shop";
+
         public DbSet<Order> Orders { get; set; }
         public DbSet<Slide> Slides { get; set; }
         public DbSet<ProductPicture> ProductPictures { get; set; }
@@ -18,13 +21,13 @@ namespace ShopManagement.Infrastructure.EFCore
 
         public ShopContext(DbContextOptions<ShopContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var assembly = typeof(ProductCategoryMapping).Assembly;
-            modelBuilder.ApplyConfigurationsFromAssembly(assembly);
+            modelBuilder.HasDefaultSchema(Schema);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductCategoryMapping).Assembly);
+            modelBuilder.ApplyOutboxAndInbox();
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -4,18 +4,19 @@ using System.Threading.Tasks;
 
 using ShopManagement.Application.Contract.A.ProductPicture;
 using MediatR;
+using ShopManagement.Application.ReadModel.Admin;
 
-using LampShade.ReadModel.Contracts.Queries.ProductPictures.SearchProductPictures;
+using ShopManagement.Application.ReadModel.Queries.ProductPictures.SearchProductPictures;
 
-namespace LampShade.ReadModel.Application.Features.ProductPictures.Queries.SearchProductPictures;
+namespace ShopManagement.Application.ReadModel.Features.ProductPictures.Queries.SearchProductPictures;
 
 
 
 public class SearchProductPicturesQueryHandler : IRequestHandler<SearchProductPicturesQuery, List<ProductPictureViewModel>>
 {
-    private readonly IProductPictureApplication _application;
+    private readonly IProductPictureReadRepository _application;
 
-    public SearchProductPicturesQueryHandler(IProductPictureApplication application)
+    public SearchProductPicturesQueryHandler(IProductPictureReadRepository application)
     {
         _application = application;
     }

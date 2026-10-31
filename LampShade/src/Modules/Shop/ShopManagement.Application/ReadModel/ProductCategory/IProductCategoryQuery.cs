@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.ProductCategory;
+namespace ShopManagement.Application.ReadModel.ProductCategory;
 
 public interface IProductCategoryQuery
 {

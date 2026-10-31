@@ -1,5 +1,5 @@
 using AwesomeAssertions;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 using AccountManagement.Domain.RoleAgg;
 using AccountManagement.Domain.RoleAgg.Contracts;
 using Xunit;

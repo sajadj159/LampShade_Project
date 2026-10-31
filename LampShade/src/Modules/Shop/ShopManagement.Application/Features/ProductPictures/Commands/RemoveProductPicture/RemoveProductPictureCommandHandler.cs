@@ -1,26 +1,18 @@
-using System.Threading;
-using System.Threading.Tasks;
-using ShopManagement.Application.Contract.A.ProductPicture;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using _0_Framework.Application;
-
 using ShopManagement.Application.Contracts.Commands.ProductPictures.RemoveProductPicture;
+using ShopManagement.Domain.ProductPictureAgg;
 
 namespace ShopManagement.Application.Features.ProductPictures.Commands.RemoveProductPicture;
 
-
-
-public class RemoveProductPictureCommandHandler : IRequestHandler<RemoveProductPictureCommand, OperationResult>
+public class RemoveProductPictureCommandHandler(IProductPictureRepository pictures) : IRequestHandler<RemoveProductPictureCommand, OperationResult>
 {
-    private readonly IProductPictureApplication _application;
-
-    public RemoveProductPictureCommandHandler(IProductPictureApplication application)
-    {
-        _application = application;
-    }
-
     public async Task<OperationResult> Handle(RemoveProductPictureCommand request, CancellationToken cancellationToken)
     {
-        return await _application.RemoveAsync(request.Id, cancellationToken);
+        var picture = await pictures.GetAsync(request.Id, cancellationToken);
+        if (picture is null)
+            return new OperationResult().Failed(ApplicationMessages.RecordNotFound);
+        picture.Remove();
+        return new OperationResult().Succeeded();
     }
 }

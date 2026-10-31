@@ -2,25 +2,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using DiscountManagement.Application.Contract.AC.CustomerDiscount;
 using MediatR;
-using DiscountManagement.Domain.CustomerDiscountAgg;
+using DiscountManagement.Application.ReadModel.Discounts;
 
-using LampShade.ReadModel.Contracts.Queries.CustomerDiscounts.GetCustomerDiscountById;
+using DiscountManagement.Application.ReadModel.Queries.CustomerDiscounts.GetCustomerDiscountById;
 
-namespace LampShade.ReadModel.Application.Features.CustomerDiscounts.Queries.GetCustomerDiscountById;
+namespace DiscountManagement.Application.ReadModel.Features.CustomerDiscounts.Queries.GetCustomerDiscountById;
 
 
 
 public class GetCustomerDiscountByIdQueryHandler : IRequestHandler<GetCustomerDiscountByIdQuery, EditCustomerDiscount>
 {
-    private readonly ICustomerDiscountRepository _repository;
+    private readonly IDiscountQuery _repository;
 
-    public GetCustomerDiscountByIdQueryHandler(ICustomerDiscountRepository repository)
+    public GetCustomerDiscountByIdQueryHandler(IDiscountQuery repository)
     {
         _repository = repository;
     }
 
     public Task<EditCustomerDiscount> Handle(GetCustomerDiscountByIdQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_repository.GetDetails(request.Id));
+        return _repository.GetCustomerDiscountDetailsAsync(request.Id, cancellationToken);
     }
 }

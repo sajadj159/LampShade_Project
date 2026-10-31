@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using _0_Framework.Application;
-using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccountById;
+using LampShade.BuildingBlocks.Application;
+using AccountManagement.Application.ReadModel.Queries.Accounts.GetAccountById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace AccountManagement.Presentation.Controllers.Write;
 
 [ApiController]
 [Route("api/write/[controller]")]

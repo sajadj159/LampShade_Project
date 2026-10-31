@@ -1,4 +1,4 @@
-﻿namespace _0_Framework.Repository
+﻿namespace LampShade.BuildingBlocks.Application
 {
     public static class Roles
     {

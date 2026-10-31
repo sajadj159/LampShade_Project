@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using Microsoft.Extensions.Options;
 
-namespace _0_Framework.Application
+namespace LampShade.BuildingBlocks.Infrastructure
 {
     public class PasswordHasher : IPasswordHasher
     {

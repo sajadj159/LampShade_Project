@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using InventoryManagement.Application.Contracts.Commands.Inventories.CreateInventory;
 using InventoryManagement.Domain.InventoryAgg;
 using MediatR;

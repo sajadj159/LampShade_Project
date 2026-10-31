@@ -1,7 +1,7 @@
-using LampShade.ReadModel.Contracts.Roles.Dto;
+using AccountManagement.Application.ReadModel.Roles.Dto;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Roles.GetRoleById;
+namespace AccountManagement.Application.ReadModel.Queries.Roles.GetRoleById;
 
 public class GetRoleByIdQuery : IRequest<RoleDto>
 {

@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Queries.Comments.GetAllComments;
+using CommentManagement.Application.ReadModel.Queries.Comments.GetAllComments;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Read;
+namespace CommentManagement.Presentation.Controllers.Read;
 
 [ApiController]
 [Route("api/read/[controller]")]

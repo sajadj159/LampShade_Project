@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace _0_Framework.Application
+namespace LampShade.BuildingBlocks.Application
 {
     public class FileExtensionLimitationAttribute : ValidationAttribute, IClientModelValidator
     {

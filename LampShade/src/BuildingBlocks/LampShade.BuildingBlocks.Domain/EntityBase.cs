@@ -1,6 +1,6 @@
 using System;
 
-namespace _0_Framework.Domain
+namespace LampShade.BuildingBlocks.Domain
 {
     public class EntityBase
     {

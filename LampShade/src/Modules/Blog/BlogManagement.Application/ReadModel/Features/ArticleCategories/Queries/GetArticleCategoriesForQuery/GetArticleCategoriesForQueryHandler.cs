@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using LampShade.ReadModel.Contracts.ArticleCategory;
+using BlogManagement.Application.ReadModel.ArticleCategory;
 
-using QueryRequest = LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoriesForQuery.GetArticleCategoriesForQuery;
+using QueryRequest = BlogManagement.Application.ReadModel.Queries.ArticleCategories.GetArticleCategoriesForQuery.GetArticleCategoriesForQuery;
 
-namespace LampShade.ReadModel.Application.Features.ArticleCategories.Queries.GetArticleCategoriesForQuery;
+namespace BlogManagement.Application.ReadModel.Features.ArticleCategories.Queries.GetArticleCategoriesForQuery;
 
 
 

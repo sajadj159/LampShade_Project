@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <InternalsVisibleTo Include="AccountManagement.Infrastructure" />
+    <InternalsVisibleTo Include="AccountManagement.Tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\LampShade.BuildingBlocks.Application\LampShade.BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\AccountManagement.Domain\AccountManagement.Domain.csproj" />
+    <ProjectReference Include="..\AccountManagement.Contracts\AccountManagement.Contracts.csproj" />
+    <ProjectReference Include="..\..\Shop\ShopManagement.Contracts\ShopManagement.Contracts.csproj" />
+  </ItemGroup>
+</Project>

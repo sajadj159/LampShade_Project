@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using LampShade.ReadModel.Contracts.Article;
+using BlogManagement.Application.ReadModel.Article;
 
-namespace LampShade.ReadModel.Contracts.ArticleCategory
+namespace BlogManagement.Application.ReadModel.ArticleCategory
 {
     public class ArticleCategoryQueryModel
     {

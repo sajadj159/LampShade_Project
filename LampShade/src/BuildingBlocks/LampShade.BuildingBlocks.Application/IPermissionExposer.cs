@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 
-namespace _0_Framework.Repository
+namespace LampShade.BuildingBlocks.Application
 {
     public interface IPermissionExposer
     {

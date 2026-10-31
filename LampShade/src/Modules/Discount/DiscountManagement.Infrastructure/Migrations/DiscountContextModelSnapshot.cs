@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace DiscountManagement.Infrastructure.EFCore.Migrations
+namespace DiscountManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(DiscountContext))]
     partial class DiscountContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,8 @@ namespace DiscountManagement.Infrastructure.EFCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.9")
+                .HasDefaultSchema("discount")
+                .HasAnnotation("ProductVersion", "10.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -44,7 +45,7 @@ namespace DiscountManagement.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ColleagueDiscounts", (string)null);
+                    b.ToTable("ColleagueDiscounts", "discount");
                 });
 
             modelBuilder.Entity("DiscountManagement.Domain.CustomerDiscountAgg.CustomerDiscount", b =>
@@ -76,7 +77,58 @@ namespace DiscountManagement.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerDiscounts", (string)null);
+                    b.ToTable("CustomerDiscounts", "discount");
+                });
+
+            modelBuilder.Entity("LampShade.BuildingBlocks.Infrastructure.Outbox.InboxMessage", b =>
+                {
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Handler")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
+
+                    b.Property<DateTime>("ProcessedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("EventId", "Handler");
+
+                    b.ToTable("InboxMessages", "discount");
+                });
+
+            modelBuilder.Entity("LampShade.BuildingBlocks.Infrastructure.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Attempts")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Error")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<DateTime>("OccurredOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ProcessedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProcessedOn");
+
+                    b.ToTable("OutboxMessages", "discount");
                 });
 #pragma warning restore 612, 618
         }

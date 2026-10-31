@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
-using _0_Framework.Application;
-using _0_Framework.Repository;
+using LampShade.BuildingBlocks.Application;
+using LampShade.BuildingBlocks.Application;
 using ShopManagement.Application.Contract.A.Slide;
 using ShopManagement.Domain.SlideAgg;
 
+using ShopManagement.Application.ReadModel.Admin;
+
 namespace ShopManagement.Infrastructure.EFCore.Repository
 {
-    public class SlideRepository : RepositoryBase<long, Slide>, ISlideRepository
+    public class SlideRepository : RepositoryBase<long, Slide>, ISlideRepository, ISlideReadRepository
     {
         private readonly ShopContext _context;
         public SlideRepository(ShopContext context) : base(context)

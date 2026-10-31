@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.Order;
+namespace ShopManagement.Application.ReadModel.Order;
 
 public interface IOrderQuery
 {

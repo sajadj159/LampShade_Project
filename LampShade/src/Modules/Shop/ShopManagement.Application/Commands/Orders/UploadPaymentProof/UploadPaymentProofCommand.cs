@@ -1,4 +1,4 @@
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using ShopManagement.Application.Contract.Order;

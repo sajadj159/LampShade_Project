@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <InternalsVisibleTo Include="DiscountManagement.Infrastructure" />
+    <InternalsVisibleTo Include="DiscountManagement.Tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\LampShade.BuildingBlocks.Application\LampShade.BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\DiscountManagement.Domain\DiscountManagement.Domain.csproj" />
+    <ProjectReference Include="..\DiscountManagement.Contracts\DiscountManagement.Contracts.csproj" />
+    <ProjectReference Include="..\..\Shop\ShopManagement.Contracts\ShopManagement.Contracts.csproj" />
+  </ItemGroup>
+</Project>

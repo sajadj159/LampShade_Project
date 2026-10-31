@@ -1,16 +1,17 @@
+using LampShade.BuildingBlocks.Application;
 using System.Threading;
 using System.Threading.Tasks;
 using AccountManagement.Application.Contracts.Commands.Roles.CreateRole;
 using AccountManagement.Application.Contracts.Commands.Roles.EditRole;
-using LampShade.ReadModel.Contracts.Queries.Roles.GetRoleById;
-using LampShade.ReadModel.Contracts.Queries.Roles.GetRoles;
+using AccountManagement.Application.ReadModel.Queries.Roles.GetRoleById;
+using AccountManagement.Application.ReadModel.Queries.Roles.GetRoles;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace AccountManagement.Presentation.Controllers.Write;
 
-[Authorize]
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class RoleController : ControllerBase

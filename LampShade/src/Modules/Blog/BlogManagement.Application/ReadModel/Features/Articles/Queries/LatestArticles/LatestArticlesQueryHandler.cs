@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using LampShade.ReadModel.Contracts.Article;
+using BlogManagement.Application.ReadModel.Article;
 
-using LampShade.ReadModel.Contracts.Queries.Articles.LatestArticles;
+using BlogManagement.Application.ReadModel.Queries.Articles.LatestArticles;
 
-namespace LampShade.ReadModel.Application.Features.Articles.Queries.LatestArticles;
+namespace BlogManagement.Application.ReadModel.Features.Articles.Queries.LatestArticles;
 
 
 

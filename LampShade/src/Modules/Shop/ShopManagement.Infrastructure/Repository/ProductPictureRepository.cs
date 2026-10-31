@@ -3,14 +3,16 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using _0_Framework.Repository;
+using LampShade.BuildingBlocks.Application;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Application.Contract.A.ProductPicture;
 using ShopManagement.Domain.ProductPictureAgg;
 
+using ShopManagement.Application.ReadModel.Admin;
+
 namespace ShopManagement.Infrastructure.EFCore.Repository
 {
-    public class ProductPictureRepository : RepositoryBase<long, ProductPicture>, IProductPictureRepository
+    public class ProductPictureRepository : RepositoryBase<long, ProductPicture>, IProductPictureRepository, IProductPictureReadRepository
     {
         private readonly ShopContext _context;
 

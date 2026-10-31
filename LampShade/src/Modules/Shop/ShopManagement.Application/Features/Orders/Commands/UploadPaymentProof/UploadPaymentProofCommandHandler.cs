@@ -1,36 +1,26 @@
-using System.Threading;
-using System.Threading.Tasks;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using ShopManagement.Application.Contract.Order;
-
 using ShopManagement.Application.Contracts.Commands.Orders.UploadPaymentProof;
+using ShopManagement.Domain.OrderAgg;
 
 namespace ShopManagement.Application.Features.Orders.Commands.UploadPaymentProof;
 
-
-
-public class UploadPaymentProofCommandHandler : IRequestHandler<UploadPaymentProofCommand, OperationResult>
+public class UploadPaymentProofCommandHandler(IFileUploader uploader, IOrderRepository orders, IAuthHelper authHelper)
+    : IRequestHandler<UploadPaymentProofCommand, OperationResult>
 {
-    private const long MaximumFileSize = 5 * 1024 * 1024;
-    private readonly IFIleUploader _uploader;
-    private readonly IOrderApplication _application;
-
-    public UploadPaymentProofCommandHandler(IFIleUploader uploader, IOrderApplication application)
-    {
-        _uploader = uploader;
-        _application = application;
-    }
+    private const int OnlinePayment = 1;
 
     public async Task<OperationResult> Handle(UploadPaymentProofCommand request, CancellationToken cancellationToken)
     {
         var result = new OperationResult();
-        if (request.Proof == null || request.Proof.Length == 0 || !request.Proof.ContentType.StartsWith("image/") || request.Proof.Length > MaximumFileSize)
+        if (request.Proof is null || request.Proof.Length == 0)
             return result.Failed("Upload an image smaller than 5 MB.");
 
-        var fileKey = _uploader.Upload(request.Proof, "Orders/PaymentProofs");
-        return await _application.UploadPaymentProofAsync(request.OrderId, fileKey, cancellationToken);
-    }
+        var order = await orders.GetAsync(request.OrderId, cancellationToken);
+        if (order is null || order.AccountId != authHelper.CurrentAccountId() || order.PaymentMethod != OnlinePayment || order.IsCanceled || order.IsPaid)
+            return result.Failed("Payment proof cannot be uploaded for this order.");
 
+        order.SetPaymentProof(uploader.Upload(request.Proof, "Orders/PaymentProofs"));
+        return result.Succeeded();
+    }
 }

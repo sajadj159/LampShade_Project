@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CommentManagement.Infrastructure.EFCore.Migrations
+namespace CommentManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(CommentContext))]
     partial class CommentContextModelSnapshot : ModelSnapshot
@@ -17,6 +17,7 @@ namespace CommentManagement.Infrastructure.EFCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("comment")
                 .HasAnnotation("ProductVersion", "10.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -73,10 +74,61 @@ namespace CommentManagement.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Comments", null, t =>
+                    b.ToTable("Comments", "comment", t =>
                         {
                             t.HasCheckConstraint("CK_Comments_Rating", "\"Rating\" >= 0 AND \"Rating\" <= 5");
                         });
+                });
+
+            modelBuilder.Entity("LampShade.BuildingBlocks.Infrastructure.Outbox.InboxMessage", b =>
+                {
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Handler")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
+
+                    b.Property<DateTime>("ProcessedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("EventId", "Handler");
+
+                    b.ToTable("InboxMessages", "comment");
+                });
+
+            modelBuilder.Entity("LampShade.BuildingBlocks.Infrastructure.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Attempts")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Error")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<DateTime>("OccurredOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ProcessedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProcessedOn");
+
+                    b.ToTable("OutboxMessages", "comment");
                 });
 
             modelBuilder.Entity("CommentManagement.Domain.CommentAgg.Comment", b =>

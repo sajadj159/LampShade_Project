@@ -1,6 +1,6 @@
 using MediatR;
-using LampShade.ReadModel.Contracts.ArticleCategory;
+using BlogManagement.Application.ReadModel.ArticleCategory;
 
-namespace LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoriesForQuery;
+namespace BlogManagement.Application.ReadModel.Queries.ArticleCategories.GetArticleCategoriesForQuery;
 
 public class GetArticleCategoriesForQuery : IRequest<List<ArticleCategoryQueryModel>> { }

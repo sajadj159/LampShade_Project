@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using LampShade.ReadModel.Contracts.Account;
+using AccountManagement.Application.ReadModel.Account;
 
-using QueryRequest = LampShade.ReadModel.Contracts.Queries.Accounts.GetAllAccountsForQuery.GetAllAccountsForQuery;
+using QueryRequest = AccountManagement.Application.ReadModel.Queries.Accounts.GetAllAccountsForQuery.GetAllAccountsForQuery;
 
-namespace LampShade.ReadModel.Application.Features.Accounts.Queries.GetAllAccountsForQuery;
+namespace AccountManagement.Application.ReadModel.Features.Accounts.Queries.GetAllAccountsForQuery;
 
 
 

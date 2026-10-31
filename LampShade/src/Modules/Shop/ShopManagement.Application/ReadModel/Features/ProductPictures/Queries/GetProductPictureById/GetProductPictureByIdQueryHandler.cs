@@ -2,18 +2,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using ShopManagement.Application.Contract.A.ProductPicture;
 using MediatR;
+using ShopManagement.Application.ReadModel.Admin;
 
-using LampShade.ReadModel.Contracts.Queries.ProductPictures.GetProductPictureById;
+using ShopManagement.Application.ReadModel.Queries.ProductPictures.GetProductPictureById;
 
-namespace LampShade.ReadModel.Application.Features.ProductPictures.Queries.GetProductPictureById;
+namespace ShopManagement.Application.ReadModel.Features.ProductPictures.Queries.GetProductPictureById;
 
 
 
 public class GetProductPictureByIdQueryHandler : IRequestHandler<GetProductPictureByIdQuery, EditProductPicture>
 {
-    private readonly IProductPictureApplication _application;
+    private readonly IProductPictureReadRepository _application;
 
-    public GetProductPictureByIdQueryHandler(IProductPictureApplication application)
+    public GetProductPictureByIdQueryHandler(IProductPictureReadRepository application)
     {
         _application = application;
     }

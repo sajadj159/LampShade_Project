@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace _0_Framework.Repository;
+namespace LampShade.BuildingBlocks.Infrastructure;
 
 public class RepositoryBase<TKey, T>(DbContext context) : IRepository<TKey, T> where T : class
 {

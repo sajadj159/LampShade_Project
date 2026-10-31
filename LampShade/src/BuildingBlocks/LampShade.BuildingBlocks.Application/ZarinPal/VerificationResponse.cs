@@ -1,4 +1,4 @@
-﻿namespace _0_Framework.Application.ZarinPal
+﻿namespace LampShade.BuildingBlocks.Application
 {
     public class VerificationResponse
     {

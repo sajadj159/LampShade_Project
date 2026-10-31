@@ -1,36 +1,26 @@
-using System.Threading;
-using System.Threading.Tasks;
-#nullable enable
-
-using ShopManagement.Application.Contract.A.ProductPicture;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using _0_Framework.Application;
-
 using ShopManagement.Application.Contracts.Commands.ProductPictures.CreateProductPicture;
+using ShopManagement.Domain.ProductAgg;
+using ShopManagement.Domain.ProductPictureAgg;
 
 namespace ShopManagement.Application.Features.ProductPictures.Commands.CreateProductPicture;
 
-
-
-public class CreateProductPictureCommandHandler : IRequestHandler<CreateProductPictureCommand, OperationResult>
+public class CreateProductPictureCommandHandler(IProductPictureRepository pictures, IProductRepository products, IFileUploader uploader)
+    : IRequestHandler<CreateProductPictureCommand, OperationResult>
 {
-    private readonly IProductPictureApplication _application;
-
-    public CreateProductPictureCommandHandler(IProductPictureApplication application)
-    {
-        _application = application;
-    }
-
     public async Task<OperationResult> Handle(CreateProductPictureCommand request, CancellationToken cancellationToken)
     {
-        var command = new ShopManagement.Application.Contract.A.ProductPicture.CreateProductPicture
-        {
-            ProductId = request.ProductId,
-            PictureUrl = request.PictureUrl,
-            PictureAlt = request.PictureAlt,
-            PictureTitle = request.PictureTitle
-        };
-        return await _application.CreateAsync(command, cancellationToken);
+        var operation = new OperationResult();
+        if (await pictures.ExistAsync(x => x.PictureTitle == request.PictureTitle && x.ProductId == request.ProductId, cancellationToken))
+            return operation.Failed(ApplicationMessages.DuplicatedRecord);
+
+        var product = await products.GetProductWithCategoriesAsync(request.ProductId, cancellationToken);
+        if (product is null)
+            return operation.Failed(ApplicationMessages.RecordNotFound);
+
+        var picturePath = uploader.Upload(request.PictureUrl, $"{product.Category.Slug}/{product.Slug}");
+        pictures.Add(new Domain.ProductPictureAgg.ProductPicture(request.ProductId, picturePath, request.PictureTitle, request.PictureAlt));
+        return operation.Succeeded();
     }
 }

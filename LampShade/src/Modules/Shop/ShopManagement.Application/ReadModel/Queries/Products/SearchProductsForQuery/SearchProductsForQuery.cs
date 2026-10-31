@@ -1,7 +1,7 @@
-using LampShade.ReadModel.Contracts.Product;
+using ShopManagement.Application.ReadModel.Product;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Products.SearchProductsForQuery;
+namespace ShopManagement.Application.ReadModel.Queries.Products.SearchProductsForQuery;
 
 public class SearchProductsForQuery : IRequest<List<ProductQueryModel>>
 {

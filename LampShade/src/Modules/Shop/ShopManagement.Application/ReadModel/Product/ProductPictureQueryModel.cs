@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.Product
+namespace ShopManagement.Application.ReadModel.Product
 {
     public class ProductPictureQueryModel
     {

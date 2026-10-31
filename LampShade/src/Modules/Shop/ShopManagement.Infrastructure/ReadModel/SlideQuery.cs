@@ -1,8 +1,8 @@
-using LampShade.ReadModel.Contracts.Slide;
+using ShopManagement.Application.ReadModel.Slide;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Infrastructure.EFCore;
 
-namespace LampShade.ReadModel.Application.Query;
+namespace ShopManagement.Infrastructure.ReadModel;
 
 public class SlideQuery(ShopContext context) : ISlideQuery
 {

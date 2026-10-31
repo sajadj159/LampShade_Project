@@ -2,12 +2,12 @@ using System.Threading;
 using System.Threading.Tasks;
 #nullable enable
 
-using LampShade.ReadModel.Contracts.Account;
-using LampShade.ReadModel.Contracts.Accounts.Dto;
-using LampShade.ReadModel.Contracts.Queries.Accounts.SearchAccounts;
+using AccountManagement.Application.ReadModel.Account;
+using AccountManagement.Application.ReadModel.Accounts.Dto;
+using AccountManagement.Application.ReadModel.Queries.Accounts.SearchAccounts;
 using MediatR;
 
-namespace LampShade.ReadModel.Application.Features.Accounts.Queries.SearchAccounts;
+namespace AccountManagement.Application.ReadModel.Features.Accounts.Queries.SearchAccounts;
 
 public class SearchAccountsQueryHandler(IAccountQuery query) : IRequestHandler<SearchAccountsQuery, List<AccountViewModel>>
 {

@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoriesWithProductsForQuery;
-using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoryWithProducts;
+using ShopManagement.Application.ReadModel.Queries.ProductCategories.GetProductCategoriesWithProductsForQuery;
+using ShopManagement.Application.ReadModel.Queries.ProductCategories.GetProductCategoryWithProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Read;
+namespace ShopManagement.Presentation.Controllers.Read;
 
 [ApiController]
 [Route("api/read/[controller]")]

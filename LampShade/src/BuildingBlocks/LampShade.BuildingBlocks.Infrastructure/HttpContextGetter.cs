@@ -2,7 +2,7 @@ using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace _0_Framework.Application
+namespace LampShade.BuildingBlocks.Infrastructure
 {
     public class HttpContextGetter : IHttpContextGetter
     {

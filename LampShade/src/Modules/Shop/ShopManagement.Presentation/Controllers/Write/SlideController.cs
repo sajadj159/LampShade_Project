@@ -1,18 +1,19 @@
+using LampShade.BuildingBlocks.Application;
 using System.Threading;
 using System.Threading.Tasks;
 using ShopManagement.Application.Contracts.Commands.Slides.CreateSlide;
 using ShopManagement.Application.Contracts.Commands.Slides.EditSlide;
 using ShopManagement.Application.Contracts.Commands.Slides.RemoveSlide;
 using ShopManagement.Application.Contracts.Commands.Slides.RestoreSlide;
-using LampShade.ReadModel.Contracts.Queries.Slides.GetSlideById;
-using LampShade.ReadModel.Contracts.Queries.Slides.GetSlides;
+using ShopManagement.Application.ReadModel.Queries.Slides.GetSlideById;
+using ShopManagement.Application.ReadModel.Queries.Slides.GetSlides;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace ShopManagement.Presentation.Controllers.Write;
 
-[Authorize]
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class SlideController : ControllerBase

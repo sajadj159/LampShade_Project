@@ -1,7 +1,7 @@
-using LampShade.ReadModel.Contracts.Accounts.Dto;
+using AccountManagement.Application.ReadModel.Accounts.Dto;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Accounts.GetAccountById;
+namespace AccountManagement.Application.ReadModel.Queries.Accounts.GetAccountById;
 
 public class GetAccountByIdQuery : IRequest<AccountViewModel>
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 
 namespace InventoryManagement.Domain.InventoryAgg
 {
@@ -47,7 +47,13 @@ namespace InventoryManagement.Domain.InventoryAgg
 
         public void Reduce(long count, long operatorId, string description, long orderId)
         {
+            if (count <= 0)
+                throw new DomainException("The reduced count must be greater than zero.");
+
             var currentCount = CalculateCurrentCount() - count;
+            if (currentCount < 0)
+                throw new DomainException($"Not enough stock for product {ProductId}: {CalculateCurrentCount()} available, {count} requested.");
+
             var operation = new InventoryOperation(false,count,operatorId,currentCount,description,orderId,Id);
             InventoryOperations.Add(operation);
             InStock=currentCount > 0;

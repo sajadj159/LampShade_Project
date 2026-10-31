@@ -1,6 +1,6 @@
 using MediatR;
 using ShopManagement.Application.Contract.A.Slide;
 
-namespace LampShade.ReadModel.Contracts.Queries.Slides.GetSlides;
+namespace ShopManagement.Application.ReadModel.Queries.Slides.GetSlides;
 
 public class GetSlidesQuery : IRequest<List<SlideViewModel>> { }

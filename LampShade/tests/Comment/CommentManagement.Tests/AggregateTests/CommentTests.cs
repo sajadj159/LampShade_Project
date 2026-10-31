@@ -1,5 +1,5 @@
 using AwesomeAssertions;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 using CommentManagement.Domain.CommentAgg;
 using Xunit;
 

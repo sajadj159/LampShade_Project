@@ -4,7 +4,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Microsoft.Extensions.Options;
 
-namespace LampShade.Api.Storage;
+namespace LampShade.BuildingBlocks.Infrastructure;
 
 public sealed class ObjectStorageInitializer : IHostedService
 {

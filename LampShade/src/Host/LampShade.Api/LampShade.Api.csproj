@@ -1,41 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>LampShade.Api</RootNamespace>
     <UserSecretsId>02fbce3c-1b00-43ba-bde9-9fc2281c54ed</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="14.2.0" />
-    <PackageReference Include="Npgsql" Version="10.0.3" />
-    <PackageReference Include="AWSSDK.S3" Version="4.0.25.3" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
-    <PackageReference Include="Microsoft.OpenApi" Version="2.7.5" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.2.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.4">
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.OpenApi" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AccountManagement\AM.Infrustructure\AccountManagement.Configuration\AccountManagement.Configuration.csproj" />
-    <ProjectReference Include="..\BlogManagement\BM.Infrastructure\BlogManagement.Infrastructure.Configuration\BlogManagement.Infrastructure.Configuration.csproj" />
-    <ProjectReference Include="..\CommentManagement\CM.Infrastructure\CommentManagement.Configuration\CommentManagement.Configuration.csproj" />
-    <ProjectReference Include="..\DiscountManagement\DM.Infrastructure\DiscountManagement.Configuration\DiscountManagement.Configuration.csproj" />
-    <ProjectReference Include="..\InventoryManagement\IM.Infrastructure\InventoryManagement.Configuration\InventoryManagement.Configuration.csproj" />
-    <ProjectReference Include="..\Shopmanagement\SM.Infrastructure\ShopManagement.Configuration\ShopManagement.Configuration.csproj" />
-    <ProjectReference Include="..\0_Framework\0_Framework\0_Framework.csproj" />
-    <ProjectReference Include="..\LampShade.ReadModel.Contracts\LampShade.ReadModel.Contracts.csproj" />
-    <ProjectReference Include="..\LampShade.ReadModel.Application\LampShade.ReadModel.Application.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\LampShade.BuildingBlocks.Infrastructure\LampShade.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Account\AccountManagement.Infrastructure\AccountManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Account\AccountManagement.Presentation\AccountManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Blog\BlogManagement.Infrastructure\BlogManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Blog\BlogManagement.Presentation\BlogManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Comment\CommentManagement.Infrastructure\CommentManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Comment\CommentManagement.Presentation\CommentManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Discount\DiscountManagement.Infrastructure\DiscountManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Discount\DiscountManagement.Presentation\DiscountManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Inventory\InventoryManagement.Infrastructure\InventoryManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Inventory\InventoryManagement.Presentation\InventoryManagement.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Shop\ShopManagement.Infrastructure\ShopManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Shop\ShopManagement.Presentation\ShopManagement.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
-
-

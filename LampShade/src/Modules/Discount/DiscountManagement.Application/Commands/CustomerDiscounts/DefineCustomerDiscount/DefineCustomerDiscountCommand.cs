@@ -1,6 +1,6 @@
 using DiscountManagement.Application.Contract.AC.CustomerDiscount;
 using MediatR;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 
 namespace DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.DefineCustomerDiscount;
 

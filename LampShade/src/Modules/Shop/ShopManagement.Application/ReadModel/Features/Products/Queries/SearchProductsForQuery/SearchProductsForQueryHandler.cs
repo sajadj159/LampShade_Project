@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Product;
+using ShopManagement.Application.ReadModel.Product;
 using MediatR;
 
-using QueryRequest = LampShade.ReadModel.Contracts.Queries.Products.SearchProductsForQuery.SearchProductsForQuery;
+using QueryRequest = ShopManagement.Application.ReadModel.Queries.Products.SearchProductsForQuery.SearchProductsForQuery;
 
-namespace LampShade.ReadModel.Application.Features.Products.Queries.SearchProductsForQuery;
+namespace ShopManagement.Application.ReadModel.Features.Products.Queries.SearchProductsForQuery;
 
 
 

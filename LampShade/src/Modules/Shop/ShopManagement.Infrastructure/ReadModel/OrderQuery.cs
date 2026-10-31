@@ -1,9 +1,9 @@
-using _0_Framework.Application;
-using LampShade.ReadModel.Contracts.Order;
+using LampShade.BuildingBlocks.Application;
+using ShopManagement.Application.ReadModel.Order;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Infrastructure.EFCore;
 
-namespace LampShade.ReadModel.Application.Query;
+namespace ShopManagement.Infrastructure.ReadModel;
 
 public class OrderQuery(ShopContext shopContext) : IOrderQuery
 {

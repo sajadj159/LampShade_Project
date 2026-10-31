@@ -1,31 +1,24 @@
-using System.Threading;
-using System.Threading.Tasks;
-#nullable enable
-
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using ShopManagement.Application.Contract.ProductCategory;
-using _0_Framework.Application;
-
 using ShopManagement.Application.Contracts.Commands.ProductCategories.EditProductCategory;
+using ShopManagement.Domain.ProductCategoryAgg;
 
 namespace ShopManagement.Application.Features.ProductCategories.Commands.EditProductCategory;
 
-
-
-public class EditProductCategoryCommandHandler : IRequestHandler<EditProductCategoryCommand, OperationResult>
+public class EditProductCategoryCommandHandler(IProductCategoryRepository categories, IFileUploader uploader)
+    : IRequestHandler<EditProductCategoryCommand, OperationResult>
 {
-    private readonly IProductCategoryApplication _application;
-    public EditProductCategoryCommandHandler(IProductCategoryApplication application) => _application = application;
-
     public async Task<OperationResult> Handle(EditProductCategoryCommand request, CancellationToken cancellationToken)
     {
-        var command = new ShopManagement.Application.Contract.ProductCategory.EditProductCategory
-        {
-            Id = request.Id, Name = request.Name, Description = request.Description, PictureUrl = request.PictureUrl,
-            PictureAlt = request.PictureAlt, PictureTitle = request.PictureTitle,
-            Keywords = request.Keywords, MetaDescription = request.MetaDescription, Slug = request.Slug
-        };
-        return await _application.EditAsync(command, cancellationToken);
+        var operation = new OperationResult();
+        var category = await categories.GetAsync(request.Id, cancellationToken);
+        if (category is null)
+            return operation.Failed(ApplicationMessages.RecordNotFound);
+        if (await categories.ExistAsync(x => x.Name == request.Name && x.Id != request.Id, cancellationToken))
+            return operation.Failed(ApplicationMessages.DuplicatedRecord);
+
+        category.Edit(request.Name, request.Description, uploader.Upload(request.PictureUrl, request.Slug), request.PictureAlt,
+            request.PictureTitle, request.Keywords, request.MetaDescription, request.Slug.Slugify());
+        return operation.Succeeded();
     }
 }

@@ -1,12 +1,9 @@
-﻿using MailKit.Net.Smtp;
+using LampShade.BuildingBlocks.Application;
+using MailKit.Net.Smtp;
 using MimeKit;
 
-namespace _0_Framework.Application.Email
+namespace LampShade.BuildingBlocks.Infrastructure
 {
-    public interface IEmailService
-    {
-        void SendEmail(string title, string messageBody, string destination);
-    }
     public class EmailService : IEmailService
     {
         public void SendEmail(string title, string messageBody, string destination)

@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\LampShade.BuildingBlocks.Domain\LampShade.BuildingBlocks.Domain.csproj" />
+  </ItemGroup>
+</Project>

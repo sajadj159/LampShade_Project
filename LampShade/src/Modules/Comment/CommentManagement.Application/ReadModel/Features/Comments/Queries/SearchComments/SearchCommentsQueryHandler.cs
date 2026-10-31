@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Comment;
-using LampShade.ReadModel.Contracts.Comments.Dto;
-using LampShade.ReadModel.Contracts.Queries.Comments.SearchComments;
+using CommentManagement.Application.ReadModel.Comment;
+using CommentManagement.Application.ReadModel.Comments.Dto;
+using CommentManagement.Application.ReadModel.Queries.Comments.SearchComments;
 using MediatR;
 
-namespace LampShade.ReadModel.Application.Features.Comments.Queries.SearchComments;
+namespace CommentManagement.Application.ReadModel.Features.Comments.Queries.SearchComments;
 
 public class SearchCommentsQueryHandler(ICommentQuery query) : IRequestHandler<SearchCommentsQuery, List<CommentViewModel>>
 {

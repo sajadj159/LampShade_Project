@@ -1,21 +1,12 @@
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
-using ShopManagement.Application.Contract.Order;
+using ShopManagement.Application.Orders;
+using ShopManagement.Application.ReadModel.Admin;
+using ShopManagement.Application.ReadModel.Queries.Orders.GetOrderAmount;
 
-using LampShade.ReadModel.Contracts.Queries.Orders.GetOrderAmount;
+namespace ShopManagement.Application.ReadModel.Features.Orders.Queries.GetOrderAmount;
 
-namespace LampShade.ReadModel.Application.Features.Orders.Queries.GetOrderAmount;
-
-
-
-public class GetOrderAmountQueryHandler : IRequestHandler<GetOrderAmountQuery, double>
+public class GetOrderAmountQueryHandler(IOrderReadRepository orders, OrderAccessPolicy access) : IRequestHandler<GetOrderAmountQuery, double>
 {
-    private readonly IOrderApplication _application;
-    public GetOrderAmountQueryHandler(IOrderApplication application) => _application = application;
-
-    public Task<double> Handle(GetOrderAmountQuery request, CancellationToken cancellationToken)
-    {
-        return Task.FromResult(_application.GetAmountBy(request.Id));
-    }
+    public async Task<double> Handle(GetOrderAmountQuery request, CancellationToken cancellationToken) =>
+        await access.CanAccessAsync(request.Id, cancellationToken) ? orders.GetAmountBy(request.Id) : 0;
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using LampShade.ReadModel.Contracts.Comment;
+using CommentManagement.Contracts;
 
-namespace LampShade.ReadModel.Contracts.Article
+namespace BlogManagement.Application.ReadModel.Article
 {
     public class ArticleQueryModel
     {

@@ -1,41 +1,23 @@
-using System.Threading;
-using System.Threading.Tasks;
-#nullable enable
-
-using ShopManagement.Application.Contract.A.Slide;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using _0_Framework.Application;
-
 using ShopManagement.Application.Contracts.Commands.Slides.EditSlide;
+using ShopManagement.Domain.SlideAgg;
 
 namespace ShopManagement.Application.Features.Slides.Commands.EditSlide;
 
-
-
-public class EditSlideCommandHandler : IRequestHandler<EditSlideCommand, OperationResult>
+public class EditSlideCommandHandler(ISlideRepository slides, IFileUploader uploader) : IRequestHandler<EditSlideCommand, OperationResult>
 {
-    private readonly ISlideApplication _application;
-
-    public EditSlideCommandHandler(ISlideApplication application)
-    {
-        _application = application;
-    }
-
     public async Task<OperationResult> Handle(EditSlideCommand request, CancellationToken cancellationToken)
     {
-        var command = new ShopManagement.Application.Contract.A.Slide.EditSlide
-        {
-            Id = request.Id,
-            PictureUrl = request.PictureUrl,
-            PictureTitle = request.PictureTitle,
-            PictureAlt = request.PictureAlt,
-            Heading = request.Heading,
-            Title = request.Title,
-            Text = request.Text,
-            Link = request.Link,
-            BtnText = request.BtnText
-        };
-        return await _application.EditAsync(command, cancellationToken);
+        var operation = new OperationResult();
+        var slide = await slides.GetAsync(request.Id, cancellationToken);
+        if (slide is null)
+            return operation.Failed(ApplicationMessages.RecordNotFound);
+        if (await slides.ExistAsync(x => x.PictureTitle == request.PictureTitle && x.Id != request.Id, cancellationToken))
+            return operation.Failed(ApplicationMessages.DuplicatedRecord);
+
+        slide.Edit(uploader.Upload(request.PictureUrl, "Slides"), request.PictureAlt, request.PictureTitle, request.Heading,
+            request.Title, request.Text, request.BtnText, request.Link);
+        return operation.Succeeded();
     }
 }

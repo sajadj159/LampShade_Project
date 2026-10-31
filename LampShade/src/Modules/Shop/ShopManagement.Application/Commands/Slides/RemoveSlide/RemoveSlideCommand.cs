@@ -1,5 +1,5 @@
 using MediatR;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using ShopManagement.Application.Contract.A.Slide;
 
 namespace ShopManagement.Application.Contracts.Commands.Slides.RemoveSlide;

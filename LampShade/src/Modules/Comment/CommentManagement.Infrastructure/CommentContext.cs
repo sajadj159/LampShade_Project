@@ -1,12 +1,14 @@
-using System;
 using CommentManagement.Domain.CommentAgg;
 using CommentManagement.Infrastructure.EFCore.Mapping;
+using LampShade.BuildingBlocks.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommentManagement.Infrastructure.EFCore
 {
-    public class CommentContext : DbContext, _0_Framework.Domain.IDbContext
+    public class CommentContext : DbContext, IDbContext
     {
+        public const string Schema = "comment";
+
         public DbSet<Comment> Comments { get; set; }
 
         public CommentContext(DbContextOptions<CommentContext> options):base(options)
@@ -15,8 +17,9 @@ namespace CommentManagement.Infrastructure.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var assembly= typeof(CommentMapping).Assembly;
-            modelBuilder.ApplyConfigurationsFromAssembly(assembly);
+            modelBuilder.HasDefaultSchema(Schema);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CommentMapping).Assembly);
+            modelBuilder.ApplyOutboxAndInbox();
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -1,6 +1,6 @@
 using MediatR;
-using LampShade.ReadModel.Contracts.ProductCategory;
+using ShopManagement.Application.ReadModel.ProductCategory;
 
-namespace LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoriesWithProductsForQuery;
+namespace ShopManagement.Application.ReadModel.Queries.ProductCategories.GetProductCategoriesWithProductsForQuery;
 
 public class GetProductCategoriesWithProductsForQuery : IRequest<List<ProductCategoryQueryModel>> { }

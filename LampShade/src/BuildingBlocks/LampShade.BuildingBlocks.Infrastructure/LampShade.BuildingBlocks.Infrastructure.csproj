@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="LampShade.BuildingBlocks.Application" />
+    <Using Include="LampShade.BuildingBlocks.Domain" />
+    <Using Include="Microsoft.Extensions.Hosting" />
+    <Using Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="AWSSDK.S3" />
+    <PackageReference Include="HtmlSanitizer" />
+    <PackageReference Include="MailKit" />
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="RestSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LampShade.BuildingBlocks.Application\LampShade.BuildingBlocks.Application.csproj" />
+  </ItemGroup>
+</Project>

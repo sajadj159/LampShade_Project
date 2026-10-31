@@ -3,7 +3,7 @@
 using MediatR;
 using ShopManagement.Application.Contract.Order;
 
-namespace LampShade.ReadModel.Contracts.Queries.Orders.SearchOrders;
+namespace ShopManagement.Application.ReadModel.Queries.Orders.SearchOrders;
 
 public class SearchOrdersQuery : IRequest<List<OrderViewModel>>
 {

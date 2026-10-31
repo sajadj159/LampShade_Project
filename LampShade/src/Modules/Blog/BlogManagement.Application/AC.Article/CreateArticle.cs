@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.VisualBasic;
 

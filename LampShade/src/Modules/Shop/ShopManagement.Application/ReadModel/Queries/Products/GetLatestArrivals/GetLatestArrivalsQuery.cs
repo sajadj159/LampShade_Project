@@ -1,6 +1,6 @@
-using LampShade.ReadModel.Contracts.Product;
+using ShopManagement.Application.ReadModel.Product;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Products.GetLatestArrivals;
+namespace ShopManagement.Application.ReadModel.Queries.Products.GetLatestArrivals;
 
 public class GetLatestArrivalsQuery : IRequest<List<ProductQueryModel>> { }

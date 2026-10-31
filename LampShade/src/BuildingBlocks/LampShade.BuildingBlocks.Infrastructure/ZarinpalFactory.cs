@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using RestSharp;
 
-namespace _0_Framework.Application.ZarinPal
+namespace LampShade.BuildingBlocks.Infrastructure
 {
     public class ZarinPalFactory : IZarinPalFactory
     {

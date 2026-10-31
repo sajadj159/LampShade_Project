@@ -1,18 +1,19 @@
+using LampShade.BuildingBlocks.Application;
 using System.Threading;
 using System.Threading.Tasks;
 using ShopManagement.Application.Contracts.Commands.ProductPictures.CreateProductPicture;
 using ShopManagement.Application.Contracts.Commands.ProductPictures.EditProductPicture;
 using ShopManagement.Application.Contracts.Commands.ProductPictures.RemoveProductPicture;
 using ShopManagement.Application.Contracts.Commands.ProductPictures.RestoreProductPicture;
-using LampShade.ReadModel.Contracts.Queries.ProductPictures.GetProductPictureById;
-using LampShade.ReadModel.Contracts.Queries.ProductPictures.SearchProductPictures;
+using ShopManagement.Application.ReadModel.Queries.ProductPictures.GetProductPictureById;
+using ShopManagement.Application.ReadModel.Queries.ProductPictures.SearchProductPictures;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace ShopManagement.Presentation.Controllers.Write;
 
-[Authorize]
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ProductPictureController : ControllerBase

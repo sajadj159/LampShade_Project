@@ -1,32 +1,12 @@
-using System.Threading;
-using System.Threading.Tasks;
-#nullable enable
-
 using BlogManagement.Application.Contract.AC.Article;
+using BlogManagement.Application.ReadModel.Article;
+using BlogManagement.Application.ReadModel.Queries.Articles.SearchArticles;
 using MediatR;
 
-using LampShade.ReadModel.Contracts.Queries.Articles.SearchArticles;
+namespace BlogManagement.Application.ReadModel.Features.Articles.Queries.SearchArticles;
 
-namespace LampShade.ReadModel.Application.Features.Articles.Queries.SearchArticles;
-
-
-
-public class SearchArticlesQueryHandler : IRequestHandler<SearchArticlesQuery, List<ArticleViewModel>>
+public class SearchArticlesQueryHandler(IArticleQuery query) : IRequestHandler<SearchArticlesQuery, List<ArticleViewModel>>
 {
-    private readonly IArticleApplication _articleApplication;
-
-    public SearchArticlesQueryHandler(IArticleApplication articleApplication)
-    {
-        _articleApplication = articleApplication;
-    }
-
-    public Task<List<ArticleViewModel>> Handle(SearchArticlesQuery request, CancellationToken cancellationToken)
-    {
-        var searchModel = new ArticleSearchModel
-        {
-            Title = request.Title,
-            CategoryId = request.CategoryId ?? 0
-        };
-        return Task.FromResult(_articleApplication.Search(searchModel));
-    }
+    public Task<List<ArticleViewModel>> Handle(SearchArticlesQuery request, CancellationToken cancellationToken) =>
+        query.SearchAsync(new ArticleSearchModel { Title = request.Title, CategoryId = request.CategoryId ?? 0 }, cancellationToken);
 }

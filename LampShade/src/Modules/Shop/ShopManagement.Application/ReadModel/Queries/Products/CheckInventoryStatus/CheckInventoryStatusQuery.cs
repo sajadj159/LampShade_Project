@@ -1,8 +1,8 @@
-using LampShade.ReadModel.Contracts.Product;
+using ShopManagement.Application.ReadModel.Product;
 using MediatR;
 using ShopManagement.Application.Contract.Order;
 
-namespace LampShade.ReadModel.Contracts.Queries.Products.CheckInventoryStatus;
+namespace ShopManagement.Application.ReadModel.Queries.Products.CheckInventoryStatus;
 
 public class CheckInventoryStatusQuery : IRequest<List<CartItem>>
 {

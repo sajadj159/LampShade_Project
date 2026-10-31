@@ -1,5 +1,5 @@
 using AwesomeAssertions;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 using ShopManagement.Domain.ProductAgg;
 using Xunit;
 
@@ -107,9 +107,9 @@ public class ProductTests
     }
 
     [Fact]
-    public void DefaultConstructor_LeavesProductPicturesUninitialized()
+    public void DefaultConstructor_InitializesEmptyProductPictures()
     {
-        new Product().ProductPictures.Should().BeNull();
+        new Product().ProductPictures.Should().NotBeNull().And.BeEmpty();
     }
 
     [Fact]

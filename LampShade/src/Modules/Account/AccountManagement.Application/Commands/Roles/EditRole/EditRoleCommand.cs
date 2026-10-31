@@ -1,5 +1,4 @@
-using _0_Framework.Application;
-using AccountManagement.Application.Contracts.AC.Role;
+using LampShade.BuildingBlocks.Application;
 using AccountManagement.Domain.RoleAgg.Contracts;
 using MediatR;
 

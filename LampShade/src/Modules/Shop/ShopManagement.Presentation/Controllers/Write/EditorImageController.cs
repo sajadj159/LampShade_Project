@@ -1,10 +1,10 @@
-using _0_Framework.Application;
-using _0_Framework.Repository;
+using LampShade.BuildingBlocks.Application;
+using LampShade.BuildingBlocks.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace ShopManagement.Presentation.Controllers.Write;
 
 [Authorize(Roles = Roles.Administrator)]
 [ApiController]
@@ -12,9 +12,9 @@ namespace LampShade.Api.Controllers.Write;
 public class EditorImageController : ControllerBase
 {
     private const long MaximumImageSize = 5 * 1024 * 1024;
-    private readonly IFIleUploader _uploader;
+    private readonly IFileUploader _uploader;
 
-    public EditorImageController(IFIleUploader uploader) => _uploader = uploader;
+    public EditorImageController(IFileUploader uploader) => _uploader = uploader;
 
     [HttpPost]
     public IActionResult Upload([FromForm] IFormFile file)

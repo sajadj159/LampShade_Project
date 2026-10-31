@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.Articles.Dto;
+namespace BlogManagement.Application.ReadModel.Articles.Dto;
 
 public class ArticleViewModel
 {

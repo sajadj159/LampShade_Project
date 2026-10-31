@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _0_Framework.Repository
+namespace LampShade.BuildingBlocks.Application
 {
     public class NeedsPermissionAttribute : Attribute
     {

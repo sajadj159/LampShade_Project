@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using LampShade.ReadModel.Contracts.Order;
+using ShopManagement.Application.ReadModel.Order;
 
-using LampShade.ReadModel.Contracts.Queries.Orders.GetPaidOrders;
+using ShopManagement.Application.ReadModel.Queries.Orders.GetPaidOrders;
 
-namespace LampShade.ReadModel.Application.Features.Orders.Queries.GetPaidOrders;
+namespace ShopManagement.Application.ReadModel.Features.Orders.Queries.GetPaidOrders;
 
 
 

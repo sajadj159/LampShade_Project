@@ -1,7 +1,7 @@
 using BlogManagement.Application.Contract.AC.Article;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Articles.GetArticleById;
+namespace BlogManagement.Application.ReadModel.Queries.Articles.GetArticleById;
 
 public class GetArticleByIdQuery : IRequest<EditArticle>
 {

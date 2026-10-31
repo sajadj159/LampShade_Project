@@ -1,7 +1,7 @@
 using InventoryManagement.Application.Contract.AC.Inventory;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Inventories.GetInventoryById;
+namespace InventoryManagement.Application.ReadModel.Queries.Inventories.GetInventoryById;
 
 public class GetInventoryByIdQuery : IRequest<EditInventory>
 {

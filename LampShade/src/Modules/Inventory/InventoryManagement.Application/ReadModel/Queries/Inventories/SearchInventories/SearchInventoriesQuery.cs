@@ -3,7 +3,7 @@
 using InventoryManagement.Application.Contract.AC.Inventory;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.Inventories.SearchInventories;
+namespace InventoryManagement.Application.ReadModel.Queries.Inventories.SearchInventories;
 
 public class SearchInventoriesQuery : IRequest<List<InventoryViewModel>>
 {

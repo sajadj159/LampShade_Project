@@ -1,4 +1,4 @@
-﻿namespace _0_Framework.Application.SMS
+﻿namespace LampShade.BuildingBlocks.Application
 {
     public interface ISmsService
     {

@@ -4,19 +4,19 @@ using System.Threading.Tasks;
 
 using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
 using MediatR;
-using DiscountManagement.Domain.ColleagueDiscountAgg;
+using DiscountManagement.Application.ReadModel.Discounts;
 
-using LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.SearchColleagueDiscounts;
+using DiscountManagement.Application.ReadModel.Queries.ColleagueDiscounts.SearchColleagueDiscounts;
 
-namespace LampShade.ReadModel.Application.Features.ColleagueDiscounts.Queries.SearchColleagueDiscounts;
+namespace DiscountManagement.Application.ReadModel.Features.ColleagueDiscounts.Queries.SearchColleagueDiscounts;
 
 
 
 public class SearchColleagueDiscountsQueryHandler : IRequestHandler<SearchColleagueDiscountsQuery, List<ColleagueDiscountViewModel>>
 {
-    private readonly IColleagueDiscountRepository _repository;
+    private readonly IDiscountQuery _repository;
 
-    public SearchColleagueDiscountsQueryHandler(IColleagueDiscountRepository repository)
+    public SearchColleagueDiscountsQueryHandler(IDiscountQuery repository)
     {
         _repository = repository;
     }
@@ -24,6 +24,6 @@ public class SearchColleagueDiscountsQueryHandler : IRequestHandler<SearchCollea
     public Task<List<ColleagueDiscountViewModel>> Handle(SearchColleagueDiscountsQuery request, CancellationToken cancellationToken)
     {
         var searchModel = new ColleagueDiscountSearchModel { ProductId = request.ProductId ?? 0 };
-        return Task.FromResult(_repository.Search(searchModel));
+        return _repository.SearchColleagueDiscountsAsync(searchModel, cancellationToken);
     }
 }

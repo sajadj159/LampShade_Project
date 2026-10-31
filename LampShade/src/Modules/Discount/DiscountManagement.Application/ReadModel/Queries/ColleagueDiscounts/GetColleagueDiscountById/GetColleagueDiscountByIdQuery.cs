@@ -1,7 +1,7 @@
 using DiscountManagement.Application.Contract.AC.ColleagueDiscount;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.ColleagueDiscounts.GetColleagueDiscountById;
+namespace DiscountManagement.Application.ReadModel.Queries.ColleagueDiscounts.GetColleagueDiscountById;
 
 public class GetColleagueDiscountByIdQuery : IRequest<EditColleagueDiscount>
 {

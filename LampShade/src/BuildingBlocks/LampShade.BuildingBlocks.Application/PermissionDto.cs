@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace _0_Framework.Repository
+namespace LampShade.BuildingBlocks.Application
 {
     public class PermissionDto
     {

@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using LampShade.ReadModel.Contracts.ArticleCategory;
+using BlogManagement.Application.ReadModel.ArticleCategory;
 
-using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoryBySlug;
+using BlogManagement.Application.ReadModel.Queries.ArticleCategories.GetArticleCategoryBySlug;
 
-namespace LampShade.ReadModel.Application.Features.ArticleCategories.Queries.GetArticleCategoryBySlug;
+namespace BlogManagement.Application.ReadModel.Features.ArticleCategories.Queries.GetArticleCategoryBySlug;
 
 
 

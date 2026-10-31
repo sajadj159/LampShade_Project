@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Product;
+using ShopManagement.Application.ReadModel.Product;
 using MediatR;
 
-using LampShade.ReadModel.Contracts.Queries.Products.GetLatestArrivals;
+using ShopManagement.Application.ReadModel.Queries.Products.GetLatestArrivals;
 
-namespace LampShade.ReadModel.Application.Features.Products.Queries.GetLatestArrivals;
+namespace ShopManagement.Application.ReadModel.Features.Products.Queries.GetLatestArrivals;
 
 
 

@@ -1,5 +1,5 @@
 using MediatR;
 
-namespace _0_Framework.Application;
+namespace LampShade.BuildingBlocks.Application;
 
 public interface ICommand<out TResponse> : IRequest<TResponse>;

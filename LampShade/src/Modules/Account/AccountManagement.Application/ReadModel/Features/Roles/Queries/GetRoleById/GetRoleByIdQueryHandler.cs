@@ -1,12 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Account;
-using LampShade.ReadModel.Contracts.Roles.Dto;
+using AccountManagement.Application.ReadModel.Account;
+using AccountManagement.Application.ReadModel.Roles.Dto;
 using MediatR;
 
-using LampShade.ReadModel.Contracts.Queries.Roles.GetRoleById;
+using AccountManagement.Application.ReadModel.Queries.Roles.GetRoleById;
 
-namespace LampShade.ReadModel.Application.Features.Roles.Queries.GetRoleById;
+namespace AccountManagement.Application.ReadModel.Features.Roles.Queries.GetRoleById;
 
 
 

@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Queries.Slides.GetSlidesForQuery;
+using ShopManagement.Application.ReadModel.Queries.Slides.GetSlidesForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Read;
+namespace ShopManagement.Presentation.Controllers.Read;
 
 [ApiController]
 [Route("api/read/[controller]")]

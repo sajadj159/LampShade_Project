@@ -1,12 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Account;
-using LampShade.ReadModel.Contracts.Roles.Dto;
+using AccountManagement.Application.ReadModel.Account;
+using AccountManagement.Application.ReadModel.Roles.Dto;
 using MediatR;
 
-using LampShade.ReadModel.Contracts.Queries.Roles.GetRoles;
+using AccountManagement.Application.ReadModel.Queries.Roles.GetRoles;
 
-namespace LampShade.ReadModel.Application.Features.Roles.Queries.GetRoles;
+namespace AccountManagement.Application.ReadModel.Features.Roles.Queries.GetRoles;
 
 public class GetRolesQueryHandler : IRequestHandler<GetRolesQuery, List<RoleDto>>
 {

@@ -1,37 +1,24 @@
-using System.Threading;
-using System.Threading.Tasks;
-#nullable enable
-
-using ShopManagement.Application.Contract.A.ProductPicture;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using _0_Framework.Application;
-
 using ShopManagement.Application.Contracts.Commands.ProductPictures.EditProductPicture;
+using ShopManagement.Domain.ProductPictureAgg;
 
 namespace ShopManagement.Application.Features.ProductPictures.Commands.EditProductPicture;
 
-
-
-public class EditProductPictureCommandHandler : IRequestHandler<EditProductPictureCommand, OperationResult>
+public class EditProductPictureCommandHandler(IProductPictureRepository pictures, IFileUploader uploader)
+    : IRequestHandler<EditProductPictureCommand, OperationResult>
 {
-    private readonly IProductPictureApplication _application;
-
-    public EditProductPictureCommandHandler(IProductPictureApplication application)
-    {
-        _application = application;
-    }
-
     public async Task<OperationResult> Handle(EditProductPictureCommand request, CancellationToken cancellationToken)
     {
-        var command = new ShopManagement.Application.Contract.A.ProductPicture.EditProductPicture
-        {
-            Id = request.Id,
-            ProductId = request.ProductId,
-            PictureUrl = request.PictureUrl,
-            PictureAlt = request.PictureAlt,
-            PictureTitle = request.PictureTitle
-        };
-        return await _application.EditAsync(command, cancellationToken);
+        var operation = new OperationResult();
+        var picture = await pictures.GetWithProductsAndCategoriesAsync(request.Id, cancellationToken);
+        if (picture is null)
+            return operation.Failed(ApplicationMessages.RecordNotFound);
+        if (await pictures.ExistAsync(x => x.PictureTitle == request.PictureTitle && x.ProductId == request.ProductId && x.Id != request.Id, cancellationToken))
+            return operation.Failed(ApplicationMessages.DuplicatedRecord);
+
+        var picturePath = uploader.Upload(request.PictureUrl, $"{picture.Product.Category.Slug}/{picture.Product.Slug}");
+        picture.Edit(request.ProductId, picturePath, request.PictureTitle, request.PictureAlt);
+        return operation.Succeeded();
     }
 }

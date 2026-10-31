@@ -2,18 +2,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using ShopManagement.Application.Contract.A.Product;
 using MediatR;
+using ShopManagement.Application.ReadModel.Admin;
 
-using LampShade.ReadModel.Contracts.Queries.Products.GetProducts;
+using ShopManagement.Application.ReadModel.Queries.Products.GetProducts;
 
-namespace LampShade.ReadModel.Application.Features.Products.Queries.GetProducts;
+namespace ShopManagement.Application.ReadModel.Features.Products.Queries.GetProducts;
 
 
 
 public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<ProductViewModel>>
 {
-    private readonly IProductApplication _application;
+    private readonly IProductReadRepository _application;
 
-    public GetProductsQueryHandler(IProductApplication application)
+    public GetProductsQueryHandler(IProductReadRepository application)
     {
         _application = application;
     }

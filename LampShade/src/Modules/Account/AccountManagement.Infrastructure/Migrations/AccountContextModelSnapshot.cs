@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AccountManagement.Infrastructure.EFCore.Migrations
+namespace AccountManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(AccountContext))]
     partial class AccountContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,8 @@ namespace AccountManagement.Infrastructure.EFCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.9")
+                .HasDefaultSchema("account")
+                .HasAnnotation("ProductVersion", "10.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -73,7 +74,7 @@ namespace AccountManagement.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Accounts", (string)null);
+                    b.ToTable("Accounts", "account");
                 });
 
             modelBuilder.Entity("AccountManagement.Domain.RoleAgg.Role", b =>
@@ -94,13 +95,64 @@ namespace AccountManagement.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles", "account");
+                });
+
+            modelBuilder.Entity("LampShade.BuildingBlocks.Infrastructure.Outbox.InboxMessage", b =>
+                {
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Handler")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
+
+                    b.Property<DateTime>("ProcessedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("EventId", "Handler");
+
+                    b.ToTable("InboxMessages", "account");
+                });
+
+            modelBuilder.Entity("LampShade.BuildingBlocks.Infrastructure.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Attempts")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Error")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<DateTime>("OccurredOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ProcessedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProcessedOn");
+
+                    b.ToTable("OutboxMessages", "account");
                 });
 
             modelBuilder.Entity("AccountManagement.Domain.AccountAgg.Account", b =>
                 {
                     b.HasOne("AccountManagement.Domain.RoleAgg.Role", "Role")
-                        .WithMany("Accounts")
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -128,7 +180,7 @@ namespace AccountManagement.Infrastructure.EFCore.Migrations
 
                             b1.HasIndex("RoleId");
 
-                            b1.ToTable("RolePermissions", (string)null);
+                            b1.ToTable("RolePermissions", "account");
 
                             b1.WithOwner("Role")
                                 .HasForeignKey("RoleId");
@@ -137,11 +189,6 @@ namespace AccountManagement.Infrastructure.EFCore.Migrations
                         });
 
                     b.Navigation("Permissions");
-                });
-
-            modelBuilder.Entity("AccountManagement.Domain.RoleAgg.Role", b =>
-                {
-                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }

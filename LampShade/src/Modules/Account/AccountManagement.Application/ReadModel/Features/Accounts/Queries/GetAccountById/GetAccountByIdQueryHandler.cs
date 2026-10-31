@@ -1,12 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Account;
-using LampShade.ReadModel.Contracts.Accounts.Dto;
+using AccountManagement.Application.ReadModel.Account;
+using AccountManagement.Application.ReadModel.Accounts.Dto;
 using MediatR;
 
-using LampShade.ReadModel.Contracts.Queries.Accounts.GetAccountById;
+using AccountManagement.Application.ReadModel.Queries.Accounts.GetAccountById;
 
-namespace LampShade.ReadModel.Application.Features.Accounts.Queries.GetAccountById;
+namespace AccountManagement.Application.ReadModel.Features.Accounts.Queries.GetAccountById;
 
 
 

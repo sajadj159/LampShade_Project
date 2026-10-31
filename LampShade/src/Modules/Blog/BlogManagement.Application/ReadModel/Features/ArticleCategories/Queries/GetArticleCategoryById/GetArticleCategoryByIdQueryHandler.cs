@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.ArticleCategory;
-using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
-using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoryById;
+using BlogManagement.Application.ReadModel.ArticleCategory;
+using BlogManagement.Application.ReadModel.ArticleCategories.Dto;
+using BlogManagement.Application.ReadModel.Queries.ArticleCategories.GetArticleCategoryById;
 using MediatR;
 
-namespace LampShade.ReadModel.Application.Features.ArticleCategories.Queries.GetArticleCategoryById;
+namespace BlogManagement.Application.ReadModel.Features.ArticleCategories.Queries.GetArticleCategoryById;
 
 public class GetArticleCategoryByIdQueryHandler(IArticleCategoryQuery query) : IRequestHandler<GetArticleCategoryByIdQuery, ArticleCategoryDetailsDto>
 {

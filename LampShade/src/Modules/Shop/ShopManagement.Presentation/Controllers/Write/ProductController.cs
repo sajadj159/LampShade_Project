@@ -1,17 +1,18 @@
+using LampShade.BuildingBlocks.Application;
 using System.Threading;
 using System.Threading.Tasks;
 using ShopManagement.Application.Contracts.Commands.Products.CreateProduct;
 using ShopManagement.Application.Contracts.Commands.Products.EditProduct;
-using LampShade.ReadModel.Contracts.Queries.Products.GetProductById;
-using LampShade.ReadModel.Contracts.Queries.Products.GetProducts;
-using LampShade.ReadModel.Contracts.Queries.Products.SearchProducts;
+using ShopManagement.Application.ReadModel.Queries.Products.GetProductById;
+using ShopManagement.Application.ReadModel.Queries.Products.GetProducts;
+using ShopManagement.Application.ReadModel.Queries.Products.SearchProducts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace ShopManagement.Presentation.Controllers.Write;
 
-[Authorize]
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ProductController : ControllerBase

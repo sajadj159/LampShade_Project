@@ -1,26 +1,18 @@
-using System.Threading;
-using System.Threading.Tasks;
-using ShopManagement.Application.Contract.A.ProductPicture;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using _0_Framework.Application;
-
 using ShopManagement.Application.Contracts.Commands.ProductPictures.RestoreProductPicture;
+using ShopManagement.Domain.ProductPictureAgg;
 
 namespace ShopManagement.Application.Features.ProductPictures.Commands.RestoreProductPicture;
 
-
-
-public class RestoreProductPictureCommandHandler : IRequestHandler<RestoreProductPictureCommand, OperationResult>
+public class RestoreProductPictureCommandHandler(IProductPictureRepository pictures) : IRequestHandler<RestoreProductPictureCommand, OperationResult>
 {
-    private readonly IProductPictureApplication _application;
-
-    public RestoreProductPictureCommandHandler(IProductPictureApplication application)
-    {
-        _application = application;
-    }
-
     public async Task<OperationResult> Handle(RestoreProductPictureCommand request, CancellationToken cancellationToken)
     {
-        return await _application.RestoreAsync(request.Id, cancellationToken);
+        var picture = await pictures.GetAsync(request.Id, cancellationToken);
+        if (picture is null)
+            return new OperationResult().Failed(ApplicationMessages.RecordNotFound);
+        picture.Restore();
+        return new OperationResult().Succeeded();
     }
 }

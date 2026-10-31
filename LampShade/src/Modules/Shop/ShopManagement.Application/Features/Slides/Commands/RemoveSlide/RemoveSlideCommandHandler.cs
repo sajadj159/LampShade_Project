@@ -1,18 +1,18 @@
-using System.Threading;
-using System.Threading.Tasks;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using _0_Framework.Application;
-using ShopManagement.Application.Contract.A.Slide;
-
 using ShopManagement.Application.Contracts.Commands.Slides.RemoveSlide;
+using ShopManagement.Domain.SlideAgg;
 
 namespace ShopManagement.Application.Features.Slides.Commands.RemoveSlide;
 
-
-
-public class RemoveSlideCommandHandler : IRequestHandler<RemoveSlideCommand, OperationResult>
+public class RemoveSlideCommandHandler(ISlideRepository slides) : IRequestHandler<RemoveSlideCommand, OperationResult>
 {
-    private readonly ISlideApplication _application;
-    public RemoveSlideCommandHandler(ISlideApplication application) => _application = application;
-    public async Task<OperationResult> Handle(RemoveSlideCommand r, CancellationToken c) => await _application.RemoveAsync(r.Id, c);
+    public async Task<OperationResult> Handle(RemoveSlideCommand request, CancellationToken cancellationToken)
+    {
+        var slide = await slides.GetAsync(request.Id, cancellationToken);
+        if (slide is null)
+            return new OperationResult().Failed(ApplicationMessages.RecordNotFound);
+        slide.Remove();
+        return new OperationResult().Succeeded();
+    }
 }

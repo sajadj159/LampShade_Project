@@ -1,11 +1,14 @@
+using LampShade.BuildingBlocks.Application;
+using Microsoft.AspNetCore.Authorization;
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Queries.Accounts.GetAllAccountsForQuery;
+using AccountManagement.Application.ReadModel.Queries.Accounts.GetAllAccountsForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Read;
+namespace AccountManagement.Presentation.Controllers.Read;
 
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/read/[controller]")]
 public class AccountQueryController : ControllerBase

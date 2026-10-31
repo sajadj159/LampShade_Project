@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using LampShade.ReadModel.Contracts.Slide;
+using ShopManagement.Application.ReadModel.Slide;
 
-using QueryRequest = LampShade.ReadModel.Contracts.Queries.Slides.GetSlidesForQuery.GetSlidesForQuery;
+using QueryRequest = ShopManagement.Application.ReadModel.Queries.Slides.GetSlidesForQuery.GetSlidesForQuery;
 
-namespace LampShade.ReadModel.Application.Features.Slides.Queries.GetSlidesForQuery;
+namespace ShopManagement.Application.ReadModel.Features.Slides.Queries.GetSlidesForQuery;
 
 
 

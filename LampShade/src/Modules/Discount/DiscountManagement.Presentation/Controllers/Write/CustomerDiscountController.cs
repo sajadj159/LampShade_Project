@@ -1,16 +1,17 @@
+using LampShade.BuildingBlocks.Application;
 using System.Threading;
 using System.Threading.Tasks;
 using DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.DefineCustomerDiscount;
 using DiscountManagement.Application.Contracts.Commands.CustomerDiscounts.EditCustomerDiscount;
-using LampShade.ReadModel.Contracts.Queries.CustomerDiscounts.GetCustomerDiscountById;
-using LampShade.ReadModel.Contracts.Queries.CustomerDiscounts.SearchCustomerDiscounts;
+using DiscountManagement.Application.ReadModel.Queries.CustomerDiscounts.GetCustomerDiscountById;
+using DiscountManagement.Application.ReadModel.Queries.CustomerDiscounts.SearchCustomerDiscounts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace DiscountManagement.Presentation.Controllers.Write;
 
-[Authorize]
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class CustomerDiscountController : ControllerBase

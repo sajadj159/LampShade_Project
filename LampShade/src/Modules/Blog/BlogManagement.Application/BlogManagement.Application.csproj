@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <InternalsVisibleTo Include="BlogManagement.Infrastructure" />
+    <InternalsVisibleTo Include="BlogManagement.Tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\LampShade.BuildingBlocks.Application\LampShade.BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\BlogManagement.Domain\BlogManagement.Domain.csproj" />
+    <ProjectReference Include="..\BlogManagement.Contracts\BlogManagement.Contracts.csproj" />
+    <ProjectReference Include="..\..\Comment\CommentManagement.Contracts\CommentManagement.Contracts.csproj" />
+  </ItemGroup>
+</Project>

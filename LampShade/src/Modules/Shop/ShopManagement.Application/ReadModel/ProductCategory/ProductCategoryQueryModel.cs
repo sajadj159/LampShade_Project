@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using LampShade.ReadModel.Contracts.Product;
+using ShopManagement.Application.ReadModel.Product;
 
-namespace LampShade.ReadModel.Contracts.ProductCategory
+namespace ShopManagement.Application.ReadModel.ProductCategory
 {
     public class ProductCategoryQueryModel
     {

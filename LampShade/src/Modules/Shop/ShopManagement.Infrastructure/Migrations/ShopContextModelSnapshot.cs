@@ -8,7 +8,7 @@ using ShopManagement.Infrastructure.EFCore;
 
 #nullable disable
 
-namespace ShopManagement.Infrastructure.EFCore.Migrations
+namespace ShopManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(ShopContext))]
     partial class ShopContextModelSnapshot : ModelSnapshot
@@ -17,10 +17,62 @@ namespace ShopManagement.Infrastructure.EFCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("shop")
                 .HasAnnotation("ProductVersion", "10.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("LampShade.BuildingBlocks.Infrastructure.Outbox.InboxMessage", b =>
+                {
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Handler")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)");
+
+                    b.Property<DateTime>("ProcessedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("EventId", "Handler");
+
+                    b.ToTable("InboxMessages", "shop");
+                });
+
+            modelBuilder.Entity("LampShade.BuildingBlocks.Infrastructure.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Attempts")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Error")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<DateTime>("OccurredOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ProcessedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProcessedOn");
+
+                    b.ToTable("OutboxMessages", "shop");
+                });
 
             modelBuilder.Entity("ShopManagement.Domain.OrderAgg.Order", b =>
                 {
@@ -67,7 +119,7 @@ namespace ShopManagement.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders", "shop");
                 });
 
             modelBuilder.Entity("ShopManagement.Domain.ProductAgg.Product", b =>
@@ -133,7 +185,7 @@ namespace ShopManagement.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products", "shop");
                 });
 
             modelBuilder.Entity("ShopManagement.Domain.ProductCategoryAgg.ProductCategory", b =>
@@ -185,7 +237,7 @@ namespace ShopManagement.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategories", (string)null);
+                    b.ToTable("ProductCategories", "shop");
                 });
 
             modelBuilder.Entity("ShopManagement.Domain.ProductPictureAgg.ProductPicture", b =>
@@ -224,7 +276,7 @@ namespace ShopManagement.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductPictures", (string)null);
+                    b.ToTable("ProductPictures", "shop");
                 });
 
             modelBuilder.Entity("ShopManagement.Domain.SlideAgg.Slide", b =>
@@ -279,7 +331,7 @@ namespace ShopManagement.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Slides", (string)null);
+                    b.ToTable("Slides", "shop");
                 });
 
             modelBuilder.Entity("ShopManagement.Domain.OrderAgg.Order", b =>
@@ -314,7 +366,7 @@ namespace ShopManagement.Infrastructure.EFCore.Migrations
 
                             b1.HasIndex("OrderId");
 
-                            b1.ToTable("OrderItems", (string)null);
+                            b1.ToTable("OrderItems", "shop");
 
                             b1.WithOwner("Order")
                                 .HasForeignKey("OrderId");

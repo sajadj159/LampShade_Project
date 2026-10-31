@@ -1,7 +1,7 @@
-using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
+using BlogManagement.Application.ReadModel.ArticleCategories.Dto;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoryById;
+namespace BlogManagement.Application.ReadModel.Queries.ArticleCategories.GetArticleCategoryById;
 
 public class GetArticleCategoryByIdQuery : IRequest<ArticleCategoryDetailsDto>
 {

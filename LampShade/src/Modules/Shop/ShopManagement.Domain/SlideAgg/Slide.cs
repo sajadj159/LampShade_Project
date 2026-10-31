@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.SymbolStore;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 
 namespace ShopManagement.Domain.SlideAgg
 {

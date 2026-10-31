@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Using Include="LampShade.BuildingBlocks.Infrastructure" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\LampShade.BuildingBlocks.Infrastructure\LampShade.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\AccountManagement.Application\AccountManagement.Application.csproj" />
+  </ItemGroup>
+</Project>

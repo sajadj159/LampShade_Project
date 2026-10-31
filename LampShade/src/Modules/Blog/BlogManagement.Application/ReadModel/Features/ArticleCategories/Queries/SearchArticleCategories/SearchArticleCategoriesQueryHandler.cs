@@ -2,13 +2,13 @@ using System.Threading;
 using System.Threading.Tasks;
 #nullable enable
 
-using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
-using LampShade.ReadModel.Contracts.ArticleCategory;
+using BlogManagement.Application.ReadModel.ArticleCategories.Dto;
+using BlogManagement.Application.ReadModel.ArticleCategory;
 using MediatR;
 
-using LampShade.ReadModel.Contracts.Queries.ArticleCategories.SearchArticleCategories;
+using BlogManagement.Application.ReadModel.Queries.ArticleCategories.SearchArticleCategories;
 
-namespace LampShade.ReadModel.Application.Features.ArticleCategories.Queries.SearchArticleCategories;
+namespace BlogManagement.Application.ReadModel.Features.ArticleCategories.Queries.SearchArticleCategories;
 
 
 

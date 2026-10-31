@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace _0_Framework.Domain;
+namespace LampShade.BuildingBlocks.Domain;
 
 public interface IRepository<in TKey, T> where T : class
 {

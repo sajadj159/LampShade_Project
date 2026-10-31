@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.Roles.Dto;
+namespace AccountManagement.Application.ReadModel.Roles.Dto;
 
 public class RoleDto
 {

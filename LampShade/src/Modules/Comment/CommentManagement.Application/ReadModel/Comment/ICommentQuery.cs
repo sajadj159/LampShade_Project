@@ -1,6 +1,7 @@
-using LampShade.ReadModel.Contracts.Comments.Dto;
+using CommentManagement.Contracts;
+using CommentManagement.Application.ReadModel.Comments.Dto;
 
-namespace LampShade.ReadModel.Contracts.Comment;
+namespace CommentManagement.Application.ReadModel.Comment;
 
 public interface ICommentQuery
 {

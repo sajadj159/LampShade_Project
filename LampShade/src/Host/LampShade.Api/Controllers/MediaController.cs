@@ -3,7 +3,7 @@ using Amazon.S3.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using LampShade.Api.Storage;
+using LampShade.BuildingBlocks.Infrastructure;
 using System.Net;
 
 namespace LampShade.Api.Controllers;
@@ -38,7 +38,16 @@ public class MediaController : ControllerBase
                 Key = key
             }, cancellationToken);
 
-            return File(response.ResponseStream, response.Headers.ContentType ?? "application/octet-stream");
+            // Only allow-listed image types are rendered inline; anything else (e.g. an object stored before
+            // uploads were restricted) is sent as a download so the browser never runs it on this origin.
+            Response.Headers.XContentTypeOptions = "nosniff";
+            var contentType = response.Headers.ContentType;
+            if (contentType is null || !S3FileUploader.ImageContentTypes.Values.Contains(contentType))
+            {
+                return File(response.ResponseStream, "application/octet-stream", Path.GetFileName(key));
+            }
+
+            return File(response.ResponseStream, contentType);
         }
         catch (AmazonS3Exception ex) when (ex.StatusCode == HttpStatusCode.NotFound)
         {

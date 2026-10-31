@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using _0_Framework.Repository;
+using LampShade.BuildingBlocks.Application;
 
 namespace InventoryManagement.Configuration.Permissions
 {

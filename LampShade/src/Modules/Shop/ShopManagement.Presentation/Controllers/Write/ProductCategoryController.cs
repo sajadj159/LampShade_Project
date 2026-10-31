@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 using ShopManagement.Application.Contracts.Commands.ProductCategories.CreateProductCategory;
 using ShopManagement.Application.Contracts.Commands.ProductCategories.EditProductCategory;
 using ShopManagement.Application.Contracts.Commands.ProductCategories.DeleteProductCategory;
-using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategories;
-using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoryById;
-using LampShade.ReadModel.Contracts.Queries.ProductCategories.SearchProductCategories;
+using ShopManagement.Application.ReadModel.Queries.ProductCategories.GetProductCategories;
+using ShopManagement.Application.ReadModel.Queries.ProductCategories.GetProductCategoryById;
+using ShopManagement.Application.ReadModel.Queries.ProductCategories.SearchProductCategories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using _0_Framework.Repository;
+using LampShade.BuildingBlocks.Application;
 
-namespace LampShade.Api.Controllers.Write;
+namespace ShopManagement.Presentation.Controllers.Write;
 
 [Authorize(Roles = Roles.Administrator)]
 [ApiController]

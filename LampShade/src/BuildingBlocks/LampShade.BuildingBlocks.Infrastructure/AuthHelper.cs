@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace _0_Framework.Application
+namespace LampShade.BuildingBlocks.Infrastructure
 {
     public class AuthHelper : IAuthHelper
     {
@@ -78,7 +78,8 @@ namespace _0_Framework.Application
 
         public bool IsAuthenticated()
         {
-            return _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
+            // No HttpContext when running outside a request (e.g. outbox event handlers).
+            return _contextAccessor.HttpContext?.User.Identity?.IsAuthenticated ?? false;
         }
 
         public void Signin(AuthViewModel account)

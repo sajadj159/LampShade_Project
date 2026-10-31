@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using _0_Framework.Domain;
-using ShopManagement.Domain.ProductAgg;
+using LampShade.BuildingBlocks.Domain;
 
 namespace DiscountManagement.Domain.CustomerDiscountAgg
 {

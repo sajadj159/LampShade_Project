@@ -1,21 +1,13 @@
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using ShopManagement.Application.Contract.Order;
+using ShopManagement.Application.Orders;
+using ShopManagement.Application.ReadModel.Admin;
+using ShopManagement.Application.ReadModel.Queries.Orders.GetOrderItems;
 
-using LampShade.ReadModel.Contracts.Queries.Orders.GetOrderItems;
+namespace ShopManagement.Application.ReadModel.Features.Orders.Queries.GetOrderItems;
 
-namespace LampShade.ReadModel.Application.Features.Orders.Queries.GetOrderItems;
-
-
-
-public class GetOrderItemsQueryHandler : IRequestHandler<GetOrderItemsQuery, List<OrderItemViewModel>>
+public class GetOrderItemsQueryHandler(IOrderReadRepository orders, OrderAccessPolicy access) : IRequestHandler<GetOrderItemsQuery, List<OrderItemViewModel>>
 {
-    private readonly IOrderApplication _application;
-    public GetOrderItemsQueryHandler(IOrderApplication application) => _application = application;
-
-    public Task<List<OrderItemViewModel>> Handle(GetOrderItemsQuery request, CancellationToken cancellationToken)
-    {
-        return Task.FromResult(_application.GetItemsBy(request.OrderId));
-    }
+    public async Task<List<OrderItemViewModel>> Handle(GetOrderItemsQuery request, CancellationToken cancellationToken) =>
+        await access.CanAccessAsync(request.OrderId, cancellationToken) ? orders.GetItemsBy(request.OrderId) : [];
 }

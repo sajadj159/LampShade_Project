@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace _0_Framework.Application
+namespace LampShade.BuildingBlocks.Application
 {
     public static class Tools
     {

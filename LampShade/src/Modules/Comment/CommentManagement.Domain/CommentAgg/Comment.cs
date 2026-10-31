@@ -1,4 +1,4 @@
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 
 namespace CommentManagement.Domain.CommentAgg
 {

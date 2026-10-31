@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.Accounts.Dto;
+namespace AccountManagement.Application.ReadModel.Accounts.Dto;
 
 public class AccountViewModel
 {

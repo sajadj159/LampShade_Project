@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Queries.Articles.GetArticleBySlug;
-using LampShade.ReadModel.Contracts.Queries.Articles.LatestArticles;
+using BlogManagement.Application.ReadModel.Queries.Articles.GetArticleBySlug;
+using BlogManagement.Application.ReadModel.Queries.Articles.LatestArticles;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Read;
+namespace BlogManagement.Presentation.Controllers.Read;
 
 [ApiController]
 [Route("api/read/[controller]")]

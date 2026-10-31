@@ -1,11 +1,12 @@
-using _0_Framework.Application;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
-namespace LampShade.Api.MediatR;
+namespace LampShade.BuildingBlocks.Infrastructure;
 
+/// <summary>
+/// Commits a command's changes. A command belongs to exactly one module, so it may only change
+/// that module's DbContext; anything another module must do happens through an integration event.
+/// </summary>
 public sealed class UnitOfWorkPipelineBehavior<TRequest, TResponse>(IEnumerable<IDbContext> dbContexts)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull
@@ -15,7 +16,7 @@ public sealed class UnitOfWorkPipelineBehavior<TRequest, TResponse>(IEnumerable<
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        var response = await next();
+        var response = await next(cancellationToken);
 
         if (request is not ICommand<TResponse>)
             return response;
@@ -24,22 +25,12 @@ public sealed class UnitOfWorkPipelineBehavior<TRequest, TResponse>(IEnumerable<
         if (changedContexts.Count == 0)
             return response;
 
-        await using var transaction = await changedContexts[0].Database.BeginTransactionAsync(cancellationToken);
-        try
-        {
-            foreach (var dbContext in changedContexts.Skip(1))
-                dbContext.Database.UseTransaction(transaction.GetDbTransaction());
+        if (changedContexts.Count > 1)
+            throw new InvalidOperationException(
+                $"{typeof(TRequest).Name} changed data of more than one module ({string.Join(", ", changedContexts.Select(x => x.GetType().Name))}). " +
+                "Cross-module side effects must be published as integration events.");
 
-            foreach (var dbContext in changedContexts)
-                await dbContext.SaveChangesAsync(cancellationToken);
-
-            await transaction.CommitAsync(cancellationToken);
-        }
-        catch
-        {
-            await transaction.RollbackAsync(cancellationToken);
-            throw;
-        }
+        await changedContexts[0].SaveChangesAsync(cancellationToken);
 
         if (response is ICommitAwareResponse commitAwareResponse)
             commitAwareResponse.OnCommitted();

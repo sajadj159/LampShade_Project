@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using Microsoft.AspNetCore.Http;
 
 namespace ShopManagement.Application.Contract.ProductCategory
@@ -12,7 +12,7 @@ namespace ShopManagement.Application.Contract.ProductCategory
         public string Description { get; set; }
 
         [FileExtensionLimitation(new string[] { ".jpeg", ".jpg", ".png" },ErrorMessage = ValidationMessages.InvalidFileFormat)]
-        [MaxFileSIze(3 * 1024 * 1024, ErrorMessage = ValidationMessages.MaxFileSize)]
+        [MaxFileSize(3 * 1024 * 1024, ErrorMessage = ValidationMessages.MaxFileSize)]
         [JsonIgnore]
         public IFormFile PictureUrl { get; set; }
         public string PictureAlt { get; set; }

@@ -1,4 +1,4 @@
-namespace LampShade.ReadModel.Contracts.Comments.Dto;
+namespace CommentManagement.Application.ReadModel.Comments.Dto;
 
 public class CommentViewModel
 {

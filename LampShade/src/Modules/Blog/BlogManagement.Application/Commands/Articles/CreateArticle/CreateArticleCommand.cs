@@ -3,7 +3,7 @@
 using BlogManagement.Application.Contract.AC.Article;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 
 namespace BlogManagement.Application.Contracts.Commands.Articles.CreateArticle;
 

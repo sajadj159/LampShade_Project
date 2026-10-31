@@ -1,5 +1,5 @@
 using AwesomeAssertions;
-using _0_Framework.Domain;
+using LampShade.BuildingBlocks.Domain;
 using InventoryManagement.Domain.InventoryAgg;
 using Xunit;
 
@@ -38,6 +38,23 @@ public class InventoryTests
     {
         var inventory = CreateInventory(); inventory.Increase(15, 7, "Initial stock"); inventory.Reduce(4, 8, "Order checkout", 20);
         inventory.CalculateCurrentCount().Should().Be(11);
+    }
+    [Fact]
+    public void Reduce_MoreThanAvailable_ThrowsAndLeavesStockUnchanged()
+    {
+        var inventory = CreateInventory(); inventory.Increase(3, 7, "Initial stock");
+        var reduce = () => inventory.Reduce(4, 8, "Order checkout", 20);
+        reduce.Should().Throw<DomainException>();
+        inventory.CalculateCurrentCount().Should().Be(3); inventory.InventoryOperations.Should().ContainSingle();
+    }
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void Reduce_NonPositiveCount_Throws(long count)
+    {
+        var inventory = CreateInventory(); inventory.Increase(3, 7, "Initial stock");
+        var reduce = () => inventory.Reduce(count, 8, "Order checkout", 20);
+        reduce.Should().Throw<DomainException>();
     }
     private static Inventory CreateInventory() => new(1, 100_000);
 }

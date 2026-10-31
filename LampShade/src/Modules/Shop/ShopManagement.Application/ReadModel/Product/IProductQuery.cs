@@ -1,6 +1,6 @@
 using ShopManagement.Application.Contract.Order;
 
-namespace LampShade.ReadModel.Contracts.Product;
+namespace ShopManagement.Application.ReadModel.Product;
 
 public interface IProductQuery
 {

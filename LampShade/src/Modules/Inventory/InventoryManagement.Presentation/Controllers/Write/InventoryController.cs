@@ -5,15 +5,15 @@ using InventoryManagement.Application.Contracts.Commands.Inventories.EditInvento
 using InventoryManagement.Application.Contracts.Commands.Inventories.IncreaseInventory;
 using InventoryManagement.Application.Contracts.Commands.Inventories.ReduceInventory;
 using InventoryManagement.Application.Contracts.Commands.Inventories.ReduceInventoryRange;
-using LampShade.ReadModel.Contracts.Queries.Inventories.GetInventoryById;
-using LampShade.ReadModel.Contracts.Queries.Inventories.GetInventoryOperations;
-using LampShade.ReadModel.Contracts.Queries.Inventories.SearchInventories;
+using InventoryManagement.Application.ReadModel.Queries.Inventories.GetInventoryById;
+using InventoryManagement.Application.ReadModel.Queries.Inventories.GetInventoryOperations;
+using InventoryManagement.Application.ReadModel.Queries.Inventories.SearchInventories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using _0_Framework.Repository;
+using LampShade.BuildingBlocks.Application;
 
-namespace LampShade.Api.Controllers.Write;
+namespace InventoryManagement.Presentation.Controllers.Write;
 
 [Authorize(Roles = Roles.Administrator)]
 [ApiController]

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace _0_Framework.Domain;
+namespace LampShade.BuildingBlocks.Infrastructure;
 
 public interface IDbContext
 {

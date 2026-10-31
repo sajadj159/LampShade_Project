@@ -1,17 +1,18 @@
+using LampShade.BuildingBlocks.Application;
 using System.Threading;
 using System.Threading.Tasks;
 using BlogManagement.Application.Contracts.Commands.ArticleCategories.CreateArticleCategory;
 using BlogManagement.Application.Contracts.Commands.ArticleCategories.EditArticleCategory;
-using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategories;
-using LampShade.ReadModel.Contracts.Queries.ArticleCategories.GetArticleCategoryById;
-using LampShade.ReadModel.Contracts.Queries.ArticleCategories.SearchArticleCategories;
+using BlogManagement.Application.ReadModel.Queries.ArticleCategories.GetArticleCategories;
+using BlogManagement.Application.ReadModel.Queries.ArticleCategories.GetArticleCategoryById;
+using BlogManagement.Application.ReadModel.Queries.ArticleCategories.SearchArticleCategories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace BlogManagement.Presentation.Controllers.Write;
 
-[Authorize]
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ArticleCategoryController : ControllerBase

@@ -1,6 +1,7 @@
 using MediatR;
-using LampShade.ReadModel.Contracts.Comment;
+using CommentManagement.Application.ReadModel.Comment;
+using CommentManagement.Contracts;
 
-namespace LampShade.ReadModel.Contracts.Queries.Comments.GetAllComments;
+namespace CommentManagement.Application.ReadModel.Queries.Comments.GetAllComments;
 
 public class GetAllCommentsQuery : IRequest<List<CommentQueryModel>> { }

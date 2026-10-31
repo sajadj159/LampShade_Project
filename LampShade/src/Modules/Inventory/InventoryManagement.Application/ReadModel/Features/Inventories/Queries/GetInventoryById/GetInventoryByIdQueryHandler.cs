@@ -1,26 +1,26 @@
 using System.Threading;
 using System.Threading.Tasks;
 using InventoryManagement.Application.Contract.AC.Inventory;
-using InventoryManagement.Domain.InventoryAgg;
 using MediatR;
+using InventoryManagement.Application.ReadModel.Inventory;
 
-using LampShade.ReadModel.Contracts.Queries.Inventories.GetInventoryById;
+using InventoryManagement.Application.ReadModel.Queries.Inventories.GetInventoryById;
 
-namespace LampShade.ReadModel.Application.Features.Inventories.Queries.GetInventoryById;
+namespace InventoryManagement.Application.ReadModel.Features.Inventories.Queries.GetInventoryById;
 
 
 
 public class GetInventoryByIdQueryHandler : IRequestHandler<GetInventoryByIdQuery, EditInventory>
 {
-    private readonly IInventoryRepository _repository;
+    private readonly IInventoryQuery _repository;
 
-    public GetInventoryByIdQueryHandler(IInventoryRepository repository)
+    public GetInventoryByIdQueryHandler(IInventoryQuery repository)
     {
         _repository = repository;
     }
 
     public Task<EditInventory> Handle(GetInventoryByIdQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_repository.GetDetails(request.Id));
+        return _repository.GetDetailsAsync(request.Id, cancellationToken);
     }
 }

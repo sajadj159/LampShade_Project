@@ -1,12 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Product;
+using ShopManagement.Application.ReadModel.Product;
 using MediatR;
 using ShopManagement.Application.Contract.Order;
 
-using LampShade.ReadModel.Contracts.Queries.Products.CheckInventoryStatus;
+using ShopManagement.Application.ReadModel.Queries.Products.CheckInventoryStatus;
 
-namespace LampShade.ReadModel.Application.Features.Products.Queries.CheckInventoryStatus;
+namespace ShopManagement.Application.ReadModel.Features.Products.Queries.CheckInventoryStatus;
 
 
 

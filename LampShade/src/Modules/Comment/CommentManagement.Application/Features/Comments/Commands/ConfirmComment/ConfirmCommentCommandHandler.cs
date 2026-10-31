@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using CommentManagement.Application.Contracts.Commands.Comments.ConfirmComment;
 using CommentManagement.Domain.CommentAgg;
 using MediatR;

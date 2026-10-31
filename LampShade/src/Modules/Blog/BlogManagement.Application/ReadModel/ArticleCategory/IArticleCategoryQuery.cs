@@ -1,6 +1,6 @@
-using LampShade.ReadModel.Contracts.ArticleCategories.Dto;
+using BlogManagement.Application.ReadModel.ArticleCategories.Dto;
 
-namespace LampShade.ReadModel.Contracts.ArticleCategory;
+namespace BlogManagement.Application.ReadModel.ArticleCategory;
 
 public interface IArticleCategoryQuery
 {

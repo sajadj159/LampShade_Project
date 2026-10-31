@@ -2,15 +2,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using _0_Framework.Application;
-using _0_Framework.Repository;
+using LampShade.BuildingBlocks.Application;
+using LampShade.BuildingBlocks.Application;
 using ShopManagement.Application.Contract.ProductCategory;
 using ShopManagement.Domain.ProductCategoryAgg;
 using Microsoft.EntityFrameworkCore;
 
+using ShopManagement.Application.ReadModel.Admin;
+
 namespace ShopManagement.Infrastructure.EFCore.Repository
 {
-    public class ProductCategoryRepository :RepositoryBase<long,ProductCategory>, IProductCategoryRepository
+    public class ProductCategoryRepository :RepositoryBase<long,ProductCategory>, IProductCategoryRepository, IProductCategoryReadRepository
     {
         private readonly ShopContext _context;
 

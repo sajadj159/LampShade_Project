@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using Microsoft.AspNetCore.Http;
 
 namespace ShopManagement.Application.Contract.A.Slide

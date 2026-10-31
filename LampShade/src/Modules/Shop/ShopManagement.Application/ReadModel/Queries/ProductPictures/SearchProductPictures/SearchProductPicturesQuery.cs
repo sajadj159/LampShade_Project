@@ -3,7 +3,7 @@
 using ShopManagement.Application.Contract.A.ProductPicture;
 using MediatR;
 
-namespace LampShade.ReadModel.Contracts.Queries.ProductPictures.SearchProductPictures;
+namespace ShopManagement.Application.ReadModel.Queries.ProductPictures.SearchProductPictures;
 
 public class SearchProductPicturesQuery : IRequest<List<ProductPictureViewModel>>
 {

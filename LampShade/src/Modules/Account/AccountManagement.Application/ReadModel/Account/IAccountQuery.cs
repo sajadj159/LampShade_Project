@@ -1,7 +1,7 @@
-using LampShade.ReadModel.Contracts.Accounts.Dto;
-using LampShade.ReadModel.Contracts.Roles.Dto;
+using AccountManagement.Application.ReadModel.Accounts.Dto;
+using AccountManagement.Application.ReadModel.Roles.Dto;
 
-namespace LampShade.ReadModel.Contracts.Account;
+namespace AccountManagement.Application.ReadModel.Account;
 
 public interface IAccountQuery
 {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using _0_Framework.Application;
-using ShopManagement.Application.Contract.A.Product;
+using LampShade.BuildingBlocks.Application;
 
 namespace DiscountManagement.Application.Contract.AC.ColleagueDiscount
 {
@@ -12,7 +11,6 @@ namespace DiscountManagement.Application.Contract.AC.ColleagueDiscount
 
         [Range(1,99,ErrorMessage = ValidationMessages.IsRequired)]
         public int DiscountRate { get; set; }
-        public List<ProductViewModel> Products { get; set; }
 
     }
 }

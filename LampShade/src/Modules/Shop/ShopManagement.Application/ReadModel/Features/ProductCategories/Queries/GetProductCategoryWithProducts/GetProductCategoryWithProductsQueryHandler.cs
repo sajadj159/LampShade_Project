@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using LampShade.ReadModel.Contracts.ProductCategory;
+using ShopManagement.Application.ReadModel.ProductCategory;
 
-using LampShade.ReadModel.Contracts.Queries.ProductCategories.GetProductCategoryWithProducts;
+using ShopManagement.Application.ReadModel.Queries.ProductCategories.GetProductCategoryWithProducts;
 
-namespace LampShade.ReadModel.Application.Features.ProductCategories.Queries.GetProductCategoryWithProducts;
+namespace ShopManagement.Application.ReadModel.Features.ProductCategories.Queries.GetProductCategoryWithProducts;
 
 
 

@@ -1,7 +1,7 @@
 using MediatR;
 using ShopManagement.Application.Contract.Order;
 
-namespace LampShade.ReadModel.Contracts.Queries.Orders.GetOrderAmount;
+namespace ShopManagement.Application.ReadModel.Queries.Orders.GetOrderAmount;
 
 public class GetOrderAmountQuery : IRequest<double>
 {

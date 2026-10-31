@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 using AccountManagement.Application.Contracts.Commands.Accounts.Login;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using BlogManagement.Application.Contract.AC.ArticleCategory;
 
 namespace BlogManagement.Application.Contract.AC.Article
 {

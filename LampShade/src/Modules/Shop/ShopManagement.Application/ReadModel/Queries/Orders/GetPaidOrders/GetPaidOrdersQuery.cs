@@ -1,6 +1,6 @@
 using MediatR;
-using LampShade.ReadModel.Contracts.Order;
+using ShopManagement.Application.ReadModel.Order;
 
-namespace LampShade.ReadModel.Contracts.Queries.Orders.GetPaidOrders;
+namespace ShopManagement.Application.ReadModel.Queries.Orders.GetPaidOrders;
 
 public class GetPaidOrdersQuery : IRequest<List<OrderQueryModel>> { }

@@ -1,18 +1,18 @@
-using System.Threading;
-using System.Threading.Tasks;
+using LampShade.BuildingBlocks.Application;
 using MediatR;
-using _0_Framework.Application;
-using ShopManagement.Application.Contract.A.Slide;
-
 using ShopManagement.Application.Contracts.Commands.Slides.RestoreSlide;
+using ShopManagement.Domain.SlideAgg;
 
 namespace ShopManagement.Application.Features.Slides.Commands.RestoreSlide;
 
-
-
-public class RestoreSlideCommandHandler : IRequestHandler<RestoreSlideCommand, OperationResult>
+public class RestoreSlideCommandHandler(ISlideRepository slides) : IRequestHandler<RestoreSlideCommand, OperationResult>
 {
-    private readonly ISlideApplication _application;
-    public RestoreSlideCommandHandler(ISlideApplication application) => _application = application;
-    public async Task<OperationResult> Handle(RestoreSlideCommand r, CancellationToken c) => await _application.RestoreAsync(r.Id, c);
+    public async Task<OperationResult> Handle(RestoreSlideCommand request, CancellationToken cancellationToken)
+    {
+        var slide = await slides.GetAsync(request.Id, cancellationToken);
+        if (slide is null)
+            return new OperationResult().Failed(ApplicationMessages.RecordNotFound);
+        slide.Restore();
+        return new OperationResult().Succeeded();
+    }
 }

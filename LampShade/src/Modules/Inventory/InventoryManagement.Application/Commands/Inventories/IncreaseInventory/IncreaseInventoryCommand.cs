@@ -1,6 +1,6 @@
 using InventoryManagement.Application.Contract.AC.Inventory;
 using MediatR;
-using _0_Framework.Application;
+using LampShade.BuildingBlocks.Application;
 
 namespace InventoryManagement.Application.Contracts.Commands.Inventories.IncreaseInventory;
 

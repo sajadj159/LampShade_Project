@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 using CommentManagement.Application.Contracts.Commands.Comments.AddComment;
 using CommentManagement.Application.Contracts.Commands.Comments.CancelComment;
 using CommentManagement.Application.Contracts.Commands.Comments.ConfirmComment;
-using LampShade.ReadModel.Contracts.Queries.Comments.SearchComments;
+using CommentManagement.Application.ReadModel.Queries.Comments.SearchComments;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using _0_Framework.Repository;
+using LampShade.BuildingBlocks.Application;
 
-namespace LampShade.Api.Controllers.Write;
+namespace CommentManagement.Presentation.Controllers.Write;
 
 [Authorize]
 [ApiController]

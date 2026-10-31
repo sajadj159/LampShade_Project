@@ -1,13 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
-using LampShade.ReadModel.Contracts.Queries.Products.CheckInventoryStatus;
-using LampShade.ReadModel.Contracts.Queries.Products.GetLatestArrivals;
-using LampShade.ReadModel.Contracts.Queries.Products.GetProductBySlug;
-using LampShade.ReadModel.Contracts.Queries.Products.SearchProductsForQuery;
+using ShopManagement.Application.ReadModel.Queries.Products.CheckInventoryStatus;
+using ShopManagement.Application.ReadModel.Queries.Products.GetLatestArrivals;
+using ShopManagement.Application.ReadModel.Queries.Products.GetProductBySlug;
+using ShopManagement.Application.ReadModel.Queries.Products.SearchProductsForQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Read;
+namespace ShopManagement.Presentation.Controllers.Read;
 
 [ApiController]
 [Route("api/read/[controller]")]

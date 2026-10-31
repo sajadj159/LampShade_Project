@@ -1,7 +1,7 @@
 using MediatR;
-using LampShade.ReadModel.Contracts.Article;
+using BlogManagement.Application.ReadModel.Article;
 
-namespace LampShade.ReadModel.Contracts.Queries.Articles.GetArticleBySlug;
+namespace BlogManagement.Application.ReadModel.Queries.Articles.GetArticleBySlug;
 
 public class GetArticleBySlugQuery : IRequest<ArticleQueryModel>
 {

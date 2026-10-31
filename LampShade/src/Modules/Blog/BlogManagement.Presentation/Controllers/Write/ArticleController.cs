@@ -1,16 +1,17 @@
+using LampShade.BuildingBlocks.Application;
 using System.Threading;
 using System.Threading.Tasks;
 using BlogManagement.Application.Contracts.Commands.Articles.CreateArticle;
 using BlogManagement.Application.Contracts.Commands.Articles.EditArticle;
-using LampShade.ReadModel.Contracts.Queries.Articles.GetArticleById;
-using LampShade.ReadModel.Contracts.Queries.Articles.SearchArticles;
+using BlogManagement.Application.ReadModel.Queries.Articles.GetArticleById;
+using BlogManagement.Application.ReadModel.Queries.Articles.SearchArticles;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LampShade.Api.Controllers.Write;
+namespace BlogManagement.Presentation.Controllers.Write;
 
-[Authorize]
+[Authorize(Roles = Roles.Administrator)]
 [ApiController]
 [Route("api/write/[controller]")]
 public class ArticleController : ControllerBase
